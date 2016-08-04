@@ -1,22 +1,15 @@
 # graphql-config
-Configuration file for your GraphQL schema/endpoints (supported by most tools, editors &amp; IDEs)
 
-```json
-{
-  "schema": {
-    "request": {
-      "url" : "https://example.com/api/schema.json"
-    }
-  }
-}
+The easiest way to configure your development environment with your GraphQL schema (supported by most tools, editors &amp; IDEs)
 
-```
+**TLDR**: Set an environment variable called `GRAPHQL_ENDPOINT` to your GraphQL endpoint (e.g. `https://your.api/graphql`) or read ahead for other configuration options.
+
 
 ## Supported by...
 
 ### Editors
 
-* [js-graphql-intellij-plugin](https://github.com/jimkyndemeyer/js-graphql-intellij-plugin) - GraphQL language support for IntelliJ IDEA and WebStorm, including Relay.QL tagged templates in JavaScript and TypeScript
+* [js-graphql-intellij-plugin](https://github.com/jimkyndemeyer/js-graphql-intellij-plugin) - GraphQL language support for IntelliJ IDEA and WebStorm, including Relay.QL tagged templates in JavaScript and TypeScript (_pending_)
 * [atom-language-graphql](https://github.com/rmosolgo/language-graphql) - GraphQL support for Atom text editor (_pending_)
 
 ### Tools
@@ -26,81 +19,72 @@ Configuration file for your GraphQL schema/endpoints (supported by most tools, e
 
 > Did we forget a tool/editor? Please [add it here](https://github.com/graphcool/graphql-config/compare).
 
-## Format
+## Usage
 
-This repository is mean as a unifying specification of a configuration file format for your GraphQL schema/endpoints which works with most tools, editors and IDEs.
+You can either configure your GraphQL endpoint via a configuration file or by providing an enviornment variable.
 
-### GraphQL Schema
+### Configuration via `$GRAPHQL_ENDPOINT` environment variable
 
-#### `schema: Object`
+The easiest way to configure your project is by setting an environment variable called `GRAPHQL_ENDPOINT` to your GraphQL endpoint.
 
-Specifies how to load the GraphQL schema that completion, error highlighting, and documentation is based on in the IDE. You can use one of the following options to configure your schema source: `file` or `request`.
-
-#### `schema.file: String`
-
-A relative or absolute path to the JSON from a schema introspection query, e.g. `{ data: ... }`. Changes to this file are usually watched.
-
-```json
-"file": "graphql.schema.json"
+```sh
+export GRAPHQL_ENDPOINT="https://your.api/graphql"
 ```
 
-#### `schema.request: Object`
+### Configuration via `.graphqlrc` file
 
-You can also request the schema from a url instead of having it as a JSON file locally. An example would look like this:
+You can either use your actual GraphQL endpoint or if preferred a local JSON schema file. 
+
+#### Use GraphQL endpoint
+
+Note: The `headers` object is optional and can for example be used to authenticate to your GraphQL endpoint.
 
 ```json
-"request": {
-  "url" : "https://example.com/api/schema.json",
-  "method" : "GET",
-  "options" : {
+{
+  "request": {
+    "url": "https://example.com/graphql",
     "headers": {
-      "Authorization" : "xxxxx"
+      "Authorization": "xxxxx"
     }
   }
 }
 ```
 
-#### `schema.request.url: String`
-
-The url to your GraphQL JSON schema file or in case you're using `postIntrospectionQuery: true` you can also specify your normal GraphQL endpoint here.
-
-#### `schema.request.method: String`
-
-The HTTP method to request the specified `url`. Defaults to `GET`.
-
-#### `schema.request.postIntrospectionQuery: Boolean`
-
-In case you don't have a JSON schema endpoint available, you can also use the `postIntrospectionQuery` option to make an on-the-fly introspection query like for example [GraphiQL](https://github.com/graphql/graphiql) does. In order to use this feature you usually have to set the `method` option to `POST`.
+#### Use local schema file (JSON)
 
 ```json
-"method" : "POST",
-"postIntrospectionQuery" : true
+{
+  "file": "./schema.json"
+}
 ```
 
-#### `schema.request.options.headers: Object`
 
-In case you need to set some HTTP headers (e.g. `Authorization`) then this is the place to do so. Here is an example:
+### Configuration via `package.json` file
+
+Use the same configuration options as for the `.graphqlrc` file but wrap it into an object with the key `graphql`.
 
 ```json
-"options" : {
-  "headers": {
-    "Authorization" : "xxxxx"
+{
+  "dependencies": { ... },
+  "request": {
+    "url": "https://example.com/graphql"
   }
 }
 ```
 
-### Data Endpoints
 
-#### `endpoints: Array<Object>`
+## How it works
 
-A list of GraphQL endpoints that can be queried from '.graphql' files. This feature currently just works for [js-graphql-intellij-plugin](https://github.com/jimkyndemeyer/js-graphql-intellij-plugin).
+This project aims to be provide a unifying configuration file format to configure your GraphQL schema in your development environment.
 
-### Enviornment variables
+Additional to the format specification, it provides the `graphql-config-parser` library, which is used by [all supported tools and editor plugins](#supported-by). The library reads your provided configuration and passes the actual GraphQL schema along to the tool which called it.
 
+![](resources/how-it-works.png)
 
-## Credits & License
+In case you provided a URL to your GraphQL endpoint, the `graphql-config-parser` library will run an [introspection query](https://github.com/graphql/graphql-js/blob/master/src/utilities/introspectionQuery.js) against your endpoint in order to fetch your schema.
 
-This config file format was originally inspired by [this great project](https://github.com/jimkyndemeyer/js-graphql-intellij-plugin/blob/master/resources/META-INF/graphql.config.json) and is available under the [MIT License](http://opensource.org/licenses/MIT).
+## `graphql-config-parser` API
+
 
 
 ## Help & Community [![Slack Status](https://slack.graph.cool/badge.svg)](https://slack.graph.cool)
