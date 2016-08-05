@@ -1,0 +1,54 @@
+{
+  "name": "graphql-config-parser",
+  "version": "0.0.0",
+  "description": "The easiest way to configure your development environment with your GraphQL schema (supported by most tools, editors & IDEs)",
+  "main": "index.js",
+  "scripts": {
+    "test": "tsc && ava tests/**/test.js --serial"
+  },
+  "ava": {
+    "babel": "inherit",
+    "require": [
+      "babel-register",
+      "babel-polyfill"
+    ]
+  },
+  "babel": {
+    "presets": [
+      "es2015",
+      "stage-0"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/graphcool/graphql-config.git"
+  },
+  "keywords": [
+    "graphql",
+    "config",
+    "relay",
+    "apollo"
+  ],
+  "author": "Johannes Schickling <johannes@graph.cool>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/graphcool/graphql-config/issues"
+  },
+  "homepage": "https://github.com/graphcool/graphql-config#readme",
+  "devDependencies": {
+    "@types/node": "^6.0.31",
+    "@types/node-fetch": "0.0.1",
+    "ava": "^0.15.2",
+    "babel-polyfill": "^6.13.0",
+    "babel-preset-es2015": "^6.13.1",
+    "babel-preset-stage-0": "^6.5.0",
+    "tslint": "^3.14.0",
+    "tslint-config-standard": "^1.3.0",
+    "typescript": "^2.1.0-dev.20160805"
+  },
+  "dependencies": {
+    "graphql": "^0.6.2",
+    "node-fetch": "^1.6.0",
+    "valid-url": "^1.0.9"
+  }
+}
