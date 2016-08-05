@@ -83,9 +83,16 @@ Additional to the format specification, it provides the `graphql-config-parser` 
 
 In case you provided a URL to your GraphQL endpoint, the `graphql-config-parser` library will run an [introspection query](https://github.com/graphql/graphql-js/blob/master/src/utilities/introspectionQuery.js) against your endpoint in order to fetch your schema.
 
-## `graphql-config-parser` API
+## `graphql-config-parser` API [![Build Status](https://travis-ci.org/graphcool/graphql-config.svg?branch=master)](https://travis-ci.org/graphcool/graphql-config)
 
+```js
+import { parse, resolveSchema } from 'graphql-config-parser'
 
+const config = parse()
+resolveSchema(config).then((schema) => {
+  // use json schema for your tool/plugin
+})
+```
 
 ## Help & Community [![Slack Status](https://slack.graph.cool/badge.svg)](https://slack.graph.cool)
 
