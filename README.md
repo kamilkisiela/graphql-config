@@ -89,9 +89,13 @@ In case you provided a URL to your GraphQL endpoint, the `graphql-config-parser`
 import { parse, resolveSchema } from 'graphql-config-parser'
 
 const config = parse()
-resolveSchema(config).then((schema) => {
-  // use json schema for your tool/plugin
-})
+resolveSchema(config)
+  .then((schema) => {
+    // use json schema for your tool/plugin
+  })
+  .catch((err) => {
+    console.error(err)
+  })
 ```
 
 ## Help & Community [![Slack Status](https://slack.graph.cool/badge.svg)](https://slack.graph.cool)
