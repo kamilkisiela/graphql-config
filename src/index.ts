@@ -57,16 +57,36 @@ export async function resolveSchema (config: Config): Promise<Schema> {
   switch (config.type) {
     case 'file':
       const schema = require(config.file)
+      console.log(`Loaded GraphQL schema from ${config.file}`)
       return Promise.resolve(schema)
     case 'request':
-      return fetch(config.url, {
+      const configRequest = config as ConfigRequest
+      return fetch(configRequest.url, {
         method: 'POST',
-        body: JSON.stringify(introspectionQuery),
-        headers: Object.assign({
-          'Content-Type': 'application/json',
-        }, config.headers || {}),
+        body: JSON.stringify({
+          query: introspectionQuery,
+        }),
+        headers: Object.assign(
+          {
+            'Content-Type': 'application/json',
+          },
+          configRequest.headers || {}
+        ),
       })
-        .then((res) => res.json())
+        .then((res) => {
+          if (res.ok) {
+            return res.json()
+              .then((schema) => {
+                console.log(`Loaded GraphQL schema from ${configRequest.url}`)
+                return schema
+              })
+          } else {
+            return res.text()
+              .then((text) => {
+                throw new Error(`${res.statusText}: ${text}`)
+              })
+          }
+        })
     default: throw new Error(`Invalid config: ${JSON.stringify(config)}`)
   }
 }
@@ -80,9 +100,12 @@ function parseConfigJson (json: any): Config {
   }
 
   if (json.request) {
-    return Object.assign({
-      type: 'request',
-    }, json.request) as ConfigRequest
+    return Object.assign(
+      {
+        type: 'request',
+      },
+      json.request
+    ) as ConfigRequest
   }
 
   throw new Error(`Invalid configuration file: ${JSON.stringify(json)}`)

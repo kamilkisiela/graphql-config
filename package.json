@@ -1,10 +1,17 @@
 {
   "name": "graphql-config-parser",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "The easiest way to configure your development environment with your GraphQL schema (supported by most tools, editors & IDEs)",
-  "main": "index.js",
+  "main": "src/index.js",
+  "files": [
+    "LICENSE",
+    "README.md",
+    "src/"
+  ],
   "scripts": {
-    "test": "tsc && ava tests/**/test.js --serial"
+    "prepublish": "npm run build",
+    "build": "tsc",
+    "test": "tslint {src,test}/**/*.ts && tsc && ava tests/**/test.js --serial"
   },
   "ava": {
     "babel": "inherit",
