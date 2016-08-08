@@ -23,7 +23,9 @@ The easiest way to configure your development environment with your GraphQL sche
 
 You can either configure your GraphQL endpoint via a configuration file or by providing an enviornment variable.
 
-### Configuration via `$GRAPHQL_ENDPOINT` environment variable
+> Note: This requires Node 5 installed or higher
+
+### Method 1: Configuration via `$GRAPHQL_ENDPOINT` environment variable
 
 The easiest way to configure your project is by setting an environment variable called `GRAPHQL_ENDPOINT` to your GraphQL endpoint.
 
@@ -31,7 +33,7 @@ The easiest way to configure your project is by setting an environment variable 
 export GRAPHQL_ENDPOINT="https://your.api/graphql"
 ```
 
-### Configuration via `.graphqlrc` file
+### Method 2: Configuration via `.graphqlrc` file
 
 You can either use your actual GraphQL endpoint or if preferred a local JSON schema file. 
 
@@ -59,7 +61,7 @@ Note: The `headers` object is optional and can for example be used to authentica
 ```
 
 
-### Configuration via `package.json` file
+### Method 3: Configuration via `package.json` file
 
 Use the same configuration options as for the `.graphqlrc` file but wrap it into an object with the key `graphql`.
 
