@@ -68,8 +68,10 @@ Use the same configuration options as for the `.graphqlrc` file but wrap it into
 ```json
 {
   "dependencies": { ... },
-  "request": {
-    "url": "https://example.com/graphql"
+  "graphql": {
+    "request": {
+      "url": "https://example.com/graphql"
+    }
   }
 }
 ```
