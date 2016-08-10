@@ -1,10 +1,11 @@
 import { isWebUri } from 'valid-url'
 import { readFileSync } from 'fs'
-import { join } from 'path'
+import { join, resolve } from 'path'
+import { graphql } from 'graphql/graphql'
 import { introspectionQuery } from 'graphql/utilities/introspectionQuery'
 import * as fetch from 'node-fetch'
 
-type Config = ConfigFile | ConfigRequest
+type Config = ConfigFile | ConfigRequest | ConfigSchema
 
 interface ConfigFile {
   type: 'file'
@@ -15,6 +16,11 @@ interface ConfigRequest {
   type: 'request'
   url: string
   headers?: { [key: string]: string }
+}
+
+interface ConfigSchema {
+  type: 'schema',
+  file: string
 }
 
 interface Schema {
@@ -88,6 +94,10 @@ export async function resolveSchema (config: Config): Promise<Schema> {
               })
           }
         })
+     case 'schema':
+       const schemaSource = require(resolve(config.file))
+       return graphql(schemaSource, introspectionQuery)
+
     default: throw new Error(`Invalid config: ${JSON.stringify(config)}`)
   }
 }
@@ -107,6 +117,13 @@ function parseConfigJson (json: any): Config {
       },
       json.request
     ) as ConfigRequest
+  }
+
+  if (json.schema) {
+    return {
+      type: 'schema',
+      file: json.schema,
+    } as ConfigSchema
   }
 
   throw new Error(`Invalid configuration file: ${JSON.stringify(json)}`)
