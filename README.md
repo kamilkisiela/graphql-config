@@ -95,7 +95,7 @@ Additional to the format specification, it provides the `graphql-config-parser` 
 
 In case you provided a URL to your GraphQL endpoint, the `graphql-config-parser` library will run an [introspection query](https://github.com/graphql/graphql-js/blob/master/src/utilities/introspectionQuery.js) against your endpoint in order to fetch your schema.
 
-## `graphql-config-parser` API [![Build Status](https://travis-ci.org/graphcool/graphql-config.svg?branch=master)](https://travis-ci.org/graphcool/graphql-config)
+## `graphql-config-parser` API [![Build Status](https://travis-ci.org/graphcool/graphql-config.svg?branch=master)](https://travis-ci.org/graphcool/graphql-config) [![npm version](https://badge.fury.io/js/graphql-config-parser.svg)](https://badge.fury.io/js/graphql-config-parser)
 
 ```js
 import { parse, resolveSchema } from 'graphql-config-parser'
