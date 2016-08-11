@@ -35,7 +35,7 @@ export GRAPHQL_ENDPOINT="https://your.api/graphql"
 
 ### Method 2: Configuration via `.graphqlrc` file
 
-You can either use your actual GraphQL endpoint or if preferred a local JSON schema file. 
+You can either use your actual GraphQL endpoint or if preferred a local schema.json or schema.js file.
 
 #### Use GraphQL endpoint
 
@@ -57,6 +57,14 @@ Note: The `headers` object is optional and can for example be used to authentica
 ```json
 {
   "file": "./schema.json"
+}
+```
+
+#### Use local schema file (GraphQL.js)
+
+```json
+{
+  "graphql-js": "./schema.js"
 }
 ```
 

@@ -1,0 +1,6 @@
+{
+  "scripts": {},
+  "graphql": {
+    "graphql-js": "../schema.js"
+  }
+}
