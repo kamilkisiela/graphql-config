@@ -5,7 +5,7 @@ import { graphql } from 'graphql/graphql'
 import { introspectionQuery } from 'graphql/utilities/introspectionQuery'
 import * as fetch from 'node-fetch'
 
-type Config = ConfigFile | ConfigRequest | ConfigSchema
+type Config = ConfigFile | ConfigRequest | ConfigGraphQLJS
 
 interface ConfigFile {
   type: 'file'
@@ -18,8 +18,8 @@ interface ConfigRequest {
   headers?: { [key: string]: string }
 }
 
-interface ConfigSchema {
-  type: 'schema',
+interface ConfigGraphQLJS {
+  type: 'graphql-js',
   file: string
 }
 
@@ -94,7 +94,7 @@ export async function resolveSchema (config: Config): Promise<Schema> {
               })
           }
         })
-     case 'schema':
+     case 'graphql-js':
        const schemaSource = require(resolve(config.file))
        return graphql(schemaSource, introspectionQuery)
 
@@ -119,11 +119,11 @@ function parseConfigJson (json: any): Config {
     ) as ConfigRequest
   }
 
-  if (json.schema) {
+  if (json['graphql-js']) {
     return {
-      type: 'schema',
-      file: json.schema,
-    } as ConfigSchema
+      type: 'graphql-js',
+      file: json['graphql-js'],
+    } as ConfigGraphQLJS
   }
 
   throw new Error(`Invalid configuration file: ${JSON.stringify(json)}`)
