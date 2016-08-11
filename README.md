@@ -64,7 +64,7 @@ Note: The `headers` object is optional and can for example be used to authentica
 
 ```json
 {
-  "schema": "./schema.js"
+  "graphql-js": "./schema.js"
 }
 ```
 
