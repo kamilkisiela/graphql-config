@@ -96,7 +96,7 @@ export async function resolveSchema (config: Config): Promise<Schema> {
         })
      case 'graphql-js':
        const schemaSource = require(resolve(config.file))
-       return graphql(schemaSource, introspectionQuery)
+       return graphql(schemaSource.default || schemaSource, introspectionQuery)
 
     default: throw new Error(`Invalid config: ${JSON.stringify(config)}`)
   }
