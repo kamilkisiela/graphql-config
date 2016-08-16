@@ -4,3 +4,4 @@ node_modules
 *.map
 src/**/*.js
 tests/**/*.js
+!tests/**/schema*.js
