@@ -1,7 +1,8 @@
 import test from 'ava'
-import { writeFileSync, unlinkSync } from 'fs';
-const schema = require('../schema.json')
+import { writeFileSync, unlinkSync, readFileSync } from 'fs'
+import { join } from 'path'
 import { parse, resolveSchema } from '../../src'
+const schema = require('../schema.json')
 
 function createPackageJson(fileName) {
   const content = {
@@ -9,15 +10,16 @@ function createPackageJson(fileName) {
       "graphql-js": fileName
     }
   }
-  writeFileSync('package.json', JSON.stringify(content));
+  writeFileSync('package.json', JSON.stringify(content))
 }
 
-test.after(() => {
-  unlinkSync('package.json');
+test.afterEach(() => {
+  delete require.cache[join(process.cwd(), 'package.json')]
+  unlinkSync('package.json')
 })
 
 test(async t => {
-  createPackageJson('schema.js');
+  createPackageJson('schema.js')
   const config = parse()
   const resolvedSchema = await resolveSchema(config)
 
@@ -25,7 +27,7 @@ test(async t => {
 })
 
 test(async t => {
-  createPackageJson('schema-es6.js');
+  createPackageJson('schema-es6.js')
   const config = parse()
   const resolvedSchema = await resolveSchema(config)
 

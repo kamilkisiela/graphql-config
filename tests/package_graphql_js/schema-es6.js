@@ -1,3 +1,3 @@
 import schema from './schema.js'
 
-export default schema.default
+export default schema

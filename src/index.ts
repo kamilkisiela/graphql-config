@@ -1,6 +1,6 @@
 import { isWebUri } from 'valid-url'
 import { readFileSync } from 'fs'
-import { join, resolve } from 'path'
+import { join } from 'path'
 import { graphql } from 'graphql/graphql'
 import { introspectionQuery } from 'graphql/utilities/introspectionQuery'
 import * as fetch from 'node-fetch'
@@ -95,7 +95,8 @@ export async function resolveSchema (config: Config): Promise<Schema> {
           }
         })
      case 'graphql-js':
-       const schemaSource = require(resolve(config.file))
+       const schemaSource = require(join(process.cwd(), config.file))
+       console.log(`Loaded GraphQL schema from ${config.file}`)
        return graphql(schemaSource.default || schemaSource, introspectionQuery)
 
     default: throw new Error(`Invalid config: ${JSON.stringify(config)}`)
