@@ -103,7 +103,7 @@ export async function resolveSchema (config: Config): Promise<Schema> {
   }
 }
 
-function parseConfigJson (json: any): Config {
+export function parseConfigJson (json: any): Config {
   if (json.file) {
     return {
       file: json.file,
