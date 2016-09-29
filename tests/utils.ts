@@ -2,7 +2,7 @@ import test from 'ava'
 const schema = require('./schema.json')
 import { createServer } from 'http'
 
-export function serveSchema (): Promise<void> {
+export function serveSchema (): Promise<any> {
   const handleRequest = (request, response) => {
     response.end(JSON.stringify(schema))
   }

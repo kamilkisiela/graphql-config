@@ -80,7 +80,7 @@ export async function resolveSchema (config: Config): Promise<Schema> {
           configRequest.headers || {}
         ),
       })
-        .then((res) => {
+        .then((res): Promise<Schema> => {
           if (res.ok) {
             return res.json()
               .then((schema) => {
@@ -89,7 +89,7 @@ export async function resolveSchema (config: Config): Promise<Schema> {
               })
           } else {
             return res.text()
-              .then((text) => {
+              .then((text): Schema => {
                 throw new Error(`${res.statusText}: ${text}`)
               })
           }
