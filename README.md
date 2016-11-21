@@ -21,7 +21,7 @@ The easiest way to configure your development environment with your GraphQL sche
 
 ## Usage
 
-You can either configure your GraphQL endpoint via a configuration file or by providing an enviornment variable.
+You can either configure your GraphQL endpoint via a configuration file or by providing an environment variable.
 
 > Note: This requires Node 5 installed or higher
 
