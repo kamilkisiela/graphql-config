@@ -27,9 +27,7 @@ interface Schema {
   data: any
 }
 
-export function parse (root: string): Config {
-  const path = root || process.cwd()
-
+export function parse (path: string = process.cwd()): Config {
   try {
     const packageJson = require(`${path}/package.json`)
     if (packageJson.hasOwnProperty('graphql')) {
