@@ -27,10 +27,9 @@ interface Schema {
   data: any
 }
 
-export function parse (): Config {
-
+export function parse (path: string = process.cwd()): Config {
   try {
-    const packageJson = require(`${process.cwd()}/package.json`)
+    const packageJson = require(`${path}/package.json`)
     if (packageJson.hasOwnProperty('graphql')) {
       return parseConfigJson(packageJson.graphql)
     }
@@ -39,7 +38,7 @@ export function parse (): Config {
   }
 
   try {
-    const graphqlrc = JSON.parse(readFileSync(`${process.cwd()}/.graphqlrc`, 'utf-8'))
+    const graphqlrc = JSON.parse(readFileSync(`${path}/.graphqlrc`, 'utf-8'))
     return parseConfigJson(graphqlrc)
   } catch (ex) {
     // do nothing here
