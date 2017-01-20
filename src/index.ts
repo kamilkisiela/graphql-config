@@ -1,6 +1,6 @@
 import { isWebUri } from 'valid-url'
 import { readFileSync } from 'fs'
-import { join } from 'path'
+import { resolve } from 'path'
 import { graphql } from 'graphql/graphql'
 import { introspectionQuery } from 'graphql/utilities/introspectionQuery'
 import * as fetch from 'node-fetch'
@@ -62,7 +62,7 @@ export function parse (path: string = process.cwd()): Config {
 export async function resolveSchema (config: Config): Promise<Schema> {
   switch (config.type) {
     case 'file':
-      const schema = require(join(process.cwd(), config.file))
+      const schema = require(resolve(config.file))
       console.log(`Loaded GraphQL schema from ${config.file}`)
       return Promise.resolve(schema)
     case 'request':
@@ -94,7 +94,7 @@ export async function resolveSchema (config: Config): Promise<Schema> {
           }
         })
      case 'graphql-js':
-       const schemaSource = require(join(process.cwd(), config.file))
+       const schemaSource = require(resolve(config.file))
        console.log(`Loaded GraphQL schema from ${config.file}`)
        return graphql(schemaSource.default || schemaSource, introspectionQuery)
 
