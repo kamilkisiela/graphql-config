@@ -15,7 +15,9 @@ The easiest way to configure your development environment with your GraphQL sche
 ### Tools
 
 * [babel-plugin-react-relay](https://github.com/graphcool/babel-plugin-react-relay) - Babel compile step to process your `Relay.QL` queries
+* [babel-plugin-transform-relay-hot](https://github.com/nodkz/babel-plugin-transform-relay-hot) - Wrapper under BabelRelayPlugin with hot reload (_pending_)
 * [eslint-plugin-graphql](https://github.com/apollostack/eslint-plugin-graphql) - An ESLint plugin that checks tagged template strings against a GraphQL schema (_pending_)
+* [webpack-plugin-graphql-schema-hot](https://github.com/nodkz/webpack-plugin-graphql-schema-hot) - Webpack plugin which tracks changes in your schema and generates its introspection in `json` and `txt` formats (_pending_)
 
 > Did we forget a tool/editor? Please [add it here](https://github.com/graphcool/graphql-config/compare).
 
