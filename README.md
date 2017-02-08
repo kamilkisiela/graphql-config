@@ -35,6 +35,12 @@ The easiest way to configure your project is by setting an environment variable 
 export GRAPHQL_ENDPOINT="https://your.api/graphql"
 ```
 
+You can also configure headers with the `GRAPHQL_HEADERS` environment variable. The value must be a valid JSON string.
+
+```sh
+export GRAPHQL_HEADERS="{\"Authorization\":\"xxxxx\"}"
+```
+
 ### Method 2: Configuration via `.graphqlrc` file
 
 You can either use your actual GraphQL endpoint or if preferred a local schema.json or schema.js file.

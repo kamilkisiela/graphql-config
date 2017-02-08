@@ -50,9 +50,18 @@ export function parse (path: string = process.cwd()): Config {
       throw new Error(`No valid GraphQL endpoint: ${endpoint}`)
     }
 
+    let headers
+    if (process.env.hasOwnProperty('GRAPHQL_HEADERS')) {
+      try {
+        headers = JSON.parse(process.env.GRAPHQL_HEADERS)
+      } catch (ex) {
+        throw new Error(`GraphQL headers are not valid JSON`)
+      }
+    }
     return {
       url: endpoint,
       type: 'request',
+      headers,
     } as ConfigRequest
   }
 
