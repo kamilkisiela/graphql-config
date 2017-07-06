@@ -1,130 +1,171 @@
-import { isWebUri } from 'valid-url'
-import { readFileSync } from 'fs'
-import { resolve } from 'path'
+import { readFile, readFileSync, existsSync } from 'fs'
+import { resolve, join, dirname, sep, extname } from 'path'
 import { graphql } from 'graphql/graphql'
+import { printSchema } from 'graphql/utilities/schemaPrinter'
 import { introspectionQuery } from 'graphql/utilities/introspectionQuery'
-import * as fetch from 'node-fetch'
+import { buildSchema } from 'graphql/utilities/buildASTSchema'
+import { buildClientSchema } from 'graphql/utilities/buildClientSchema'
+import { request } from 'graphql-request'
 
-type Config = ConfigFile | ConfigRequest | ConfigGraphQLJS
+export const GRAPHQL_CONFIG_NAME = '.graphqlconfig'
 
-interface ConfigFile {
-  type: 'file'
-  file: string
-}
+function findConfigPath(filePath) {
+  let currentDir = dirname(resolve(filePath))
 
-interface ConfigRequest {
-  type: 'request'
-  url: string
-  headers?: { [key: string]: string }
-}
-
-interface ConfigGraphQLJS {
-  type: 'graphql-js',
-  file: string
-}
-
-interface Schema {
-  data: any
-}
-
-export function parse (path: string = process.cwd()): Config {
-  try {
-    const packageJson = require(`${path}/package.json`)
-    if (packageJson.hasOwnProperty('graphql')) {
-      return parseConfigJson(packageJson.graphql)
+  while (!isRootDir(currentDir)) {
+    const configPath = join(currentDir, GRAPHQL_CONFIG_NAME)
+    if (existsSync(configPath)) {
+      return configPath
     }
-  } catch (ex) {
-    // do nothing here
+    currentDir = dirname(currentDir)
   }
 
-  try {
-    const graphqlrc = JSON.parse(readFileSync(`${path}/.graphqlrc`, 'utf-8'))
-    return parseConfigJson(graphqlrc)
-  } catch (ex) {
-    // do nothing here
+  return null
+}
+
+export function validateConfig(config) {
+  // FIXME
+  // TODO check if projects are overlapping
+  // forbid recursive projects and env
+}
+
+function isRootDir(path: string): boolean {
+  return dirname(path) === path
+}
+
+function isSubPath(from, to) {
+  from = resolve(from)
+  to = resolve(to)
+  return (from === to || to.startsWith(from + sep))
+}
+
+function isFileInDirs(filePath, dirs) {
+  return (dirs || []).some(dir => isSubPath(dir, filePath))
+}
+
+function merge(object, source) {
+  // if (source == null)
+  // for (const name in object) {
+  //   merge(object[name], source[name])
+  // }
+}
+
+function resolveProject(config, filePath) {
+  const { projects, ...configBase } = config
+  if (!projects || Object.keys(projects).length === 0) {
+    return config
   }
 
-  if (process.env.hasOwnProperty('GRAPHQL_ENDPOINT')) {
-    const endpoint = process.env.GRAPHQL_ENDPOINT
-    if (!isWebUri(endpoint)) {
-      throw new Error(`No valid GraphQL endpoint: ${endpoint}`)
+  projects.each(project => {
+    if (
+      isFileInDirs(filePath, project.includeDirs) &&
+      !isFileInDirs(filePath, project.excludeDirs)
+    ) {
+      return merge(configBase, project)
     }
+  })
 
-    return {
-      url: endpoint,
-      type: 'request',
-    } as ConfigRequest
-  }
-
-  throw new Error('Couldn\'t find a GraphQL config. Please refer to https://github.com/graphcool/graphql-config')
+  // FIXME
+  throw new Error('')
 }
 
-export async function resolveSchema (config: Config): Promise<Schema> {
-  switch (config.type) {
-    case 'file':
-      const schema = require(resolve(config.file))
-      console.log(`Loaded GraphQL schema from ${config.file}`)
-      return Promise.resolve(schema)
-    case 'request':
-      const configRequest = config as ConfigRequest
-      return fetch(configRequest.url, {
-        method: 'POST',
-        body: JSON.stringify({
-          query: introspectionQuery,
-        }),
-        headers: Object.assign(
-          {
-            'Content-Type': 'application/json',
-          },
-          configRequest.headers || {}
-        ),
-      })
-        .then((res): Promise<Schema> => {
-          if (res.ok) {
-            return res.json()
-              .then((schema) => {
-                console.log(`Loaded GraphQL schema from ${configRequest.url}`)
-                return schema
-              })
-          } else {
-            return res.text()
-              .then((text): Schema => {
-                throw new Error(`${res.statusText}: ${text}`)
-              })
-          }
-        })
-     case 'graphql-js':
-       const schemaSource = require(resolve(config.file))
-       console.log(`Loaded GraphQL schema from ${config.file}`)
-       return graphql(schemaSource.default || schemaSource, introspectionQuery)
-
-    default: throw new Error(`Invalid config: ${JSON.stringify(config)}`)
+function resolveEnv(config, envName?: string) {
+  const { env, ...configBase } = config.env
+  if (!env || Object.keys(env).length === 0) {
+    return config
   }
+
+  if (!envName) {
+    envName = process.env.GRAPHQL_ENV
+  }
+
+  if (!envName) {
+    // FIXME
+    throw new Error('')
+  }
+
+  const selectedEnv = env[envName]
+  if (!selectedEnv) {
+    const possibleNames = Object.keys(env)
+    // FIXME:
+    throw new Error(`${possibleNames}`)
+  }
+
+  return merge(configBase, selectedEnv)
 }
 
-export function parseConfigJson (json: any): Config {
-  if (json.file) {
-    return {
-      file: json.file,
-      type: 'file',
-    } as ConfigFile
+export function getProjectConfig(filePath) {
+  const configPath = findConfigPath(filePath)
+
+  if (configPath === null) {
+    // '${GRAPHQL_CONFIG_NAME} file is not available in the provided ' +
+    // `config directory: ${configDir}\nPlease check the config ` +
+    // 'directory path and try again.',
+    throw new Error('')
   }
 
-  if (json.request) {
-    return Object.assign(
-      {
-        type: 'request',
-      },
-      json.request
-    ) as ConfigRequest
+  const rawConfig = readFileSync(configPath, 'utf-8')
+
+  let config
+  try {
+    config = JSON.parse(rawConfig)
+  } catch (error) {
+    // FIXME: prefix error
+    // console.error('Parsing JSON in .graphqlrc file has failed.')
+    throw new Error(error)
   }
 
-  if (json['graphql-js']) {
-    return {
-      type: 'graphql-js',
-      file: json['graphql-js'],
-    } as ConfigGraphQLJS
-  }
+  validateConfig(config)
+  return { ...resolveProject(config, filePath), configPath }
+}
 
-  throw new Error(`Invalid configuration file: ${JSON.stringify(json)}`)
+export function getConfig(filePath, envName?: string) {
+  const config = getProjectConfig(filePath)
+  return resolveEnv(config, envName)
+}
+
+function readSchema(path) {
+  return new Promise((resolve, reject) => {
+    readFile(path, 'utf-8', (error, data) => {
+      // FIXME prefix error
+      error ? reject(error) : resolve(data)
+    })
+  }).then(data => {
+    // FIXME: prefix error
+    switch (extname(path)) {
+      case '.graphql':
+        return buildSchema(data)
+      case '.json':
+        return buildClientSchema(JSON.parse(data))
+      default:
+        throw new Error('Unsupported schema file extention')
+    }
+  })
+}
+
+function querySchema(url, options?) {
+  return request(url, introspectionQuery)
+}
+
+export function getSchema(filePath) {
+  const {schemaPath, configPath, schemaUrl} = getConfig(filePath)
+
+  if (schemaPath) {
+    return readSchema(join(configPath, schemaPath))
+  }
+  if (schemaUrl) {
+    return querySchema(schemaUrl)
+  }
+  // FIXME
+  throw new Error('')
+}
+
+export function getIntospection(filePath) {
+  return getSchema(filePath)
+    .then(schema => graphql(schema, introspectionQuery))
+}
+
+export function getSchemaIDL(filePath) {
+  return getSchema(filePath)
+    .then(schema => printSchema(schema))
 }
