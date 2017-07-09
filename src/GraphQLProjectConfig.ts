@@ -10,6 +10,7 @@ import {
 import {
   GraphQLResolvedConfigData,
   GraphQLProjectConfigData,
+  GraphQLConfigData,
 } from './types'
 
 import {
@@ -22,13 +23,25 @@ import {
 } from './utils'
 
 export class GraphQLProjectConfig {
-  public rawConfig: GraphQLProjectConfigData
+  public config: GraphQLProjectConfigData
   _configPath: string
 
   constructor(
     public rootPath: string = process.cwd(),
-    public projectName?: string
+    public projectName?: string,
+    configData?: { config: GraphQLConfigData, path: string }
   ) {
+    let config: GraphQLConfigData
+    if (configData) {
+      config = configData.config
+      this._configPath = configData.path
+    } else {
+      config = this.loadConfig(rootPath)
+    }
+    this.loadProjectConfig(config, projectName)
+  }
+
+  loadConfig(rootPath) {
     const configPath = findConfigPath(rootPath)
     if (!configPath) {
       throw new Error("Can't find .graphqlconfig")
@@ -38,6 +51,10 @@ export class GraphQLProjectConfig {
 
     const config = readConfig(configPath)
     validateConfig(config)
+    return config;
+  }
+
+  loadProjectConfig(config: GraphQLConfigData, projectName?: string) {
     const { projects, ...configBase } = config
 
     if (projects && projects.length && !projectName) {
@@ -45,7 +62,7 @@ export class GraphQLProjectConfig {
     }
 
     if (!projectName || !projects) {
-      this.rawConfig = config
+      this.config = config
       return
     }
 
@@ -54,11 +71,11 @@ export class GraphQLProjectConfig {
       throw new Error(`No config for ${projectName}`)
     }
 
-    this.rawConfig = { ...configBase, ...projectConfig }
+    this.config = { ...configBase, ...projectConfig }
   }
 
   resolveSchema(env: string = process.env.GRAPHQL_ENV): Promise<GraphQLSchema> {
-    const {schemaPath, schemaUrl} = this.rawConfig
+    const {schemaPath, schemaUrl} = this.config
 
     if (schemaPath) {
       return readSchema(joinPaths(this._configPath, schemaPath))
@@ -81,9 +98,9 @@ export class GraphQLProjectConfig {
   }
 
   getConfig(envName: string = process.env.GRAPHQL_ENV): GraphQLResolvedConfigData {
-    const { env, ...configBase } = this.rawConfig
+    const { env, ...configBase } = this.config
     if (!env || Object.keys(env).length === 0) {
-      return this.rawConfig
+      return this.config
     }
 
     if (!envName) {
@@ -94,7 +111,7 @@ export class GraphQLProjectConfig {
     const selectedEnvConfig = env[envName]
     if (!selectedEnvConfig) {
       const possibleNames = Object.keys(env)
-      // FIXME:
+      // FIXME
       throw new Error(`${possibleNames}`)
     }
 
@@ -102,6 +119,6 @@ export class GraphQLProjectConfig {
   }
 
   getEnvs(): { [envName: string]: GraphQLResolvedConfigData } | undefined {
-    return this.rawConfig.env
+    return this.config.env
   }
 }

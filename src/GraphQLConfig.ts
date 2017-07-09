@@ -19,31 +19,37 @@ import { GraphQLProjectConfig } from './GraphQLProjectConfig'
 
 export class GraphQLConfig {
   public config: GraphQLConfigData
+  _configPath: string;
 
   constructor(
     public rootPath: string = process.cwd()
   ) {
-    const configFileName = findConfigPath(rootPath)
-    if (!configFileName) {
-      // '${GRAPHQL_CONFIG_NAME} file is not available in the provided ' +
-      // `config directory: ${configDir}\nPlease check the config ` +
-      // 'directory path and try again.',
-      throw new Error(`Can't find ${GRAPHQL_CONFIG_NAME}`)
+    const configPath = findConfigPath(rootPath)
+    if (!configPath) {
+      throw new Error(`'${GRAPHQL_CONFIG_NAME} file is not available in the provided ` +
+        `config directory: ${this.rootPath}\nPlease check the config ` +
+        `directory path and try again.`)
     }
-
-    this.config = readConfig(configFileName)
+    this._configPath = configPath;
+    this.config = readConfig(configPath)
     validateConfig(this.config)
   }
 
 
   getProjectConfig(projectName: string): GraphQLProjectConfig {
-    return new GraphQLProjectConfig(this.rootPath, projectName)
+    return new GraphQLProjectConfig(this.rootPath, projectName, {
+      config: this.config,
+      path: this._configPath
+    })
   }
 
   getConfigForFile(filePath: string): GraphQLProjectConfig {
     const { projects, ...configBase } = this.config
     if (!projects || Object.keys(projects).length === 0) {
-      return new GraphQLProjectConfig(this.rootPath)
+      return new GraphQLProjectConfig(this.rootPath, undefined, {
+        config: this.config,
+        path: this._configPath
+      })
     }
 
     Object.entries(projects).forEach(([projectName, project]) => {
@@ -51,7 +57,10 @@ export class GraphQLConfig {
         isFileInDirs(filePath, project.includeDirs) &&
         !isFileInDirs(filePath, project.excludeDirs)
       ) {
-        return new GraphQLProjectConfig(this.rootPath, projectName)
+        return new GraphQLProjectConfig(this.rootPath, projectName, {
+          config: this.config,
+          path: this._configPath
+        })
       }
     })
 
