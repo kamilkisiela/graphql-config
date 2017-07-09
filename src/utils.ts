@@ -1,5 +1,5 @@
 import { readFile, readFileSync, existsSync } from 'fs'
-import { resolve, join, dirname, sep, extname } from 'path'
+import { resolve, join as joinPaths, dirname, sep, extname } from 'path'
 import { buildSchema, buildClientSchema, introspectionQuery } from 'graphql'
 import { request } from 'graphql-request'
 import { GraphQLConfigData } from './types'
@@ -20,34 +20,33 @@ export function isPathToConfig(path: string) {
   return (extname(path) === GRAPHQL_CONFIG_NAME)
 }
 
-export function findConfigPath(filePath: string): string | null {
+export function findConfigPath(filePath: string): string {
   let currentDir = resolve(filePath)
 
   while (!isRootDir(currentDir)) {
-    const configPath = join(currentDir, GRAPHQL_CONFIG_NAME)
+    const configPath = joinPaths(currentDir, GRAPHQL_CONFIG_NAME)
     if (existsSync(configPath)) {
       return configPath
     }
     currentDir = dirname(currentDir)
   }
 
-  return null
+  throw new Error(
+    `'${GRAPHQL_CONFIG_NAME} file is not available in the provided config ` +
+    `directory: ${filePath}\nPlease check the config directory path and try again.`
+  )
 }
 
 export function readConfig(configPath: string): GraphQLConfigData {
-  const rawConfig = readFileSync(configPath, 'utf-8')
-
-  let config
   try {
-    config = JSON.parse(rawConfig)
+    const rawConfig = readFileSync(configPath, 'utf-8')
+    const config = JSON.parse(rawConfig)
+    return config
   } catch (error) {
     // FIXME: prefix error
     // console.error('Parsing JSON in .graphqlrc file has failed.')
     throw new Error(error)
   }
-
-  // validateConfig(config)
-  return config
 }
 
 export function isFileInDirs(filePath: string, dirs?: string[]): boolean {
@@ -62,14 +61,22 @@ export function mergeConfigs(
   dest: GraphQLConfigData,
   src: GraphQLConfigData
 ): GraphQLConfigData {
-  // FIXME: handle extensions, envs and projects
-  return { ...dest, ...src }
+  const result = { ...dest, ...src }
+  if (dest.extensions && src.extensions) {
+    result.extensions = { ...dest.extensions, ...src.extensions }
+  }
+  if (dest.env && src.env) {
+    result.env = { ...dest.env, ...src.env }
+  }
+  if (dest.projects && src.projects) {
+    result.projects = { ...dest.projects, ...src.projects }
+  }
+  return result
 }
 
 export function readSchema(path) {
   return new Promise((resolve, reject) => {
     readFile(path, 'utf-8', (error, data) => {
-      // FIXME: prefix error
       error ? reject(error) : resolve(data)
     })
   }).then((data: string) => {

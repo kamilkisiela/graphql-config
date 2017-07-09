@@ -36,11 +36,7 @@ export class GraphQLProjectConfig {
     if (isPathToConfig(path)) {
       this.configPath = path
     } else {
-      const configPath = findConfigPath(path)
-      if (!configPath) {
-        throw new Error("Can't find .graphqlconfig")
-      }
-      this.configPath = configPath
+      this.configPath = findConfigPath(path)
     }
 
     let config = configData
@@ -48,29 +44,7 @@ export class GraphQLProjectConfig {
       config = readConfig(this.configPath)
     }
     validateConfig(config)
-    this.config = this.loadProjectConfig(config, projectName)
-  }
-
-  loadProjectConfig(
-    config: GraphQLConfigData,
-    projectName: string = process.env.GRAPHQL_PROJECT
-  ) {
-    const { projects, ...configBase } = config
-
-    if (projects == null || !Object.keys(projects).length) {
-      return config
-    }
-
-    if (!projectName) {
-      throw new Error('Project name must be specified for multiproject config')
-    }
-
-    const projectConfig = projects[projectName]
-    if (!projectConfig) {
-      throw new Error(`No config for ${projectName}`)
-    }
-
-    return mergeConfigs(configBase, projectConfig)
+    this.config = loadProjectConfig(config, projectName)
   }
 
   resolveConfigPath(relativePath: string): string {
@@ -128,4 +102,26 @@ export class GraphQLProjectConfig {
     }
     return result
   }
+}
+
+function loadProjectConfig(
+  config: GraphQLConfigData,
+  projectName: string = process.env.GRAPHQL_PROJECT
+) {
+  const { projects, ...configBase } = config
+
+  if (projects == null || !Object.keys(projects).length) {
+    return config
+  }
+
+  if (!projectName) {
+    throw new Error('Project name must be specified for multiproject config')
+  }
+
+  const projectConfig = projects[projectName]
+  if (!projectConfig) {
+    throw new Error(`No config for ${projectName}`)
+  }
+
+  return mergeConfigs(configBase, projectConfig)
 }

@@ -8,37 +8,30 @@ import {
   readConfig,
   isFileInDirs,
   validateConfig,
-  GRAPHQL_CONFIG_NAME,
 } from './utils'
 
 import { GraphQLProjectConfig } from './GraphQLProjectConfig'
 
 export class GraphQLConfig {
   public config: GraphQLConfigData
-  _configPath: string
+  public configPath: string
 
   constructor(
     public rootPath: string = process.cwd()
   ) {
-    const configPath = findConfigPath(rootPath)
-    if (!configPath) {
-      throw new Error(`'${GRAPHQL_CONFIG_NAME} file is not available in the provided ` +
-        `config directory: ${this.rootPath}\nPlease check the config ` +
-        `directory path and try again.`)
-    }
-    this._configPath = configPath
-    this.config = readConfig(configPath)
+    this.configPath = findConfigPath(rootPath)
+    this.config = readConfig(this.configPath)
     validateConfig(this.config)
   }
 
   getProjectConfig(projectName: string): GraphQLProjectConfig {
-    return new GraphQLProjectConfig(this._configPath, projectName, this.config)
+    return new GraphQLProjectConfig(this.configPath, projectName, this.config)
   }
 
   getConfigForFile(filePath: string): GraphQLProjectConfig {
     const { projects } = this.config
     if (!projects || Object.keys(projects).length === 0) {
-      return new GraphQLProjectConfig(this._configPath, undefined, this.config)
+      return new GraphQLProjectConfig(this.configPath, undefined, this.config)
     }
 
     Object.entries(projects).forEach(([projectName, project]) => {
@@ -46,14 +39,18 @@ export class GraphQLConfig {
         isFileInDirs(filePath, project.includeDirs) &&
         !isFileInDirs(filePath, project.excludeDirs)
       ) {
-        return new GraphQLProjectConfig(this._configPath, projectName, this.config)
+        return this.getProjectConfig(projectName)
       }
     })
 
     throw new Error('File is not included in any config')
   }
 
-  getProjects(): { [name: string]: GraphQLProjectConfigData } | undefined {
-    return this.config.projects
+  getProjects(): { [name: string]: GraphQLProjectConfigData } {
+    const result = {}
+    for (const projectName in (this.config.projects || {})) {
+      result[projectName] = this.getProjectConfig(projectName)
+    }
+    return result
   }
 }
