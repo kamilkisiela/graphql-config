@@ -10,14 +10,14 @@ function isRootDir(path: string): boolean {
   return dirname(path) === path
 }
 
-function isSubPath(from:string, to:string): boolean {
+function isSubPath(from: string, to: string): boolean {
   from = resolve(from)
   to = resolve(to)
   return (from === to || to.startsWith(from + sep))
 }
 
 export function findConfigPath(filePath: string): string | null {
-  let currentDir = dirname(resolve(filePath))
+  let currentDir = resolve(filePath)
 
   while (!isRootDir(currentDir)) {
     const configPath = join(currentDir, GRAPHQL_CONFIG_NAME)
@@ -30,7 +30,7 @@ export function findConfigPath(filePath: string): string | null {
   return null
 }
 
-export function readConfig(configPath:string):GraphQLConfigData {
+export function readConfig(configPath: string): GraphQLConfigData {
   const rawConfig = readFileSync(configPath, 'utf-8')
 
   let config
@@ -42,11 +42,11 @@ export function readConfig(configPath:string):GraphQLConfigData {
     throw new Error(error)
   }
 
-  //validateConfig(config)
+  // validateConfig(config)
   return config
 }
 
-export function isFileInDirs(filePath:string, dirs?:string[]): boolean {
+export function isFileInDirs(filePath: string, dirs?: string[]): boolean {
   return (dirs || []).some(dir => isSubPath(dir, filePath))
 }
 
@@ -68,19 +68,19 @@ export function readSchema(path) {
       // FIXME: prefix error
       error ? reject(error) : resolve(data)
     })
-  }).then((data:string) => {
+  }).then((data: string) => {
     // FIXME: prefix error
     switch (extname(path)) {
       case '.graphql':
         return buildSchema(data)
       case '.json':
-        return buildClientSchema(JSON.parse(data))
+        return buildClientSchema(JSON.parse(data).data)
       default:
         throw new Error('Unsupported schema file extention')
     }
   })
 }
 
-export function querySchema(url:string, options?) {
+export function querySchema(url: string, options?) {
   return request(url, introspectionQuery)
 }

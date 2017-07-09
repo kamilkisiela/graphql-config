@@ -1,8 +1,4 @@
 import {
-  GraphQLSchema
-} from 'graphql'
-
-import {
   GraphQLConfigData,
   GraphQLProjectConfigData,
 } from './types'
@@ -19,7 +15,7 @@ import { GraphQLProjectConfig } from './GraphQLProjectConfig'
 
 export class GraphQLConfig {
   public config: GraphQLConfigData
-  _configPath: string;
+  _configPath: string
 
   constructor(
     public rootPath: string = process.cwd()
@@ -30,25 +26,24 @@ export class GraphQLConfig {
         `config directory: ${this.rootPath}\nPlease check the config ` +
         `directory path and try again.`)
     }
-    this._configPath = configPath;
+    this._configPath = configPath
     this.config = readConfig(configPath)
     validateConfig(this.config)
   }
 
-
   getProjectConfig(projectName: string): GraphQLProjectConfig {
     return new GraphQLProjectConfig(this.rootPath, projectName, {
       config: this.config,
-      path: this._configPath
+      path: this._configPath,
     })
   }
 
   getConfigForFile(filePath: string): GraphQLProjectConfig {
-    const { projects, ...configBase } = this.config
+    const { projects } = this.config
     if (!projects || Object.keys(projects).length === 0) {
       return new GraphQLProjectConfig(this.rootPath, undefined, {
         config: this.config,
-        path: this._configPath
+        path: this._configPath,
       })
     }
 
@@ -59,7 +54,7 @@ export class GraphQLConfig {
       ) {
         return new GraphQLProjectConfig(this.rootPath, projectName, {
           config: this.config,
-          path: this._configPath
+          path: this._configPath,
         })
       }
     })

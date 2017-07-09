@@ -12,11 +12,9 @@ export type GraphQLResolvedConfigData = {
   extensions?: {[name: string]: GraphQLConfigurationExtension}
 }
 
-
 export type GraphQLProjectConfigData = GraphQLResolvedConfigData & {
   env?: {[name: string]: GraphQLResolvedConfigData}
 }
-
 
 export type GraphQLConfigData = GraphQLProjectConfigData & {
   projects?: {

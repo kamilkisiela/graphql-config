@@ -1,4 +1,4 @@
-import { join as joinPaths } from 'path'
+import { join as joinPaths, dirname } from 'path'
 
 import {
   GraphQLSchema,
@@ -51,7 +51,7 @@ export class GraphQLProjectConfig {
 
     const config = readConfig(configPath)
     validateConfig(config)
-    return config;
+    return config
   }
 
   loadProjectConfig(config: GraphQLConfigData, projectName?: string) {
@@ -78,7 +78,7 @@ export class GraphQLProjectConfig {
     const {schemaPath, schemaUrl} = this.config
 
     if (schemaPath) {
-      return readSchema(joinPaths(this._configPath, schemaPath))
+      return readSchema(joinPaths(dirname(this._configPath), schemaPath))
     }
     if (schemaUrl) {
       return querySchema(schemaUrl)
