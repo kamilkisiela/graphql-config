@@ -47,19 +47,21 @@ export class GraphQLProjectConfig {
       config = readConfig(this._configPath)
     }
     validateConfig(config)
-    this.loadProjectConfig(config, projectName)
+    this.config = this.loadProjectConfig(config, projectName)
   }
 
-  loadProjectConfig(config: GraphQLConfigData, projectName?: string) {
+  loadProjectConfig(
+    config: GraphQLConfigData,
+    projectName: string = process.env.GRAPHQL_PROJECT
+  ) {
     const { projects, ...configBase } = config
 
-    if (projects && projects.length && !projectName) {
-      throw new Error('Project name must be specified for multiproject config')
+    if (!projects || Object.keys(projects).length) {
+      return config
     }
 
-    if (!projectName || !projects) {
-      this.config = config
-      return
+    if (!projectName) {
+      throw new Error('Project name must be specified for multiproject config')
     }
 
     const projectConfig = projects[projectName]
@@ -67,11 +69,11 @@ export class GraphQLProjectConfig {
       throw new Error(`No config for ${projectName}`)
     }
 
-    this.config = { ...configBase, ...projectConfig }
+    return mergeConfigs(configBase, projectConfig)
   }
 
-  resolveSchema(env: string = process.env.GRAPHQL_ENV): Promise<GraphQLSchema> {
-    const {schemaPath, schemaUrl} = this.config
+  resolveSchema(env?: string): Promise<GraphQLSchema> {
+    const {schemaPath, schemaUrl} = this.getConfig(env)
 
     if (schemaPath) {
       return readSchema(joinPaths(dirname(this._configPath), schemaPath))
@@ -83,12 +85,12 @@ export class GraphQLProjectConfig {
     throw new Error('')
   }
 
-  resolveIntrospection(env: string = process.env.GRAPHQL_ENV): Promise<any> {
+  resolveIntrospection(env?: string): Promise<GraphQLSchema> {
     return this.resolveSchema(env)
       .then(schema => graphql(schema, introspectionQuery))
   }
 
-  resolveSchemaIDL(env: string = process.env.GRAPHQL_ENV): Promise<any> {
+  resolveSchemaIDL(env?: string): Promise<GraphQLSchema> {
     return this.resolveSchema(env)
       .then(schema => printSchema(schema))
   }
