@@ -14,6 +14,7 @@ import {
 } from './types'
 
 import {
+  isPathToConfig,
   findConfigPath,
   readConfig,
   validateConfig,
@@ -27,31 +28,26 @@ export class GraphQLProjectConfig {
   _configPath: string
 
   constructor(
-    public rootPath: string = process.cwd(),
+    path: string = process.cwd(),
     public projectName?: string,
-    configData?: { config: GraphQLConfigData, path: string }
+    configData?: GraphQLConfigData
   ) {
-    let config: GraphQLConfigData
-    if (configData) {
-      config = configData.config
-      this._configPath = configData.path
+    if (isPathToConfig(path)) {
+      this._configPath = path
     } else {
-      config = this.loadConfig(rootPath)
-    }
-    this.loadProjectConfig(config, projectName)
-  }
-
-  loadConfig(rootPath) {
-    const configPath = findConfigPath(rootPath)
-    if (!configPath) {
-      throw new Error("Can't find .graphqlconfig")
+      const configPath = findConfigPath(path)
+      if (!configPath) {
+        throw new Error("Can't find .graphqlconfig")
+      }
+      this._configPath = configPath
     }
 
-    this._configPath = configPath
-
-    const config = readConfig(configPath)
+    let config = configData
+    if (config == null) {
+      config = readConfig(this._configPath)
+    }
     validateConfig(config)
-    return config
+    this.loadProjectConfig(config, projectName)
   }
 
   loadProjectConfig(config: GraphQLConfigData, projectName?: string) {

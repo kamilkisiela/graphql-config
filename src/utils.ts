@@ -16,6 +16,10 @@ function isSubPath(from: string, to: string): boolean {
   return (from === to || to.startsWith(from + sep))
 }
 
+export function isPathToConfig(path: string) {
+  return (extname(path) === GRAPHQL_CONFIG_NAME)
+}
+
 export function findConfigPath(filePath: string): string | null {
   let currentDir = resolve(filePath)
 

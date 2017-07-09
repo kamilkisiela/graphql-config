@@ -32,19 +32,13 @@ export class GraphQLConfig {
   }
 
   getProjectConfig(projectName: string): GraphQLProjectConfig {
-    return new GraphQLProjectConfig(this.rootPath, projectName, {
-      config: this.config,
-      path: this._configPath,
-    })
+    return new GraphQLProjectConfig(this._configPath, projectName, this.config)
   }
 
   getConfigForFile(filePath: string): GraphQLProjectConfig {
     const { projects } = this.config
     if (!projects || Object.keys(projects).length === 0) {
-      return new GraphQLProjectConfig(this.rootPath, undefined, {
-        config: this.config,
-        path: this._configPath,
-      })
+      return new GraphQLProjectConfig(this._configPath, undefined, this.config)
     }
 
     Object.entries(projects).forEach(([projectName, project]) => {
@@ -52,10 +46,7 @@ export class GraphQLConfig {
         isFileInDirs(filePath, project.includeDirs) &&
         !isFileInDirs(filePath, project.excludeDirs)
       ) {
-        return new GraphQLProjectConfig(this.rootPath, projectName, {
-          config: this.config,
-          path: this._configPath,
-        })
+        return new GraphQLProjectConfig(this._configPath, projectName, this.config)
       }
     })
 
