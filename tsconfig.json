@@ -3,7 +3,7 @@
     "module": "commonjs",
     "strictNullChecks": true,
     "target": "es2015",
-    "lib": [ "es2017" ]
+    "lib": [ "es2017", "DOM" ]
   },
   "exclude": [
     "node_modules",
