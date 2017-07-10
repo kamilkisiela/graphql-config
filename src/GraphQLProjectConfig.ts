@@ -18,6 +18,7 @@ import {
   isPathToConfig,
   findConfigPath,
   readConfig,
+  isFileInDirs,
   validateConfig,
   mergeConfigs,
   readSchema,
@@ -101,6 +102,13 @@ export class GraphQLProjectConfig {
       result[envName] = this.getConfig(envName)
     }
     return result
+  }
+
+  includeFile(filePath: string): boolean {
+    return (
+      isFileInDirs(filePath, this.config.includeDirs) &&
+      !isFileInDirs(filePath, this.config.excludeDirs)
+    )
   }
 }
 

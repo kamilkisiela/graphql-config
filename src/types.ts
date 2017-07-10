@@ -9,17 +9,17 @@ export type GraphQLResolvedConfigData = {
   includeDirs?: Array<string>,
   excludeDirs?: Array<string>,
 
-  extensions?: {[name: string]: GraphQLConfigurationExtension}
+  extensions?: { [name: string]: GraphQLConfigurationExtension }
 }
 
 export type GraphQLPerEnvConfig = {
-  env?: {[name: string]: GraphQLResolvedConfigData}
+  env?: { [name: string]: GraphQLResolvedConfigData }
 }
 
 export type GraphQLProjectConfigData = GraphQLResolvedConfigData & GraphQLPerEnvConfig
 
-export type GraphQLConfigData = GraphQLProjectConfigData & {
-  projects?: {
-    [projectName: string]: GraphQLProjectConfigData
-  }
+export type GraphQLPerProjectConfig = {
+  projects?: { [projectName: string]: GraphQLProjectConfigData }
 }
+
+export type GraphQLConfigData = GraphQLProjectConfigData & GraphQLPerProjectConfig

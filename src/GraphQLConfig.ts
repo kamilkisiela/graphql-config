@@ -28,10 +28,12 @@ export class GraphQLConfig {
     return new GraphQLProjectConfig(this.configPath, projectName, this.config)
   }
 
-  getConfigForFile(filePath: string): GraphQLProjectConfig {
+  getConfigForFile(filePath: string): GraphQLProjectConfig | null {
     const { projects } = this.config
+
     if (!projects || Object.keys(projects).length === 0) {
-      return new GraphQLProjectConfig(this.configPath, undefined, this.config)
+      const config = new GraphQLProjectConfig(this.configPath, undefined, this.config)
+      return config.includeFile(filePath) ? config : null
     }
 
     Object.entries(projects).forEach(([projectName, project]) => {
@@ -42,8 +44,7 @@ export class GraphQLConfig {
         return this.getProjectConfig(projectName)
       }
     })
-
-    throw new Error('File is not included in any config')
+    return null
   }
 
   getProjects(): { [name: string]: GraphQLProjectConfigData } {
