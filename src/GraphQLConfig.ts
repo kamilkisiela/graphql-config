@@ -33,7 +33,7 @@ export class GraphQLConfig {
 
     if (!projects || Object.keys(projects).length === 0) {
       const config = new GraphQLProjectConfig(this.configPath, undefined, this.config)
-      return config.includeFile(filePath) ? config : null
+      return config.includesFile(filePath) ? config : null
     }
 
     Object.entries(projects).forEach(([projectName, project]) => {

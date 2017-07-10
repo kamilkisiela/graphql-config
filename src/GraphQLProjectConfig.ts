@@ -65,12 +65,12 @@ export class GraphQLProjectConfig {
     throw new Error('')
   }
 
-  resolveIntrospection(env?: string): Promise<GraphQLSchema> {
+  resolveIntrospection(env?: string): Promise<any> {
     return this.resolveSchema(env)
       .then(schema => graphql(schema, introspectionQuery))
   }
 
-  resolveSchemaIDL(env?: string): Promise<GraphQLSchema> {
+  resolveSchemaIDL(env?: string): Promise<string> {
     return this.resolveSchema(env)
       .then(schema => printSchema(schema))
   }
@@ -104,7 +104,7 @@ export class GraphQLProjectConfig {
     return result
   }
 
-  includeFile(filePath: string): boolean {
+  includesFile(filePath: string): boolean {
     return (
       isFileInDirs(filePath, this.config.includeDirs) &&
       !isFileInDirs(filePath, this.config.excludeDirs)
