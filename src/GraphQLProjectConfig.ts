@@ -30,8 +30,8 @@ export class GraphQLProjectConfig {
 
   constructor(
     path: string = process.cwd(),
-    public projectName?: string,
-    configData?: GraphQLConfigData
+    public projectName: string = process.env.GRAPHQL_PROJECT,
+    configData?: GraphQLConfigData // for cases when data is already parsed
   ) {
     if (isPathToConfig(path)) {
       this.configPath = path
@@ -113,7 +113,7 @@ export class GraphQLProjectConfig {
 
 function loadProjectConfig(
   config: GraphQLConfigData,
-  projectName: string = process.env.GRAPHQL_PROJECT
+  projectName: string
 ) {
   const { projects, ...configBase } = config
 
