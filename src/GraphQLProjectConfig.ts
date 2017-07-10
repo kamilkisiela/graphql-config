@@ -11,7 +11,6 @@ import {
   GraphQLResolvedConfigData,
   GraphQLProjectConfigData,
   GraphQLConfigData,
-  GraphQLPerEnvConfig,
 } from './types'
 
 import {
@@ -96,7 +95,7 @@ export class GraphQLProjectConfig {
     return mergeConfigs(configBase, selectedEnvConfig)
   }
 
-  getEnvs(): GraphQLPerEnvConfig {
+  getEnvs(): { [env: string]: GraphQLResolvedConfigData } {
     const result = {}
     for (const envName in (this.config.env || {})) {
       result[envName] = this.getConfig(envName)

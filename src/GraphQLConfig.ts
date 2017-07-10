@@ -1,6 +1,5 @@
 import {
   GraphQLConfigData,
-  GraphQLProjectConfigData,
 } from './types'
 
 import {
@@ -47,7 +46,7 @@ export class GraphQLConfig {
     return null
   }
 
-  getProjects(): { [name: string]: GraphQLProjectConfigData } {
+  getProjects(): { [name: string]: GraphQLProjectConfig } {
     const result = {}
     for (const projectName in (this.config.projects || {})) {
       result[projectName] = this.getProjectConfig(projectName)
