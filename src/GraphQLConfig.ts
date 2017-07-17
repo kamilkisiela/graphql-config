@@ -1,3 +1,5 @@
+import { relative } from 'path'
+
 import {
   GraphQLConfigData,
 } from './types'
@@ -5,7 +7,7 @@ import {
 import {
   findConfigPath,
   readConfig,
-  isFileInDirs,
+  matchesGlobs,
   validateConfig,
 } from './utils'
 
@@ -30,6 +32,7 @@ export class GraphQLConfig {
   getConfigForFile(filePath: string): GraphQLProjectConfig | null {
     const { projects } = this.config
 
+    filePath = relative(this.configPath, filePath)
     if (!projects || Object.keys(projects).length === 0) {
       const config = new GraphQLProjectConfig(this.configPath, undefined, this.config)
       return config.includesFile(filePath) ? config : null
@@ -37,12 +40,13 @@ export class GraphQLConfig {
 
     Object.entries(projects).forEach(([projectName, project]) => {
       if (
-        isFileInDirs(filePath, project.includeDirs) &&
-        !isFileInDirs(filePath, project.excludeDirs)
+        matchesGlobs(filePath, project.include) &&
+        !matchesGlobs(filePath, project.exclude)
       ) {
         return this.getProjectConfig(projectName)
       }
     })
+
     return null
   }
 

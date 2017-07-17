@@ -56,6 +56,6 @@
   "dependencies": {
     "graphql": "0.7.1 - 1.0.0",
     "graphql-request": "^1.2.0",
-    "valid-url": "^1.0.9"
+    "minimatch": "^3.0.4"
   }
 }

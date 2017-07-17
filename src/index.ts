@@ -1,10 +1,10 @@
 export {
-  GraphQLProjectConfig
-} from './GraphQLProjectConfig';
-
-export {
   GraphQLConfig
 } from './GraphQLConfig';
+
+export {
+  GraphQLProjectConfig
+} from './GraphQLProjectConfig';
 
 export * from './types';
 

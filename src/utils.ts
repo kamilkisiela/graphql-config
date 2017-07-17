@@ -1,19 +1,13 @@
 import { readFile, readFileSync, existsSync } from 'fs'
-import { resolve, join as joinPaths, dirname, sep, extname } from 'path'
-import { buildSchema, buildClientSchema, introspectionQuery } from 'graphql'
-import { request } from 'graphql-request'
+import { resolve, join as joinPaths, dirname, extname } from 'path'
+import { buildSchema, buildClientSchema } from 'graphql'
 import { GraphQLConfigData } from './types'
+import * as minimatch from 'minimatch'
 
-export const GRAPHQL_CONFIG_NAME = '.graphqlconfig'
+export const GRAPHQL_CONFIG_NAME = '.graphqlrc'
 
 function isRootDir(path: string): boolean {
   return dirname(path) === path
-}
-
-function isSubPath(from: string, to: string): boolean {
-  from = resolve(from)
-  to = resolve(to)
-  return (from === to || to.startsWith(from + sep))
 }
 
 export function isPathToConfig(path: string) {
@@ -43,18 +37,21 @@ export function readConfig(configPath: string): GraphQLConfigData {
     const config = JSON.parse(rawConfig)
     return config
   } catch (error) {
-    // FIXME: prefix error
-    // console.error('Parsing JSON in .graphqlrc file has failed.')
-    throw new Error(error)
+    error.message = 'Parsing JSON in .graphqlrc file has failed.\n' + error.message
+    throw error
   }
 }
 
-export function isFileInDirs(filePath: string, dirs?: string[]): boolean {
-  return (dirs || []).some(dir => isSubPath(dir, filePath))
+function matchesGlob(filePath: string, pattern: string): boolean {
+  return minimatch(filePath, pattern, {matchBase: true})
+}
+
+export function matchesGlobs(filePath: string, globs?: string[]): boolean {
+  return (globs || []).some(pattern => matchesGlob(filePath, pattern))
 }
 
 export function validateConfig(config: GraphQLConfigData) {
-  // FIXME:
+  // FIXME: implement
 }
 
 export function mergeConfigs(
@@ -87,11 +84,7 @@ export function readSchema(path) {
       case '.json':
         return buildClientSchema(JSON.parse(data).data)
       default:
-        throw new Error('Unsupported schema file extention')
+        throw new Error('Unsupported schema file extention. Only ".graphql" and ".json" are supported')
     }
   })
-}
-
-export function querySchema(url: string, options?) {
-  return request(url, introspectionQuery)
 }

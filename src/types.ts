@@ -1,15 +1,24 @@
-type GraphQLConfigurationExtension = {
+export type ServerExtensionConfig = {
+  url: string
+  headers: { [name: string]: string }
+}
+
+export type GraphQLConfigExtensions = {
+  server?: ServerExtensionConfig,
+  'server-query'?: ServerExtensionConfig,
+  'server-mutation'?: ServerExtensionConfig,
+  'server-subscription'?: ServerExtensionConfig,
+
   [name: string]: any
 }
 
 export type GraphQLResolvedConfigData = {
-  schemaPath?: string,
-  schemaUrl?: string,
+  schemaPath: string,
 
-  includeDirs?: Array<string>,
-  excludeDirs?: Array<string>,
+  include?: Array<string>,
+  exclude?: Array<string>,
 
-  extensions?: { [name: string]: GraphQLConfigurationExtension }
+  extensions?: GraphQLConfigExtensions;
 }
 
 export type GraphQLProjectConfigData = GraphQLResolvedConfigData & {

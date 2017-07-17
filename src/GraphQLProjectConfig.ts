@@ -1,4 +1,4 @@
-import { join as joinPaths, dirname } from 'path'
+import { join as joinPaths, dirname, relative } from 'path'
 
 import {
   GraphQLSchema,
@@ -17,13 +17,17 @@ import {
   isPathToConfig,
   findConfigPath,
   readConfig,
-  isFileInDirs,
+  matchesGlobs,
   validateConfig,
   mergeConfigs,
   readSchema,
-  querySchema,
+  GRAPHQL_CONFIG_NAME,
 } from './utils'
 
+
+/*
+ * this class can be used for simple usecases where there is no need in per-file API
+ */
 export class GraphQLProjectConfig {
   public config: GraphQLProjectConfigData
   public configPath: string
@@ -31,7 +35,7 @@ export class GraphQLProjectConfig {
   constructor(
     path: string = process.cwd(),
     public projectName: string = process.env.GRAPHQL_PROJECT,
-    configData?: GraphQLConfigData // for cases when data is already parsed
+    configData?: GraphQLConfigData // in case the data is already parsed
   ) {
     if (isPathToConfig(path)) {
       this.configPath = path
@@ -52,16 +56,12 @@ export class GraphQLProjectConfig {
   }
 
   resolveSchema(env?: string): Promise<GraphQLSchema> {
-    const {schemaPath, schemaUrl} = this.getConfig(env)
+    const { schemaPath } = this.getConfig(env)
 
     if (schemaPath) {
       return readSchema(this.resolveConfigPath(schemaPath))
     }
-    if (schemaUrl) {
-      return querySchema(schemaUrl)
-    }
-    // FIXME
-    throw new Error('')
+    throw new Error(`"schemaPath" is required but not provided in ${GRAPHQL_CONFIG_NAME}`)
   }
 
   resolveIntrospection(env?: string): Promise<any> {
@@ -88,8 +88,8 @@ export class GraphQLProjectConfig {
     const selectedEnvConfig = env[envName]
     if (!selectedEnvConfig) {
       const possibleNames = Object.keys(env)
-      // FIXME
-      throw new Error(`${possibleNames}`)
+      throw new Error(`Wrong value provided for GRAPHQL_ENV. ` +
+        `The following values are valid: ${possibleNames.join(', ')}`)
     }
 
     return mergeConfigs(configBase, selectedEnvConfig)
@@ -104,9 +104,10 @@ export class GraphQLProjectConfig {
   }
 
   includesFile(filePath: string): boolean {
+    filePath = relative(this.configPath, filePath)
     return (
-      isFileInDirs(filePath, this.config.includeDirs) &&
-      !isFileInDirs(filePath, this.config.excludeDirs)
+      matchesGlobs(filePath, this.config.include) &&
+      !matchesGlobs(filePath, this.config.exclude)
     )
   }
 }
@@ -121,6 +122,7 @@ function loadProjectConfig(
     return config
   }
 
+  // TODO: try checking GRAPHQL_CONFIG_PROJECT env var ?
   if (!projectName) {
     throw new Error('Project name must be specified for multiproject config')
   }
