@@ -1,13 +1,12 @@
-export type ServerExtensionConfig = {
-  url: string
-  headers: { [name: string]: string }
-}
-
 export type GraphQLConfigExtensions = {
-  server?: ServerExtensionConfig,
-  'server-query'?: ServerExtensionConfig,
-  'server-mutation'?: ServerExtensionConfig,
-  'server-subscription'?: ServerExtensionConfig,
+  'endpoint'?: string | {
+    url: string
+    headers?: { [name: string]: string }
+  },
+  'subscription-endpoint'?: string | {
+    url: string,
+    connectionParams?: { [name: string]: string }
+  },
 
   [name: string]: any
 }
