@@ -58,7 +58,7 @@ For multiple apps with isolated directories, there are mainly two ways to set up
 }
 ```
 
-Or each can app have a separate `.graphqlrc` file per each application and/or directories:
+Or each app can have a separate `.graphqlrc` file per each application and/or directories:
 ```
 ./appA/.graphqlrc
 ./appB/.graphqlrc
@@ -133,6 +133,85 @@ For example, some application may choose to build using Webpack and need to spec
 # Experimental Configuration Options
 
 Below are what we're experimenting with for additional fields. Before including in the official recommendation, we would like to iterate on a few different codebases first.
+
+## Configuring GraphQL endpoint
+
+For a simple GraphQL endpoints, the only required configuration is an URL:
+```
+{
+  "endpoint": "http://your-app.com/graphql"
+}
+```
+
+Additional header values could be added if needed:
+```
+{
+  "endpoint": {
+    "url": "http://your-app.com/graphql",
+    "headers": {
+      "Authorization": "bearer ${env: YOUR_APP_TOKEN}"
+    }
+  }
+}
+```
+
+**Note**: Don't specify passwords, tokens, etc. inside your `.graphqlrc`. Use [Environment variables](#referencing-environment-variables) for that.
+
+### Referencing Environment Variables
+
+To reference environment variables, use the ${env:SOME_VAR} syntax, for example:
+```
+{
+  "endpoint": {
+    "url": "http://your-app.com/graphql",
+    "headers": {
+      "User-Agent": "Build script",
+      "Authorization": "bearer ${env: YOUR_APP_TOKEN}"
+    }
+  }
+}
+```
+
+Note: To escape `${` sequence just prefix it with slash like that `\\${some value}`.
+
+### Subscription support
+
+Separate endpoint for subscription can be defined and `connectionParams` can be used to provide additional values:
+```
+{
+  "endpoint": {
+    "url": "http://your-app.com/graphql",
+    "subscription": {
+      "url": "ws://your-app.com:5000/",
+      "connectionParams": {
+        "Token": "${env: YOUR_APP_TOKEN}"
+      }
+    }
+  }
+}
+```
+
+### Support for multiple endpoints
+
+In situation where multiple endpoints are supported they can be specified like that:
+```
+"endpoint": {
+  "prod": {
+    "url": "https://your-app.com/graphql"
+    "subscription": {
+      "url": "wss://subscriptions.graph.cool/v1/instagram"
+    }
+  },
+  "dev": {
+    "url": "http://localhost:3000/graphql",
+    "subscription": {
+      "url": "ws://localhost:3001"
+    }
+  }
+}
+```
+
+Note: `url` can't be used as a key of this map.
 
 ## Configuring a schema defined programmatically
 
