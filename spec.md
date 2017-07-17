@@ -19,7 +19,6 @@ type GraphQLConfiguration =
 
 type GraphQLProjectConfiguration = {
   schemaPath?: string, // a file with schema IDL
-  schemaUrl?: URL,
 
   // For multiple applications with overlapping files,
   // these configuration options may be helpful
@@ -42,15 +41,6 @@ Usually, for a simple GraphQL applications, the only required configuration is a
 ```
 {
   "schemaPath": "./schema.graphql"
-}
-```
-
-Although it is possible for the configuration file to have more than one way to fetch the schema, a GraphQL application consuming this configuration should determine how to work with provided configuration properties. For example, while one application may arbitrarily choose to have `schemaPath` take precedence over `schemaUrl`, another may choose to throw and error when both are provided. The behavior in this case is explicitly undefined.
-```
-{
-  // How to resolve this is up to the application
-  "schemaPath": "./schema.graphql",
-  "schemaUrl": "http://my-app.com/schema"
 }
 ```
 
@@ -159,7 +149,7 @@ The proposed usage for the property is as follows:
   "schemaPath": "./schema.graphql",
   "env": {
     "production": {
-      "schemaUrl": "http://your-app.com/graphqlschema"
+      "schemaPath": "./prod-schema.graphql"
     },
     "development": {
       "schemaPath": "./dev-schema.graphql"
