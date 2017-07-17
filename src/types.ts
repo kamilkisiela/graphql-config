@@ -1,21 +1,19 @@
-export type GraphQLConfigExtensionEnvs = {
-  'env'?: { [name: string]: GraphQLConfigBaseExtensions }
+export type GraphQLConfigEnpointConfig = {
+  url: string
+  headers?: { [name: string]: string }
+  subscription?: {
+    url: string;
+    connectionParams?: { [name: string]: string }
+  }
 }
 
-export type GraphQLConfigBaseExtensions = {
-  'endpoint'?: string | {
-    url: string
-    headers?: { [name: string]: string }
-  },
-  'subscription-endpoint'?: string | {
-    url: string,
-    connectionParams?: { [name: string]: string }
+export type GraphQLConfigExtensions = {
+  endpoint: string | GraphQLConfigEnpointConfig | {
+    [env: string]: GraphQLConfigEnpointConfig
   },
 
   [name: string]: any
 }
-
-export type GraphQLConfigExtensions = GraphQLConfigExtensionEnvs & GraphQLConfigBaseExtensions
 
 export type GraphQLResolvedConfigData = {
   schemaPath: string,
@@ -23,7 +21,7 @@ export type GraphQLResolvedConfigData = {
   include?: Array<string>,
   exclude?: Array<string>,
 
-  extensions?: GraphQLConfigExtensions;
+  extensions: GraphQLConfigExtensions;
 }
 
 export type GraphQLConfigData = GraphQLResolvedConfigData & {

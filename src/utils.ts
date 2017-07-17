@@ -2,6 +2,7 @@ import { readFile, readFileSync, existsSync } from 'fs'
 import { resolve, join as joinPaths, dirname, extname } from 'path'
 import { buildSchema, buildClientSchema } from 'graphql'
 import * as minimatch from 'minimatch'
+import * as yaml from 'js-yaml'
 
 import { GraphQLConfigData } from './types'
 import resolveRefString from './resolveRefString'
@@ -24,6 +25,9 @@ export function findConfigPath(filePath: string): string {
     if (existsSync(configPath)) {
       return configPath
     }
+    if (existsSync(configPath + '.yaml')) {
+      return configPath + '.yaml'
+    }
     currentDir = dirname(currentDir)
   }
 
@@ -37,9 +41,13 @@ export function readConfig(configPath: string): GraphQLConfigData {
   let config
   try {
     const rawConfig = readFileSync(configPath, 'utf-8')
-    config = JSON.parse(rawConfig)
+    if (configPath.endsWith('.yaml')) {
+      config = yaml.safeLoad(rawConfig)
+    } else {
+      config = JSON.parse(rawConfig)
+    }
   } catch (error) {
-    error.message = 'Parsing JSON in .graphqlrc file has failed.\n' + error.message
+    error.message = `Parsing ${configPath} file has failed.\n` + error.message
     throw error
   }
   resolveValues(config)

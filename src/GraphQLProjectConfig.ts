@@ -5,12 +5,16 @@ import {
   graphql,
   introspectionQuery,
   printSchema,
+  buildClientSchema,
 } from 'graphql'
+
+import { GraphQLClient } from 'graphql-request'
 
 import {
   GraphQLResolvedConfigData,
   GraphQLConfigData,
   GraphQLConfigExtensions,
+  GraphQLConfigEnpointConfig,
 } from './types'
 
 import {
@@ -54,6 +58,14 @@ export class GraphQLProjectConfig {
     return joinPaths(dirname(this.configPath), relativePath)
   }
 
+  includesFile(filePath: string): boolean {
+    filePath = relative(this.configPath, filePath)
+    return (
+      matchesGlobs(filePath, this.config.include) &&
+      !matchesGlobs(filePath, this.config.exclude)
+    )
+  }
+
   resolveSchema(): Promise<GraphQLSchema> {
     if (this.schemaPath) {
       return readSchema(this.resolveConfigPath(this.schemaPath))
@@ -71,6 +83,7 @@ export class GraphQLProjectConfig {
       .then(schema => printSchema(schema))
   }
 
+  // Getters
   get schemaPath(): string {
     return this.config.schemaPath
   }
@@ -78,51 +91,44 @@ export class GraphQLProjectConfig {
   get include(): string[] {
     return this.config.include || []
   }
+
   get exclude(): string[] {
     return this.config.exclude || []
   }
 
-  includesFile(filePath: string): boolean {
-    filePath = relative(this.configPath, filePath)
-    return (
-      matchesGlobs(filePath, this.config.include) &&
-      !matchesGlobs(filePath, this.config.exclude)
-    )
+  get extensions(): GraphQLConfigExtensions {
+    return this.config.extensions || {}
   }
 
-  getExtensions(envName: string = process.env.GRAPHQL_ENV): GraphQLConfigExtensions {
-    const extentions = this.config.extensions
-    if (extentions == null) {
-      return {}
-    }
-
-    const { env, ...extBase } = extentions
-    if (env == null || !Object.keys(env).length) {
-      return extentions
-    }
-
-    if (!envName) {
+  // helper functions
+  getEndpointsMap(): { [name: string]: GraphQLConfigEnpointConfig } {
+    const endpoint = this.extensions.endpoint
+    if (typeof endpoint === 'string') {
+      return {
+        default: {
+          url: endpoint,
+        },
+      }
+    } else if (endpoint['url'] && typeof endpoint['url'] === 'string') {
+      return {
+        // FIXME
+        default: endpoint as GraphQLConfigEnpointConfig,
+      }
+    } else {
       // FIXME
-      throw new Error('GRAPHQL_ENV is not specified')
+      return endpoint as any
     }
-
-    const selectedEnvExtensions = env[envName]
-    if (!selectedEnvExtensions) {
-      const possibleNames = Object.keys(env)
-      throw new Error(`Wrong value provided for GRAPHQL_ENV. ` +
-        `The following values are valid: ${possibleNames.join(', ')}`)
-    }
-
-    return { ...extBase, ...selectedEnvExtensions }
   }
 
-  getExtensionsPerEnv(): { [env: string]: GraphQLConfigExtensions } {
-    const result = {}
-    const envs = this.config.extensions && this.config.extensions.env || {}
-    for (const envName in envs) {
-      result[envName] = this.getExtensions(envName)
+  resolveSchemaFromEndpoint(name: string = 'default'): Promise<GraphQLSchema> {
+    const { url, headers } = this.getEndpointsMap()[name]
+    if (!url) {
+      // TODO
+      throw new Error('Undefined endpoint')
     }
-    return result
+    const client = new GraphQLClient(url, { headers })
+    return client.request(introspectionQuery)
+      .then(introspection => buildClientSchema(introspection))
   }
 }
 
