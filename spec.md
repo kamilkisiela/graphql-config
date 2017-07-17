@@ -1,6 +1,6 @@
 # GraphQL Configuration
 
-There are many ways to configure your application to use GraphQL, and while it is often enough to specify configuration options directly in your application code, maintaining and understanding the hard-coded configuration options may become a challenge as the scale grows. We recommend configuring your application with a `.graphqlconfig` file that contains commonly needed GraphQL-related artifacts.
+There are many ways to configure your application to use GraphQL, and while it is often enough to specify configuration options directly in your application code, maintaining and understanding the hard-coded configuration options may become a challenge as the scale grows. We recommend configuring your application with a `.graphqlrc` file that contains commonly needed GraphQL-related artifacts.
 
 ## GraphQL Configuration Format
 
@@ -44,7 +44,7 @@ Usually, for a simple GraphQL applications, the only required configuration is a
 }
 ```
 
-For multiple apps with isolated directories, there are mainly two ways to set up the configuration. Each app can either use the `projects` property to specify each application's configuration, or have a separate `.graphqlconfig` file for each project root.
+For multiple apps with isolated directories, there are mainly two ways to set up the configuration. Each app can either use the `projects` property to specify each application's configuration, or have a separate `.graphqlrc` file for each project root.
 ```
 {
   "projects": {
@@ -58,10 +58,10 @@ For multiple apps with isolated directories, there are mainly two ways to set up
 }
 ```
 
-Or each can app have a separate `.graphqlconfig` file per each application and/or directories:
+Or each can app have a separate `.graphqlrc` file per each application and/or directories:
 ```
-./appA/.graphqlconfig
-./appB/.graphqlconfig
+./appA/.graphqlrc
+./appB/.graphqlrc
 ```
 
 ## Default Configuration Properties
@@ -159,7 +159,7 @@ Sometimes a GraphQL application wants to either define an additional set of vali
 // In customRules.js,
 export const customRules: Array<(context: ValidationContext) => any> = { ... };
 
-// And in .graphqlconfig, specify where the custom rules are:
+// And in .graphqlrc, specify where the custom rules are:
 {
   "customValidationRules": "./customRules.js"
 }
