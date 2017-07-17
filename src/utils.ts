@@ -1,8 +1,10 @@
 import { readFile, readFileSync, existsSync } from 'fs'
 import { resolve, join as joinPaths, dirname, extname } from 'path'
 import { buildSchema, buildClientSchema } from 'graphql'
-import { GraphQLConfigData } from './types'
 import * as minimatch from 'minimatch'
+
+import { GraphQLConfigData } from './types'
+import resolveRefString from './resolveRefString'
 
 export const GRAPHQL_CONFIG_NAME = '.graphqlrc'
 
@@ -32,13 +34,26 @@ export function findConfigPath(filePath: string): string {
 }
 
 export function readConfig(configPath: string): GraphQLConfigData {
+  let config
   try {
     const rawConfig = readFileSync(configPath, 'utf-8')
-    const config = JSON.parse(rawConfig)
-    return config
+    config = JSON.parse(rawConfig)
   } catch (error) {
     error.message = 'Parsing JSON in .graphqlrc file has failed.\n' + error.message
     throw error
+  }
+  resolveValues(config)
+  return config
+}
+
+export function resolveValues(config: any): void {
+  for (let key in config) {
+    const value = config[key]
+    if (typeof value === 'string') {
+      config[key] = resolveRefString(value)
+    } else if (typeof value === 'object') {
+      resolveValues(value)
+    }
   }
 }
 

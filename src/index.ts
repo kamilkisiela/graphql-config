@@ -1,14 +1,14 @@
 export {
   GraphQLConfig
-} from './GraphQLConfig';
+} from './GraphQLConfig'
 
 export {
   GraphQLProjectConfig
-} from './GraphQLProjectConfig';
+} from './GraphQLProjectConfig'
 
-export * from './types';
+export * from './types'
 
 export {
   validateConfig,
   findConfigPath,
-} from './utils';
+} from './utils'

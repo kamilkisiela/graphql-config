@@ -24,7 +24,6 @@ import {
   GRAPHQL_CONFIG_NAME,
 } from './utils'
 
-
 /*
  * this class can be used for simple usecases where there is no need in per-file API
  */
