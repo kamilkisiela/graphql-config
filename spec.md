@@ -22,8 +22,8 @@ type GraphQLProjectConfiguration = {
 
   // For multiple applications with overlapping files,
   // these configuration options may be helpful
-  includeDirs?: Array<DirPath>,
-  excludeDirs?: Array<DirPath>,
+  include?: Array<GlobPath>,
+  exclude?: Array<GlobPath>,
 
   // If you'd like to specify any other configurations,
   // we provide a reserved namespace for it
@@ -75,11 +75,11 @@ Consider the below GraphQL configuration:
     "projects": {
       "projectA": {
         "schemaPath": "./resources/schema.graphql",
-        "includeDirs": "./projectA/graphql"
+        "include": "./projectA/graphql/*.graphql"
       },
       "projectB": {
         "schemaPath": "../resources/schema.graphql",
-        "includeDirs": "./projectB/graphql"
+        "include": "./projectB/graphql/*.graphql"
       },
       "projectC": {
         "schemaPath": "./schema-for-projectC.graphql"      }
@@ -95,10 +95,10 @@ Since projectA and projectB share the same schema file, we can push the `schemaP
   {
     "projects": {
       "projectA": {
-        "includeDirs": "./projectA/graphql"
+        "include": "./projectA/graphql/*.graphql"
       },
       "projectB": {
-        "includeDirs": "./projectB/graphql"
+        "include": "./projectB/graphql/*.graphql"
       },
       "projectC": {
         // "schemaPath" in this scope should take precedence
