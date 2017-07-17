@@ -77,9 +77,6 @@ export function mergeConfigs(
   if (dest.extensions && src.extensions) {
     result.extensions = { ...dest.extensions, ...src.extensions }
   }
-  if (dest.env && src.env) {
-    result.env = { ...dest.env, ...src.env }
-  }
   if (dest.projects && src.projects) {
     result.projects = { ...dest.projects, ...src.projects }
   }

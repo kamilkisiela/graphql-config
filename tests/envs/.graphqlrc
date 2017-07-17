@@ -1,0 +1,15 @@
+{
+  "schemaPath": "../schema.json",
+  "extensions": {
+    "endpoint": "http://default",
+    "subscription-endpoint": "ws://test",
+    "env": {
+      "prod": {
+        "endpoint": "http://prod"
+      },
+      "dev": {
+        "endpoint": "http://dev"
+      }
+    }
+  }
+}

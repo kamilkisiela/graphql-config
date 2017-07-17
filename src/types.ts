@@ -1,4 +1,8 @@
-export type GraphQLConfigExtensions = {
+export type GraphQLConfigExtensionEnvs = {
+  'env'?: { [name: string]: GraphQLConfigBaseExtensions }
+}
+
+export type GraphQLConfigBaseExtensions = {
   'endpoint'?: string | {
     url: string
     headers?: { [name: string]: string }
@@ -11,6 +15,8 @@ export type GraphQLConfigExtensions = {
   [name: string]: any
 }
 
+export type GraphQLConfigExtensions = GraphQLConfigExtensionEnvs & GraphQLConfigBaseExtensions
+
 export type GraphQLResolvedConfigData = {
   schemaPath: string,
 
@@ -20,10 +26,6 @@ export type GraphQLResolvedConfigData = {
   extensions?: GraphQLConfigExtensions;
 }
 
-export type GraphQLProjectConfigData = GraphQLResolvedConfigData & {
-  env?: { [name: string]: GraphQLResolvedConfigData }
-}
-
-export type GraphQLConfigData = GraphQLProjectConfigData & {
-  projects?: { [projectName: string]: GraphQLProjectConfigData }
+export type GraphQLConfigData = GraphQLResolvedConfigData & {
+  projects?: { [projectName: string]: GraphQLResolvedConfigData }
 }

@@ -9,8 +9,8 @@ import {
 
 import {
   GraphQLResolvedConfigData,
-  GraphQLProjectConfigData,
   GraphQLConfigData,
+  GraphQLConfigExtensions,
 } from './types'
 
 import {
@@ -28,7 +28,7 @@ import {
  * this class can be used for simple usecases where there is no need in per-file API
  */
 export class GraphQLProjectConfig {
-  public config: GraphQLProjectConfigData
+  public config: GraphQLResolvedConfigData
   public configPath: string
 
   constructor(
@@ -54,52 +54,32 @@ export class GraphQLProjectConfig {
     return joinPaths(dirname(this.configPath), relativePath)
   }
 
-  resolveSchema(env?: string): Promise<GraphQLSchema> {
-    const { schemaPath } = this.getConfig(env)
-
-    if (schemaPath) {
-      return readSchema(this.resolveConfigPath(schemaPath))
+  resolveSchema(): Promise<GraphQLSchema> {
+    if (this.schemaPath) {
+      return readSchema(this.resolveConfigPath(this.schemaPath))
     }
     throw new Error(`"schemaPath" is required but not provided in ${GRAPHQL_CONFIG_NAME}`)
   }
 
-  resolveIntrospection(env?: string): Promise<any> {
-    return this.resolveSchema(env)
+  resolveIntrospection(): Promise<any> {
+    return this.resolveSchema()
       .then(schema => graphql(schema, introspectionQuery))
   }
 
-  resolveSchemaIDL(env?: string): Promise<string> {
-    return this.resolveSchema(env)
+  resolveSchemaIDL(): Promise<string> {
+    return this.resolveSchema()
       .then(schema => printSchema(schema))
   }
 
-  getConfig(envName: string = process.env.GRAPHQL_ENV): GraphQLResolvedConfigData {
-    const { env, ...configBase } = this.config
-    if (env == null || !Object.keys(env).length) {
-      return this.config
-    }
-
-    if (!envName) {
-      // FIXME
-      throw new Error('GRAPHQL_ENV is not specified')
-    }
-
-    const selectedEnvConfig = env[envName]
-    if (!selectedEnvConfig) {
-      const possibleNames = Object.keys(env)
-      throw new Error(`Wrong value provided for GRAPHQL_ENV. ` +
-        `The following values are valid: ${possibleNames.join(', ')}`)
-    }
-
-    return mergeConfigs(configBase, selectedEnvConfig)
+  get schemaPath(): string {
+    return this.config.schemaPath
   }
 
-  getEnvs(): { [env: string]: GraphQLResolvedConfigData } {
-    const result = {}
-    for (const envName in (this.config.env || {})) {
-      result[envName] = this.getConfig(envName)
-    }
-    return result
+  get include(): string[] {
+    return this.config.include || []
+  }
+  get exclude(): string[] {
+    return this.config.exclude || []
   }
 
   includesFile(filePath: string): boolean {
@@ -108,6 +88,41 @@ export class GraphQLProjectConfig {
       matchesGlobs(filePath, this.config.include) &&
       !matchesGlobs(filePath, this.config.exclude)
     )
+  }
+
+  getExtensions(envName: string = process.env.GRAPHQL_ENV): GraphQLConfigExtensions {
+    const extentions = this.config.extensions
+    if (extentions == null) {
+      return {}
+    }
+
+    const { env, ...extBase } = extentions
+    if (env == null || !Object.keys(env).length) {
+      return extentions
+    }
+
+    if (!envName) {
+      // FIXME
+      throw new Error('GRAPHQL_ENV is not specified')
+    }
+
+    const selectedEnvExtensions = env[envName]
+    if (!selectedEnvExtensions) {
+      const possibleNames = Object.keys(env)
+      throw new Error(`Wrong value provided for GRAPHQL_ENV. ` +
+        `The following values are valid: ${possibleNames.join(', ')}`)
+    }
+
+    return { ...extBase, ...selectedEnvExtensions }
+  }
+
+  getExtensionsPerEnv(): { [env: string]: GraphQLConfigExtensions } {
+    const result = {}
+    const envs = this.config.extensions && this.config.extensions.env || {}
+    for (const envName in envs) {
+      result[envName] = this.getExtensions(envName)
+    }
+    return result
   }
 }
 
