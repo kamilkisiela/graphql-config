@@ -25,6 +25,7 @@ import {
   validateConfig,
   mergeConfigs,
   readSchema,
+  resolveEnvsInValues,
 } from './utils'
 
 /*
@@ -102,12 +103,13 @@ export class GraphQLProjectConfig {
   }
 
   // helper functions
-  getEndpointsMap(): GraphQLConfigEnpointsMap {
+  getEndpointsMap(resolveEnvs = true): GraphQLConfigEnpointsMap {
     const endpoint = this.extensions.endpoint
+    let result
     if (endpoint == null) {
-      return {}
+      result = {}
     } else if (typeof endpoint === 'string') {
-      return {
+      result = {
         default: {
           url: endpoint,
         },
@@ -115,22 +117,27 @@ export class GraphQLProjectConfig {
     } else if (typeof endpoint !== 'object' || Array.isArray(endpoint)) {
       throw new Error('"endpoint" should be string or object')
     } else if (!endpoint['url']) {
-      return endpoint as GraphQLConfigEnpointsMap
+      result = endpoint as GraphQLConfigEnpointsMap
     } else if (typeof endpoint['url'] === 'string') {
-      return {
+      result = {
         default: endpoint as GraphQLConfigEnpointConfig,
       }
     } else {
       throw new Error('"url" should by a string')
     }
+
+    if (resolveEnvs) {
+      resolveEnvsInValues(result)
+    }
+    return result
   }
 
   resolveSchemaFromEndpoint(name: string = 'default'): Promise<GraphQLSchema> {
-    const { url, headers } = this.getEndpointsMap()[name]
-    if (!url) {
-      // TODO
+    const endpoint = this.getEndpointsMap()[name] || {}
+    if (!endpoint || !endpoint.url) {
       throw new Error('Undefined endpoint')
     }
+    const { url, headers } = endpoint
     const client = new GraphQLClient(url, { headers })
     return client.request(introspectionQuery)
       .then(introspection => buildClientSchema(introspection))

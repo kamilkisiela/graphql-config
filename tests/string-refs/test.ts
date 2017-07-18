@@ -1,23 +1,18 @@
 import test from 'ava'
-const schema = require('../schema.json')
-import { GraphQLConfig } from '../../src'
-
+import { GraphQLProjectConfig } from '../../src'
 
 test(async (t) => {
-  const testURL = 'http://test.com';
+  const testURL = 'http://test.com'
   const expected = {
-    "schemaPath": "../schema.json",
-    "extensions": {
-      "endpoint": {
-        "url": testURL
-      }
-    }
+    default: {
+      url: testURL,
+    },
   }
 
   process.env['TEST_ENDPOINT_URL'] = testURL
-  const inst = new GraphQLConfig(__dirname)
+  const inst = new GraphQLProjectConfig(__dirname)
 
-  t.deepEqual(inst.config, expected)
+  t.deepEqual(inst.getEndpointsMap(), expected)
 
   // clean up
   delete process.env['TEST_ENDPOINT_URL']

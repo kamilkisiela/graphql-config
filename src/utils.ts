@@ -55,19 +55,19 @@ export function readConfig(configPath: string): GraphQLConfigData {
     error.message = `Parsing ${configPath} file has failed.\n` + error.message
     throw error
   }
-  if (config && config.extensions && config.extensions.endpoint) {
-    resolveValues(config.extensions.endpoint)
-  }
+
   return config
 }
 
-export function resolveValues(config: any): void {
+export function resolveEnvsInValues(
+  config: any
+): void {
   for (let key in config) {
     const value = config[key]
     if (typeof value === 'string') {
       config[key] = resolveRefString(value)
     } else if (typeof value === 'object') {
-      resolveValues(value)
+      resolveEnvsInValues(value)
     }
   }
 }

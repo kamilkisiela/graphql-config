@@ -1,4 +1,4 @@
-export default function resolveReftring(str: string): string {
+export default function resolveRefString(str: string): string {
   const { strings, rawRefs } = parse(str)
   const refValues = rawRefs.map(resolveRef)
 
