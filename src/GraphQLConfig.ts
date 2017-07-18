@@ -7,7 +7,6 @@ import {
 import {
   findConfigPath,
   readConfig,
-  matchesGlobs,
   validateConfig,
 } from './utils'
 
@@ -38,16 +37,9 @@ export class GraphQLConfig {
       return config.includesFile(filePath) ? config : null
     }
 
-    Object.entries(projects).forEach(([projectName, project]) => {
-      if (
-        matchesGlobs(filePath, project.include) &&
-        !matchesGlobs(filePath, project.exclude)
-      ) {
-        return this.getProjectConfig(projectName)
-      }
-    })
-
-    return null
+    return Object.values(this.getProjects()).find(
+      project => project.includesFile(filePath)
+    ) || null
   }
 
   getProjects(): { [name: string]: GraphQLProjectConfig } {

@@ -1,4 +1,4 @@
-import { join as joinPaths, dirname, relative } from 'path'
+import { dirname, resolve } from 'path'
 
 import {
   GraphQLSchema,
@@ -15,17 +15,16 @@ import {
   GraphQLConfigData,
   GraphQLConfigExtensions,
   GraphQLConfigEnpointConfig,
+  GraphQLConfigEnpointsMap,
 } from './types'
 
 import {
-  isPathToConfig,
   findConfigPath,
   readConfig,
   matchesGlobs,
   validateConfig,
   mergeConfigs,
   readSchema,
-  GRAPHQL_CONFIG_NAME,
 } from './utils'
 
 /*
@@ -40,11 +39,7 @@ export class GraphQLProjectConfig {
     public projectName: string = process.env.GRAPHQL_PROJECT,
     configData?: GraphQLConfigData // in case the data is already parsed
   ) {
-    if (isPathToConfig(path)) {
-      this.configPath = path
-    } else {
-      this.configPath = findConfigPath(path)
-    }
+    this.configPath = findConfigPath(path)
 
     let config = configData
     if (config == null) {
@@ -55,14 +50,14 @@ export class GraphQLProjectConfig {
   }
 
   resolveConfigPath(relativePath: string): string {
-    return joinPaths(dirname(this.configPath), relativePath)
+    return resolve(dirname(this.configPath), relativePath)
   }
 
   includesFile(filePath: string): boolean {
-    filePath = relative(this.configPath, filePath)
+    filePath = resolve(filePath)
     return (
-      matchesGlobs(filePath, this.config.include) &&
-      !matchesGlobs(filePath, this.config.exclude)
+      (!this.config.include || matchesGlobs(filePath, this.include)) &&
+      !matchesGlobs(filePath, this.exclude)
     )
   }
 
@@ -70,7 +65,9 @@ export class GraphQLProjectConfig {
     if (this.schemaPath) {
       return readSchema(this.resolveConfigPath(this.schemaPath))
     }
-    throw new Error(`"schemaPath" is required but not provided in ${GRAPHQL_CONFIG_NAME}`)
+    throw new Error(
+      `"schemaPath" is required but not provided in ${this.configPath}`
+    )
   }
 
   resolveIntrospection(): Promise<any> {
@@ -85,15 +82,19 @@ export class GraphQLProjectConfig {
 
   // Getters
   get schemaPath(): string {
-    return this.config.schemaPath
+    return this.resolveConfigPath(this.config.schemaPath)
   }
 
   get include(): string[] {
-    return this.config.include || []
+    return (this.config.include || []).map(
+      glob => this.resolveConfigPath(glob)
+    )
   }
 
   get exclude(): string[] {
-    return this.config.exclude || []
+    return (this.config.exclude || []).map(
+      glob => this.resolveConfigPath(glob)
+    )
   }
 
   get extensions(): GraphQLConfigExtensions {
@@ -101,22 +102,26 @@ export class GraphQLProjectConfig {
   }
 
   // helper functions
-  getEndpointsMap(): { [name: string]: GraphQLConfigEnpointConfig } {
+  getEndpointsMap(): GraphQLConfigEnpointsMap {
     const endpoint = this.extensions.endpoint
-    if (typeof endpoint === 'string') {
+    if (endpoint == null) {
+      return {}
+    } else if (typeof endpoint === 'string') {
       return {
         default: {
           url: endpoint,
         },
       }
-    } else if (endpoint['url'] && typeof endpoint['url'] === 'string') {
+    } else if (typeof endpoint !== 'object' || Array.isArray(endpoint)) {
+      throw new Error('"endpoint" should be string or object')
+    } else if (!endpoint['url']) {
+      return endpoint as GraphQLConfigEnpointsMap
+    } else if (typeof endpoint['url'] === 'string') {
       return {
-        // FIXME
         default: endpoint as GraphQLConfigEnpointConfig,
       }
     } else {
-      // FIXME
-      return endpoint as any
+      throw new Error('"url" should by a string')
     }
   }
 
@@ -142,7 +147,6 @@ function loadProjectConfig(
     return config
   }
 
-  // TODO: try checking GRAPHQL_CONFIG_PROJECT env var ?
   if (!projectName) {
     throw new Error('Project name must be specified for multiproject config')
   }

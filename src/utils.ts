@@ -8,18 +8,23 @@ import { GraphQLConfigData } from './types'
 import resolveRefString from './resolveRefString'
 
 export const GRAPHQL_CONFIG_NAME = '.graphqlrc'
+export const GRAPHQL_CONFIG_YAML_NAME = '.graphqlrc.yaml'
 
 function isRootDir(path: string): boolean {
   return dirname(path) === path
 }
 
-export function isPathToConfig(path: string) {
-  return (extname(path) === GRAPHQL_CONFIG_NAME)
-}
-
 export function findConfigPath(filePath: string): string {
-  let currentDir = resolve(filePath)
+  filePath = resolve(filePath)
 
+  if (
+    filePath.endsWith(GRAPHQL_CONFIG_NAME) ||
+    filePath.endsWith(GRAPHQL_CONFIG_YAML_NAME)
+  ) {
+    return filePath
+  }
+
+  let currentDir = filePath
   while (!isRootDir(currentDir)) {
     const configPath = joinPaths(currentDir, GRAPHQL_CONFIG_NAME)
     if (existsSync(configPath)) {
@@ -50,7 +55,9 @@ export function readConfig(configPath: string): GraphQLConfigData {
     error.message = `Parsing ${configPath} file has failed.\n` + error.message
     throw error
   }
-  resolveValues(config)
+  if (config && config.extensions && config.extensions.endpoint) {
+    resolveValues(config.extensions.endpoint)
+  }
   return config
 }
 
@@ -65,12 +72,10 @@ export function resolveValues(config: any): void {
   }
 }
 
-function matchesGlob(filePath: string, pattern: string): boolean {
-  return minimatch(filePath, pattern, {matchBase: true})
-}
-
 export function matchesGlobs(filePath: string, globs?: string[]): boolean {
-  return (globs || []).some(pattern => matchesGlob(filePath, pattern))
+  return (globs || []).some(
+    glob => minimatch(filePath, glob, {matchBase: true})
+  )
 }
 
 export function validateConfig(config: GraphQLConfigData) {

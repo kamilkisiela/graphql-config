@@ -7,11 +7,12 @@ export type GraphQLConfigEnpointConfig = {
   }
 }
 
-export type GraphQLConfigExtensions = {
-  endpoint: string | GraphQLConfigEnpointConfig | {
-    [env: string]: GraphQLConfigEnpointConfig
-  },
+export type GraphQLConfigEnpointsMap = {
+  [env: string]: GraphQLConfigEnpointConfig
+}
 
+export type GraphQLConfigExtensions = {
+  endpoint?: string | GraphQLConfigEnpointConfig | GraphQLConfigEnpointsMap,
   [name: string]: any
 }
 
@@ -21,7 +22,7 @@ export type GraphQLResolvedConfigData = {
   include?: Array<string>,
   exclude?: Array<string>,
 
-  extensions: GraphQLConfigExtensions;
+  extensions?: GraphQLConfigExtensions;
 }
 
 export type GraphQLConfigData = GraphQLResolvedConfigData & {
