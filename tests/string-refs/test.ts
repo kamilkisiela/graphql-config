@@ -33,6 +33,6 @@ test('resolveSchemaFromEndpoint should throw when not all env variables are set'
 test('ability to pass external values as env vars to resolveSchemaFromEndpoint', async (t) => {
   await serveSchema()
   t.notThrows(() => {
-    return config.resolveSchemaFromEndpoint('default', {TEST_ENDPOINT_URL: 'http://127.0.0.0:33333'})
+    return config.resolveSchemaFromEndpoint('default', {TEST_ENDPOINT_URL: 'http://127.0.0.1:33333'})
   })
 })
