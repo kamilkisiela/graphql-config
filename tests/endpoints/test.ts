@@ -82,9 +82,9 @@ test('resolveSchemaFromEndpoint should throw if non-existing endpoint is specifi
   const inst = new GraphQLProjectConfig(__dirname, undefined, config)
   let error
   error = t.throws(() => inst.resolveSchemaFromEndpoint('prod'))
-  t.regex(error.message, /Undefined endpoint/)
+  t.regex(error.message, /^Endpoint.*is not defined/)
   error = t.throws(() => inst.resolveSchemaFromEndpoint('default'))
-  t.regex(error.message, /Undefined endpoint/)
+  t.regex(error.message, /^Endpoint.*is not defined/)
 })
 
 test('resolveSchemaFromEndpoint HTTP', async (t) => {

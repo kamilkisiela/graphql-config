@@ -31,6 +31,7 @@ import {
   getUsedEnvs,
   resolveEnvsInValues,
 } from './resolveRefString'
+
 /*
  * this class can be used for simple usecases where there is no need in per-file API
  */
@@ -120,7 +121,7 @@ export class GraphQLProjectConfig {
         },
       }
     } else if (typeof endpoint !== 'object' || Array.isArray(endpoint)) {
-      throw new Error('"endpoint" should be string or object')
+      throw new Error(`${this.configPath}: "endpoint" should be string or object`)
     } else if (!endpoint['url']) {
       result = endpoint as GraphQLConfigEnpointsMap
     } else if (typeof endpoint['url'] === 'string') {
@@ -128,7 +129,7 @@ export class GraphQLProjectConfig {
         default: endpoint as GraphQLConfigEnpointConfig,
       }
     } else {
-      throw new Error('"url" should by a string')
+      throw new Error(`${this.configPath}: "url" should be a string`)
     }
 
     return result
@@ -140,18 +141,18 @@ export class GraphQLProjectConfig {
   }
 
   resolveEndpointInfo(
-    endpointName: string = 'default',
+    endpointName: string = process.env.GRAPHQL_CONFIG_ENDPOINT_NAME || 'default',
     env: { [name: string]: string } = process.env
   ): GraphQLConfigEnpointConfig {
     const endpoint = this.getEndpointsMap()[endpointName] || {}
     if (!endpoint || !endpoint.url) {
-      throw new Error('Undefined endpoint')
+      throw new Error(`Endpoint "${endpointName}" is not defined in ${this.configPath}`)
     }
     return resolveEnvsInValues(endpoint, env)
   }
 
   resolveSchemaFromEndpoint(
-    endpointName: string = 'default',
+    endpointName?: string,
     env?: { [name: string]: string }
   ): Promise<GraphQLSchema> {
     const endpoint = this.resolveEndpointInfo(endpointName, env)
