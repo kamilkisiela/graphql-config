@@ -1,7 +1,6 @@
 import test from 'ava'
 import { GraphQLProjectConfig } from '../../src'
 import { serveSchema } from '../utils'
-const introspection = require('../schema.json')
 
 test.before(async (t) => {
   return await serveSchema()
@@ -84,28 +83,4 @@ test('resolveSchemaFromEndpoint should throw if non-existing endpoint is specifi
   t.regex(error.message, /Undefined endpoint/)
   error = t.throws(() => inst.resolveSchemaFromEndpoint('default'))
   t.regex(error.message, /Undefined endpoint/)
-})
-
-test('resolveSchemaFromEndpoint HTTP', async (t) => {
-  const config = {
-    schemaPath: '../schema.json',
-    extensions: {
-      endpoint: 'http://127.0.0.1:33333',
-    },
-  }
-
-  const inst = new GraphQLProjectConfig(__dirname, undefined, config)
-  t.deepEqual(await inst.resolveIntrospection(), introspection)
-})
-
-test('resolveSchemaFromEndpoint HTTP', async (t) => {
-  const config = {
-    schemaPath: '../schema.json',
-    extensions: {
-      endpoint: 'http://127.0.0.1:${env:gagkjk}',
-    },
-  }
-
-  const inst = new GraphQLProjectConfig(__dirname, undefined, config)
-  t.deepEqual(await inst.resolveIntrospection(), introspection)
 })
