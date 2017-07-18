@@ -5,7 +5,6 @@ import * as minimatch from 'minimatch'
 import * as yaml from 'js-yaml'
 
 import { GraphQLConfigData } from './types'
-import resolveRefString from './resolveRefString'
 
 export const GRAPHQL_CONFIG_NAME = '.graphqlrc'
 export const GRAPHQL_CONFIG_YAML_NAME = '.graphqlrc.yaml'
@@ -57,19 +56,6 @@ export function readConfig(configPath: string): GraphQLConfigData {
   }
 
   return config
-}
-
-export function resolveEnvsInValues(
-  config: any
-): void {
-  for (let key in config) {
-    const value = config[key]
-    if (typeof value === 'string') {
-      config[key] = resolveRefString(value)
-    } else if (typeof value === 'object') {
-      resolveEnvsInValues(value)
-    }
-  }
 }
 
 export function matchesGlobs(filePath: string, globs?: string[]): boolean {

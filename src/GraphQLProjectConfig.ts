@@ -25,9 +25,12 @@ import {
   validateConfig,
   mergeConfigs,
   readSchema,
-  resolveEnvsInValues,
 } from './utils'
 
+import {
+  getUsedEnvs,
+  resolveEnvsInValues,
+} from './resolveRefString'
 /*
  * this class can be used for simple usecases where there is no need in per-file API
  */
@@ -102,8 +105,10 @@ export class GraphQLProjectConfig {
     return this.config.extensions || {}
   }
 
-  // helper functions
-  getEndpointsMap(resolveEnvs = true): GraphQLConfigEnpointsMap {
+  /*
+   extension relatad helper functions
+  */
+  getEndpointsMap(): GraphQLConfigEnpointsMap {
     const endpoint = this.extensions.endpoint
     let result
     if (endpoint == null) {
@@ -126,17 +131,30 @@ export class GraphQLProjectConfig {
       throw new Error('"url" should by a string')
     }
 
-    if (resolveEnvs) {
-      resolveEnvsInValues(result)
-    }
     return result
   }
 
-  resolveSchemaFromEndpoint(name: string = 'default'): Promise<GraphQLSchema> {
-    const endpoint = this.getEndpointsMap()[name] || {}
+  getEndpointEnvVars(endpointName: string): { [name: string]: string | null } {
+    const endpoint = this.getEndpointsMap()[endpointName]
+    return getUsedEnvs(endpoint)
+  }
+
+  resolveEndpointInfo(
+    endpointName: string = 'default',
+    env: { [name: string]: string } = process.env
+  ): GraphQLConfigEnpointConfig {
+    const endpoint = this.getEndpointsMap()[endpointName] || {}
     if (!endpoint || !endpoint.url) {
       throw new Error('Undefined endpoint')
     }
+    return resolveEnvsInValues(endpoint, env)
+  }
+
+  resolveSchemaFromEndpoint(
+    endpointName: string = 'default',
+    env?: { [name: string]: string }
+  ): Promise<GraphQLSchema> {
+    const endpoint = this.resolveEndpointInfo(endpointName, env)
     const { url, headers } = endpoint
     const client = new GraphQLClient(url, { headers })
     return client.request(introspectionQuery)

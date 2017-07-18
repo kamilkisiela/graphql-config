@@ -1,6 +1,6 @@
-export default function resolveRefString(str: string): string {
+export function resolveRefString(str: string, values?: object): string {
   const { strings, rawRefs } = parse(str)
-  const refValues = rawRefs.map(resolveRef)
+  const refValues = rawRefs.map(ref => resolveRef(ref, values))
 
   let res = ''
   for (let i = 0; i < refValues.length; i++) {
@@ -11,17 +11,65 @@ export default function resolveRefString(str: string): string {
   return res
 }
 
-function resolveRef(rawRef: string): string {
-  const [refType, ref] = rawRef.split(/\s*:\s*/)
+export function resolveEnvsInValues<T extends any> (
+  config: T,
+  env: { [name: string]: string }
+): T {
+  config = Object.assign({}, config)
+  for (let key in config) {
+    const value = config[key]
+    if (typeof value === 'string') {
+      config[key] = resolveRefString(value, { env })
+    } else if (typeof value === 'object') {
+      config[key] = resolveEnvsInValues(value, env)
+    }
+  }
+  return config
+}
 
-  if (refType === 'env') {
+export function getUsedEnvs(config: any): { [name: string]: string } {
+  const result = {}
+
+  const traverse = val => {
+    if (typeof val === 'string') {
+      const rawRefs = parse(val).rawRefs
+      for (let ref of rawRefs) {
+        result[parseRef(ref).ref] = resolveRef(ref, {}, false)
+      }
+    } else if (typeof val === 'object') {
+      for (let key in config) {
+        traverse(config[key])
+      }
+    }
+  }
+  traverse(config)
+  return result
+}
+
+function parseRef(rawRef: string): { type: string, ref: string } {
+  const [type, ref] = rawRef.split(/\s*:\s*/)
+  return { type, ref}
+}
+
+function resolveRef(
+  rawRef: string,
+  values: any = {},
+  throwIfUndef: boolean = true
+): string | null {
+  const {type, ref} = parseRef(rawRef)
+
+  if (type === 'env') {
     if (!ref) {
-      throw new Error('Reference value is not present for ${refType}: ${rawRef}')
+      throw new Error(`Reference value is not present for ${type}: ${rawRef}`)
     }
 
-    const refValue = process.env[ref]
+    const refValue = values.env && values.env[ref] || process.env[ref]
     if (!refValue) {
-      throw new Error('Environment variable ${ref} is not set')
+      if (throwIfUndef) {
+        throw new Error(`Environment variable ${ref} is not set`)
+      } else {
+        return null
+      }
     }
     return refValue
   } else {
