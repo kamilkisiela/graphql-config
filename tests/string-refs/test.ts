@@ -1,10 +1,10 @@
 import test from 'ava'
-import { GraphQLProjectConfig } from '../../src'
+import { getGraphQLProjectConfig } from '../../src'
 import { serveSchema } from '../utils'
 
 let config
 test.beforeEach(() => {
-  config = new GraphQLProjectConfig(__dirname)
+  config = getGraphQLProjectConfig()
 })
 
 test('getEndpointsMap', async (t) => {

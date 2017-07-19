@@ -1,45 +1,10 @@
-import { readFile, readFileSync, existsSync } from 'fs'
-import { resolve, join as joinPaths, dirname, extname } from 'path'
+import { readFile, readFileSync } from 'fs'
+import { extname } from 'path'
 import { buildSchema, buildClientSchema } from 'graphql'
 import * as minimatch from 'minimatch'
 import * as yaml from 'js-yaml'
 
 import { GraphQLConfigData } from './types'
-
-export const GRAPHQL_CONFIG_NAME = '.graphqlrc'
-export const GRAPHQL_CONFIG_YAML_NAME = '.graphqlrc.yaml'
-
-function isRootDir(path: string): boolean {
-  return dirname(path) === path
-}
-
-export function findConfigPath(filePath: string): string {
-  filePath = resolve(filePath)
-
-  if (
-    filePath.endsWith(GRAPHQL_CONFIG_NAME) ||
-    filePath.endsWith(GRAPHQL_CONFIG_YAML_NAME)
-  ) {
-    return filePath
-  }
-
-  let currentDir = filePath
-  while (!isRootDir(currentDir)) {
-    const configPath = joinPaths(currentDir, GRAPHQL_CONFIG_NAME)
-    if (existsSync(configPath)) {
-      return configPath
-    }
-    if (existsSync(configPath + '.yaml')) {
-      return configPath + '.yaml'
-    }
-    currentDir = dirname(currentDir)
-  }
-
-  throw new Error(
-    `'${GRAPHQL_CONFIG_NAME} file is not available in the provided config ` +
-    `directory: ${filePath}\nPlease check the config directory path and try again.`
-  )
-}
 
 export function readConfig(configPath: string): GraphQLConfigData {
   let config

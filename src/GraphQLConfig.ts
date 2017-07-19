@@ -4,12 +4,6 @@ import {
   GraphQLConfigData,
 } from './types'
 
-import {
-  findConfigPath,
-  readConfig,
-  validateConfig,
-} from './utils'
-
 import { GraphQLProjectConfig } from './GraphQLProjectConfig'
 
 export class GraphQLConfig {
@@ -17,15 +11,15 @@ export class GraphQLConfig {
   public configPath: string
 
   constructor(
-    public rootPath: string = process.cwd()
+    config: GraphQLConfigData,
+    configPath: string
   ) {
-    this.configPath = findConfigPath(rootPath)
-    this.config = readConfig(this.configPath)
-    validateConfig(this.config)
+    this.config = config
+    this.configPath = configPath
   }
 
-  getProjectConfig(projectName: string): GraphQLProjectConfig {
-    return new GraphQLProjectConfig(this.configPath, projectName, this.config)
+  getProjectConfig(projectName?: string): GraphQLProjectConfig {
+    return new GraphQLProjectConfig(this.config, projectName, this.configPath)
   }
 
   getConfigForFile(filePath: string): GraphQLProjectConfig | null {
@@ -33,7 +27,7 @@ export class GraphQLConfig {
 
     filePath = relative(this.configPath, filePath)
     if (!projects || Object.keys(projects).length === 0) {
-      const config = new GraphQLProjectConfig(this.configPath, undefined, this.config)
+      const config = new GraphQLProjectConfig(this.config, undefined, this.configPath)
       return config.includesFile(filePath) ? config : null
     }
 

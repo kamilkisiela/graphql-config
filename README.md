@@ -128,17 +128,17 @@ Additional to the format specification, it provides the `graphql-config-parser` 
 
 ## `graphql-config-parser` API [![Build Status](https://travis-ci.org/graphcool/graphql-config.svg?branch=master)](https://travis-ci.org/graphcool/graphql-config) [![npm version](https://badge.fury.io/js/graphql-config-parser.svg)](https://badge.fury.io/js/graphql-config-parser)
 
-### GraphQLProjectConfig
+### getGraphQLProjectConfig
 
 > NOTE: if you work with files (e.g. editor plugin, linter, etc) use GraphQLConfig
 class and `getConfigForFile` method to get instance of the correct `GraphQLProjectConfig`
 
-`GraphQLProjectConfig` should be used by tools that do not work on per-file basis
+`getGraphQLProjectConfig` should be used by tools that do not work on per-file basis
 
 ```js
-import { GraphQLProjectConfig } from 'graphql-config-parser'
+import { getGraphQLProjectConfig } from 'graphql-config-parser'
 
-const config = new GraphQLProjectConfig()
+const config = getGraphQLProjectConfig()
 config.resolveSchema()
   .then(schema => {
     // use schema for your tool/plugin
@@ -148,15 +148,15 @@ config.resolveSchema()
   })
 ```
 
-### GraphQLConfig
+### getGraphQLConfig
 
-`GraphQLConfig` should be used by tools that work on per-file basis (editor plugins,
+`getGraphQLConfig` should be used by tools that work on per-file basis (editor plugins,
 linters, etc.)
 
 ```js
-import { GraphQLConfig } from 'graphql-config-parser'
+import { getGraphQLConfig } from 'graphql-config-parser'
 
-const config = new GraphQLConfig()
+const config = getGraphQLConfig()
 config.getConfigForFile(filename)
   .resolveSchema()
   .then(schema => {

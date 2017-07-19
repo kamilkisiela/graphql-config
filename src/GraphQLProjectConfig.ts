@@ -19,10 +19,7 @@ import {
 } from './types'
 
 import {
-  findConfigPath,
-  readConfig,
   matchesGlobs,
-  validateConfig,
   mergeConfigs,
   readSchema,
 } from './utils'
@@ -38,20 +35,16 @@ import {
 export class GraphQLProjectConfig {
   public config: GraphQLResolvedConfigData
   public configPath: string
+  public projectName: string
 
   constructor(
-    path: string = process.cwd(),
-    public projectName: string = process.env.GRAPHQL_PROJECT,
-    configData?: GraphQLConfigData // in case the data is already parsed
+    config: GraphQLConfigData,
+    projectName = process.env.GRAPHQL_PROJECT,
+    configPath: string
   ) {
-    this.configPath = findConfigPath(path)
-
-    let config = configData
-    if (config == null) {
-      config = readConfig(this.configPath)
-    }
-    validateConfig(config)
     this.config = loadProjectConfig(config, projectName)
+    this.configPath = configPath
+    this.projectName = projectName
   }
 
   resolveConfigPath(relativePath: string): string {
