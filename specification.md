@@ -149,12 +149,14 @@ The proposed usage for the property is as follows:
 ```
 {
   "schemaPath": "./schema.graphql",
-  "env": {
-    "production": {
-      "schemaUrl": "http://your-app.com/graphqlschema"
-    },
-    "development": {
-      "schemaPath": "./dev-schema.graphql"
+  "extensions": {
+    "env": {
+      "production": {
+        "schemaUrl": "http://your-app.com/graphqlschema"
+      },
+      "development": {
+        "schemaPath": "./dev-schema.graphql"
+      }
     }
   }
 }
