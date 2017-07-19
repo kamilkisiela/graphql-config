@@ -1,6 +1,6 @@
 # graphql-config
 
-**THIS README is for 2.* version. 1.* version README is on the master branch**
+**THIS README is for 2.\* version. 1.\* version README is on the master branch**
 
 The easiest way to configure your development environment with your GraphQL schema (supported by most tools, editors &amp; IDEs)
 
@@ -30,7 +30,7 @@ You can either configure your GraphQL endpoint via a configuration file `.graphq
 ### Simplest use case
 
 The simplest config specifies only `schemaPath` which is path to the file with introspection
-results or corresponding STL document
+results or corresponding SDL document
 
 ```json
 {
@@ -78,7 +78,7 @@ a endpoint for subscription you can use expanded version:
       "subscription": {
         "url": "ws://example.com/graphql",
         "connectionParams": {
-          "Token": "${env: YOUR_APP_TOKEN}"
+          "Token": "${env:YOUR_APP_TOKEN}"
         }
       }
     }
