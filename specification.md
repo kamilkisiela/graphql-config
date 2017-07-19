@@ -134,6 +134,37 @@ For example, some application may choose to build using Webpack and need to spec
 
 Below are what we're experimenting with for additional fields. Before including in the official recommendation, we would like to iterate on a few different codebases first.
 
+## 'Env' Variable
+
+An env property is useful to facilitate the build and deployment if your application needs to introduce a GraphQL-specific environment variable and run build steps with it:
+
+```
+// run a development build with a production GraphQL database 
+GRAPHQL_ENV=production && NODE_ENV=development && babel-node ./server.js
+```
+
+Also, an env property allows an easier adoption of this GraphQL configuration format for non-JavaScript codebases.
+
+The proposed usage for the property is as follows:
+```
+{
+  "schemaPath": "./schema.graphql",
+  "extensions": {
+    "env": {
+      "production": {
+        "schemaUrl": "http://your-app.com/graphqlschema"
+      },
+      "development": {
+        "schemaPath": "./dev-schema.graphql"
+      }
+    }
+  }
+}
+```
+GraphQL configurations do not support this property because there isn't a clear example how to utilize this property yet.
+
+
+
 ## Configuring GraphQL endpoint
 
 For a simple GraphQL endpoints, the only required configuration is an URL:
