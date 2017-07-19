@@ -1,4 +1,4 @@
-import { relative } from 'path'
+import { resolve, dirname } from 'path'
 import { validateConfig } from './utils'
 
 import {
@@ -10,6 +10,7 @@ import { GraphQLProjectConfig } from './GraphQLProjectConfig'
 export class GraphQLConfig {
   public config: GraphQLConfigData
   public configPath: string
+  public configDir: string
 
   constructor(
     config: GraphQLConfigData,
@@ -18,6 +19,7 @@ export class GraphQLConfig {
     validateConfig(config)
     this.config = config
     this.configPath = configPath
+    this.configDir = dirname(configPath)
   }
 
   getProjectConfig(projectName?: string): GraphQLProjectConfig {
@@ -27,7 +29,6 @@ export class GraphQLConfig {
   getConfigForFile(filePath: string): GraphQLProjectConfig | null {
     const { projects } = this.config
 
-    filePath = relative(this.configPath, filePath)
     if (!projects || Object.keys(projects).length === 0) {
       const config = new GraphQLProjectConfig(this.config, this.configPath, undefined)
       return config.includesFile(filePath) ? config : null
@@ -36,6 +37,11 @@ export class GraphQLConfig {
     return Object.values(this.getProjects()).find(
       project => project.includesFile(filePath)
     ) || null
+  }
+
+  getProjectNameForFile(filePath: string): string | null {
+    const proj = this.getConfigForFile(filePath);
+    return proj && proj.projectName || null;
   }
 
   getProjects(): { [name: string]: GraphQLProjectConfig } {

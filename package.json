@@ -1,6 +1,6 @@
 {
   "name": "graphql-config-parser",
-  "version": "1.2.0",
+  "version": "2.0.0-rc.0",
   "description": "The easiest way to configure your development environment with your GraphQL schema (supported by most tools, editors & IDEs)",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -14,7 +14,7 @@
     "clean": "rimraf lib",
     "build": "npm run clean && tsc",
     "copy-test-assets": "cpx \"src/**/{.graphqlrc,.graphqlrc.yaml,*.json}\" lib",
-    "test-only": "npm run build && npm run copy-test-assets && ava lib/__tests__/**/test.js --serial",
+    "test-only": "npm run build && npm run copy-test-assets && ava --verbose lib/__tests__/**/*.js --serial",
     "test": "tslint src/**/*.ts && npm run test-only"
   },
   "ava": {
@@ -63,6 +63,7 @@
     "graphql": "0.7.1 - 1.0.0",
     "graphql-request": "^1.2.0",
     "js-yaml": "^3.9.0",
-    "minimatch": "^3.0.4"
+    "minimatch": "^3.0.4",
+    "rimraf": "^2.6.1"
   }
 }

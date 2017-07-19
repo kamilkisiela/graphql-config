@@ -31,6 +31,13 @@ export function readConfig(configPath: string): GraphQLConfigData {
   return config
 }
 
+export function normalizeGlob(glob: string): string {
+  if (glob.startsWith('./')) {
+    return glob.substr(2)
+  }
+  return glob
+}
+
 export function matchesGlobs(filePath: string, globs?: string[]): boolean {
   return (globs || []).some(
     glob => minimatch(filePath, glob, {matchBase: true})

@@ -1,4 +1,4 @@
-import { dirname, resolve } from 'path'
+import { dirname, resolve, relative, join } from 'path'
 
 import {
   GraphQLSchema,
@@ -25,6 +25,7 @@ import {
   readSchema,
   validateConfig,
   schemaToIntrospection,
+  normalizeGlob,
 } from './utils'
 
 import {
@@ -40,6 +41,8 @@ export class GraphQLProjectConfig {
   public configPath: string
   public projectName?: string
 
+  public configDir: string;
+
   constructor(
     config: GraphQLConfigData,
     configPath: string,
@@ -48,15 +51,19 @@ export class GraphQLProjectConfig {
     validateConfig(config)
     this.config = loadProjectConfig(config, projectName)
     this.configPath = configPath
+    this.configDir = dirname(configPath)
     this.projectName = projectName
   }
 
   resolveConfigPath(relativePath: string): string {
-    return resolve(dirname(this.configPath), relativePath)
+    return resolve(this.configDir, relativePath)
   }
 
   includesFile(filePath: string): boolean {
-    filePath = resolve(filePath)
+    if (filePath.startsWith('file://')) {
+      filePath = filePath.substr(7)
+    }
+    filePath = relative(this.configDir, resolve(join(this.configDir, filePath)))
     return (
       (!this.config.include || matchesGlobs(filePath, this.include)) &&
       !matchesGlobs(filePath, this.exclude)
@@ -83,20 +90,16 @@ export class GraphQLProjectConfig {
   }
 
   // Getters
-  get schemaPath(): string {
-    return this.resolveConfigPath(this.config.schemaPath)
+  get schemaPath(): string | null {
+    return this.config.schemaPath ? this.resolveConfigPath(this.config.schemaPath) : null
   }
 
   get include(): string[] {
-    return (this.config.include || []).map(
-      glob => this.resolveConfigPath(glob)
-    )
+    return (this.config.include || []).map(normalizeGlob)
   }
 
   get exclude(): string[] {
-    return (this.config.exclude || []).map(
-      glob => this.resolveConfigPath(glob)
-    )
+    return (this.config.exclude || []).map(normalizeGlob)
   }
 
   get extensions(): GraphQLConfigExtensions {
