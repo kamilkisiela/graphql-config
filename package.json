@@ -11,7 +11,7 @@
   "scripts": {
     "prepublish": "npm run build",
     "build": "tsc",
-    "test": "tslint {src,test}/**/*.ts && tsc && ava tests/**/test.js --serial"
+    "test": "tslint {src,test}/**/*.ts && tsc && ava src/__tests__/**/test.js --serial"
   },
   "ava": {
     "babel": "inherit",

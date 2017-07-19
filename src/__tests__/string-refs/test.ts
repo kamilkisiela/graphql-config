@@ -1,5 +1,5 @@
 import test from 'ava'
-import { getGraphQLProjectConfig } from '../../src'
+import { getGraphQLProjectConfig } from '../../'
 import { serveSchema } from '../utils'
 
 let config

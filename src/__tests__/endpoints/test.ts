@@ -1,6 +1,6 @@
 import test from 'ava'
 import { graphql, introspectionQuery } from 'graphql'
-import { GraphQLProjectConfig } from '../../src'
+import { GraphQLProjectConfig } from '../../'
 import { serveSchema } from '../utils'
 const introspection = require('../schema.json')
 
