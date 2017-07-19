@@ -203,7 +203,7 @@ To reference environment variables, use the ${env:SOME_VAR} syntax, for example:
 }
 ```
 
-Note: To escape `${` sequence just prefix it with slash like that `\\${some value}`.
+Note: To escape a `${` sequence just prefix it with a backslash like `\${some value}`.
 
 ### Subscription support
 
@@ -215,7 +215,7 @@ Separate endpoint for subscription can be defined and `connectionParams` can be 
     "subscription": {
       "url": "ws://your-app.com:5000/",
       "connectionParams": {
-        "Token": "${env: YOUR_APP_TOKEN}"
+        "Token": "${env:YOUR_APP_TOKEN}"
       }
     }
   }
@@ -228,7 +228,7 @@ In situation where multiple endpoints are supported they can be specified like t
 ```json
 "endpoint": {
   "prod": {
-    "url": "https://your-app.com/graphql"
+    "url": "https://your-app.com/graphql",
     "subscription": {
       "url": "wss://subscriptions.graph.cool/v1/instagram"
     }
@@ -278,4 +278,4 @@ export const customRules: Array<(context: ValidationContext) => any> = { ... };
 }
 ```
 
-We're not yet officially supporting these rules, because many GraphQL tools don't yet have a way of using additional validation rules.
+We're not yet officially supporting these rules, because most GraphQL tools don't yet have a way of using additional validation rules.
