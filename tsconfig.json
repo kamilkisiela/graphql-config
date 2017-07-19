@@ -7,7 +7,9 @@
       "es2017",
       "DOM",
       "esnext.asynciterable"
-    ]
+    ],
+    "outDir": "lib",
+    "declaration": true
   },
   "exclude": [
     "node_modules",
@@ -15,7 +17,6 @@
   ],
   "include": [
     "./src/**/*.ts",
-    "./tests/**/*.ts",
     "./custom.d.ts"
   ]
 }
