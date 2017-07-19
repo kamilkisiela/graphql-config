@@ -2,15 +2,16 @@ import { dirname, resolve } from 'path'
 
 import {
   GraphQLSchema,
-  graphql,
-  introspectionQuery,
   printSchema,
+  introspectionQuery,
+  IntrospectionQuery,
   buildClientSchema,
 } from 'graphql'
 
 import { GraphQLClient } from 'graphql-request'
 
 import {
+  IntrospectionResult,
   GraphQLResolvedConfigData,
   GraphQLConfigData,
   GraphQLConfigExtensions,
@@ -23,6 +24,7 @@ import {
   mergeConfigs,
   readSchema,
   validateConfig,
+  schemaToIntrospection,
 } from './utils'
 
 import {
@@ -70,9 +72,9 @@ export class GraphQLProjectConfig {
     )
   }
 
-  resolveIntrospection(): Promise<any> {
+  resolveIntrospection(): Promise<IntrospectionResult> {
     return this.resolveSchema()
-      .then(schema => graphql(schema, introspectionQuery))
+      .then(schemaToIntrospection)
   }
 
   resolveSchemaSDL(): Promise<string> {
@@ -139,7 +141,7 @@ export class GraphQLProjectConfig {
     endpointName: string = process.env.GRAPHQL_CONFIG_ENDPOINT_NAME || 'default',
     env: { [name: string]: string } = process.env
   ): GraphQLConfigEnpointConfig {
-    const endpoint = this.getEndpointsMap()[endpointName] || {}
+    const endpoint = this.getEndpointsMap()[endpointName]
     if (!endpoint || !endpoint.url) {
       throw new Error(`Endpoint "${endpointName}" is not defined in ${this.configPath}`)
     }
@@ -153,8 +155,9 @@ export class GraphQLProjectConfig {
     const endpoint = this.resolveEndpointInfo(endpointName, env)
     const { url, headers } = endpoint
     const client = new GraphQLClient(url, { headers })
-    return client.request(introspectionQuery)
-      .then(introspection => buildClientSchema(introspection))
+    return client.request(introspectionQuery).then(introspection => {
+      return buildClientSchema(introspection as IntrospectionQuery)
+    })
   }
 }
 

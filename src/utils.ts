@@ -1,10 +1,18 @@
-import { readFile, readFileSync } from 'fs'
+import { readFile, readFileSync, writeFileSync } from 'fs'
 import { extname } from 'path'
-import { buildSchema, buildClientSchema } from 'graphql'
 import * as minimatch from 'minimatch'
 import * as yaml from 'js-yaml'
+import {
+  Source,
+  GraphQLSchema,
+  graphql,
+  printSchema,
+  buildSchema,
+  buildClientSchema,
+  introspectionQuery,
+} from 'graphql'
 
-import { GraphQLConfigData } from './types'
+import { GraphQLConfigData, IntrospectionResult } from './types'
 
 export function readConfig(configPath: string): GraphQLConfigData {
   let config
@@ -47,7 +55,21 @@ export function mergeConfigs(
   return result
 }
 
-export function readSchema(path) {
+export function schemaToIntrospection(schema: GraphQLSchema) {
+  return graphql(schema, introspectionQuery) as Promise<IntrospectionResult>
+}
+
+export function introspectionToSchema(introspection: IntrospectionResult) {
+  if (introspection.errors != null) {
+    throw new Error('Introspection result containts errors')
+  }
+  if (introspection.data == null) {
+    throw new Error('Missing "data" property from introspection result')
+  }
+  return buildClientSchema(introspection.data)
+}
+
+export function readSchema(path): Promise<GraphQLSchema> {
   return new Promise((resolve, reject) => {
     readFile(path, 'utf-8', (error, data) => {
       error ? reject(error) : resolve(data)
@@ -56,11 +78,40 @@ export function readSchema(path) {
     // FIXME: prefix error
     switch (extname(path)) {
       case '.graphql':
-        return buildSchema(data)
+        return valueToSchema(data)
       case '.json':
-        return buildClientSchema(JSON.parse(data).data)
+        const introspection = JSON.parse(data)
+        return valueToSchema(introspection)
       default:
         throw new Error('Unsupported schema file extention. Only ".graphql" and ".json" are supported')
     }
   })
+}
+
+function valueToSchema(schema) {
+  if (schema instanceof GraphQLSchema) {
+    return schema
+  } else if (typeof schema === 'string' || schema instanceof Source) {
+    return buildSchema(schema)
+  } else if (typeof schema === 'object' && !Array.isArray(schema)) {
+    return introspectionToSchema(schema as IntrospectionResult)
+  }
+  throw new Error('Can not convert data to a schema')
+}
+
+export async function writeSchema(path, schema): Promise<void> {
+  schema = valueToSchema(schema)
+  let data: string
+  switch (extname(path)) {
+    case '.graphql':
+      data = printSchema(schema)
+      break
+    case '.json':
+      const introspection = await schemaToIntrospection(schema)
+      data = JSON.stringify(introspection, null, 2)
+      break
+    default:
+      throw new Error('Unsupported schema file extention. Only ".graphql" and ".json" are supported')
+  }
+  writeFileSync(path, data, 'utf-8')
 }

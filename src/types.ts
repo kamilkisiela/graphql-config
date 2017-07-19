@@ -1,3 +1,10 @@
+import { IntrospectionQuery } from 'graphql'
+
+export type IntrospectionResult = {
+  data?: IntrospectionQuery
+  errors?: any
+}
+
 export type GraphQLConfigEnpointConfig = {
   url: string
   headers?: { [name: string]: string }

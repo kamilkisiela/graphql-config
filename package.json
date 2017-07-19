@@ -43,6 +43,7 @@
   },
   "homepage": "https://github.com/graphcool/graphql-config#readme",
   "devDependencies": {
+    "@types/graphql": "^0.10.0",
     "@types/node": "^6.0.41",
     "@types/node-fetch": "0.0.4",
     "ava": "^0.16.0",
