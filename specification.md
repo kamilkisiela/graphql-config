@@ -6,7 +6,7 @@ There are many ways to configure your application to use GraphQL, and while it i
 
 After inspecting many GraphQL applications for use cases and communicating with many external contributors, we recommend configuring your GraphQL application with a below format:
 
-```
+```ts
 // For the ease of understanding/formatting, we're using a
 // Flow-like type to define the configuration format.
 
@@ -38,14 +38,14 @@ type GraphQLConfigurationExtension = {
 ## Use Cases
 
 Usually, for a simple GraphQL applications, the only required configuration is a way to fetch a GraphQL schema:
-```
+```json
 {
   "schemaPath": "./schema.graphql"
 }
 ```
 
 For multiple apps with isolated directories, there are mainly two ways to set up the configuration. Each app can either use the `projects` property to specify each application's configuration, or have a separate `.graphqlrc` file for each project root.
-```
+```json
 {
   "projects": {
     "appA": {
@@ -69,7 +69,7 @@ Or each app can have a separate `.graphqlrc` file per each application and/or di
 > Treat the top-level configuration properties as default values to use if a project configuration scope omits them.
 
 Consider the below GraphQL configuration:
-```
+```json
 {
   {
     "projects": {
@@ -89,7 +89,7 @@ Consider the below GraphQL configuration:
 ```
 
 Since projectA and projectB share the same schema file, we can push the `schemaPath` property to the top level, and treat it as a default value for a schema path. In this case, the application using this configuration should treat each project config as a more specific scope, and look at the top level scope with default properties as a fallback.
-```
+```json
 {
   "schemaPath": "./resources/schema.graphql",
   {
@@ -117,7 +117,7 @@ Additionally, we'd like to treat the `extensions` property as a sandbox for impr
 
 For example, some application may choose to build using Webpack and need to specify Webpack-related configurations in GraphQL configuration. Also, they may need to process additional file types other than `.graphql`. Below suggests one way to configure these options using 'extensions':
 
-```
+```json
 {
   "schemaPath": "...",
   "extensions": {
@@ -146,7 +146,7 @@ GRAPHQL_ENV=production && NODE_ENV=development && babel-node ./server.js
 Also, an env property allows an easier adoption of this GraphQL configuration format for non-JavaScript codebases.
 
 The proposed usage for the property is as follows:
-```
+```json
 {
   "schemaPath": "./schema.graphql",
   "extensions": {
@@ -168,19 +168,19 @@ GraphQL configurations do not support this property because there isn't a clear 
 ## Configuring GraphQL endpoint
 
 For a simple GraphQL endpoints, the only required configuration is an URL:
-```
+```json
 {
   "endpoint": "http://your-app.com/graphql"
 }
 ```
 
 Additional header values could be added if needed:
-```
+```json
 {
   "endpoint": {
     "url": "http://your-app.com/graphql",
     "headers": {
-      "Authorization": "bearer ${env: YOUR_APP_TOKEN}"
+      "Authorization": "Bearer ${env:YOUR_APP_TOKEN}"
     }
   }
 }
@@ -191,13 +191,13 @@ Additional header values could be added if needed:
 ### Referencing Environment Variables
 
 To reference environment variables, use the ${env:SOME_VAR} syntax, for example:
-```
+```json
 {
   "endpoint": {
     "url": "http://your-app.com/graphql",
     "headers": {
       "User-Agent": "Build script",
-      "Authorization": "bearer ${env: YOUR_APP_TOKEN}"
+      "Authorization": "Bearer ${env:YOUR_APP_TOKEN}"
     }
   }
 }
@@ -208,7 +208,7 @@ Note: To escape `${` sequence just prefix it with slash like that `\\${some valu
 ### Subscription support
 
 Separate endpoint for subscription can be defined and `connectionParams` can be used to provide additional values:
-```
+```json
 {
   "endpoint": {
     "url": "http://your-app.com/graphql",
@@ -225,7 +225,7 @@ Separate endpoint for subscription can be defined and `connectionParams` can be 
 ### Support for multiple endpoints
 
 In situation where multiple endpoints are supported they can be specified like that:
-```
+```json
 "endpoint": {
   "prod": {
     "url": "https://your-app.com/graphql"
@@ -247,14 +247,14 @@ Note: `url` can't be used as a key of this map.
 ## Configuring a schema defined programmatically
 
 Suppose you have a schema defined using objects from `graphql-js`:
-```
+```js
 // In schema.js,
 const queryType = new GraphQLObjectType({ name: 'Query' });
 export const schema = new GraphQLSchema({ query: queryType });
 ```
 
 Because this is a valid GraphQL schema that can be used within applications, we want to provide a way to configure the schema defined in this way:
-```
+```json
 {
   "schemaModule": "./schema.js"
 }
@@ -265,7 +265,7 @@ This is not yet supported in GraphQL configuration because we're not sure what s
 ## Including a set of customized validation rules
 
 Sometimes a GraphQL application wants to either define an additional set of validation rules or specify a list of validation rules to be run at build/runtime. The GraphQL configuration can be a good place to locate where to look for this:
-```
+```js
 // In customRules.js,
 export const customRules: Array<(context: ValidationContext) => any> = { ... };
 
