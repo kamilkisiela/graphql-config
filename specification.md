@@ -109,7 +109,7 @@ Since projectA and projectB share the same schema file, we can push the `schemaP
 }
 ```
 
-## `Extensions` as Namespaces
+## `extensions` as Namespaces
 
 > If your application requires a unique configuration option, use the `extensions` attribute to customize your own configuration option. 
 
