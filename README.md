@@ -1,9 +1,8 @@
 # graphql-config
 
+**THIS README is for 2.* version. 1.* version README is on the master branch**
+
 The easiest way to configure your development environment with your GraphQL schema (supported by most tools, editors &amp; IDEs)
-
-**TLDR**: Set an environment variable called `GRAPHQL_ENDPOINT` to your GraphQL endpoint (e.g. `https://your.api/graphql`) or read ahead for other configuration options.
-
 
 ## Supported by...
 
@@ -14,78 +13,109 @@ The easiest way to configure your development environment with your GraphQL sche
 
 ### Tools
 
-* [babel-plugin-react-relay](https://github.com/graphcool/babel-plugin-react-relay) - Babel compile step to process your `Relay.QL` queries
+* [babel-plugin-react-relay](https://github.com/graphcool/babel-plugin-react-relay) - Babel compile step to process your `Relay.QL` queries (_pending_)
 * [babel-plugin-transform-relay-hot](https://github.com/nodkz/babel-plugin-transform-relay-hot) - Wrapper under BabelRelayPlugin with hot reload (_pending_)
 * [eslint-plugin-graphql](https://github.com/apollostack/eslint-plugin-graphql) - An ESLint plugin that checks tagged template strings against a GraphQL schema (_pending_)
 * [webpack-plugin-graphql-schema-hot](https://github.com/nodkz/webpack-plugin-graphql-schema-hot) - Webpack plugin which tracks changes in your schema and generates its introspection in `json` and `txt` formats (_pending_)
 
-> Did we forget a tool/editor? Please [add it here](https://github.com/graphcool/graphql-config/compare).
+> Did we forget a tool/editor? Please [add it here](https://github.com/graphcool/graphql-config/issues/new).
 
 ## Usage
 
-You can either configure your GraphQL endpoint via a configuration file or by providing an environment variable.
+You can either configure your GraphQL endpoint via a configuration file `.graphqlrc`
+(or `.graphqlrc.yaml`) which should be put into the root of your project
 
 > Note: This requires Node 5 installed or higher
 
-### Method 1: Configuration via `$GRAPHQL_ENDPOINT` environment variable
+### Simplest use case
 
-The easiest way to configure your project is by setting an environment variable called `GRAPHQL_ENDPOINT` to your GraphQL endpoint.
-
-```sh
-export GRAPHQL_ENDPOINT="https://your.api/graphql"
-```
-
-### Method 2: Configuration via `.graphqlrc` file
-
-You can either use your actual GraphQL endpoint or if preferred a local schema.json or schema.js file.
-
-#### Use GraphQL endpoint
-
-Note: The `headers` object is optional and can for example be used to authenticate to your GraphQL endpoint.
+The simplest config specifies only `schemaPath` which is path to the file with introspection
+results or corresponding STL document
 
 ```json
 {
-  "request": {
-    "url": "https://example.com/graphql",
-    "headers": {
-      "Authorization": "xxxxx"
+  "schemaPath": "schema.graphql"
+}
+```
+
+### Specifying include/exclude files
+
+You can specify which files to include/exclude using the corresponding options:
+
+```json
+{
+  "schemaPath": "schema.graphql",
+  "include": ["*.graphql"],
+  "exclude": ["temp/**"]
+}
+```
+
+#### Specifying endpoint info
+
+You may specify your endpoints info in `.graphqlrc`. The simplest case:
+
+```json
+{
+  "schemaPath": "schema.graphql",
+  "extensions": {
+    "endpoint": "https://example.com/graphql"
+  }
+}
+```
+
+In case you need provide addition information for example headers to authenticate your GraphQL endpoint or
+a endpoint for subscription you can use expanded version:
+
+```json
+{
+  "schemaPath": "schema.graphql",
+  "extensions": {
+    "endpoint": {
+      "url": "https://example.com/graphql",
+      "headers": {
+        "Authorization": "Bearer ${env:AUTH_TOKEN_ENV}"
+      },
+      "subscription": {
+        "url": "ws://example.com/graphql",
+        "connectionParams": {
+          "Token": "${env: YOUR_APP_TOKEN}"
+        }
+      }
     }
   }
 }
 ```
 
-#### Use local schema file (JSON)
+> Note: do not save secure information in .graphqlrc file. Use [Environment variables](specification.md#referencing-environment-variables) for that like in the example above.
+
+In case if you have multiple endpoints use the following syntax:
 
 ```json
 {
-  "file": "./schema.json"
-}
-```
-
-#### Use local schema file (GraphQL.js)
-
-```json
-{
-  "graphql-js": "./schema.js"
-}
-```
-
-
-### Method 3: Configuration via `package.json` file
-
-Use the same configuration options as for the `.graphqlrc` file but wrap it into an object with the key `graphql`.
-
-```json
-{
-  "dependencies": { ... },
-  "graphql": {
-    "request": {
-      "url": "https://example.com/graphql"
+  "schemaPath": "schema.graphql",
+  "extensions": {
+    "endpoint": {
+      "prod": {
+        "url": "https://your-app.com/graphql"
+        "subscription": {
+          "url": "wss://subscriptions.graph.cool/v1/instagram"
+        }
+      },
+      "dev": {
+        "url": "http://localhost:3000/graphql",
+        "subscription": {
+          "url": "ws://localhost:3001"
+        }
+      }
     }
   }
 }
 ```
 
+### Multi-project configuration
+> TBD
+
+__Refer to [specification use-cases](specification.md#use-cases) for details__
 
 ## How it works
 
@@ -95,17 +125,42 @@ Additional to the format specification, it provides the `graphql-config-parser` 
 
 ![](resources/how-it-works.png)
 
-In case you provided a URL to your GraphQL endpoint, the `graphql-config-parser` library will run an [introspection query](https://github.com/graphql/graphql-js/blob/master/src/utilities/introspectionQuery.js) against your endpoint in order to fetch your schema.
 
 ## `graphql-config-parser` API [![Build Status](https://travis-ci.org/graphcool/graphql-config.svg?branch=master)](https://travis-ci.org/graphcool/graphql-config) [![npm version](https://badge.fury.io/js/graphql-config-parser.svg)](https://badge.fury.io/js/graphql-config-parser)
 
-```js
-import { parse, resolveSchema } from 'graphql-config-parser'
+### GraphQLProjectConfig
 
-const config = parse()
-resolveSchema(config)
-  .then((schema) => {
-    // use json schema for your tool/plugin
+> NOTE: if you work with files (e.g. editor plugin, linter, etc) use GraphQLConfig
+class and `getConfigForFile` method to get instance of the correct `GraphQLProjectConfig`
+
+`GraphQLProjectConfig` should be used by tools that do not work on per-file basis
+
+```js
+import { GraphQLProjectConfig } from 'graphql-config-parser'
+
+const config = new GraphQLProjectConfig()
+config.resolveSchema()
+  .then(schema => {
+    // use schema for your tool/plugin
+  })
+  .catch((err) => {
+    console.error(err)
+  })
+```
+
+### GraphQLConfig
+
+`GraphQLConfig` should be used by tools that work on per-file basis (editor plugins,
+linters, etc.)
+
+```js
+import { GraphQLConfig } from 'graphql-config-parser'
+
+const config = new GraphQLConfig()
+config.getConfigForFile(filename)
+  .resolveSchema()
+  .then(schema => {
+    // use schema for your tool/plugin
   })
   .catch((err) => {
     console.error(err)
