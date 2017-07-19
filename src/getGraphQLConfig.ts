@@ -12,8 +12,8 @@ export function getGraphQLConfig(rootDir: string = process.cwd()): GraphQLConfig
 }
 
 export function getGraphQLProjectConfig(
-  projectName: string = process.env.GRAPHQL_CONFIG_PROJECT,
-  rootDir?: string
+  rootDir?: string,
+  projectName: string = process.env.GRAPHQL_CONFIG_PROJECT
 ): GraphQLProjectConfig {
   return getGraphQLConfig(rootDir).getProjectConfig(projectName)
 }

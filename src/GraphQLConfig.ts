@@ -1,4 +1,5 @@
 import { relative } from 'path'
+import { validateConfig } from './utils'
 
 import {
   GraphQLConfigData,
@@ -14,12 +15,13 @@ export class GraphQLConfig {
     config: GraphQLConfigData,
     configPath: string
   ) {
+    validateConfig(config)
     this.config = config
     this.configPath = configPath
   }
 
   getProjectConfig(projectName?: string): GraphQLProjectConfig {
-    return new GraphQLProjectConfig(this.config, projectName, this.configPath)
+    return new GraphQLProjectConfig(this.config, this.configPath, projectName)
   }
 
   getConfigForFile(filePath: string): GraphQLProjectConfig | null {
@@ -27,7 +29,7 @@ export class GraphQLConfig {
 
     filePath = relative(this.configPath, filePath)
     if (!projects || Object.keys(projects).length === 0) {
-      const config = new GraphQLProjectConfig(this.config, undefined, this.configPath)
+      const config = new GraphQLProjectConfig(this.config, this.configPath, undefined)
       return config.includesFile(filePath) ? config : null
     }
 

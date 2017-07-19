@@ -22,6 +22,7 @@ import {
   matchesGlobs,
   mergeConfigs,
   readSchema,
+  validateConfig,
 } from './utils'
 
 import {
@@ -35,13 +36,14 @@ import {
 export class GraphQLProjectConfig {
   public config: GraphQLResolvedConfigData
   public configPath: string
-  public projectName: string
+  public projectName?: string
 
   constructor(
     config: GraphQLConfigData,
-    projectName = process.env.GRAPHQL_PROJECT,
-    configPath: string
+    configPath: string,
+    projectName?: string
   ) {
+    validateConfig(config)
     this.config = loadProjectConfig(config, projectName)
     this.configPath = configPath
     this.projectName = projectName
@@ -73,7 +75,7 @@ export class GraphQLProjectConfig {
       .then(schema => graphql(schema, introspectionQuery))
   }
 
-  resolveSchemaIDL(): Promise<string> {
+  resolveSchemaSDL(): Promise<string> {
     return this.resolveSchema()
       .then(schema => printSchema(schema))
   }
@@ -158,7 +160,7 @@ export class GraphQLProjectConfig {
 
 function loadProjectConfig(
   config: GraphQLConfigData,
-  projectName: string
+  projectName?: string
 ) {
   const { projects, ...configBase } = config
 
