@@ -71,19 +71,17 @@ Or each app can have a separate `.graphqlrc` file per each application and/or di
 Consider the below GraphQL configuration:
 ```json
 {
-  {
-    "projects": {
-      "projectA": {
-        "schemaPath": "./resources/schema.graphql",
-        "include": "./projectA/graphql/*.graphql"
-      },
-      "projectB": {
-        "schemaPath": "../resources/schema.graphql",
-        "include": "./projectB/graphql/*.graphql"
-      },
-      "projectC": {
-        "schemaPath": "./schema-for-projectC.graphql"      }
-    }
+  "projects": {
+    "projectA": {
+      "schemaPath": "./resources/schema.graphql",
+      "include": "./projectA/graphql/*.graphql"
+    },
+    "projectB": {
+      "schemaPath": "../resources/schema.graphql",
+      "include": "./projectB/graphql/*.graphql"
+    },
+    "projectC": {
+      "schemaPath": "./schema-for-projectC.graphql"      }
   }
 }
 ```
@@ -92,18 +90,16 @@ Since projectA and projectB share the same schema file, we can push the `schemaP
 ```json
 {
   "schemaPath": "./resources/schema.graphql",
-  {
-    "projects": {
-      "projectA": {
-        "include": "./projectA/graphql/*.graphql"
-      },
-      "projectB": {
-        "include": "./projectB/graphql/*.graphql"
-      },
-      "projectC": {
-        // "schemaPath" in this scope should take precedence
-        "schemaPath": "./schema-for-projectC.graphql"
-      }
+  "projects": {
+    "projectA": {
+      "include": "./projectA/graphql/*.graphql"
+    },
+    "projectB": {
+      "include": "./projectB/graphql/*.graphql"
+    },
+    "projectC": {
+      // "schemaPath" in this scope should take precedence
+      "schemaPath": "./schema-for-projectC.graphql"
     }
   }
 }
@@ -111,7 +107,7 @@ Since projectA and projectB share the same schema file, we can push the `schemaP
 
 ## `extensions` as Namespaces
 
-> If your application requires a unique configuration option, use the `extensions` attribute to customize your own configuration option. 
+> If your application requires a unique configuration option, use the `extensions` attribute to customize your own configuration option.
 
 Additionally, we'd like to treat the `extensions` property as a sandbox for improving the overall GraphQL configuration. If there is a configuration option that you think will be useful for general purposes, please let us know! Meanwhile, take advantage of this 'extensions' for testing purposes.
 
@@ -139,7 +135,7 @@ Below are what we're experimenting with for additional fields. Before including 
 An env property is useful to facilitate the build and deployment if your application needs to introduce a GraphQL-specific environment variable and run build steps with it:
 
 ```
-// run a development build with a production GraphQL database 
+// run a development build with a production GraphQL database
 GRAPHQL_ENV=production && NODE_ENV=development && babel-node ./server.js
 ```
 
@@ -163,24 +159,28 @@ The proposed usage for the property is as follows:
 ```
 GraphQL configurations do not support this property because there isn't a clear example how to utilize this property yet.
 
-
-
 ## Configuring GraphQL endpoint
 
 For a simple GraphQL endpoints, the only required configuration is an URL:
 ```json
 {
-  "endpoint": "http://your-app.com/graphql"
+  "schemaPath": "./schema.graphql",
+  "extensions": {
+    "endpoint": "http://your-app.com/graphql"
+  }
 }
 ```
 
 Additional header values could be added if needed:
 ```json
 {
-  "endpoint": {
-    "url": "http://your-app.com/graphql",
-    "headers": {
-      "Authorization": "Bearer ${env:YOUR_APP_TOKEN}"
+  "schemaPath": "./schema.graphql",
+  "extensions": {
+    "endpoint": {
+      "url": "http://your-app.com/graphql",
+      "headers": {
+        "Authorization": "Bearer ${env:YOUR_APP_TOKEN}"
+      }
     }
   }
 }
@@ -193,11 +193,14 @@ Additional header values could be added if needed:
 To reference environment variables, use the ${env:SOME_VAR} syntax, for example:
 ```json
 {
-  "endpoint": {
-    "url": "http://your-app.com/graphql",
-    "headers": {
-      "User-Agent": "Build script",
-      "Authorization": "Bearer ${env:YOUR_APP_TOKEN}"
+  "schemaPath": "./schema.graphql",
+  "extensions": {
+    "endpoint": {
+      "url": "http://your-app.com/graphql",
+      "headers": {
+        "User-Agent": "Build script",
+        "Authorization": "Bearer ${env:YOUR_APP_TOKEN}"
+      }
     }
   }
 }
@@ -210,12 +213,15 @@ Note: To escape a `${` sequence just prefix it with a backslash like `\${some va
 Separate endpoint for subscription can be defined and `connectionParams` can be used to provide additional values:
 ```json
 {
-  "endpoint": {
-    "url": "http://your-app.com/graphql",
-    "subscription": {
-      "url": "ws://your-app.com:5000/",
-      "connectionParams": {
-        "Token": "${env:YOUR_APP_TOKEN}"
+  "schemaPath": "./schema.graphql",
+  "extensions": {
+    "endpoint": {
+      "url": "http://your-app.com/graphql",
+      "subscription": {
+        "url": "ws://your-app.com:5000/",
+        "connectionParams": {
+          "Token": "${env:YOUR_APP_TOKEN}"
+        }
       }
     }
   }
@@ -226,17 +232,22 @@ Separate endpoint for subscription can be defined and `connectionParams` can be 
 
 In situation where multiple endpoints are supported they can be specified like that:
 ```json
-"endpoint": {
-  "prod": {
-    "url": "https://your-app.com/graphql",
-    "subscription": {
-      "url": "wss://subscriptions.graph.cool/v1/instagram"
-    }
-  },
-  "dev": {
-    "url": "http://localhost:3000/graphql",
-    "subscription": {
-      "url": "ws://localhost:3001"
+{
+  "schemaPath": "./schema.graphql",
+  "extensions": {
+    "endpoint": {
+      "prod": {
+        "url": "https://your-app.com/graphql",
+        "subscription": {
+          "url": "wss://subscriptions.graph.cool/v1/instagram"
+        }
+      },
+      "dev": {
+        "url": "http://localhost:3000/graphql",
+        "subscription": {
+          "url": "ws://localhost:3001"
+        }
+      }
     }
   }
 }
@@ -256,7 +267,10 @@ export const schema = new GraphQLSchema({ query: queryType });
 Because this is a valid GraphQL schema that can be used within applications, we want to provide a way to configure the schema defined in this way:
 ```json
 {
-  "schemaModule": "./schema.js"
+  "schemaPath": "./schema.graphql",
+  "extensions": {
+    "schemaModule": "./schema.js"
+  }
 }
 ```
 
@@ -271,10 +285,16 @@ export const customRules: Array<(context: ValidationContext) => any> = { ... };
 
 // And in .graphqlrc, specify where the custom rules are:
 {
-  "customValidationRules": "./customRules.js"
+  "schemaPath": "./schema.graphql",
+  "extensions": {
+    "customValidationRules": "./customRules.js"
+  }
 }
 {
-  "customValidationRules": [ "./customRules.js", "./moreCustomRules.js" ]
+  "schemaPath": "./schema.graphql",
+  "extensions": {
+    "customValidationRules": [ "./customRules.js", "./moreCustomRules.js" ]
+  }
 }
 ```
 
