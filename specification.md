@@ -18,6 +18,9 @@ type GraphQLConfiguration =
   };
 
 type GraphQLProjectConfiguration = {
+  // the name of this project. If absent, the key of this
+  // project config object will be used as the project name.
+  name?: string, 
   schemaPath?: string, // a file with schema IDL
 
   // For multiple applications with overlapping files,
