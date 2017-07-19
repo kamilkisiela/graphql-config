@@ -90,7 +90,7 @@ Consider the below GraphQL configuration:
 ```
 
 Since projectA and projectB share the same schema file, we can push the `schemaPath` property to the top level, and treat it as a default value for a schema path. In this case, the application using this configuration should treat each project config as a more specific scope, and look at the top level scope with default properties as a fallback.
-```json
+```
 {
   "schemaPath": "./resources/schema.graphql",
   "projects": {
@@ -116,7 +116,7 @@ Additionally, we'd like to treat the `extensions` property as a sandbox for impr
 
 For example, some application may choose to build using Webpack and need to specify Webpack-related configurations in GraphQL configuration. Also, they may need to process additional file types other than `.graphql`. Below suggests one way to configure these options using 'extensions':
 
-```json
+```
 {
   "schemaPath": "...",
   "extensions": {
@@ -124,7 +124,7 @@ For example, some application may choose to build using Webpack and need to spec
       // Webpack-specific options here!
     },
     // additional file types that you want to process
-    "additionalFileTypes": [ '.js' ]
+    "additionalFileTypes": [ ".js" ]
   }
 }
 ```
