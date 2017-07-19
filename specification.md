@@ -84,7 +84,8 @@ Consider the below GraphQL configuration:
       "include": "./projectB/graphql/*.graphql"
     },
     "projectC": {
-      "schemaPath": "./schema-for-projectC.graphql"      }
+      "schemaPath": "./schema-for-projectC.graphql"
+    }
   }
 }
 ```
