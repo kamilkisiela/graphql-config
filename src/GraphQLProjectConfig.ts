@@ -151,13 +151,20 @@ export class GraphQLProjectConfig {
     return resolveEnvsInValues(endpoint, env)
   }
 
+  getEnpointClient(
+    endpointName?: string,
+    clientOptions: any = {},
+    env?: { [name: string]: string }
+  ): GraphQLClient {
+    const { url, headers } = this.resolveEndpointInfo(endpointName, env)
+    return new GraphQLClient(url, { ...clientOptions, headers })
+  }
+
   resolveSchemaFromEndpoint(
     endpointName?: string,
     env?: { [name: string]: string }
   ): Promise<GraphQLSchema> {
-    const endpoint = this.resolveEndpointInfo(endpointName, env)
-    const { url, headers } = endpoint
-    const client = new GraphQLClient(url, { headers })
+    const client = this.getEnpointClient(endpointName, {}, env)
     return client.request(introspectionQuery).then(introspection => {
       return buildClientSchema(introspection as IntrospectionQuery)
     })
