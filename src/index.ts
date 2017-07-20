@@ -8,6 +8,7 @@ export {
   validateConfig,
 } from './utils'
 
+export * from './errors'
 export * from './extensions/'
 
 export { GraphQLConfig } from './GraphQLConfig'

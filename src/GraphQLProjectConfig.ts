@@ -67,7 +67,7 @@ export class GraphQLProjectConfig {
     )
   }
 
-  resolveSchema(): Promise<GraphQLSchema> {
+  getSchema(): GraphQLSchema {
     if (this.schemaPath) {
       return readSchema(this.resolveConfigPath(this.schemaPath))
     }
@@ -76,14 +76,12 @@ export class GraphQLProjectConfig {
     )
   }
 
-  resolveIntrospection(): Promise<IntrospectionResult> {
-    return this.resolveSchema()
-      .then(schemaToIntrospection)
+  async resolveIntrospection(): Promise<IntrospectionResult> {
+    return schemaToIntrospection(this.getSchema())
   }
 
-  resolveSchemaSDL(): Promise<string> {
-    return this.resolveSchema()
-      .then(schema => printSchema(schema))
+  getSchemaSDL(): string {
+    return printSchema(this.getSchema())
   }
 
   // Getters

@@ -1,6 +1,10 @@
 import { resolve, join as joinPaths, dirname } from 'path'
 import { existsSync } from 'fs'
 
+import {
+  ConfigNotFoundError
+} from './errors'
+
 const GRAPHQL_CONFIG_NAME = '.graphqlconfig'
 const GRAPHQL_CONFIG_YAML_NAME = '.graphqlconfig.yaml'
 
@@ -30,7 +34,7 @@ export function findGraphQLConfigFile(filePath: string): string {
     currentDir = dirname(currentDir)
   }
 
-  throw new Error(
+  throw new ConfigNotFoundError(
     `'${GRAPHQL_CONFIG_NAME} file is not available in the provided config ` +
     `directory: ${filePath}\nPlease check the config directory path and try again.`
   )

@@ -94,7 +94,7 @@ In case if you have multiple endpoints use the following syntax:
   "extensions": {
     "endpoint": {
       "prod": {
-        "url": "https://your-app.com/graphql"
+        "url": "https://your-app.com/graphql",
         "subscription": {
           "url": "wss://subscriptions.graph.cool/v1/instagram"
         }
@@ -136,14 +136,9 @@ class and `getConfigForFile` method to get instance of the correct `GraphQLProje
 ```js
 import { getGraphQLProjectConfig } from 'graphql-config'
 
-const config = getGraphQLProjectConfig()
-config.resolveSchema()
-  .then(schema => {
-    // use schema for your tool/plugin
-  })
-  .catch((err) => {
-    console.error(err)
-  })
+const config = getGraphQLProjectConfig('./optionalProjectDir', 'optionalProjectName')
+const schema = config.getSchema()
+// use schema for your tool/plugin
 ```
 
 ### getGraphQLConfig
@@ -154,15 +149,9 @@ linters, etc.)
 ```js
 import { getGraphQLConfig } from 'graphql-config'
 
-const config = getGraphQLConfig()
-config.getConfigForFile(filename)
-  .resolveSchema()
-  .then(schema => {
-    // use schema for your tool/plugin
-  })
-  .catch((err) => {
-    console.error(err)
-  })
+const config = getGraphQLConfig('./optionalProjectDir')
+const schema = config.getConfigForFile(filename).getSchema()
+// use schema for your tool/plugin
 ```
 
 ## Help & Community [![Slack Status](https://slack.graph.cool/badge.svg)](https://slack.graph.cool)

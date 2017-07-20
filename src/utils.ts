@@ -1,4 +1,4 @@
-import { readFile, readFileSync, writeFileSync } from 'fs'
+import { readFileSync, writeFileSync } from 'fs'
 import { extname } from 'path'
 import * as minimatch from 'minimatch'
 import * as yaml from 'js-yaml'
@@ -76,23 +76,18 @@ export function introspectionToSchema(introspection: IntrospectionResult) {
   return buildClientSchema(introspection.data)
 }
 
-export function readSchema(path): Promise<GraphQLSchema> {
-  return new Promise((resolve, reject) => {
-    readFile(path, 'utf-8', (error, data) => {
-      error ? reject(error) : resolve(data)
-    })
-  }).then((data: string) => {
-    // FIXME: prefix error
-    switch (extname(path)) {
-      case '.graphql':
-        return valueToSchema(data)
-      case '.json':
-        const introspection = JSON.parse(data)
-        return valueToSchema(introspection)
-      default:
-        throw new Error('Unsupported schema file extention. Only ".graphql" and ".json" are supported')
-    }
-  })
+export function readSchema(path): GraphQLSchema {
+  const data = readFileSync(path, 'utf-8');
+  // FIXME: prefix error
+  switch (extname(path)) {
+    case '.graphql':
+      return valueToSchema(data)
+    case '.json':
+      const introspection = JSON.parse(data)
+      return valueToSchema(introspection)
+    default:
+      throw new Error('Unsupported schema file extention. Only ".graphql" and ".json" are supported')
+  }
 }
 
 function valueToSchema(schema) {
