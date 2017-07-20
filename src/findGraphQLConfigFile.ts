@@ -1,8 +1,8 @@
 import { resolve, join as joinPaths, dirname } from 'path'
 import { existsSync } from 'fs'
 
-const GRAPHQL_CONFIG_NAME = '.graphqlrc'
-const GRAPHQL_CONFIG_YAML_NAME = '.graphqlrc.yaml'
+const GRAPHQL_CONFIG_NAME = '.graphqlconfig'
+const GRAPHQL_CONFIG_YAML_NAME = '.graphqlconfig.yaml'
 
 function isRootDir(path: string): boolean {
   return dirname(path) === path

@@ -22,8 +22,8 @@ The easiest way to configure your development environment with your GraphQL sche
 
 ## Usage
 
-You can either configure your GraphQL endpoint via a configuration file `.graphqlrc`
-(or `.graphqlrc.yaml`) which should be put into the root of your project
+You can either configure your GraphQL endpoint via a configuration file `.graphqlconfig`
+(or `.graphqlconfig.yaml`) which should be put into the root of your project
 
 > Note: This requires Node 5 installed or higher
 
@@ -52,7 +52,7 @@ You can specify which files to include/exclude using the corresponding options:
 
 #### Specifying endpoint info
 
-You may specify your endpoints info in `.graphqlrc`. The simplest case:
+You may specify your endpoints info in `.graphqlconfig`. The simplest case:
 
 ```json
 {
@@ -86,7 +86,7 @@ a endpoint for subscription you can use expanded version:
 }
 ```
 
-> Note: do not save secure information in .graphqlrc file. Use [Environment variables](specification.md#referencing-environment-variables) for that like in the example above.
+> Note: do not save secure information in .graphqlconfig file. Use [Environment variables](specification.md#referencing-environment-variables) for that like in the example above.
 
 In case if you have multiple endpoints use the following syntax:
 

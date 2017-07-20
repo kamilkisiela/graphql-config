@@ -9,7 +9,7 @@ test.before(async (t) => {
 })
 
 
-const confPath = `${__dirname}/.graphqlrc`
+const confPath = `${__dirname}/.graphqlconfig`
 
 test('getEndpointsMap when endpoint is string url', async (t) => {
   const configData = {
