@@ -1,7 +1,5 @@
 # graphql-config
 
-**THIS README is for 2.\* version. 1.\* version README is on the master branch**
-
 The easiest way to configure your development environment with your GraphQL schema (supported by most tools, editors &amp; IDEs)
 
 ## Supported by...
@@ -121,12 +119,12 @@ __Refer to [specification use-cases](specification.md#use-cases) for details__
 
 This project aims to be provide a unifying configuration file format to configure your GraphQL schema in your development environment.
 
-Additional to the format specification, it provides the `graphql-config-parser` library, which is used by [all supported tools and editor plugins](#supported-by). The library reads your provided configuration and passes the actual GraphQL schema along to the tool which called it.
+Additional to the format specification, it provides the `graphql-config` library, which is used by [all supported tools and editor plugins](#supported-by). The library reads your provided configuration and passes the actual GraphQL schema along to the tool which called it.
 
 ![](resources/how-it-works.png)
 
 
-## `graphql-config-parser` API [![Build Status](https://travis-ci.org/graphcool/graphql-config.svg?branch=master)](https://travis-ci.org/graphcool/graphql-config) [![npm version](https://badge.fury.io/js/graphql-config-parser.svg)](https://badge.fury.io/js/graphql-config-parser)
+## `graphql-config` API [![Build Status](https://travis-ci.org/graphcool/graphql-config.svg?branch=master)](https://travis-ci.org/graphcool/graphql-config) [![npm version](https://badge.fury.io/js/graphql-config.svg)](https://badge.fury.io/js/graphql-config)
 
 ### getGraphQLProjectConfig
 
@@ -136,7 +134,7 @@ class and `getConfigForFile` method to get instance of the correct `GraphQLProje
 `getGraphQLProjectConfig` should be used by tools that do not work on per-file basis
 
 ```js
-import { getGraphQLProjectConfig } from 'graphql-config-parser'
+import { getGraphQLProjectConfig } from 'graphql-config'
 
 const config = getGraphQLProjectConfig()
 config.resolveSchema()
@@ -154,7 +152,7 @@ config.resolveSchema()
 linters, etc.)
 
 ```js
-import { getGraphQLConfig } from 'graphql-config-parser'
+import { getGraphQLConfig } from 'graphql-config'
 
 const config = getGraphQLConfig()
 config.getConfigForFile(filename)
