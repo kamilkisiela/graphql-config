@@ -1,25 +1,13 @@
 import { IntrospectionQuery } from 'graphql'
+import { GraphQLConfigEnpointsData } from './extensions/';
 
 export type IntrospectionResult = {
   data?: IntrospectionQuery
   errors?: any
 }
 
-export type GraphQLConfigEnpointConfig = {
-  url: string
-  headers?: { [name: string]: string }
-  subscription?: {
-    url: string;
-    connectionParams?: { [name: string]: string }
-  }
-}
-
-export type GraphQLConfigEnpointsMap = {
-  [env: string]: GraphQLConfigEnpointConfig
-}
-
 export type GraphQLConfigExtensions = {
-  endpoint?: string | GraphQLConfigEnpointConfig | GraphQLConfigEnpointsMap,
+  endpoint?: GraphQLConfigEnpointsData,
   [name: string]: any
 }
 

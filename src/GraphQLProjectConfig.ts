@@ -15,8 +15,6 @@ import {
   GraphQLResolvedConfigData,
   GraphQLConfigData,
   GraphQLConfigExtensions,
-  GraphQLConfigEnpointConfig,
-  GraphQLConfigEnpointsMap,
 } from './types'
 
 import {
@@ -29,9 +27,8 @@ import {
 } from './utils'
 
 import {
-  getUsedEnvs,
-  resolveEnvsInValues,
-} from './resolveRefString'
+  GraphQLEndpointExtension
+} from './extensions'
 
 /*
  * this class can be used for simple usecases where there is no need in per-file API
@@ -109,65 +106,9 @@ export class GraphQLProjectConfig {
   /*
    extension relatad helper functions
   */
-  getEndpointsMap(): GraphQLConfigEnpointsMap {
-    const endpoint = this.extensions.endpoint
-    let result
-    if (endpoint == null) {
-      result = {}
-    } else if (typeof endpoint === 'string') {
-      result = {
-        default: {
-          url: endpoint,
-        },
-      }
-    } else if (typeof endpoint !== 'object' || Array.isArray(endpoint)) {
-      throw new Error(`${this.configPath}: "endpoint" should be string or object`)
-    } else if (!endpoint['url']) {
-      result = endpoint as GraphQLConfigEnpointsMap
-    } else if (typeof endpoint['url'] === 'string') {
-      result = {
-        default: endpoint as GraphQLConfigEnpointConfig,
-      }
-    } else {
-      throw new Error(`${this.configPath}: "url" should be a string`)
-    }
-
-    return result
-  }
-
-  getEndpointEnvVars(endpointName: string): { [name: string]: string | null } {
-    const endpoint = this.getEndpointsMap()[endpointName]
-    return getUsedEnvs(endpoint)
-  }
-
-  resolveEndpointInfo(
-    endpointName: string = process.env.GRAPHQL_CONFIG_ENDPOINT_NAME || 'default',
-    env: { [name: string]: string } = process.env
-  ): GraphQLConfigEnpointConfig {
-    const endpoint = this.getEndpointsMap()[endpointName]
-    if (!endpoint || !endpoint.url) {
-      throw new Error(`Endpoint "${endpointName}" is not defined in ${this.configPath}`)
-    }
-    return resolveEnvsInValues(endpoint, env)
-  }
-
-  getEnpointClient(
-    endpointName?: string,
-    clientOptions: any = {},
-    env?: { [name: string]: string }
-  ): GraphQLClient {
-    const { url, headers } = this.resolveEndpointInfo(endpointName, env)
-    return new GraphQLClient(url, { ...clientOptions, headers })
-  }
-
-  resolveSchemaFromEndpoint(
-    endpointName?: string,
-    env?: { [name: string]: string }
-  ): Promise<GraphQLSchema> {
-    const client = this.getEnpointClient(endpointName, {}, env)
-    return client.request(introspectionQuery).then(introspection => {
-      return buildClientSchema(introspection as IntrospectionQuery)
-    })
+  get endpointExtension(): GraphQLEndpointExtension | null {
+    return this.extensions.endpoint ?
+      new GraphQLEndpointExtension(this.extensions.endpoint, this.configPath) : null
   }
 }
 
