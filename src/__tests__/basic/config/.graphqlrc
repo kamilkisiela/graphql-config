@@ -1,0 +1,9 @@
+{
+  "projects": {
+    "testWithSchema": {
+      "schemaPath": "__schema__/StarWarsSchema.graphql"
+    },
+    "testWithoutSchema": {
+    }
+  }
+}
