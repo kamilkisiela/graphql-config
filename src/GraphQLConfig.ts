@@ -10,7 +10,6 @@ import { GraphQLProjectConfig } from './GraphQLProjectConfig'
 export class GraphQLConfig {
   public config: GraphQLConfigData
   public configPath: string
-  public configDir: string
 
   constructor(
     config: GraphQLConfigData,
@@ -19,7 +18,10 @@ export class GraphQLConfig {
     validateConfig(config)
     this.config = config
     this.configPath = configPath
-    this.configDir = dirname(configPath)
+  }
+
+  get configDir() {
+    return dirname(this.configPath)
   }
 
   getProjectConfig(projectName?: string): GraphQLProjectConfig {

@@ -38,8 +38,6 @@ export class GraphQLProjectConfig {
   public configPath: string
   public projectName?: string
 
-  public configDir: string;
-
   constructor(
     config: GraphQLConfigData,
     configPath: string,
@@ -48,7 +46,6 @@ export class GraphQLProjectConfig {
     validateConfig(config)
     this.config = loadProjectConfig(config, projectName)
     this.configPath = configPath
-    this.configDir = dirname(configPath)
     this.projectName = projectName
   }
 
@@ -85,6 +82,10 @@ export class GraphQLProjectConfig {
   }
 
   // Getters
+  get configDir() {
+    return dirname(this.configPath)
+  }
+
   get schemaPath(): string | null {
     return this.config.schemaPath ? this.resolveConfigPath(this.config.schemaPath) : null
   }
