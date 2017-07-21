@@ -1,5 +1,8 @@
 # graphql-config
 
+> The README reflects new [graphql-config protocol](specification.md).
+> Old graphql-config-parser documentation [can be found here](https://github.com/graphcool/graphql-config/tree/graphql-config-parser)
+
 The easiest way to configure your development environment with your GraphQL schema (supported by most tools, editors &amp; IDEs)
 
 ## Supported by...
@@ -47,6 +50,10 @@ You can specify which files to include/exclude using the corresponding options:
   "exclude": ["temp/**"]
 }
 ```
+
+> Note: exclude and include fields are globs that should match filename.
+> So, just `temp` or `temp/` won't match all files inside the directory.
+> That's why the example uses `temp/**`
 
 #### Specifying endpoint info
 
@@ -121,10 +128,10 @@ This project aims to be provide a unifying configuration file format to configur
 
 Additional to the format specification, it provides the `graphql-config` library, which is used by [all supported tools and editor plugins](#supported-by). The library reads your provided configuration and passes the actual GraphQL schema along to the tool which called it.
 
-![](resources/how-it-works.png)
-
 
 ## `graphql-config` API [![Build Status](https://travis-ci.org/graphcool/graphql-config.svg?branch=master)](https://travis-ci.org/graphcool/graphql-config) [![npm version](https://badge.fury.io/js/graphql-config.svg)](https://badge.fury.io/js/graphql-config)
+
+> **WIP: More examples are coming soon**
 
 ### getGraphQLProjectConfig
 
