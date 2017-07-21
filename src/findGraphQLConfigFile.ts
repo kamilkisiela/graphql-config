@@ -5,8 +5,8 @@ import {
   ConfigNotFoundError
 } from './errors'
 
-const GRAPHQL_CONFIG_NAME = '.graphqlconfig'
-const GRAPHQL_CONFIG_YAML_NAME = '.graphqlconfig.yaml'
+export const GRAPHQL_CONFIG_NAME = '.graphqlconfig'
+export const GRAPHQL_CONFIG_YAML_NAME = '.graphqlconfig.yaml'
 
 function isRootDir(path: string): boolean {
   return dirname(path) === path

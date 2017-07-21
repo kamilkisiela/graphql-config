@@ -2,7 +2,11 @@ export {
   getGraphQLConfig,
   getGraphQLProjectConfig
 } from './getGraphQLConfig'
-export { findGraphQLConfigFile } from './findGraphQLConfigFile'
+export {
+  GRAPHQL_CONFIG_NAME,
+  GRAPHQL_CONFIG_YAML_NAME,
+  findGraphQLConfigFile
+} from './findGraphQLConfigFile'
 export {
   writeSchema,
   validateConfig,
