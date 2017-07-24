@@ -39,19 +39,19 @@ results or corresponding SDL document
 }
 ```
 
-### Specifying include/exclude files
+### Specifying includes/excludes files
 
-You can specify which files to include/exclude using the corresponding options:
+You can specify which files to includes/excludes using the corresponding options:
 
 ```json
 {
   "schemaPath": "schema.graphql",
-  "include": ["*.graphql"],
-  "exclude": ["temp/**"]
+  "includes": ["*.graphql"],
+  "excludes": ["temp/**"]
 }
 ```
 
-> Note: exclude and include fields are globs that should match filename.
+> Note: `excludes` and `includes` fields are globs that should match filename.
 > So, just `temp` or `temp/` won't match all files inside the directory.
 > That's why the example uses `temp/**`
 

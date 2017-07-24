@@ -59,8 +59,8 @@ export class GraphQLProjectConfig {
     }
     filePath = relative(this.configDir, resolve(join(this.configDir, filePath)))
     return (
-      (!this.config.include || matchesGlobs(filePath, this.include)) &&
-      !matchesGlobs(filePath, this.exclude)
+      (!this.config.includes || matchesGlobs(filePath, this.includes)) &&
+      !matchesGlobs(filePath, this.excludes)
     )
   }
 
@@ -90,12 +90,12 @@ export class GraphQLProjectConfig {
     return this.config.schemaPath ? this.resolveConfigPath(this.config.schemaPath) : null
   }
 
-  get include(): string[] {
-    return (this.config.include || []).map(normalizeGlob)
+  get includes(): string[] {
+    return (this.config.includes || []).map(normalizeGlob)
   }
 
-  get exclude(): string[] {
-    return (this.config.exclude || []).map(normalizeGlob)
+  get excludes(): string[] {
+    return (this.config.excludes || []).map(normalizeGlob)
   }
 
   get extensions(): GraphQLConfigExtensions {

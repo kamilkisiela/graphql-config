@@ -20,13 +20,13 @@ type GraphQLConfiguration =
 type GraphQLProjectConfiguration = {
   // the name of this project. If absent, the key of this
   // project config object will be used as the project name.
-  name?: string, 
+  name?: string,
   schemaPath?: string, // a file with schema IDL
 
   // For multiple applications with overlapping files,
   // these configuration options may be helpful
-  include?: Array<GlobPath>,
-  exclude?: Array<GlobPath>,
+  includes?: Array<GlobPath>,
+  excludes?: Array<GlobPath>,
 
   // If you'd like to specify any other configurations,
   // we provide a reserved namespace for it
@@ -77,11 +77,11 @@ Consider the below GraphQL configuration:
   "projects": {
     "projectA": {
       "schemaPath": "./resources/schema.graphql",
-      "include": "./projectA/graphql/*.graphql"
+      "includes": ["./projectA/graphql/*.graphql"]
     },
     "projectB": {
       "schemaPath": "../resources/schema.graphql",
-      "include": "./projectB/graphql/*.graphql"
+      "includes": ["./projectB/graphql/*.graphql"]
     },
     "projectC": {
       "schemaPath": "./schema-for-projectC.graphql"
@@ -96,10 +96,10 @@ Since projectA and projectB share the same schema file, we can push the `schemaP
   "schemaPath": "./resources/schema.graphql",
   "projects": {
     "projectA": {
-      "include": "./projectA/graphql/*.graphql"
+      "includes": ["./projectA/graphql/*.graphql"]
     },
     "projectB": {
-      "include": "./projectB/graphql/*.graphql"
+      "includes": ["./projectB/graphql/*.graphql"]
     },
     "projectC": {
       // "schemaPath" in this scope should take precedence
