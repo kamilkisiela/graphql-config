@@ -103,7 +103,7 @@ export class GraphQLProjectConfig {
   }
 
   /*
-   extension relatad helper functions
+   extension related helper functions
   */
   get endpointExtension(): GraphQLEndpointExtension | null {
     return this.extensions.endpoint ?
