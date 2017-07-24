@@ -3,14 +3,14 @@
 The library exports the following entities:
 
 **Functions:**
-- [`findGraphQLConfigFile`](#findGraphQLConfigFile)
-- [`getGraphQLConfig`](#getGraphQLConfig)
-- [`getGraphQLProjectConfig`](#getGraphQLProjectConfig)
+- [`findGraphQLConfigFile`](#findgraphqlconfigfile)
+- [`getGraphQLConfig`](#getgraphqlconfig)
+- [`getGraphQLProjectConfig`](#getgraphqlprojectconfig)
 
 **Classes:**
-- [`GraphQLConfig`](#GraphQLConfig)
-- [`GraphQLProjectConfig`](#GraphQLProjectConfig)
-- [`GraphQLEndpointExtension`](#GraphQLEndpointExtension)
+- [`GraphQLConfig`](#graphqlconfig)
+- [`GraphQLProjectConfig`](#graphqlprojectconfig)
+- [`GraphQLEndpointExtension`](#graphqlendpointsextension)
 
 Advanced .graphqlconfig may contain a few `projects` with `includes/excludes` configured,
 so if your tool works on per-file basis use `getGraphQLConfig` and `GraphQLConfig`.
@@ -35,7 +35,7 @@ or `.graphqlconfig.yaml` file. Throws `ConfigNotFoundError` error when config is
   - `rootDir` - root dir of a project
 
 Parses the first found config file starting from the `rootDir`.
-Returns an instance of [`GraphQLConfig`](#GraphQLConfig)
+Returns an instance of [`GraphQLConfig`](#graphqlconfig)
 
 
 ## `getGraphQLProjectConfig`
@@ -53,7 +53,7 @@ export function getGraphQLProjectConfig(
   `GRAPHQL_CONFIG_PROJECT` environment variables
 
 Parses the first found config file starting from the `rootDir`.
-Returns an instance of [`GraphQLProjectConfig`](#GraphQLProjectConfig)
+Returns an instance of [`GraphQLProjectConfig`](#graphqlprojectconfig)
 
 
 ## `GraphQLConfig`
