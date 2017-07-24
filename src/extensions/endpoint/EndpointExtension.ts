@@ -21,43 +21,37 @@ export type GraphQLConfigEnpointConfig = {
   subscription?: GraphQLConfigEnpointsSubscription
 }
 
+export type GraphQLConfigEnpointsMapData = {
+  [env: string]: GraphQLConfigEnpointConfig | string
+}
+
 export type GraphQLConfigEnpointsMap = {
   [env: string]: GraphQLConfigEnpointConfig
 }
 
-export type GraphQLConfigEnpointsData = string | GraphQLConfigEnpointConfig | GraphQLConfigEnpointsMap
+export type GraphQLConfigEnpointsData = GraphQLConfigEnpointsMap
 
-export class GraphQLEndpointExtension {
-  public raw: GraphQLConfigEnpointsData
+export class GraphQLEndpointsExtension {
+  public raw: GraphQLConfigEnpointsMapData
   private configPath
 
-  constructor(endpointConfig: GraphQLConfigEnpointsData, configPath: string) {
+  constructor(endpointConfig: GraphQLConfigEnpointsMapData, configPath: string) {
     this.raw = endpointConfig
     this.configPath = configPath
   }
 
   getRawEndpointsMap(): GraphQLConfigEnpointsMap {
-    const endpoint = this.raw
-    let result
-    if (typeof endpoint === 'string') {
-      result = {
-        default: {
-          url: endpoint,
-        },
-      }
-    } else if (typeof endpoint !== 'object' || Array.isArray(endpoint)) {
-      throw new Error(`${this.configPath}: "endpoint" should be string or object`)
-    } else if (!endpoint['url']) {
-      result = endpoint as GraphQLConfigEnpointsMap
-    } else if (typeof endpoint['url'] === 'string') {
-      result = {
-        default: endpoint as GraphQLConfigEnpointConfig,
-      }
+    const endpoints = this.raw
+    if (typeof endpoints !== 'object' || Array.isArray(endpoints)) {
+      throw new Error(`${this.configPath}: "endpoints" should be an object`)
     } else {
-      throw new Error(`${this.configPath}: "url" should be a string`)
+      return valuesMap(endpoints, value => {
+        if (typeof value === 'string') {
+          return { url: value }
+        }
+        return value;
+      })
     }
-
-    return result
   }
 
   getEnvVarsForEndpoint(
@@ -113,4 +107,16 @@ export class GraphQLEndpoint {
     const schema = await this.resolveSchema()
     return printSchema(schema)
   }
+}
+
+
+function valuesMap<T extends any, K>(
+  obj: {[key: string]: T},
+  fn: (val: T) => K
+):{[key: string]: K} {
+  const res: {[key: string]: K} = {}
+  for (let key in obj) {
+    res[key] = fn(obj[key]);
+  }
+  return res;
 }

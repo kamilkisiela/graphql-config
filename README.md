@@ -63,7 +63,9 @@ You may specify your endpoints info in `.graphqlconfig`. The simplest case:
 {
   "schemaPath": "schema.graphql",
   "extensions": {
-    "endpoint": "https://example.com/graphql"
+    "endpoints": {
+      "dev": "https://example.com/graphql"
+    }
   }
 }
 ```
@@ -75,15 +77,17 @@ a endpoint for subscription you can use expanded version:
 {
   "schemaPath": "schema.graphql",
   "extensions": {
-    "endpoint": {
-      "url": "https://example.com/graphql",
-      "headers": {
-        "Authorization": "Bearer ${env:AUTH_TOKEN_ENV}"
-      },
-      "subscription": {
-        "url": "ws://example.com/graphql",
-        "connectionParams": {
-          "Token": "${env:YOUR_APP_TOKEN}"
+    "endpoints": {
+      "dev": {
+        "url": "https://example.com/graphql",
+        "headers": {
+          "Authorization": "Bearer ${env:AUTH_TOKEN_ENV}"
+        },
+        "subscription": {
+          "url": "ws://example.com/graphql",
+          "connectionParams": {
+            "Token": "${env:YOUR_APP_TOKEN}"
+          }
         }
       }
     }
@@ -99,7 +103,7 @@ In case if you have multiple endpoints use the following syntax:
 {
   "schemaPath": "schema.graphql",
   "extensions": {
-    "endpoint": {
+    "endpoints": {
       "prod": {
         "url": "https://your-app.com/graphql",
         "subscription": {

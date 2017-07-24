@@ -27,7 +27,7 @@ import {
 } from './utils'
 
 import {
-  GraphQLEndpointExtension
+  GraphQLEndpointsExtension
 } from './extensions'
 
 /*
@@ -105,9 +105,9 @@ export class GraphQLProjectConfig {
   /*
    extension related helper functions
   */
-  get endpointExtension(): GraphQLEndpointExtension | null {
-    return this.extensions.endpoint ?
-      new GraphQLEndpointExtension(this.extensions.endpoint, this.configPath) : null
+  get endpointsExtension(): GraphQLEndpointsExtension | null {
+    return this.extensions.endpoints ?
+      new GraphQLEndpointsExtension(this.extensions.endpoints, this.configPath) : null
   }
 }
 

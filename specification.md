@@ -170,7 +170,9 @@ For a simple GraphQL endpoints, the only required configuration is an URL:
 {
   "schemaPath": "./schema.graphql",
   "extensions": {
-    "endpoint": "http://your-app.com/graphql"
+    "endpoints": {
+      "dev": "http://your-app.com/graphql"
+    }
   }
 }
 ```
@@ -180,10 +182,12 @@ Additional header values could be added if needed:
 {
   "schemaPath": "./schema.graphql",
   "extensions": {
-    "endpoint": {
-      "url": "http://your-app.com/graphql",
-      "headers": {
-        "Authorization": "Bearer ${env:YOUR_APP_TOKEN}"
+    "endpoints": {
+      "dev": {
+        "url": "http://your-app.com/graphql",
+        "headers": {
+          "Authorization": "Bearer ${env:YOUR_APP_TOKEN}"
+        }
       }
     }
   }
@@ -199,11 +203,13 @@ To reference environment variables, use the ${env:SOME_VAR} syntax, for example:
 {
   "schemaPath": "./schema.graphql",
   "extensions": {
-    "endpoint": {
-      "url": "http://your-app.com/graphql",
-      "headers": {
-        "User-Agent": "Build script",
-        "Authorization": "Bearer ${env:YOUR_APP_TOKEN}"
+    "endpoints": {
+      "dev": {
+        "url": "http://your-app.com/graphql",
+        "headers": {
+          "User-Agent": "Build script",
+          "Authorization": "Bearer ${env:YOUR_APP_TOKEN}"
+        }
       }
     }
   }
@@ -219,12 +225,14 @@ Separate endpoint for subscription can be defined and `connectionParams` can be 
 {
   "schemaPath": "./schema.graphql",
   "extensions": {
-    "endpoint": {
-      "url": "http://your-app.com/graphql",
-      "subscription": {
-        "url": "ws://your-app.com:5000/",
-        "connectionParams": {
-          "Token": "${env:YOUR_APP_TOKEN}"
+    "endpoints": {
+      "dev": {
+        "url": "http://your-app.com/graphql",
+        "subscription": {
+          "url": "ws://your-app.com:5000/",
+          "connectionParams": {
+            "Token": "${env:YOUR_APP_TOKEN}"
+          }
         }
       }
     }
@@ -239,7 +247,7 @@ In situation where multiple endpoints are supported they can be specified like t
 {
   "schemaPath": "./schema.graphql",
   "extensions": {
-    "endpoint": {
+    "endpoints": {
       "prod": {
         "url": "https://your-app.com/graphql",
         "subscription": {

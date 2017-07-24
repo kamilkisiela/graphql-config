@@ -1,8 +1,8 @@
 {
   "schemaPath": "../schema.json",
   "extensions": {
-    "endpoint": {
-      "url": "${env:TEST_ENDPOINT_URL}" 
+    "endpoints": {
+      "default": "${env:TEST_ENDPOINT_URL}"
     }
   }
 }

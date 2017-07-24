@@ -1,6 +1,6 @@
 import test from 'ava'
 import { graphql, introspectionQuery } from 'graphql'
-import { GraphQLProjectConfig, GraphQLEndpointExtension } from '../../'
+import { GraphQLProjectConfig, GraphQLEndpointsExtension } from '../../'
 import { serveSchema } from '../utils'
 const introspection = require('../schema.json')
 
@@ -15,44 +15,43 @@ test('getEndpointsMap when endpoint is string url', async (t) => {
   const configData = {
     schemaPath: '../schema.json',
     extensions: {
-      endpoint: 'http://default',
+      endpoints: {
+        dev: 'http://default',
+      },
     },
   }
 
   const config = new GraphQLProjectConfig(configData, confPath)
-  const endpoint = config.endpointExtension
-  t.deepEqual(endpoint && endpoint.getRawEndpointsMap(), { default: { url: 'http://default' }})
+  const endpoints = config.endpointsExtension
+  t.deepEqual(endpoints && endpoints.getRawEndpointsMap(), { dev: { url: 'http://default' }})
 })
 
 test('getEndpointsMap when endpoint is single endpoint config', async (t) => {
   const configData = {
     schemaPath: '../schema.json',
     extensions: {
-      endpoint: {
-        url: 'http://default',
-        subscription: {
-          url: 'ws://test',
+      endpoints: {
+        dev: {
+          url: 'http://default',
+          subscription: {
+            url: 'ws://test',
+          },
         },
       },
     },
   }
 
   const config = new GraphQLProjectConfig(configData, confPath, undefined)
-  const endpoint = config.endpointExtension
-  t.deepEqual(endpoint && endpoint.getRawEndpointsMap(), { default: configData.extensions.endpoint })
+  const endpoint = config.endpointsExtension
+  t.deepEqual(endpoint && endpoint.getRawEndpointsMap(), { dev: configData.extensions.endpoints.dev })
 })
 
 test('getEndpointsMap when endpoint is endpoints map', async (t) => {
   const configData = {
     schemaPath: '../schema.json',
     extensions: {
-      endpoint: {
-        dev: {
-          url: 'http://dev',
-          subscription: {
-            url: 'ws://dev',
-          },
-        },
+      endpoints: {
+        dev: 'http://dev',
         prod: {
           url: 'http://prod',
           subscription: {
@@ -65,15 +64,27 @@ test('getEndpointsMap when endpoint is endpoints map', async (t) => {
 
   const config = new GraphQLProjectConfig(configData, confPath, undefined)
 
-  const endpoint = config.endpointExtension
-  t.deepEqual(endpoint && endpoint.getRawEndpointsMap(), configData.extensions.endpoint)
+  const endpoint = config.endpointsExtension
+  t.deepEqual(endpoint && endpoint.getRawEndpointsMap(),
+    {
+      dev: {
+        url: 'http://dev',
+      },
+      prod: {
+        url: 'http://prod',
+        subscription: {
+          url: 'ws://prod',
+        },
+      }
+    }
+  )
 })
 
 test('resolveSchemaFromEndpoint should throw if non-existing endpoint is specified', async (t) => {
   const configData = {
     schemaPath: '../schema.json',
     extensions: {
-      endpoint: {
+      endpoints: {
         dev: {
           url: 'http://dev',
           subscription: {
@@ -85,7 +96,7 @@ test('resolveSchemaFromEndpoint should throw if non-existing endpoint is specifi
   }
   const config = new GraphQLProjectConfig(configData, confPath, undefined)
   let error
-  const endpoint = config.endpointExtension
+  const endpoint = config.endpointsExtension
   error = t.throws(() => endpoint && endpoint.getEndpoint('prod').resolveSchema())
   t.regex(error.message, /^Endpoint.*is not defined/)
   error = t.throws(() => endpoint && endpoint.getEndpoint('prod').resolveSchema())
@@ -96,15 +107,17 @@ test('resolveSchemaFromEndpoint HTTP', async (t) => {
   const configData = {
     schemaPath: '../schema.json',
     extensions: {
-      endpoint: 'http://127.0.0.1:33333',
+      endpoints: {
+        dev: 'http://127.0.0.1:33333'
+      }
     },
   }
 
   const config = new GraphQLProjectConfig(configData, confPath, undefined)
-  if (!config.endpointExtension){
+  if (!config.endpointsExtension){
     throw 'endpointExtension can\'t be empty'
   }
-  const schema = await config.endpointExtension.getEndpoint().resolveSchema()
+  const schema = await config.endpointsExtension.getEndpoint('dev').resolveSchema()
   const resolvedIntrospection = await graphql(schema, introspectionQuery)
   t.deepEqual(resolvedIntrospection, introspection)
 })
