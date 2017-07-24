@@ -1,12 +1,14 @@
 import { GraphQLClient } from 'graphql-request'
 import {
   GraphQLSchema,
+  printSchema,
   buildClientSchema,
   introspectionQuery,
   IntrospectionQuery,
 } from 'graphql'
 
 import { resolveEnvsInValues, getUsedEnvs } from './resolveRefString';
+import { IntrospectionResult } from '../../types'
 
 export type GraphQLConfigEnpointsSubscription = {
   url: string;
@@ -96,10 +98,19 @@ export class GraphQLEndpoint {
     return new GraphQLClient(this.url, { ...clientOptions, headers: this.headers })
   }
 
-  resolveSchema(): Promise<GraphQLSchema> {
+  async resolveIntrospection(): Promise<IntrospectionResult> {
     const client = this.getClient()
-    return client.request(introspectionQuery).then(introspection => {
-      return buildClientSchema(introspection as IntrospectionQuery)
-    })
+    const data = await client.request(introspectionQuery)
+    return { data } as IntrospectionResult
+  }
+
+  async resolveSchema(): Promise<GraphQLSchema> {
+    const introspection = await this.resolveIntrospection()
+    return buildClientSchema(introspection.data)
+  }
+
+  async resolveSchemaSDL(): Promise<string> {
+    const schema = await this.resolveSchema()
+    return printSchema(schema)
   }
 }
