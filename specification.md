@@ -198,7 +198,7 @@ Additional header values could be added if needed:
 
 ### Referencing Environment Variables
 
-To reference environment variables, use the ${env:SOME_VAR} syntax, for example:
+To reference environment variables, use the `${env:SOME_VAR}` syntax, for example:
 ```json
 {
   "schemaPath": "./schema.graphql",

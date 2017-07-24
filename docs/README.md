@@ -1,4 +1,4 @@
-# `graph-config` library documentation
+# `graphql-config` library documentation
 
 The library exports the following entities:
 
