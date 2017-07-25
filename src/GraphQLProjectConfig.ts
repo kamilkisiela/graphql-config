@@ -122,12 +122,18 @@ function loadProjectConfig(
   }
 
   if (!projectName) {
-    throw new Error('Project name must be specified for multiproject config')
+    throw new Error(
+      `Project name must be specified for multiproject config. ` +
+      `Valid project names: ${Object.keys(projects).join(', ')}`
+    )
   }
 
   const projectConfig = projects[projectName]
   if (!projectConfig) {
-    throw new Error(`No config for ${projectName}`)
+    throw new Error(
+      `"${projectName}" is not a valid project name. ` + 
+      `Valid project names: ${Object.keys(projects).join(', ')}`
+    )
   }
 
   return mergeConfigs(configBase, projectConfig)

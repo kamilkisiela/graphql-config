@@ -98,9 +98,7 @@ test('resolveSchemaFromEndpoint should throw if non-existing endpoint is specifi
   let error
   const endpoint = config.endpointsExtension
   error = t.throws(() => endpoint && endpoint.getEndpoint('prod').resolveSchema())
-  t.regex(error.message, /^Endpoint.*is not defined/)
-  error = t.throws(() => endpoint && endpoint.getEndpoint('prod').resolveSchema())
-  t.regex(error.message, /^Endpoint.*is not defined/)
+  t.regex(error.message, /"prod" is not valid endpoint name. Valid endpoint names: dev/)
 })
 
 test('resolveSchemaFromEndpoint HTTP', async (t) => {

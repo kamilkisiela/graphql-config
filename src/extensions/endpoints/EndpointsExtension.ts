@@ -59,7 +59,10 @@ export class GraphQLEndpointsExtension {
   ): { [name: string]: string | null } {
     const endpoint = this.getRawEndpointsMap()[endpointName]
     if (!endpoint || !endpoint.url) {
-      throw new Error(`Endpoint "${endpointName}" is not defined in "${this.configPath}"`)
+      throw new Error(
+        `${this.configPath}: "${endpointName}" is not valid endpoint name. Valid endpoint names: ` +
+        Object.keys(this.getRawEndpointsMap()).join(', ')
+      )
     }
     return getUsedEnvs(endpoint)
   }
@@ -69,10 +72,24 @@ export class GraphQLEndpointsExtension {
     env: { [name: string]: string } = process.env
   ): GraphQLEndpoint {
     const endpoint = this.getRawEndpointsMap()[endpointName]
-    if (!endpoint || !endpoint.url) {
-      throw new Error(`Endpoint "${endpointName}" is not defined in ${this.configPath}`)
+    if (!endpoint) {
+      throw new Error(
+        `${this.configPath}: "${endpointName}" is not valid endpoint name. Valid endpoint names: ` +
+        Object.keys(this.getRawEndpointsMap()).join(', ')
+      )
     }
-    return new GraphQLEndpoint(resolveEnvsInValues(endpoint, env))
+    if (!endpoint.url) {
+      throw new Error(
+        `${this.configPath}: "url" is required but is not specified for "${endpointName}" endpoint`
+      )
+    }
+    try {
+      return new GraphQLEndpoint(resolveEnvsInValues(endpoint, env))
+    } catch (e) {
+      // prefix error
+      e.message = `${this.configPath}: ${e.message}`;
+      throw e;
+    }
   }
 
 }
