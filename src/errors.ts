@@ -9,8 +9,9 @@ function ExtendableBuiltin<T extends Function>(cls: T): T {
 }
 
 export class ConfigNotFoundError extends ExtendableBuiltin(Error) {
-  constructor(...args) {
-    super(...args)
+  constructor(message: string) {
+    super(message)
     this.name = this.constructor.name;
+    this.message = message;
   }
 }

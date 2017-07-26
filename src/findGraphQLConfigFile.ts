@@ -35,7 +35,7 @@ export function findGraphQLConfigFile(filePath: string): string {
   }
 
   throw new ConfigNotFoundError(
-    `'${GRAPHQL_CONFIG_NAME} file is not available in the provided config ` +
+    `"${GRAPHQL_CONFIG_NAME}" file is not available in the provided config ` +
     `directory: ${filePath}\nPlease check the config directory.`
   )
 }

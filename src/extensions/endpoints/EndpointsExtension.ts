@@ -51,7 +51,7 @@ export class GraphQLEndpointsExtension {
   }
 
   getEnvVarsForEndpoint(
-    endpointName: string = process.env.GRAPHQL_CONFIG_ENDPOINT_NAME || 'default',
+    endpointName: string = process.env.GRAPHQL_CONFIG_ENDPOINT_NAME,
   ): { [name: string]: string | null } {
     const endpoint = this.getRawEndpointsMap()[endpointName]
     if (!endpoint || !endpoint.url) {
@@ -64,7 +64,7 @@ export class GraphQLEndpointsExtension {
   }
 
   getEndpoint(
-    endpointName: string = process.env.GRAPHQL_CONFIG_ENDPOINT_NAME || 'default',
+    endpointName: string = process.env.GRAPHQL_CONFIG_ENDPOINT_NAME,
     env: { [name: string]: string } = process.env
   ): GraphQLEndpoint {
     const endpoint = this.getRawEndpointsMap()[endpointName]
