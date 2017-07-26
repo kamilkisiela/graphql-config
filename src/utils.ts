@@ -124,7 +124,7 @@ export async function writeSchema(
       data = ''
       if (schemaExtensions) {
         for (const name in schemaExtensions) {
-          data += `# ${name}: ${schemaExtensions[name]}`
+          data += `# ${name}: ${schemaExtensions[name]}\n`
         }
         data += '\n'
       }
