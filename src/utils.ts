@@ -31,6 +31,17 @@ export function readConfig(configPath: string): GraphQLConfigData {
   return config
 }
 
+export function writeConfig(configPath: string, config: GraphQLConfigData) {
+  let configContents
+  if (configPath.endsWith('.yaml')) {
+    configContents = yaml.safeDump(config)
+  } else {
+    configContents = JSON.stringify(config)
+  }
+
+  writeFileSync(configPath, configContents, 'utf-8')
+}
+
 export function normalizeGlob(glob: string): string {
   if (glob.startsWith('./')) {
     return glob.substr(2)

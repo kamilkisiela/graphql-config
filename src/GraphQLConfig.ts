@@ -1,5 +1,5 @@
 import { resolve, dirname } from 'path'
-import { validateConfig } from './utils'
+import { validateConfig, writeConfig } from './utils'
 
 import {
   GraphQLConfigData,
@@ -52,5 +52,18 @@ export class GraphQLConfig {
       result[projectName] = this.getProjectConfig(projectName)
     }
     return result
+  }
+
+  saveConfig(newConfig: GraphQLConfigData, projectName?: string) {
+    let config
+    if (projectName) {
+      config = this.config;
+      config.projects = config.projects || {};
+      config.projects[projectName] = config.projects[projectName] || {}
+      config.projects[projectName] = newConfig
+    } else {
+      config = newConfig
+    }
+    writeConfig(this.configPath, config)
   }
 }
