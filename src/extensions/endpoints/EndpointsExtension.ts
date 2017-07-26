@@ -42,16 +42,12 @@ export class GraphQLEndpointsExtension {
 
   getRawEndpointsMap(): GraphQLConfigEnpointsMap {
     const endpoints = this.raw
-    if (typeof endpoints !== 'object' || Array.isArray(endpoints)) {
-      throw new Error(`${this.configPath}: "endpoints" should be an object`)
-    } else {
-      return valuesMap(endpoints, value => {
-        if (typeof value === 'string') {
-          return { url: value }
-        }
-        return value;
-      })
-    }
+    return valuesMap(endpoints, value => {
+      if (typeof value === 'string') {
+        return { url: value }
+      }
+      return value;
+    })
   }
 
   getEnvVarsForEndpoint(

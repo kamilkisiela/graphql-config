@@ -106,7 +106,13 @@ export class GraphQLProjectConfig {
    extension related helper functions
   */
   get endpointsExtension(): GraphQLEndpointsExtension | null {
-    return this.extensions.endpoints ?
+    const {endpoints} = this.extensions
+
+    if (typeof endpoints !== 'object' || Array.isArray(endpoints)) {
+      throw new Error(`${this.configPath}: "endpoints" should be an object`)
+    }
+
+    return endpoints && Object.keys(endpoints).length !== 0 ?
       new GraphQLEndpointsExtension(this.extensions.endpoints, this.configPath) : null
   }
 }
