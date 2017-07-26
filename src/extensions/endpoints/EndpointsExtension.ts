@@ -41,53 +41,67 @@ export class GraphQLEndpointsExtension {
   }
 
   getRawEndpointsMap(): GraphQLConfigEnpointsMap {
-    const endpoints = this.raw
-    return valuesMap(endpoints, value => {
-      if (typeof value === 'string') {
-        return { url: value }
+    const endpoints = {}
+    for (let name in this.raw) {
+      const rawEndpoint = this.raw[name]
+      if (typeof rawEndpoint === 'string') {
+        endpoints[name] = { url: rawEndpoint }
+      } else {
+        endpoints[name] = rawEndpoint
       }
-      return value;
-    })
-  }
-
-  getEnvVarsForEndpoint(
-    endpointName: string = process.env.GRAPHQL_CONFIG_ENDPOINT_NAME,
-  ): { [name: string]: string | null } {
-    const endpoint = this.getRawEndpointsMap()[endpointName]
-    if (!endpoint || !endpoint.url) {
-      throw new Error(
-        `${this.configPath}: "${endpointName}" is not valid endpoint name. Valid endpoint names: ` +
-        Object.keys(this.getRawEndpointsMap()).join(', ')
-      )
     }
-    return getUsedEnvs(endpoint)
+    return endpoints
   }
 
-  getEndpoint(
+  private getRawEndpoint(
     endpointName: string = process.env.GRAPHQL_CONFIG_ENDPOINT_NAME,
-    env: { [name: string]: string } = process.env
-  ): GraphQLEndpoint {
-    const endpoint = this.getRawEndpointsMap()[endpointName]
+  ) {
+    const rawEndpointsMap = this.getRawEndpointsMap()
+    const endpointNames = Object.keys(rawEndpointsMap)
+
+    if (endpointName == null) {
+      if (endpointNames.length === 1) {
+        endpointName = endpointNames[0];
+      } else {
+        throw new Error(
+          "You have to specify endpoint name or define GRAPHQL_CONFIG_ENDPOINT_NAME enviroment variable"
+        )
+      }
+    }
+
+    const endpoint = rawEndpointsMap[endpointName]
     if (!endpoint) {
       throw new Error(
-        `${this.configPath}: "${endpointName}" is not valid endpoint name. Valid endpoint names: ` +
-        Object.keys(this.getRawEndpointsMap()).join(', ')
+        `${this.configPath}: "${endpointName}" is not valid endpoint name. ` +
+        `Valid endpoint names: ${endpointNames.join(', ')}`
       )
     }
+
     if (!endpoint.url) {
       throw new Error(
         `${this.configPath}: "url" is required but is not specified for "${endpointName}" endpoint`
       )
     }
+
+    return endpoint
+  }
+
+  getEnvVarsForEndpoint(endpointName: string): { [name: string]: string | null } {
+    return getUsedEnvs(this.getRawEndpoint(endpointName))
+  }
+
+  getEndpoint(
+    endpointName: string,
+    env: { [name: string]: string } = process.env
+  ): GraphQLEndpoint {
+    const endpoint = this.getRawEndpoint(endpointName)
     try {
       return new GraphQLEndpoint(resolveEnvsInValues(endpoint, env))
     } catch (e) {
-      // prefix error
       e.message = `${this.configPath}: ${e.message}`;
       throw e;
     }
   }
-
 }
 
 export class GraphQLEndpoint {
@@ -120,16 +134,4 @@ export class GraphQLEndpoint {
     const schema = await this.resolveSchema()
     return printSchema(schema)
   }
-}
-
-
-function valuesMap<T extends any, K>(
-  obj: {[key: string]: T},
-  fn: (val: T) => K
-):{[key: string]: K} {
-  const res: {[key: string]: K} = {}
-  for (let key in obj) {
-    res[key] = fn(obj[key]);
-  }
-  return res;
 }

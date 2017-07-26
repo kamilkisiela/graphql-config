@@ -7,7 +7,7 @@ export type IntrospectionResult = {
 }
 
 export type GraphQLConfigExtensions = {
-  endpoint?: GraphQLConfigEnpointsData,
+  endpoints?: GraphQLConfigEnpointsData,
   [name: string]: any
 }
 
