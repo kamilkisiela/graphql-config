@@ -29,7 +29,7 @@ export type GraphQLConfigEnpointsMap = {
   [env: string]: GraphQLConfigEnpointConfig
 }
 
-export type GraphQLConfigEnpointsData = GraphQLConfigEnpointsMap
+export type GraphQLConfigEnpointsData = GraphQLConfigEnpointsMapData
 
 export class GraphQLEndpointsExtension {
   public raw: GraphQLConfigEnpointsMapData

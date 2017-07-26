@@ -106,11 +106,11 @@ export class GraphQLProjectConfig {
    extension related helper functions
   */
   get endpointsExtension(): GraphQLEndpointsExtension | null {
-    const {endpoints} = this.extensions
-
-    if (!endpoints) {
+    if (!this.extensions.endpoints) {
       return null
     }
+
+    const {endpoints} = this.extensions
 
     if (typeof endpoints !== 'object' || Array.isArray(endpoints)) {
       throw new Error(`${this.configPath}: "endpoints" should be an object`)
@@ -147,7 +147,7 @@ function loadProjectConfig(
   const projectConfig = projects[projectName]
   if (!projectConfig) {
     throw new Error(
-      `"${projectName}" is not a valid project name. ` + 
+      `"${projectName}" is not a valid project name. ` +
       `Valid project names: ${Object.keys(projects).join(', ')}`
     )
   }
