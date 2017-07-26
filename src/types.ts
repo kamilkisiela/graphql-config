@@ -3,6 +3,7 @@ import { GraphQLConfigEnpointsData } from './extensions/';
 
 export type IntrospectionResult = {
   data: IntrospectionQuery
+  extensions?: Object
   errors?: any
 }
 

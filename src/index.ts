@@ -10,6 +10,7 @@ export {
 export {
   writeSchema,
   validateConfig,
+  getSchemaExtensions,
 } from './utils'
 
 export * from './errors'
