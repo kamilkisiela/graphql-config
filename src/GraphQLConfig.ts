@@ -28,28 +28,31 @@ export class GraphQLConfig {
     return new GraphQLProjectConfig(this.config, this.configPath, projectName)
   }
 
-  getConfigForFile(filePath: string): GraphQLProjectConfig | null {
+  getConfigForFile(filePath: string): GraphQLProjectConfig | undefined {
     const { projects } = this.config
 
     if (!projects || Object.keys(projects).length === 0) {
       const config = new GraphQLProjectConfig(this.config, this.configPath, undefined)
-      return config.includesFile(filePath) ? config : null
+      return config.includesFile(filePath) ? config : undefined
     }
 
     return Object.values(this.getProjects()).find(
       project => project.includesFile(filePath)
-    ) || null
+    ) || undefined
   }
 
-  getProjectNameForFile(filePath: string): string | null {
+  getProjectNameForFile(filePath: string): string | undefined {
     const proj = this.getConfigForFile(filePath);
-    return proj && proj.projectName || null;
+    return proj && proj.projectName || undefined;
   }
 
-  getProjects(): { [name: string]: GraphQLProjectConfig } {
+  getProjects(): { [name: string]: GraphQLProjectConfig } | undefined {
     const result = {}
     for (const projectName in (this.config.projects || {})) {
       result[projectName] = this.getProjectConfig(projectName)
+    }
+    if (Object.keys(result).length === 0) {
+      return undefined
     }
     return result
   }
