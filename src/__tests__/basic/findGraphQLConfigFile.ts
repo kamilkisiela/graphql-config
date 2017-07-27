@@ -13,13 +13,5 @@ test('returns a correct config filename', (t) => {
 
 test('throws GraphQLConfigNotFoundError when config is not found', (t) => {
   const tempDir = mkdtempSync(join(tmpdir(), 'graphql-config'))
-  let path
-  try {
-    path = findGraphQLConfigFile(tempDir)
-  } catch(error) {
-    t.truthy(error instanceof ConfigNotFoundError)
-    return
-  }
-  console.log(path, tempDir)
-  t.fail('findGraphQLConfigFile should throw when config is not found')
+  t.throws(() => findGraphQLConfigFile(tempDir), ConfigNotFoundError)
 })
