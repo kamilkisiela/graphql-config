@@ -27,6 +27,10 @@ The easiest way to configure your development environment with your GraphQL sche
 
 ## Usage
 
+**tl;dr**
+
+Install [`graphql-cli`](https://github.com/graphcool/graphql-cli) and run `graphql init`. Answer a few simple questions and you are set up!
+
 You can either configure your GraphQL endpoint via a configuration file `.graphqlconfig`
 (or `.graphqlconfig.yaml`) which should be put into the root of your project
 
