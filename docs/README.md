@@ -66,9 +66,9 @@ class GraphQLConfig {
   get configDir(): string
 
   getProjectConfig(projectName?: string): GraphQLProjectConfig
-  getConfigForFile(filePath: string): GraphQLProjectConfig | null
-  getProjectNameForFile(filePath: string): string | null
-  getProjects(): { [name: string]: GraphQLProjectConfig }
+  getConfigForFile(filePath: string): GraphQLProjectConfig | undefined
+  getProjectNameForFile(filePath: string): string | undefined
+  getProjects(): { [name: string]: GraphQLProjectConfig } | undefined
 }
 ```
 
@@ -95,7 +95,7 @@ class GraphQLProjectConfig {
   get extensions(): GraphQLConfigExtensions
 
   // extension related helper functions
-  get endpointExtension(): GraphQLEndpointExtension | null
+  get endpointsExtension(): GraphQLEndpointExtension | null
 }
 ```
 
