@@ -53,14 +53,15 @@ export class GraphQLProjectConfig {
     return resolve(this.configDir, relativePath)
   }
 
-  includesFile(filePath: string): boolean {
-    if (filePath.startsWith('file://')) {
-      filePath = filePath.substr(7)
-    }
-    filePath = relative(this.configDir, resolve(join(this.configDir, filePath)))
+  includesFile(fileUri: string): boolean {
+    const filePath = fileUri.startsWith('file://') ?
+      fileUri.substr(7) : fileUri;
+    const fullFilePath = filePath.startsWith(this.configDir) ?
+      filePath : resolve(join(this.configDir, filePath));
+    const relativePath = relative(this.configDir, fullFilePath);
     return (
-      (!this.config.includes || matchesGlobs(filePath, this.includes)) &&
-      !matchesGlobs(filePath, this.excludes)
+      (!this.config.includes || matchesGlobs(relativePath, this.includes)) &&
+      !matchesGlobs(relativePath, this.excludes)
     )
   }
 
