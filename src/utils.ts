@@ -1,5 +1,5 @@
 import { readFileSync, writeFileSync } from 'fs'
-import { extname } from 'path'
+import { extname, lstatSync } from 'path'
 import * as minimatch from 'minimatch'
 import * as yaml from 'js-yaml'
 import {
@@ -51,7 +51,18 @@ export function normalizeGlob(glob: string): string {
 
 export function matchesGlobs(filePath: string, globs?: string[]): boolean {
   return (globs || []).some(
-    glob => minimatch(filePath, glob, {matchBase: true})
+    glob => {
+      try {
+        const globStat = lstatSync(glob);
+        const globToMatch = globStat.isDirectory() ? `${glob}/**` : glob;
+        minimatch(filePath, globToMatch, {matchBase: true})
+      } catch (error) {
+        // Out of errors that lstat provides, EACCES and ENOENT are the
+        // most likely. For both cases there is no need to continue
+        // furthermore with the glob match.
+        return false;
+      }
+    }
   )
 }
 
