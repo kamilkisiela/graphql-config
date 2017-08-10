@@ -1,5 +1,5 @@
-import { readFileSync, writeFileSync } from 'fs'
-import { extname } from 'path'
+import { lstatSync, readFileSync, writeFileSync } from 'fs'
+import { extname, join } from 'path'
 import * as minimatch from 'minimatch'
 import * as yaml from 'js-yaml'
 import {
@@ -49,10 +49,19 @@ export function normalizeGlob(glob: string): string {
   return glob
 }
 
-export function matchesGlobs(filePath: string, globs?: string[]): boolean {
-  return (globs || []).some(
-    glob => minimatch(filePath, glob, {matchBase: true})
-  )
+export function matchesGlobs(filePath: string, configDir: string, globs?: string[]): boolean {
+  return (globs || []).some(glob => {
+    try {
+      const globStat = lstatSync(join(configDir, glob))
+      const globToMatch = globStat.isDirectory() ? `${glob}/**` : glob
+      return minimatch(filePath, globToMatch, {matchBase: true})
+    } catch (error) {
+      // Out of errors that lstat provides, EACCES and ENOENT are the
+      // most likely. For both cases there is no need to continue
+      // furthermore with the glob match.
+      return false
+    }
+  })
 }
 
 export function validateConfig(config: GraphQLConfigData) {

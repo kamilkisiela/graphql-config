@@ -60,8 +60,10 @@ export class GraphQLProjectConfig {
       filePath : resolve(join(this.configDir, filePath));
     const relativePath = relative(this.configDir, fullFilePath);
     return (
-      (!this.config.includes || matchesGlobs(relativePath, this.includes)) &&
-      !matchesGlobs(relativePath, this.excludes)
+      (
+        !this.config.includes ||
+        matchesGlobs(filePath, this.configDir, this.includes)
+      ) && !matchesGlobs(filePath, this.configDir, this.excludes)
     )
   }
 
