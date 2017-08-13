@@ -62,8 +62,8 @@ export class GraphQLProjectConfig {
     return (
       (
         !this.config.includes ||
-        matchesGlobs(filePath, this.configDir, this.includes)
-      ) && !matchesGlobs(filePath, this.configDir, this.excludes)
+        matchesGlobs(relativePath, this.configDir, this.includes)
+      ) && !matchesGlobs(relativePath, this.configDir, this.excludes)
     )
   }
 

@@ -57,9 +57,9 @@ export function matchesGlobs(filePath: string, configDir: string, globs?: string
       return minimatch(filePath, globToMatch, {matchBase: true})
     } catch (error) {
       // Out of errors that lstat provides, EACCES and ENOENT are the
-      // most likely. For both cases there is no need to continue
-      // furthermore with the glob match.
-      return false
+      // most likely. For both cases, run the match with the raw glob
+      // and return the result.
+      return minimatch(filePath, glob, {matchBase: true})
     }
   })
 }
