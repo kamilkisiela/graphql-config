@@ -53,6 +53,7 @@ export function matchesGlobs(filePath: string, configDir: string, globs?: string
   return (globs || []).some(glob => {
     try {
       const globStat = lstatSync(join(configDir, glob))
+      const newGlob = glob.length === 0 ? '.' : glob;
       const globToMatch = globStat.isDirectory() ? `${glob}/**` : glob
       return minimatch(filePath, globToMatch, {matchBase: true})
     } catch (error) {
