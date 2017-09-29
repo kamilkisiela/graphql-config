@@ -60,7 +60,7 @@
     "typescript": "^2.1.0-dev.20160805"
   },
   "dependencies": {
-    "graphql": "0.7.1 - 1.0.0",
+    "graphql": "^0.11.5",
     "graphql-request": "^1.2.0",
     "js-yaml": "^3.9.0",
     "minimatch": "^3.0.4",

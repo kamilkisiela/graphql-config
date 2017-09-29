@@ -1547,11 +1547,11 @@ graphql-request@^1.2.0:
   dependencies:
     isomorphic-fetch "^2.2.1"
 
-"graphql@0.7.1 - 1.0.0":
-  version "0.10.4"
-  resolved "https://registry.yarnpkg.com/graphql/-/graphql-0.10.4.tgz#55ae6857ae521e3592aec4265587e5e94c477667"
+graphql@^0.11.5:
+  version "0.11.5"
+  resolved "https://registry.yarnpkg.com/graphql/-/graphql-0.11.5.tgz#9744b3578ab760687e4a861b4e07ff9f1c5286d1"
   dependencies:
-    iterall "^1.1.0"
+    iterall "1.1.2"
 
 har-schema@^1.0.5:
   version "1.0.5"
@@ -1822,9 +1822,9 @@ isstream@~0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/isstream/-/isstream-0.1.2.tgz#47e63f7af55afa6f92e1500e690eb8b8529c099a"
 
-iterall@^1.1.0:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/iterall/-/iterall-1.1.1.tgz#f7f0af11e9a04ec6426260f5019d9fcca4d50214"
+iterall@1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/iterall/-/iterall-1.1.2.tgz#413332b3cdb46f8f5ede57d6cd8e3ca8a9df8816"
 
 js-tokens@^3.0.0:
   version "3.0.2"
