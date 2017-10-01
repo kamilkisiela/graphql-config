@@ -1,5 +1,7 @@
 # graphql-config
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/graphcool/graphql-config.svg)](https://greenkeeper.io/)
+
 > The README reflects new [graphql-config protocol](specification.md).
 > Old graphql-config-parser documentation [can be found here](https://github.com/graphcool/graphql-config/tree/graphql-config-parser)
 
