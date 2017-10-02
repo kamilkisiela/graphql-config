@@ -1,6 +1,6 @@
 {
   "name": "graphql-config",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "The easiest way to configure your development environment with your GraphQL schema (supported by most tools, editors & IDEs)",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -60,7 +60,7 @@
     "typescript": "^2.1.0-dev.20160805"
   },
   "dependencies": {
-    "graphql": "^0.11.5",
+    "graphql": "^0.11.6",
     "graphql-request": "^1.2.0",
     "js-yaml": "^3.9.0",
     "minimatch": "^3.0.4",

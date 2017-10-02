@@ -12,7 +12,7 @@ import { IntrospectionResult } from '../../types'
 
 export type GraphQLConfigEnpointsSubscription = {
   url: string;
-  connectionParams?: { [name: string]: string }
+  connectionParams?: { [name: string]: string | undefined }
 }
 
 export type GraphQLConfigEnpointConfig = {
@@ -54,7 +54,7 @@ export class GraphQLEndpointsExtension {
   }
 
   private getRawEndpoint(
-    endpointName: string = process.env.GRAPHQL_CONFIG_ENDPOINT_NAME,
+    endpointName: string | undefined = process.env.GRAPHQL_CONFIG_ENDPOINT_NAME,
   ) {
     const rawEndpointsMap = this.getRawEndpointsMap()
     const endpointNames = Object.keys(rawEndpointsMap)
@@ -92,7 +92,7 @@ export class GraphQLEndpointsExtension {
 
   getEndpoint(
     endpointName: string,
-    env: { [name: string]: string } = process.env
+    env: { [name: string]: string | undefined } = process.env
   ): GraphQLEndpoint {
     const endpoint = this.getRawEndpoint(endpointName)
     try {

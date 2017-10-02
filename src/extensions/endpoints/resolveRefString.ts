@@ -13,7 +13,7 @@ export function resolveRefString(str: string, values?: object): string {
 
 export function resolveEnvsInValues<T extends any> (
   config: T,
-  env: { [name: string]: string }
+  env: { [name: string]: string | undefined }
 ): T {
   config = Object.assign({}, config)
   for (let key in config) {
