@@ -7,6 +7,7 @@ import {
 
 export const GRAPHQL_CONFIG_NAME = '.graphqlconfig'
 export const GRAPHQL_CONFIG_YAML_NAME = '.graphqlconfig.yaml'
+export const GRAPHQL_CONFIG_YML_NAME = '.graphqlconfig.yaml'
 
 function isRootDir(path: string): boolean {
   return dirname(path) === path
@@ -17,7 +18,8 @@ export function findGraphQLConfigFile(filePath: string): string {
 
   if (
     filePath.endsWith(GRAPHQL_CONFIG_NAME) ||
-    filePath.endsWith(GRAPHQL_CONFIG_YAML_NAME)
+    filePath.endsWith(GRAPHQL_CONFIG_YAML_NAME) ||
+    filePath.endsWith(GRAPHQL_CONFIG_YML_NAME)
   ) {
     return filePath
   }
@@ -30,6 +32,9 @@ export function findGraphQLConfigFile(filePath: string): string {
     }
     if (existsSync(configPath + '.yaml')) {
       return configPath + '.yaml'
+    }
+    if (existsSync(configPath + '.yml')) {
+      return configPath + '.yml'
     }
     currentDir = dirname(currentDir)
   }

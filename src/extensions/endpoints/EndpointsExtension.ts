@@ -7,11 +7,11 @@ import {
   IntrospectionQuery,
 } from 'graphql'
 
-import { resolveEnvsInValues, getUsedEnvs } from './resolveRefString';
+import { resolveEnvsInValues, getUsedEnvs } from './resolveRefString'
 import { IntrospectionResult } from '../../types'
 
 export type GraphQLConfigEnpointsSubscription = {
-  url: string;
+  url: string
   connectionParams?: { [name: string]: string | undefined }
 }
 
@@ -35,7 +35,10 @@ export class GraphQLEndpointsExtension {
   public raw: GraphQLConfigEnpointsMapData
   private configPath
 
-  constructor(endpointConfig: GraphQLConfigEnpointsMapData, configPath: string) {
+  constructor(
+    endpointConfig: GraphQLConfigEnpointsMapData,
+    configPath: string,
+  ) {
     this.raw = endpointConfig
     this.configPath = configPath
   }
@@ -53,6 +56,25 @@ export class GraphQLEndpointsExtension {
     return endpoints
   }
 
+  getEnvVarsForEndpoint(
+    endpointName: string,
+  ): { [name: string]: string | null } {
+    return getUsedEnvs(this.getRawEndpoint(endpointName))
+  }
+
+  getEndpoint(
+    endpointName: string,
+    env: { [name: string]: string | undefined } = process.env,
+  ): GraphQLEndpoint {
+    const endpoint = this.getRawEndpoint(endpointName)
+    try {
+      return new GraphQLEndpoint(resolveEnvsInValues(endpoint, env))
+    } catch (e) {
+      e.message = `${this.configPath}: ${e.message}`
+      throw e
+    }
+  }
+
   private getRawEndpoint(
     endpointName: string | undefined = process.env.GRAPHQL_CONFIG_ENDPOINT_NAME,
   ) {
@@ -61,10 +83,10 @@ export class GraphQLEndpointsExtension {
 
     if (endpointName == null) {
       if (endpointNames.length === 1) {
-        endpointName = endpointNames[0];
+        endpointName = endpointNames[0]
       } else {
         throw new Error(
-          "You have to specify endpoint name or define GRAPHQL_CONFIG_ENDPOINT_NAME enviroment variable"
+          'You have to specify endpoint name or define GRAPHQL_CONFIG_ENDPOINT_NAME enviroment variable',
         )
       }
     }
@@ -73,50 +95,35 @@ export class GraphQLEndpointsExtension {
     if (!endpoint) {
       throw new Error(
         `${this.configPath}: "${endpointName}" is not valid endpoint name. ` +
-        `Valid endpoint names: ${endpointNames.join(', ')}`
+          `Valid endpoint names: ${endpointNames.join(', ')}`,
       )
     }
 
     if (!endpoint.url) {
       throw new Error(
-        `${this.configPath}: "url" is required but is not specified for "${endpointName}" endpoint`
+        `${this
+          .configPath}: "url" is required but is not specified for "${endpointName}" endpoint`,
       )
     }
 
     return endpoint
   }
-
-  getEnvVarsForEndpoint(endpointName: string): { [name: string]: string | null } {
-    return getUsedEnvs(this.getRawEndpoint(endpointName))
-  }
-
-  getEndpoint(
-    endpointName: string,
-    env: { [name: string]: string | undefined } = process.env
-  ): GraphQLEndpoint {
-    const endpoint = this.getRawEndpoint(endpointName)
-    try {
-      return new GraphQLEndpoint(resolveEnvsInValues(endpoint, env))
-    } catch (e) {
-      e.message = `${this.configPath}: ${e.message}`;
-      throw e;
-    }
-  }
 }
 
 export class GraphQLEndpoint {
   public url: string
-  public headers: { [name: string] : string}
+  public headers: { [name: string]: string }
   public subscription: GraphQLConfigEnpointsSubscription
 
   constructor(resolvedConfig: GraphQLConfigEnpointConfig) {
-    Object.assign(this, resolvedConfig);
+    Object.assign(this, resolvedConfig)
   }
 
-  getClient(
-    clientOptions: any = {}
-  ): GraphQLClient {
-    return new GraphQLClient(this.url, { ...clientOptions, headers: this.headers })
+  getClient(clientOptions: any = {}): GraphQLClient {
+    return new GraphQLClient(this.url, {
+      ...clientOptions,
+      headers: this.headers,
+    })
   }
 
   async resolveIntrospection(): Promise<IntrospectionResult> {

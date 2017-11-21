@@ -18,7 +18,7 @@ export function readConfig(configPath: string): GraphQLConfigData {
   let config
   try {
     const rawConfig = readFileSync(configPath, 'utf-8')
-    if (configPath.endsWith('.yaml')) {
+    if (configPath.endsWith('.yaml') || configPath.endsWith('.yml')) {
       config = yaml.safeLoad(rawConfig)
     } else {
       config = JSON.parse(rawConfig)
