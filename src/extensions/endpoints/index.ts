@@ -1,1 +1,3 @@
-export * from './EndpointsExtension';
+export * from './EndpointsExtension'
+
+export * from './resolveRefString'

@@ -11,9 +11,9 @@ export function resolveRefString(str: string, values?: object): string {
   return res
 }
 
-export function resolveEnvsInValues<T extends any> (
+export function resolveEnvsInValues<T extends any>(
   config: T,
-  env: { [name: string]: string | undefined }
+  env: { [name: string]: string | undefined },
 ): T {
   config = Object.assign({}, config)
   for (let key in config) {
@@ -37,8 +37,8 @@ export function getUsedEnvs(config: any): { [name: string]: string } {
         result[parseRef(ref).ref] = resolveRef(ref, {}, false)
       }
     } else if (typeof val === 'object') {
-      for (let key in config) {
-        traverse(config[key])
+      for (let key in val) {
+        traverse(val[key])
       }
     }
   }
@@ -46,24 +46,24 @@ export function getUsedEnvs(config: any): { [name: string]: string } {
   return result
 }
 
-function parseRef(rawRef: string): { type: string, ref: string } {
+function parseRef(rawRef: string): { type: string; ref: string } {
   const [type, ref] = rawRef.split(/\s*:\s*/)
-  return { type, ref}
+  return { type, ref }
 }
 
 function resolveRef(
   rawRef: string,
   values: any = {},
-  throwIfUndef: boolean = true
+  throwIfUndef: boolean = true,
 ): string | null {
-  const {type, ref} = parseRef(rawRef)
+  const { type, ref } = parseRef(rawRef)
 
   if (type === 'env') {
     if (!ref) {
       throw new Error(`Reference value is not present for ${type}: ${rawRef}`)
     }
 
-    const refValue = values.env && values.env[ref] || process.env[ref]
+    const refValue = (values.env && values.env[ref]) || process.env[ref]
     if (!refValue) {
       if (throwIfUndef) {
         throw new Error(`Environment variable ${ref} is not set`)
@@ -74,11 +74,13 @@ function resolveRef(
     return refValue
   } else {
     // support only 'env' for now
-    throw new Error('Undefined reference type ${refType}. Only "env" is supported')
+    throw new Error(
+      'Undefined reference type ${refType}. Only "env" is supported',
+    )
   }
 }
 
-function parse(str: string): { strings: string[], rawRefs: string[] } {
+function parse(str: string): { strings: string[]; rawRefs: string[] } {
   const regex = /\${([^}]*)}/g
   const strings: string[] = []
   const rawRefs: string[] = []
