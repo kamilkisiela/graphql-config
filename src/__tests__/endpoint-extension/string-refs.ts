@@ -1,5 +1,9 @@
 import test from 'ava'
-import { getGraphQLProjectConfig, GraphQLEndpointsExtension } from '../../'
+import {
+  getGraphQLProjectConfig,
+  GraphQLEndpointsExtension,
+  getUsedEnvs,
+} from '../../'
 import { serveSchema } from '../utils'
 
 let endpoints: GraphQLEndpointsExtension
@@ -42,4 +46,19 @@ test('ability to pass external values as env vars to resolveSchemaFromEndpoint',
       .getEndpoint('default', { TEST_ENDPOINT_URL: 'http://127.0.0.1:33333' })
       .resolveSchema()
   })
+})
+
+test('getUsedEnvs', async t => {
+  const configData = {
+    schemaPath: '../schema.json',
+    extensions: {
+      endpoints: {
+        dev: 'http://127.0.0.1:${env:EXTENSION_TEST_PORT}',
+      },
+    },
+  }
+
+  const envs = getUsedEnvs(configData)
+
+  t.is(Object.keys(envs)[0], 'EXTENSION_TEST_PORT')
 })
