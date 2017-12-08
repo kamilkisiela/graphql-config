@@ -1,0 +1,6 @@
+# import User from "./schema-b2.graphql"
+
+type Query {
+  hello: String!
+  user: User!
+}

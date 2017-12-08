@@ -4,6 +4,12 @@
       "schemaPath": "__schema__/StarWarsSchema.graphql"
     },
     "testWithoutSchema": {
+    },
+    "testSchemaA": {
+      "schemaPath": "schema-a.graphql"
+    },
+    "testSchemaB": {
+      "schemaPath": "schema-b1.graphql"
     }
   }
 }
