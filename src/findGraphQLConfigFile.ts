@@ -7,7 +7,7 @@ import {
 
 export const GRAPHQL_CONFIG_NAME = '.graphqlconfig'
 export const GRAPHQL_CONFIG_YAML_NAME = '.graphqlconfig.yaml'
-export const GRAPHQL_CONFIG_YML_NAME = '.graphqlconfig.yaml'
+export const GRAPHQL_CONFIG_YML_NAME = '.graphqlconfig.yml'
 
 function isRootDir(path: string): boolean {
   return dirname(path) === path
