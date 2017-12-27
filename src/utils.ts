@@ -11,6 +11,7 @@ import {
   buildSchema,
   buildClientSchema,
   introspectionQuery,
+  IntrospectionQuery,
 } from 'graphql'
 
 import { GraphQLConfigData, IntrospectionResult } from './types'
@@ -92,14 +93,14 @@ export function schemaToIntrospection(schema: GraphQLSchema) {
   return graphql(schema, introspectionQuery) as Promise<IntrospectionResult>
 }
 
-export function introspectionToSchema(introspection: IntrospectionResult) {
+// Predicate for errors/data can be removed after typescript 2.7.
+// See: https://github.com/Microsoft/TypeScript/pull/19513
+export function introspectionToSchema(introspection: IntrospectionResult | (IntrospectionQuery & { errors: undefined, data: undefined; })) {
   if (introspection.errors != null) {
-    throw new Error('Introspection result containts errors')
+    throw new Error('Introspection result contains errors')
   }
-  if (introspection.data == null) {
-    throw new Error('Missing "data" property from introspection result')
-  }
-  return buildClientSchema(introspection.data)
+
+  return buildClientSchema(introspection.data ? introspection.data : introspection as IntrospectionQuery)
 }
 
 export function readSchema(path): GraphQLSchema {
