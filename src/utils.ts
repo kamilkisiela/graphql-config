@@ -35,7 +35,7 @@ export function readConfig(configPath: string): GraphQLConfigData {
 
 export function writeConfig(configPath: string, config: GraphQLConfigData) {
   let configContents
-  if (configPath.endsWith('.yaml')) {
+  if (configPath.endsWith('.yaml') || configPath.endsWith('.yml')) {
     configContents = yaml.safeDump(config)
   } else {
     configContents = JSON.stringify(config)
