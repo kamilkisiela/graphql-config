@@ -5,7 +5,8 @@ node_js:
   - '6'
 
 after_success:
-  - yarn semantic-release
+  - npm i -g semantic-release
+  - semantic-release
 
 branches:
   except:
