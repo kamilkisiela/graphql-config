@@ -61,7 +61,7 @@
   },
   "dependencies": {
     "graphql": "^0.12.3",
-    "graphql-import": "^0.2.0",
+    "graphql-import": "^0.3.0",
     "graphql-request": "^1.4.0",
     "js-yaml": "^3.10.0",
     "minimatch": "^3.0.4",
