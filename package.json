@@ -4,6 +4,9 @@
   "description": "The easiest way to configure your development environment with your GraphQL schema (supported by most tools, editors & IDEs)",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
+  "engines": {
+    "node": ">=4.2.0"
+  },
   "files": [
     "LICENSE",
     "README.md",
