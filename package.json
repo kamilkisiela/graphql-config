@@ -55,16 +55,19 @@
     "babel-preset-es2015": "6.24.1",
     "babel-preset-stage-0": "6.24.1",
     "cpx": "1.5.0",
+    "graphql": "^0.12.3",
     "rimraf": "2.6.2",
     "tslint": "5.8.0",
     "tslint-config-standard": "7.0.0",
     "typescript": "2.6.2"
   },
   "dependencies": {
-    "graphql": "^0.12.3",
     "graphql-import": "^0.4.0",
     "graphql-request": "^1.4.0",
     "js-yaml": "^3.10.0",
     "minimatch": "^3.0.4"
+  },
+  "peerDependencies": {
+    "graphql": "0.11 - 0.12"
   }
 }
