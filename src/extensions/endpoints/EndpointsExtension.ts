@@ -26,7 +26,7 @@ export type GraphQLConfigEnpointsMapData = {
 }
 
 export type GraphQLConfigEnpointsMap = {
-  [env: string]: GraphQLConfigEnpointConfig
+  [env: string]: GraphQLConfigEnpointConfig | GraphQLEndpoint
 }
 
 export type GraphQLConfigEnpointsData = GraphQLConfigEnpointsMapData
@@ -68,7 +68,11 @@ export class GraphQLEndpointsExtension {
   ): GraphQLEndpoint {
     const endpoint = this.getRawEndpoint(endpointName)
     try {
-      return new GraphQLEndpoint(resolveEnvsInValues(endpoint, env))
+      const resolved = resolveEnvsInValues(endpoint, env)
+      if (!(resolved instanceof GraphQLEndpoint)) {
+        return new GraphQLEndpoint(resolved)
+      }
+      return resolved
     } catch (e) {
       e.message = `${this.configPath}: ${e.message}`
       throw e
@@ -99,7 +103,7 @@ export class GraphQLEndpointsExtension {
       )
     }
 
-    if (!endpoint.url) {
+    if (!endpoint.url && !(endpoint instanceof GraphQLEndpoint)) {
       throw new Error(
         `${this
           .configPath}: "url" is required but is not specified for "${endpointName}" endpoint`,
