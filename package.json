@@ -4,6 +4,9 @@
   "description": "The easiest way to configure your development environment with your GraphQL schema (supported by most tools, editors & IDEs)",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
+  "engines": {
+    "node": ">=4.2.0"
+  },
   "files": [
     "LICENSE",
     "README.md",
@@ -15,7 +18,7 @@
     "build": "npm run clean && tsc",
     "copy-test-assets": "cpx \"src/**/{.graphqlconfig*,*.graphql,*.json}\" lib",
     "test-only": "npm run build && npm run copy-test-assets && ava --verbose lib/__tests__/**/*.js --serial",
-    "test": "tslint src/**/*.ts && npm run test-only"
+    "test": "tslint src/**/*.ts && installed-check -e && npm run test-only"
   },
   "ava": {
     "babel": "inherit",
@@ -55,6 +58,7 @@
     "babel-preset-es2015": "6.24.1",
     "babel-preset-stage-0": "6.24.1",
     "cpx": "1.5.0",
+    "installed-check": "^2.1.3",
     "rimraf": "2.6.2",
     "tslint": "5.8.0",
     "tslint-config-standard": "7.0.0",
