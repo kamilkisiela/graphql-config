@@ -1,5 +1,5 @@
 import test from 'ava'
-import { join } from 'path'
+import { join, resolve } from 'path'
 import { printSchema } from 'graphql'
 const schema = require('../schema.json')
 import { getGraphQLConfig, GraphQLConfig } from '../../'
@@ -15,6 +15,15 @@ test.beforeEach(() => {
 test('returns a correct name', t => {
   const testWithSchemaConfig = config.getProjectConfig('testWithSchema')
   t.deepEqual(testWithSchemaConfig.projectName, 'testWithSchema')
+})
+
+test('returns config for file', t => {
+  const testWithSchemaConfig = config.getConfigForFile(resolve('./config/schema-a.graphql'))
+  if (testWithSchemaConfig) {
+    t.deepEqual(testWithSchemaConfig.projectName, 'testWithSchema')
+  } else {
+    t.fail()
+  }
 })
 
 test('returns a correct root dir', t => {
