@@ -69,6 +69,10 @@ export class GraphQLEndpointsExtension {
     const endpoint = this.getRawEndpoint(endpointName)
     try {
       const resolved = resolveEnvsInValues(endpoint, env)
+
+      // graphql-config extensions might have already instantiated a GraphQLEndpoint
+      // or derived class from the GraphQLConfigEndpointConfig data. In that case,
+      // getRawEndpoint will already return a GraphQLEndpoint and it should not be overwritten.
       if (!(resolved instanceof GraphQLEndpoint)) {
         return new GraphQLEndpoint(resolved)
       }
