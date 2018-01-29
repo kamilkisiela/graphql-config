@@ -1,5 +1,6 @@
 import { resolve, dirname } from 'path'
 import { validateConfig, writeConfig } from './utils'
+import { values } from 'lodash'
 
 import {
   GraphQLConfigData,
@@ -36,7 +37,7 @@ export class GraphQLConfig {
       return config.includesFile(filePath) ? config : undefined
     }
 
-    return Object.values(this.getProjects()).find(
+    return values(this.getProjects()).find(
       project => project.includesFile(filePath)
     ) || undefined
   }
