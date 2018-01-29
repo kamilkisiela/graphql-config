@@ -15,7 +15,6 @@ export function resolveEnvsInValues<T extends any>(
   config: T,
   env: { [name: string]: string | undefined },
 ): T {
-  config = Object.assign({}, config)
   for (let key in config) {
     const value = config[key]
     if (typeof value === 'string') {
