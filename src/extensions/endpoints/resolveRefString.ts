@@ -11,7 +11,7 @@ export function resolveRefString(str: string, values?: object): string {
   return res
 }
 
-export function resolveEnvsInValues<T extends any>(
+export function resolveEnvsInValues<T extends { [key: string]: any}>(
   config: T,
   env: { [name: string]: string | undefined },
 ): T {

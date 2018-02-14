@@ -5,7 +5,7 @@
     "target": "es5",
     "lib": [
       "es2017",
-      "DOM",
+      "dom",
       "esnext.asynciterable"
     ],
     "outDir": "lib",
