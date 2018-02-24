@@ -1357,16 +1357,15 @@ graceful-fs@^4.1.11, graceful-fs@^4.1.2:
   version "4.1.11"
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.1.11.tgz#0e8bdfe4d1ddb8854d64e04ea7c00e2a026e5658"
 
-graphql-import@^0.4.0:
-  version "0.4.3"
-  resolved "https://registry.yarnpkg.com/graphql-import/-/graphql-import-0.4.3.tgz#5fc68244e0908d6d8f2b91658a82be3d11f4ec62"
+graphql-import@^0.4.4:
+  version "0.4.4"
+  resolved "https://registry.yarnpkg.com/graphql-import/-/graphql-import-0.4.4.tgz#57a485f3b954fd3fa80ae58bf35d8d158e263e92"
   dependencies:
-    graphql "^0.13.0"
     lodash "^4.17.4"
 
-graphql-request@^1.4.0:
-  version "1.4.1"
-  resolved "https://registry.yarnpkg.com/graphql-request/-/graphql-request-1.4.1.tgz#0772743cfac8dfdd4d69d36106a96c9bdd191ce8"
+graphql-request@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/graphql-request/-/graphql-request-1.5.0.tgz#69b30a1767189fcba27f5c907c0a87339f90b5d8"
   dependencies:
     cross-fetch "1.1.1"
 
@@ -1375,12 +1374,6 @@ graphql@0.13.1:
   resolved "https://registry.yarnpkg.com/graphql/-/graphql-0.13.1.tgz#9b3db3d8e40d1827e4172404bfdd2e4e17a58b55"
   dependencies:
     iterall "^1.2.0"
-
-graphql@^0.13.0:
-  version "0.13.0"
-  resolved "https://registry.yarnpkg.com/graphql/-/graphql-0.13.0.tgz#d1b44a282279a9ce0a6ec1037329332f4c1079b6"
-  dependencies:
-    iterall "1.1.x"
 
 har-schema@^1.0.5:
   version "1.0.5"
@@ -1708,10 +1701,6 @@ isobject@^2.0.0:
 isstream@~0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/isstream/-/isstream-0.1.2.tgz#47e63f7af55afa6f92e1500e690eb8b8529c099a"
-
-iterall@1.1.x:
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/iterall/-/iterall-1.1.4.tgz#0db40d38fdcf53ae14dc8ec674e62ab190d52cfc"
 
 iterall@^1.2.0:
   version "1.2.0"
@@ -2903,9 +2892,9 @@ tweetnacl@^0.14.3, tweetnacl@~0.14.0:
   version "0.14.5"
   resolved "https://registry.yarnpkg.com/tweetnacl/-/tweetnacl-0.14.5.tgz#5ae68177f192d4456269d108afa93ff8743f4f64"
 
-typescript@2.7.1:
-  version "2.7.1"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.7.1.tgz#bb3682c2c791ac90e7c6210b26478a8da085c359"
+typescript@2.7.2:
+  version "2.7.2"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.7.2.tgz#2d615a1ef4aee4f574425cdff7026edf81919836"
 
 uid-number@^0.0.6:
   version "0.0.6"
