@@ -94,7 +94,7 @@ export class GraphQLEndpointsExtension {
         endpointName = endpointNames[0]
       } else {
         throw new Error(
-          'You have to specify endpoint name or define GRAPHQL_CONFIG_ENDPOINT_NAME enviroment variable',
+          'You have to specify endpoint name or define GRAPHQL_CONFIG_ENDPOINT_NAME environment variable',
         )
       }
     }
