@@ -46,7 +46,7 @@
     "rimraf": "2.6.2",
     "tslint": "5.9.1",
     "tslint-config-standard": "7.0.0",
-    "typescript": "2.7.2"
+    "typescript": "2.9.2"
   },
   "dependencies": {
     "graphql-import": "^0.4.4",
