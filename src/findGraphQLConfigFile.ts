@@ -1,5 +1,6 @@
-import { resolve, join as joinPaths, dirname } from 'path'
+import { resolve, join as joinPaths, dirname, basename } from 'path'
 import { existsSync } from 'fs'
+import * as Finder from 'fs-finder'
 
 import {
   ConfigNotFoundError
@@ -37,6 +38,24 @@ export function findGraphQLConfigFile(filePath: string): string {
       return configPath + '.yml'
     }
     currentDir = dirname(currentDir)
+  }
+
+  // Try to find GraphQL config in first level of sub-directories.
+  const subDirectories = Finder.in(filePath).showSystemFiles().findDirectories()
+  const subDirectoriesWithGraphQLConfig = subDirectories.map(subDirectory => {
+    const subDirectoryFiles = Finder.in(subDirectory).showSystemFiles().findFiles().map(file => basename(file))
+    if (subDirectoryFiles.includes(GRAPHQL_CONFIG_NAME)) {
+      return `${subDirectory}/${GRAPHQL_CONFIG_NAME}`
+    } 
+    if (subDirectoryFiles.includes(`${GRAPHQL_CONFIG_NAME}.yml`)) {
+      return `${subDirectory}/${GRAPHQL_CONFIG_NAME}.yml`
+    }
+    if (subDirectoryFiles.includes(`${GRAPHQL_CONFIG_NAME}.yaml`)) {
+      return `${subDirectory}/${GRAPHQL_CONFIG_NAME}.yaml`
+    }
+  })
+  if (subDirectoriesWithGraphQLConfig.length > 0) {
+    return subDirectoriesWithGraphQLConfig[0]
   }
 
   throw new ConfigNotFoundError(
