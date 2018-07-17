@@ -1,5 +1,5 @@
-import { resolve, join as joinPaths, dirname } from 'path'
-import { existsSync } from 'fs'
+import { resolve, join as joinPaths, dirname, basename, join } from 'path'
+import { existsSync, readdirSync, lstatSync } from 'fs'
 
 import {
   ConfigNotFoundError
@@ -37,6 +37,32 @@ export function findGraphQLConfigFile(filePath: string): string {
       return configPath + '.yml'
     }
     currentDir = dirname(currentDir)
+  }
+
+  // Try to find GraphQL config in first level of sub-directories.
+  const subDirectories = readdirSync(filePath).map(dir => joinPaths(filePath, dir)).filter(dir => {
+    return (lstatSync(dir).isDirectory())
+  })
+  const subDirectoriesWithGraphQLConfig = subDirectories.map(subDirectory => {
+    const subDirectoryFiles = readdirSync(subDirectory)
+      .filter(file => {
+        return !(lstatSync(joinPaths(subDirectory, file)).isDirectory())
+      })
+      .map(file => {
+        return basename(joinPaths(subDirectory, file))
+      })
+    if (subDirectoryFiles.includes(GRAPHQL_CONFIG_NAME)) {
+      return `${subDirectory}/${GRAPHQL_CONFIG_NAME}`
+    }
+    if (subDirectoryFiles.includes(`${GRAPHQL_CONFIG_NAME}.yml`)) {
+      return `${subDirectory}/${GRAPHQL_CONFIG_NAME}.yml`
+    }
+    if (subDirectoryFiles.includes(`${GRAPHQL_CONFIG_NAME}.yaml`)) {
+      return `${subDirectory}/${GRAPHQL_CONFIG_NAME}.yaml`
+    }
+  })
+  if (subDirectoriesWithGraphQLConfig.length > 0) {
+    return subDirectoriesWithGraphQLConfig[0] as string
   }
 
   throw new ConfigNotFoundError(
