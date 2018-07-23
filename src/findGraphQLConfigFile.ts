@@ -60,7 +60,7 @@ export function findGraphQLConfigFile(filePath: string): string {
     if (subDirectoryFiles.includes(`${GRAPHQL_CONFIG_NAME}.yaml`)) {
       return `${subDirectory}/${GRAPHQL_CONFIG_NAME}.yaml`
     }
-  })
+  }).filter(subDirectory => Boolean(subDirectory))
   if (subDirectoriesWithGraphQLConfig.length > 0) {
     return subDirectoriesWithGraphQLConfig[0] as string
   }
