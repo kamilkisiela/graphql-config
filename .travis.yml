@@ -12,6 +12,7 @@ script:
   - yarn test
 
 after_success:
+  - yarn prepublish
   - npm install -g travis-deploy-once
   - travis-deploy-once "npx semantic-release"
 
