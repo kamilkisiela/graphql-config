@@ -5,7 +5,8 @@ node_js:
   - '6'
 
 after_success:
-  - npx semantic-release
+  - npm install -g travis-deploy-once
+  - travis-deploy-once "npx semantic-release"
 
 branches:
   except:
