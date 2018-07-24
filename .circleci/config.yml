@@ -3,8 +3,8 @@ jobs:
   build:
     docker:
       - image: circleci/node:8
-        steps:
-          - checkout
-          - run: yarn install
-          - run: yarn test
-          - run: npx semantic-release
+    steps:
+      - checkout
+      - run: yarn install
+      - run: yarn test
+      - run: npx semantic-release
