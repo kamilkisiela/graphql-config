@@ -4,9 +4,15 @@ node_js:
   - '8'
   - '6'
 
+install
+  - yarn
+
+script:
+  - yarn test
+
 after_success:
-  - npm i -g semantic-release
-  - semantic-release
+  - npm install -g travis-deploy-once
+  - travis-deploy-once "npx semantic-release"
 
 branches:
   except:
