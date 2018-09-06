@@ -61,12 +61,12 @@ export function matchesGlobs(
       const globStat = lstatSync(join(configDir, glob))
       const newGlob = glob.length === 0 ? '.' : glob
       const globToMatch = globStat.isDirectory() ? `${glob}/**` : glob
-      return minimatch(filePath, globToMatch, { matchBase: true })
+      return minimatch(filePath, globToMatch, { matchBase: true, dot: true })
     } catch (error) {
       // Out of errors that lstat provides, EACCES and ENOENT are the
       // most likely. For both cases, run the match with the raw glob
       // and return the result.
-      return minimatch(filePath, glob, { matchBase: true })
+      return minimatch(filePath, glob, { matchBase: true, dot: true })
     }
   })
 }
