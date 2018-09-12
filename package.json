@@ -1,6 +1,6 @@
 {
   "name": "graphql-config",
-  "version": "0.0.0-semantic-release",
+  "version": "0.0.0",
   "description": "The easiest way to configure your development environment with your GraphQL schema (supported by most tools, editors & IDEs)",
   "engines": {
     "node": ">= 6.0.0"
