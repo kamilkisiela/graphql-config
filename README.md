@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/prisma/graphql-config.svg?branch=master)](https://travis-ci.org/prisma/graphql-config) [![npm version](https://badge.fury.io/js/graphql-config.svg)](https://badge.fury.io/js/graphql-config)
 
-> The README reflects new [graphql-config protocol](specification.md).
+> The README reflects the new [graphql-config protocol](specification.md).
 > Old graphql-config-parser documentation [can be found here](https://github.com/graphcool/graphql-config/tree/graphql-config-parser)
 
 The easiest way to configure your development environment with your GraphQL schema (supported by most tools, editors &amp; IDEs)
