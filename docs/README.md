@@ -80,7 +80,7 @@ class GraphQLProjectConfig {
   configPath: string
   projectName?: string
 
-  resolveConfigPath(relativePath: string): string // resolves path relative to config
+  resolvePathRelativeToConfig(relativePath: string): string
   includesFile(filePath: string): boolean
 
   getSchema(): GraphQLSchema

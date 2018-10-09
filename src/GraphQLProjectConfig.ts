@@ -49,9 +49,14 @@ export class GraphQLProjectConfig {
     this.projectName = projectName
   }
 
-  resolveConfigPath(relativePath: string): string {
+  resolvePathRelativeToConfig(relativePath: string): string {
     return resolve(this.configDir, relativePath)
   }
+
+  /**
+   * @deprecated use resolvePathRelativeToConfig
+   */
+  resolveConfigPath = this.resolvePathRelativeToConfig;
 
   includesFile(fileUri: string): boolean {
     const filePath = fileUri.startsWith('file://') ?
@@ -69,7 +74,7 @@ export class GraphQLProjectConfig {
 
   getSchema(): GraphQLSchema {
     if (this.schemaPath) {
-      return readSchema(this.resolveConfigPath(this.schemaPath))
+      return readSchema(this.resolvePathRelativeToConfig(this.schemaPath))
     }
     throw new Error(
       `"schemaPath" is required but not provided in ${this.configPath}`
@@ -90,7 +95,7 @@ export class GraphQLProjectConfig {
   }
 
   get schemaPath(): string | null {
-    return this.config.schemaPath ? this.resolveConfigPath(this.config.schemaPath) : null
+    return this.config.schemaPath ? this.resolvePathRelativeToConfig(this.config.schemaPath) : null
   }
 
   get includes(): string[] {
