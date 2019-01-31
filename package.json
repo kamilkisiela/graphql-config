@@ -39,7 +39,7 @@
   "devDependencies": {
     "@types/graphql": "0.13.3",
     "@types/node": "9.4.6",
-    "@types/node-fetch": "1.6.7",
+    "@types/node-fetch": "2.1.4",
     "ava": "0.25.0",
     "cpx": "1.5.0",
     "graphql": "14.0.2",
