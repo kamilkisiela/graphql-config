@@ -8,8 +8,6 @@ import {
   buildClientSchema,
 } from 'graphql'
 
-import { GraphQLClient } from 'graphql-request'
-
 import {
   IntrospectionResult,
   GraphQLResolvedConfigData,

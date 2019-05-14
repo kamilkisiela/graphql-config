@@ -1,4 +1,4 @@
-import { GraphQLClient } from 'graphql-request'
+import 'cross-fetch/polyfill'
 import {
   GraphQLSchema,
   printSchema,
@@ -8,7 +8,7 @@ import {
 } from 'graphql'
 
 import { resolveEnvsInValues, getUsedEnvs } from './resolveRefString'
-import { IntrospectionResult } from '../../types'
+import { IntrospectionResult, ClientError } from '../../types'
 
 export type GraphQLConfigEnpointsSubscription = {
   url: string
@@ -127,17 +127,35 @@ export class GraphQLEndpoint {
     Object.assign(this, resolvedConfig)
   }
 
-  getClient(clientOptions: any = {}): GraphQLClient {
-    return new GraphQLClient(this.url, {
-      ...clientOptions,
-      headers: this.headers,
+  async resolveIntrospection(): Promise<IntrospectionResult> {
+    const response = await fetch(this.url, {
+      method: 'POST',
+      headers: Object.assign({ 'Content-Type': 'application/json' }, this.headers),
+      body: JSON.stringify({
+        query: introspectionQuery
+      })
     })
+
+    const result = await this.getResult(response)
+
+    if (response.ok && !result.errors && result.data) {
+      return { data: result.data } as IntrospectionResult
+    } else {
+      const error = typeof result === 'string' ? { error: result } : result
+      throw new ClientError(
+        { ...error, status: response.status, headers: response.headers },
+        { query: introspectionQuery, variables: {} },
+      )
+    }
   }
 
-  async resolveIntrospection(): Promise<IntrospectionResult> {
-    const client = this.getClient()
-    const data = await client.request(introspectionQuery)
-    return { data } as IntrospectionResult
+  async getResult(response: Response): Promise<any> {
+    const contentType = response.headers.get('Content-Type')
+    if (contentType && contentType.startsWith('application/json')) {
+      return response.json()
+    } else {
+      return response.text()
+    }
   }
 
   async resolveSchema(): Promise<GraphQLSchema> {
