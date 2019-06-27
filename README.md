@@ -56,6 +56,16 @@ or
 }
 ```
 
+### Specifying a tagged template name
+
+You may specify the name of the template literal tag that is used when defining GraphQL queries. The default is `gql`.
+
+```json
+{
+  "tagName": "gql"
+}
+```
+
 ### Specifying includes/excludes files
 
 You can specify which files are included/excluded using the corresponding options:

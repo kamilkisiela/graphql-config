@@ -14,10 +14,9 @@ export type GraphQLConfigExtensions = {
 
 export type GraphQLResolvedConfigData = {
   schemaPath: string,
-
+  tagName?: string,
   includes?: Array<string>,
   excludes?: Array<string>,
-
   extensions?: GraphQLConfigExtensions;
 }
 

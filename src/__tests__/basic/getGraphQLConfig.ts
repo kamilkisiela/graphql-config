@@ -16,6 +16,13 @@ test('returns a correct name', t => {
   t.deepEqual(testWithSchemaConfig.projectName, 'testWithSchema')
 })
 
+test("returns the correct tagName", t => {
+  const testWithSchemaConfig = config.getProjectConfig("testWithSchema")
+  t.deepEqual(testWithSchemaConfig.tagName, "gql")
+  const testWithTagNameConfig = config.getProjectConfig("testWithTagName")
+  t.deepEqual(testWithTagNameConfig.tagName, "graphql")
+})
+
 test('returns config for file', t => {
   const testWithSchemaConfig = config.getConfigForFile(
     resolve('./config/schema-a.graphql'),
