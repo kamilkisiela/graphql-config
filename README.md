@@ -62,7 +62,7 @@ You may specify the name of the template literal tag that is used when defining 
 
 ```json
 {
-  "tagName": "gql"
+  "tagNames": ["gql"],
 }
 ```
 

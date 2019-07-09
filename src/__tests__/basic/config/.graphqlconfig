@@ -3,9 +3,9 @@
     "testWithSchema": {
       "schemaPath": "__schema__/StarWarsSchema.graphql"
     },
-    "testWithTagName": {
+    "testWithTagNames": {
       "schemaPath": "__schema__/StarWarsSchema.graphql",
-      "tagName": "graphql"
+      "tagNames": ["graphql"]
     },
     "testWithoutSchema": {
     },

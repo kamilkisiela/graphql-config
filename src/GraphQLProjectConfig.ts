@@ -105,8 +105,8 @@ export class GraphQLProjectConfig {
     return this.config.extensions || {}
   }
 
-  get tagName(): string {
-    return this.config.tagName || 'gql'
+  get tagNames(): string[] {
+    return this.config.tagNames || ['gql'];
   }
 
   /*
