@@ -112,7 +112,7 @@ an endpoint for subscription, you can use expanded version:
 }
 ```
 
-> Note: do not save secure information in your .graphql file. Use [Environment variables](specification.md#referencing-environment-variables) for that like in the example above.
+> Note: do not save secure information in your .graphqlrc file. Use [Environment variables](specification.md#referencing-environment-variables) for that like in the example above.
 
 In case if you have multiple endpoints use the following syntax:
 
