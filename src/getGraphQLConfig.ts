@@ -1,19 +1,54 @@
-import { readConfig, validateConfig } from './utils'
-import { findGraphQLConfigFile } from './findGraphQLConfigFile'
+import cosmiconfig = require('cosmiconfig')
+import TypeScriptLoader from '@endemolshinegroup/cosmiconfig-typescript-loader'
+
+import { validateConfig } from './utils'
 import { GraphQLConfig } from './GraphQLConfig'
-import { GraphQLProjectConfig } from './GraphQLProjectConfig'
+import { GraphQLConfigData } from './types'
+import { ConfigNotFoundError } from './errors'
 
-export function getGraphQLConfig(rootDir: string = process.cwd()): GraphQLConfig {
-  const configPath = findGraphQLConfigFile(rootDir)
-  const config = readConfig(configPath)
+export async function getGraphQLConfig(rootDir = process.cwd()) {
+  const moduleName = 'graphql'
+  const explorer = cosmiconfig(moduleName, {
+    loaders: {
+      '.ts': {
+        async: TypeScriptLoader,
+      },
+      // legacy support for .graphqlconfig
+      [`.${moduleName}config`]: (cosmiconfig as any).loadJson,
+    },
+    searchPlaces: [
+      // default searchPlaces
+      'package.json',
+      `.${moduleName}rc`,
+      `.${moduleName}rc.json`,
+      `.${moduleName}rc.yaml`,
+      `.${moduleName}rc.yml`,
+      `.${moduleName}rc.js`,
+      `${moduleName}.config.js`,
+      // legacy support for .graphqlconfig[.y[a]ml]
+      `.${moduleName}config`,
+      `.${moduleName}config.yml`,
+      `.${moduleName}config.yaml`,
+    ],
+  })
+  const result = await explorer.search(rootDir)
+  if (!result) {
+    throw new ConfigNotFoundError([
+      `Config file not available in the provided config directory: ${rootDir}`,
+      'Please check the config directory.'
+    ].join('\n'))
+  }
+  const config = result.config as GraphQLConfigData
   validateConfig(config)
-
-  return new GraphQLConfig(config, configPath)
+  return new GraphQLConfig(config, result.filepath)
 }
 
-export function getGraphQLProjectConfig(
+export async function getGraphQLProjectConfig(
   rootDir?: string,
   projectName: string | undefined = process.env.GRAPHQL_CONFIG_PROJECT
-): GraphQLProjectConfig {
-  return getGraphQLConfig(rootDir).getProjectConfig(projectName)
+) {
+  const config = await getGraphQLConfig(rootDir)
+  if (config) {
+    return config.getProjectConfig(projectName)
+  }
 }

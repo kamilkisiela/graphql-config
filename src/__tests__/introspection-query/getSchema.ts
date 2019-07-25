@@ -1,10 +1,9 @@
 import test from 'ava'
-import { join } from 'path'
 import { printSchema } from 'graphql'
-import { getGraphQLConfig, GraphQLConfig } from '../../'
+import { getGraphQLConfig } from '../../'
 
-test('reads single schema', t => {
-  const config = getGraphQLConfig(__dirname)
+test('reads single schema', async t => {
+  const config = (await getGraphQLConfig(__dirname))!
 
   const typeDefs = `\
 schema {

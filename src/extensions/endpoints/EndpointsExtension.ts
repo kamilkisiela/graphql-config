@@ -4,7 +4,6 @@ import {
   printSchema,
   buildClientSchema,
   introspectionQuery,
-  IntrospectionQuery,
 } from 'graphql'
 
 import { resolveEnvsInValues, getUsedEnvs } from './resolveRefString'
@@ -31,16 +30,47 @@ export type GraphQLConfigEnpointsMap = {
 
 export type GraphQLConfigEnpointsData = GraphQLConfigEnpointsMapData
 
-export class GraphQLEndpointsExtension {
-  public raw: GraphQLConfigEnpointsMapData
-  private configPath
+export class GraphQLEndpoint {
+  public url: string
+  public headers: { [name: string]: string }
+  public subscription: GraphQLConfigEnpointsSubscription
 
+  constructor(resolvedConfig: GraphQLConfigEnpointConfig) {
+    Object.assign(this, resolvedConfig)
+  }
+
+  getClient(clientOptions: any = {}): GraphQLClient {
+    return new GraphQLClient(this.url, {
+      ...clientOptions,
+      headers: this.headers,
+    })
+  }
+
+  async resolveIntrospection(): Promise<IntrospectionResult> {
+    const client = this.getClient()
+    const data = await client.request(introspectionQuery)
+    return { data } as IntrospectionResult
+  }
+
+  async resolveSchema(): Promise<GraphQLSchema> {
+    const introspection = await this.resolveIntrospection()
+    return buildClientSchema(introspection.data)
+  }
+
+  async resolveSchemaSDL(): Promise<string> {
+    const schema = await this.resolveSchema()
+    return printSchema(schema)
+  }
+}
+
+export class GraphQLEndpointsExtension {
   constructor(
-    endpointConfig: GraphQLConfigEnpointsMapData,
-    configPath: string,
+    /**
+     * Endpoint config.
+     */
+    public raw: GraphQLConfigEnpointsMapData,
+    private configPath: string,
   ) {
-    this.raw = endpointConfig
-    this.configPath = configPath
   }
 
   getRawEndpointsMap(): GraphQLConfigEnpointsMap {
@@ -89,7 +119,7 @@ export class GraphQLEndpointsExtension {
     const rawEndpointsMap = this.getRawEndpointsMap()
     const endpointNames = Object.keys(rawEndpointsMap)
 
-    if (endpointName == null) {
+    if (endpointName === undefined) {
       if (endpointNames.length === 1) {
         endpointName = endpointNames[0]
       } else {
@@ -115,38 +145,5 @@ export class GraphQLEndpointsExtension {
     }
 
     return endpoint
-  }
-}
-
-export class GraphQLEndpoint {
-  public url: string
-  public headers: { [name: string]: string }
-  public subscription: GraphQLConfigEnpointsSubscription
-
-  constructor(resolvedConfig: GraphQLConfigEnpointConfig) {
-    Object.assign(this, resolvedConfig)
-  }
-
-  getClient(clientOptions: any = {}): GraphQLClient {
-    return new GraphQLClient(this.url, {
-      ...clientOptions,
-      headers: this.headers,
-    })
-  }
-
-  async resolveIntrospection(): Promise<IntrospectionResult> {
-    const client = this.getClient()
-    const data = await client.request(introspectionQuery)
-    return { data } as IntrospectionResult
-  }
-
-  async resolveSchema(): Promise<GraphQLSchema> {
-    const introspection = await this.resolveIntrospection()
-    return buildClientSchema(introspection.data)
-  }
-
-  async resolveSchemaSDL(): Promise<string> {
-    const schema = await this.resolveSchema()
-    return printSchema(schema)
   }
 }

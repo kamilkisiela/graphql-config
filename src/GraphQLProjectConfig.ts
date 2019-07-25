@@ -3,12 +3,7 @@ import { dirname, resolve, relative, join } from 'path'
 import {
   GraphQLSchema,
   printSchema,
-  introspectionQuery,
-  IntrospectionQuery,
-  buildClientSchema,
 } from 'graphql'
-
-import { GraphQLClient } from 'graphql-request'
 
 import {
   IntrospectionResult,
@@ -30,23 +25,19 @@ import {
   GraphQLEndpointsExtension
 } from './extensions'
 
-/*
- * this class can be used for simple usecases where there is no need in per-file API
+/**
+ * This class can be used for simple usecases where there is no need in per-file API.
  */
 export class GraphQLProjectConfig {
   public config: GraphQLResolvedConfigData
-  public configPath: string
-  public projectName?: string
 
   constructor(
     config: GraphQLConfigData,
-    configPath: string,
-    projectName?: string
+    public configPath: string,
+    public projectName?: string
   ) {
     validateConfig(config)
     this.config = loadProjectConfig(config, projectName)
-    this.configPath = configPath
-    this.projectName = projectName
   }
 
   resolveConfigPath(relativePath: string): string {
@@ -55,10 +46,10 @@ export class GraphQLProjectConfig {
 
   includesFile(fileUri: string): boolean {
     const filePath = fileUri.startsWith('file://') ?
-      fileUri.substr(7) : fileUri;
+      fileUri.substr(7) : fileUri
     const fullFilePath = filePath.startsWith(this.configDir) ?
-      filePath : resolve(join(this.configDir, filePath));
-    const relativePath = relative(this.configDir, fullFilePath);
+      filePath : resolve(join(this.configDir, filePath))
+    const relativePath = relative(this.configDir, fullFilePath)
     return (
       (
         !this.config.includes ||
@@ -105,17 +96,17 @@ export class GraphQLProjectConfig {
     return this.config.extensions || {}
   }
 
-  /*
-   extension related helper functions
+ /**
+  * extension related helper functions
   */
   get endpointsExtension(): GraphQLEndpointsExtension | null {
     if (!this.extensions.endpoints) {
       return null
     }
 
-    const {endpoints} = this.extensions
+    const { endpoints } = this.extensions
 
-    if (typeof endpoints !== 'object' || Array.isArray(endpoints)) {
+    if (Array.isArray(endpoints)) {
       throw new Error(`${this.configPath}: "endpoints" should be an object`)
     }
 
@@ -136,7 +127,7 @@ function loadProjectConfig(
 ) {
   const { projects, ...configBase } = config
 
-  if (projects == null || !Object.keys(projects).length) {
+  if (projects === undefined || !Object.keys(projects).length) {
     return config
   }
 

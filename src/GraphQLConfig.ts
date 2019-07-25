@@ -1,4 +1,4 @@
-import { resolve, dirname } from 'path'
+import { dirname } from 'path'
 import { validateConfig, writeConfig } from './utils'
 import { values } from 'lodash'
 
@@ -9,16 +9,11 @@ import {
 import { GraphQLProjectConfig } from './GraphQLProjectConfig'
 
 export class GraphQLConfig {
-  public config: GraphQLConfigData
-  public configPath: string
-
   constructor(
-    config: GraphQLConfigData,
-    configPath: string
+    public config: GraphQLConfigData,
+    public configPath: string
   ) {
     validateConfig(config)
-    this.config = config
-    this.configPath = configPath
   }
 
   get configDir() {
@@ -43,8 +38,8 @@ export class GraphQLConfig {
   }
 
   getProjectNameForFile(filePath: string): string | undefined {
-    const proj = this.getConfigForFile(filePath);
-    return proj && proj.projectName || undefined;
+    const proj = this.getConfigForFile(filePath)
+    return proj && proj.projectName || undefined
   }
 
   getProjects(): { [name: string]: GraphQLProjectConfig } | undefined {
@@ -59,10 +54,10 @@ export class GraphQLConfig {
   }
 
   saveConfig(newConfig: GraphQLConfigData, projectName?: string) {
-    let config
+    let config: GraphQLConfigData
     if (projectName) {
-      config = this.config;
-      config.projects = config.projects || {};
+      config = this.config
+      config.projects = config.projects || {}
       config.projects[projectName] = config.projects[projectName] || {}
       config.projects[projectName] = newConfig
     } else {

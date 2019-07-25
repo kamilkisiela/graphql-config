@@ -34,8 +34,7 @@ The easiest way to configure your development environment with your GraphQL sche
 
 Install [`graphql-cli`](https://github.com/graphcool/graphql-cli) and run `graphql init`. Answer a few simple questions and you are set up!
 
-You can either configure your GraphQL endpoint via a configuration file `.graphqlconfig`
-(or `.graphqlconfig.yaml`) which should be put into the root of your project
+You can configure your GraphQL endpoint via a configuration file via [cosmiconfig](https://github.com/davidtheclark/cosmiconfig#cosmiconfig) (e.g., `.graphqlrc`), which should be in the root of your project.
 
 ### Simplest use case
 
@@ -74,7 +73,7 @@ You can specify which files are included/excluded using the corresponding option
 
 #### Specifying endpoint info
 
-You may specify your endpoints info in `.graphqlconfig` which may be used by some tools.
+You may specify your endpoints info in a `.graphqlrc` file which may be used by some tools.
 The simplest case:
 
 ```json
@@ -113,7 +112,7 @@ an endpoint for subscription, you can use expanded version:
 }
 ```
 
-> Note: do not save secure information in .graphqlconfig file. Use [Environment variables](specification.md#referencing-environment-variables) for that like in the example above.
+> Note: do not save secure information in your .graphql file. Use [Environment variables](specification.md#referencing-environment-variables) for that like in the example above.
 
 In case if you have multiple endpoints use the following syntax:
 

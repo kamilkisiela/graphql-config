@@ -1,6 +1,6 @@
 # GraphQL Configuration
 
-There are many ways to configure your application to use GraphQL, and while it is often enough to specify configuration options directly in your application code, maintaining and understanding the hard-coded configuration options may become a challenge as the scale grows. We recommend configuring your application with a `.graphqlconfig` file that contains commonly needed GraphQL-related artifacts.
+There are many ways to configure your application to use GraphQL, and while it is often enough to specify configuration options directly in your application code, maintaining and understanding the hard-coded configuration options may become a challenge as the scale grows. We recommend configuring your application with a `.graphqlrc` file that contains commonly needed GraphQL-related artifacts.
 
 ## GraphQL Configuration Format
 
@@ -47,7 +47,7 @@ Usually, for a simple GraphQL applications, the only required configuration is a
 }
 ```
 
-For multiple apps with isolated directories, there are mainly two ways to set up the configuration. Each app can either use the `projects` property to specify each application's configuration, or have a separate `.graphqlconfig` file for each project root.
+For multiple apps with isolated directories, there are mainly two ways to set up the configuration. Each app can either use the `projects` property to specify each application's configuration, or have a separate `.graphqlrc` file for each project root.
 ```json
 {
   "projects": {
@@ -61,10 +61,10 @@ For multiple apps with isolated directories, there are mainly two ways to set up
 }
 ```
 
-Or each app can have a separate `.graphqlconfig` file per each application and/or directories:
+Or each app can have a separate `.graphqlrc` file per each application and/or directories:
 ```
-./appA/.graphqlconfig
-./appB/.graphqlconfig
+./appA/.graphql
+./appB/.graphql
 ```
 
 ## Default Configuration Properties
@@ -115,7 +115,7 @@ Since projectA and projectB share the same schema file, we can push the `schemaP
 
 Additionally, we'd like to treat the `extensions` property as a sandbox for improving the overall GraphQL configuration. If there is a configuration option that you think will be useful for general purposes, please let us know! Meanwhile, take advantage of this 'extensions' for testing purposes.
 
-For example, some application may choose to build using Webpack and need to specify Webpack-related configurations in GraphQL configuration. Also, they may need to process additional file types other than `.graphql`. Below suggests one way to configure these options using 'extensions':
+For example, some application may choose to build using Webpack and need to specify Webpack-related configurations in GraphQL configuration. Also, they may need to process additional file types other than `.graphqlrc`. Below suggests one way to configure these options using 'extensions':
 
 ```
 {
@@ -194,7 +194,7 @@ Additional header values could be added if needed:
 }
 ```
 
-**Note**: Don't specify passwords, tokens, etc. inside your `.graphqlconfig`. Use [Environment variables](#referencing-environment-variables) for that.
+**Note**: Don't specify passwords, tokens, etc. inside your `.graphqlrc` file. Use [Environment variables](#referencing-environment-variables) for that.
 
 ### Referencing Environment Variables
 
@@ -295,7 +295,7 @@ Sometimes a GraphQL application wants to either define an additional set of vali
 // In customRules.js,
 export const customRules: Array<(context: ValidationContext) => any> = { ... };
 
-// And in .graphqlconfig, specify where the custom rules are:
+// And in .graphql, specify where the custom rules are:
 {
   "schemaPath": "./schema.graphql",
   "extensions": {

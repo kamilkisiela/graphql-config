@@ -11,25 +11,26 @@ export function resolveRefString(str: string, values?: object): string {
   return res
 }
 
-export function resolveEnvsInValues<T extends { [key: string]: any }>(
+export function resolveEnvsInValues<T extends Record<string, any>>(
   config: T,
-  env: { [name: string]: string | undefined },
+  env: Record<string, string | undefined>,
 ): T {
-  for (let key in config) {
+  for (const key in config) {
     const value = config[key]
+    // tslint:disable-next-line: strict-type-predicates
     if (typeof value === 'string') {
-      config[key] = resolveRefString(value, { env })
-    } else if (typeof value === 'object') {
+      config[key] = resolveRefString(value, { env }) as any
+    } else {
       config[key] = resolveEnvsInValues(value, env)
     }
   }
   return config
 }
 
-export function getUsedEnvs(config: any): { [name: string]: string } {
+export function getUsedEnvs(config: any): Record<string, string> {
   const result = {}
 
-  const traverse = val => {
+  const traverse = (val: any) => {
     if (typeof val === 'string') {
       const rawRefs = parse(val).rawRefs
       for (let ref of rawRefs) {
@@ -85,7 +86,7 @@ function parse(str: string): { strings: string[]; rawRefs: string[] } {
   const rawRefs: string[] = []
 
   let prevIdx = 0
-  let match
+  let match: RegExpExecArray | null
   // tslint:disable-next-line:no-conditional-assignment
   while ((match = regex.exec(str)) !== null) {
     if (match.index > 0 && str[match.index - 1] === '\\') {

@@ -16,25 +16,8 @@ import {
 
 import { GraphQLConfigData, IntrospectionResult } from './types'
 
-export function readConfig(configPath: string): GraphQLConfigData {
-  let config
-  try {
-    const rawConfig = readFileSync(configPath, 'utf-8')
-    if (configPath.endsWith('.yaml') || configPath.endsWith('.yml')) {
-      config = yaml.safeLoad(rawConfig)
-    } else {
-      config = JSON.parse(rawConfig)
-    }
-  } catch (error) {
-    error.message = `Parsing ${configPath} file has failed.\n` + error.message
-    throw error
-  }
-
-  return config
-}
-
 export function writeConfig(configPath: string, config: GraphQLConfigData) {
-  let configContents
+  let configContents: string
   if (configPath.endsWith('.yaml') || configPath.endsWith('.yml')) {
     configContents = yaml.safeDump(config)
   } else {
@@ -59,7 +42,6 @@ export function matchesGlobs(
   return (globs || []).some(glob => {
     try {
       const globStat = lstatSync(join(configDir, glob))
-      const newGlob = glob.length === 0 ? '.' : glob
       const globToMatch = globStat.isDirectory() ? `${glob}/**` : glob
       return minimatch(filePath, globToMatch, { matchBase: true })
     } catch (error) {
@@ -93,8 +75,10 @@ export function schemaToIntrospection(schema: GraphQLSchema) {
   return graphql(schema, introspectionQuery) as Promise<IntrospectionResult>
 }
 
-// Predicate for errors/data can be removed after typescript 2.7.
-// See: https://github.com/Microsoft/TypeScript/pull/19513
+/**
+ * Predicate for errors/data can be removed after typescript 2.7.
+ * @see https://github.com/Microsoft/TypeScript/pull/19513
+ */
 export function introspectionToSchema(introspection: IntrospectionResult | (IntrospectionQuery & { errors: undefined, data: undefined; })) {
   if (introspection.errors != null) {
     throw new Error('Introspection result contains errors')
@@ -103,7 +87,7 @@ export function introspectionToSchema(introspection: IntrospectionResult | (Intr
   return buildClientSchema(introspection.data ? introspection.data : introspection as IntrospectionQuery)
 }
 
-export function readSchema(path): GraphQLSchema {
+export function readSchema(path: string) {
   // FIXME: prefix error
   switch (extname(path)) {
     case '.graphql':
@@ -128,8 +112,8 @@ function valueToSchema(
     return buildSchema(schema)
   } else if (schema instanceof Source) {
     return buildSchema(schema)
-  } else if (typeof schema === 'object' && !Array.isArray(schema)) {
-    return introspectionToSchema(schema as IntrospectionResult)
+  } else if (!Array.isArray(schema)) {
+    return introspectionToSchema(schema)
   }
   throw new Error('Can not convert data to a schema')
 }
@@ -174,7 +158,7 @@ export function getSchemaExtensions(path: string): { [name: string]: string } {
       const extensions = {}
       for (const line of data.split('\n')) {
         const result = /# ([^:]+): (.+)$/.exec(line)
-        if (result == null) {
+        if (result === null) {
           break
         }
         const [_, key, value] = result

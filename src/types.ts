@@ -1,5 +1,5 @@
 import { IntrospectionQuery } from 'graphql'
-import { GraphQLConfigEnpointsData } from './extensions/';
+import { GraphQLConfigEnpointsData } from './extensions/'
 
 export type IntrospectionResult = {
   data: IntrospectionQuery

@@ -3,11 +3,11 @@ import { graphql, introspectionQuery } from 'graphql'
 import { GraphQLProjectConfig } from '../../'
 import { serveSchema } from '../utils'
 
-test.before(async t => {
-  return await serveSchema()
+test.before(() => {
+  return serveSchema()
 })
 
-const confPath = `${__dirname}/.graphqlconfig`
+const confPath = `${__dirname}/.graphql`
 
 test('getEndpointsMap when endpoint is string url', async t => {
   const configData = {
@@ -118,7 +118,7 @@ test('resolveSchemaFromEndpoint HTTP', async t => {
 
   const config = new GraphQLProjectConfig(configData, confPath, undefined)
   if (!config.endpointsExtension) {
-    throw 'endpointExtension can\'t be empty'
+    throw new Error('endpointExtension can\'t be empty')
   }
   const schema = await config.endpointsExtension
     .getEndpoint('dev')

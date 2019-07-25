@@ -16,9 +16,10 @@
     "prepublish": "npm run build",
     "clean": "rimraf lib",
     "build": "npm run clean && tsc",
-    "copy-test-assets": "cpx \"src/**/{.graphqlconfig*,*.graphql,*.json}\" lib",
+    "copy-test-assets": "cpx \"src/**/{.graphqlrc*,*.graphql,*.json,*.md,*.snap}\" lib",
     "test-only": "npm run build && npm run copy-test-assets && ava --verbose lib/__tests__/**/*.js --serial",
-    "test": "tslint src/**/*.ts && npm run test-only"
+    "test": "tslint src/**/*.ts && npm run test-only",
+    "commit": "git-cz"
   },
   "repository": {
     "type": "git",
@@ -37,25 +38,38 @@
   },
   "homepage": "https://github.com/graphcool/graphql-config#readme",
   "devDependencies": {
-    "@types/graphql": "0.13.3",
-    "@types/node": "9.4.6",
-    "@types/node-fetch": "1.6.7",
-    "ava": "0.25.0",
+    "@types/cosmiconfig": "^5.0.3",
+    "@types/graphql": "14.2.3",
+    "@types/js-yaml": "^3.12.1",
+    "@types/lodash": "^4.14.136",
+    "@types/minimatch": "^3.0.3",
+    "@types/node": "12.6.8",
+    "@types/node-fetch": "2.5.0",
+    "ava": "2.2.0",
+    "commitizen": "^4.0.3",
     "cpx": "1.5.0",
-    "graphql": "14.0.2",
-    "rimraf": "2.6.2",
-    "tslint": "5.9.1",
-    "tslint-config-standard": "7.0.0",
-    "typescript": "2.7.2"
+    "cz-conventional-changelog": "^3.0.2",
+    "graphql": "14.4.2",
+    "rimraf": "2.6.3",
+    "tslint": "5.18.0",
+    "tslint-config-standard": "8.0.1",
+    "typescript": "3.5.3"
   },
   "dependencies": {
+    "@endemolshinegroup/cosmiconfig-typescript-loader": "^1.0.1",
+    "cosmiconfig": "^5.2.1",
     "graphql-import": "^0.7.1",
-    "graphql-request": "^1.5.0",
+    "graphql-request": "^1.8.2",
     "js-yaml": "^3.13.1",
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.15",
     "minimatch": "^3.0.4"
   },
   "peerDependencies": {
     "graphql": "^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }

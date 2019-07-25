@@ -3,7 +3,6 @@
 The library exports the following entities:
 
 **Functions:**
-- [`findGraphQLConfigFile`](#findgraphqlconfigfile)
 - [`getGraphQLConfig`](#getgraphqlconfig)
 - [`getGraphQLProjectConfig`](#getgraphqlprojectconfig)
 
@@ -12,20 +11,10 @@ The library exports the following entities:
 - [`GraphQLProjectConfig`](#graphqlprojectconfig)
 - [`GraphQLEndpointExtension`](#graphqlendpointsextension)
 
-Advanced .graphqlconfig may contain a few `projects` with `includes/excludes` configured,
+Advanced `.graphqlrc` file may contain a few `projects` with `includes/excludes` configured,
 so if your tool works on per-file basis use `getGraphQLConfig` and `GraphQLConfig`.
 For simpler use-cases when your tool needs only a schema `getGraphQLProjectConfig` and
 `GraphQLProjectConfig` should be used.
-
-## `findGraphQLConfigFile`
-
-`function findGraphQLConfigFile(filePath: string): string`
-
-Starting from `filePath` and up the directory tree returns path to the first reached `.graphqlconfig`
-or `.graphqlconfig.yaml` file. Throws `ConfigNotFoundError` error when config is not found.
-
-**Arguments**:
-  - `filePath` - file path or directory to start search from
 
 ## `getGraphQLConfig`
 
