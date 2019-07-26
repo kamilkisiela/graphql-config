@@ -9,7 +9,9 @@
       "esnext.asynciterable"
     ],
     "outDir": "lib",
-    "declaration": true
+    "declaration": true,
+    "noEmitHelpers": true,
+    "importHelpers": true
   },
   "exclude": [
     "node_modules",

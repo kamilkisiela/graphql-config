@@ -18,7 +18,7 @@ test('returns a correct name', t => {
 
 test('returns config for file', t => {
   const testWithSchemaConfig = config.getConfigForFile(
-    resolve('./config/schema-a.graphql'),
+    resolve('./config/schema-a.gql'),
   )
   if (testWithSchemaConfig) {
     t.deepEqual(testWithSchemaConfig.projectName, 'testWithSchema')
@@ -34,7 +34,7 @@ test('returns a correct root dir', t => {
 test('returns a correct schema path', t => {
   t.deepEqual(
     config.getProjectConfig('testWithSchema').schemaPath,
-    join(CONFIG_DIR, '__schema__/StarWarsSchema.graphql'),
+    join(CONFIG_DIR, '__schema__/StarWarsSchema.gql'),
   )
   t.deepEqual(config.getProjectConfig('testWithoutSchema').schemaPath, null)
 })

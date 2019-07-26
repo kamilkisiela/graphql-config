@@ -20,11 +20,11 @@ export class GraphQLConfig {
     return dirname(this.configPath)
   }
 
-  getProjectConfig(projectName?: string): GraphQLProjectConfig {
+  getProjectConfig(projectName?: string) {
     return new GraphQLProjectConfig(this.config, this.configPath, projectName)
   }
 
-  getConfigForFile(filePath: string): GraphQLProjectConfig | undefined {
+  getConfigForFile(filePath: string) {
     const { projects } = this.config
 
     if (!projects || Object.keys(projects).length === 0) {
@@ -37,13 +37,13 @@ export class GraphQLConfig {
     ) || undefined
   }
 
-  getProjectNameForFile(filePath: string): string | undefined {
+  getProjectNameForFile(filePath: string) {
     const proj = this.getConfigForFile(filePath)
     return proj && proj.projectName || undefined
   }
 
-  getProjects(): { [name: string]: GraphQLProjectConfig } | undefined {
-    const result = {}
+  getProjects() {
+    const result: Record<string, GraphQLProjectConfig> = {}
     for (const projectName in (this.config.projects || {})) {
       result[projectName] = this.getProjectConfig(projectName)
     }

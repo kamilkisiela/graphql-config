@@ -3,7 +3,7 @@ import { printSchema } from 'graphql'
 import { getGraphQLConfig } from '../../'
 
 test('reads single schema', async t => {
-  const config = (await getGraphQLConfig(__dirname))!
+  const config = await getGraphQLConfig(__dirname)
 
   const typeDefs = `\
 schema {

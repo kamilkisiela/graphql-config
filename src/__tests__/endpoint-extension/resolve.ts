@@ -7,7 +7,7 @@ test.before(() => {
   return serveSchema()
 })
 
-const confPath = `${__dirname}/.graphql`
+const confPath = `${__dirname}/.graphqlrc`
 
 test('getEndpointsMap when endpoint is string url', async t => {
   const configData = {

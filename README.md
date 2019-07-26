@@ -10,9 +10,11 @@ The easiest way to configure your development environment with your GraphQL sche
 ## Supported by...
 
 ### Language Services
+
 * [graphql-language-service](https://github.com/graphql/graphql-language-service) - An interface for building GraphQL language services for IDEs (_pending_)
 
 ### Editors
+
 * [js-graphql-intellij-plugin 2.0](https://github.com/jimkyndemeyer/js-graphql-intellij-plugin) - GraphQL language support for WebStorm, IntelliJ IDEA and other IDEs based on the IntelliJ Platform.
 * [atom-language-graphql](https://github.com/rmosolgo/language-graphql) - GraphQL support for Atom text editor (_pending_)
 * [vscode-graphql](https://github.com/stephen/vscode-graphql) - GraphQL support for VSCode text editor
@@ -34,7 +36,7 @@ The easiest way to configure your development environment with your GraphQL sche
 
 Install [`graphql-cli`](https://github.com/graphcool/graphql-cli) and run `graphql init`. Answer a few simple questions and you are set up!
 
-You can configure your GraphQL endpoint via a configuration file via [cosmiconfig](https://github.com/davidtheclark/cosmiconfig#cosmiconfig) (e.g., `.graphqlrc`), which should be in the root of your project.
+You can configure your GraphQL endpoint via a [cosmiconfig](https://github.com/davidtheclark/cosmiconfig#cosmiconfig) file (e.g., `.graphqlrc`), which should be in the root of your project.
 
 ### Simplest use case
 
@@ -43,7 +45,7 @@ results or corresponding SDL document
 
 ```json
 {
-  "schemaPath": "schema.graphql"
+  "schemaPath": "schema.gql"
 }
 ```
 
@@ -61,8 +63,8 @@ You can specify which files are included/excluded using the corresponding option
 
 ```json
 {
-  "schemaPath": "schema.graphql",
-  "includes": ["*.graphql"],
+  "schemaPath": "schema.gql",
+  "includes": ["*.gql"],
   "excludes": ["temp/**"]
 }
 ```
@@ -78,7 +80,7 @@ The simplest case:
 
 ```json
 {
-  "schemaPath": "schema.graphql",
+  "schemaPath": "schema.gql",
   "extensions": {
     "endpoints": {
       "dev": "https://example.com/graphql"
@@ -92,7 +94,7 @@ an endpoint for subscription, you can use expanded version:
 
 ```json
 {
-  "schemaPath": "schema.graphql",
+  "schemaPath": "schema.gql",
   "extensions": {
     "endpoints": {
       "dev": {
@@ -118,7 +120,7 @@ In case if you have multiple endpoints use the following syntax:
 
 ```json
 {
-  "schemaPath": "schema.graphql",
+  "schemaPath": "schema.gql",
   "extensions": {
     "endpoints": {
       "prod": {
@@ -139,6 +141,7 @@ In case if you have multiple endpoints use the following syntax:
 ```
 
 ### Multi-project configuration (advanced)
+
 > TBD
 
 __Refer to [specification use-cases](specification.md#use-cases) for details__
@@ -148,7 +151,6 @@ __Refer to [specification use-cases](specification.md#use-cases) for details__
 This project aims to be provide a unifying configuration file format to configure your GraphQL schema in your development environment.
 
 Additional to the format specification, it provides the [`graphql-config`](#graphql-config-api) library, which is used by [all supported tools and editor plugins](#supported-by). The library reads your provided configuration and passes the actual GraphQL schema along to the tool which called it.
-
 
 ## `graphql-config` API
 
@@ -188,4 +190,4 @@ const schema = config.getConfigForFile(filename).getSchema()
 
 Join our [Slack community](http://slack.graph.cool/) if you run into issues or have questions. We love talking to you!
 
-![](http://i.imgur.com/5RHR6Ku.png)
+![We love open source](http://i.imgur.com/5RHR6Ku.png)

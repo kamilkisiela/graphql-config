@@ -1,4 +1,4 @@
-# import User from "./schema-b2.graphql"
+# import User from "./schema-b2.gql"
 
 type Query {
   hello: String!

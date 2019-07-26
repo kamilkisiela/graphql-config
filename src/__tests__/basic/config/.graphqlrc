@@ -1,15 +1,15 @@
 {
   "projects": {
     "testWithSchema": {
-      "schemaPath": "__schema__/StarWarsSchema.graphql"
+      "schemaPath": "__schema__/StarWarsSchema.gql"
     },
     "testWithoutSchema": {
     },
     "testSchemaA": {
-      "schemaPath": "schema-a.graphql"
+      "schemaPath": "schema-a.gql"
     },
     "testSchemaB": {
-      "schemaPath": "schema-b1.graphql"
+      "schemaPath": "schema-b1.gql"
     }
   }
 }

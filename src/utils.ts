@@ -87,9 +87,14 @@ export function introspectionToSchema(introspection: IntrospectionResult | (Intr
   return buildClientSchema(introspection.data ? introspection.data : introspection as IntrospectionQuery)
 }
 
+const unsupportedSchemaError = new Error(
+  'Unsupported schema file extention. Only ".gql", ".graphql" and ".json" are supported',
+)
+
 export function readSchema(path: string) {
   // FIXME: prefix error
   switch (extname(path)) {
+    case '.gql':
     case '.graphql':
       return valueToSchema(importSchema(path))
     case '.json':
@@ -97,9 +102,7 @@ export function readSchema(path: string) {
       const introspection = JSON.parse(data)
       return valueToSchema(introspection)
     default:
-      throw new Error(
-        'Unsupported schema file extention. Only ".graphql" and ".json" are supported',
-      )
+      throw unsupportedSchemaError
   }
 }
 
@@ -108,11 +111,14 @@ function valueToSchema(
 ): GraphQLSchema {
   if (schema instanceof GraphQLSchema) {
     return schema
-  } else if (typeof schema === 'string') {
+  }
+  if (typeof schema === 'string') {
     return buildSchema(schema)
-  } else if (schema instanceof Source) {
+  }
+  if (schema instanceof Source) {
     return buildSchema(schema)
-  } else if (!Array.isArray(schema)) {
+  }
+  if (!Array.isArray(schema)) {
     return introspectionToSchema(schema)
   }
   throw new Error('Can not convert data to a schema')
@@ -126,6 +132,7 @@ export async function writeSchema(
   schema = valueToSchema(schema)
   let data: string
   switch (extname(path)) {
+    case '.gql':
     case '.graphql':
       data = ''
       if (schemaExtensions) {
@@ -144,9 +151,7 @@ export async function writeSchema(
       data = JSON.stringify(introspection, null, 2)
       break
     default:
-      throw new Error(
-        'Unsupported schema file extention. Only ".graphql" and ".json" are supported',
-      )
+      throw unsupportedSchemaError
   }
   writeFileSync(path, data, 'utf-8')
 }
@@ -154,6 +159,7 @@ export async function writeSchema(
 export function getSchemaExtensions(path: string): { [name: string]: string } {
   const data = readFileSync(path, 'utf-8')
   switch (extname(path)) {
+    case '.gql':
     case '.graphql':
       const extensions = {}
       for (const line of data.split('\n')) {
@@ -172,8 +178,6 @@ export function getSchemaExtensions(path: string): { [name: string]: string } {
       }
       return introspection.extensions['graphql-config'] || {}
     default:
-      throw new Error(
-        'Unsupported schema file extention. Only ".graphql" and ".json" are supported',
-      )
+      throw unsupportedSchemaError
   }
 }

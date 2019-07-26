@@ -16,7 +16,7 @@
     "prepublish": "npm run build",
     "clean": "rimraf lib",
     "build": "npm run clean && tsc",
-    "copy-test-assets": "cpx \"src/**/{.graphqlrc*,*.graphql,*.json,*.md,*.snap}\" lib",
+    "copy-test-assets": "cpx \"src/**/{.graphqlrc*,*.gql,*.json,*.md,*.snap}\" lib",
     "test-only": "npm run build && npm run copy-test-assets && ava --verbose lib/__tests__/**/*.js --serial",
     "test": "tslint src/**/*.ts && npm run test-only",
     "commit": "git-cz"
@@ -27,6 +27,7 @@
   },
   "keywords": [
     "graphql",
+    "gql",
     "config",
     "relay",
     "apollo"
@@ -62,7 +63,8 @@
     "graphql-request": "^1.8.2",
     "js-yaml": "^3.13.1",
     "lodash": "^4.17.15",
-    "minimatch": "^3.0.4"
+    "minimatch": "^3.0.4",
+    "ts-helpers": "^1.1.2"
   },
   "peerDependencies": {
     "graphql": "^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0"

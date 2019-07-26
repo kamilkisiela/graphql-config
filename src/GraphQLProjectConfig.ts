@@ -1,15 +1,10 @@
 import { dirname, resolve, relative, join } from 'path'
 
-import {
-  GraphQLSchema,
-  printSchema,
-} from 'graphql'
+import { printSchema } from 'graphql'
 
 import {
-  IntrospectionResult,
   GraphQLResolvedConfigData,
   GraphQLConfigData,
-  GraphQLConfigExtensions,
 } from './types'
 
 import {
@@ -40,11 +35,11 @@ export class GraphQLProjectConfig {
     this.config = loadProjectConfig(config, projectName)
   }
 
-  resolveConfigPath(relativePath: string): string {
+  resolveConfigPath(relativePath: string) {
     return resolve(this.configDir, relativePath)
   }
 
-  includesFile(fileUri: string): boolean {
+  includesFile(fileUri: string) {
     const filePath = fileUri.startsWith('file://') ?
       fileUri.substr(7) : fileUri
     const fullFilePath = filePath.startsWith(this.configDir) ?
@@ -58,7 +53,7 @@ export class GraphQLProjectConfig {
     )
   }
 
-  getSchema(): GraphQLSchema {
+  getSchema() {
     if (this.schemaPath) {
       return readSchema(this.resolveConfigPath(this.schemaPath))
     }
@@ -67,11 +62,11 @@ export class GraphQLProjectConfig {
     )
   }
 
-  async resolveIntrospection(): Promise<IntrospectionResult> {
+  async resolveIntrospection() {
     return schemaToIntrospection(this.getSchema())
   }
 
-  getSchemaSDL(): string {
+  getSchemaSDL() {
     return printSchema(this.getSchema())
   }
 
@@ -84,22 +79,22 @@ export class GraphQLProjectConfig {
     return this.config.schemaPath ? this.resolveConfigPath(this.config.schemaPath) : null
   }
 
-  get includes(): string[] {
+  get includes() {
     return (this.config.includes || []).map(normalizeGlob)
   }
 
-  get excludes(): string[] {
+  get excludes() {
     return (this.config.excludes || []).map(normalizeGlob)
   }
 
-  get extensions(): GraphQLConfigExtensions {
+  get extensions() {
     return this.config.extensions || {}
   }
 
  /**
   * extension related helper functions
   */
-  get endpointsExtension(): GraphQLEndpointsExtension | null {
+  get endpointsExtension() {
     if (!this.extensions.endpoints) {
       return null
     }
