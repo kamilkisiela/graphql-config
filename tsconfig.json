@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
+    "module": "esnext",
     "strictNullChecks": true,
     "target": "es5",
     "lib": [
@@ -9,14 +9,16 @@
       "esnext.asynciterable"
     ],
     "outDir": "lib",
-    "declaration": true
+    "declaration": true,
+    "importHelpers": true,
+    "moduleResolution": "node",
+    "esModuleInterop": true
   },
   "exclude": [
     "node_modules",
     "dist"
   ],
   "include": [
-    "./src/**/*.ts",
-    "./custom.d.ts"
+    "./src/index.ts"
   ]
 }

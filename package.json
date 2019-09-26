@@ -1,29 +1,50 @@
 {
   "name": "graphql-config",
-  "version": "0.0.0",
+  "version": "2.2.1",
   "description": "The easiest way to configure your development environment with your GraphQL schema (supported by most tools, editors & IDEs)",
-  "engines": {
-    "node": ">= 6.0.0"
-  },
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
-  "files": [
-    "LICENSE",
-    "README.md",
-    "lib/"
-  ],
+  "main": "dist/index.js",
+  "module": "dist/graphql-config.esm.js",
+  "typings": "dist/index.d.ts",
+  "sideEffects": false,
   "scripts": {
-    "prepublish": "npm run build",
-    "clean": "rimraf lib",
-    "build": "npm run clean && tsc",
-    "copy-test-assets": "cpx \"src/**/{.graphqlconfig*,*.graphql,*.json}\" lib",
-    "test-only": "npm run build && npm run copy-test-assets && ava --verbose lib/__tests__/**/*.js --serial",
-    "test": "tslint src/**/*.ts && npm run test-only"
+    "prepublish": "yarn build",
+    "clean": "rimraf dist",
+    "prebuild": "yarn clean",
+    "build": "tsdx build",
+    "format": "prettier --write '{src,test}/**/*.{ts,graphql}'",
+    "test": "tsdx test",
+    "precommit": "lint-staged"
+  },
+  "peerDependencies": {
+    "graphql": "^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0"
+  },
+  "dependencies": {
+    "graphql-import": "0.7.1",
+    "graphql-request": "1.8.2",
+    "js-yaml": "3.13.1",
+    "lodash": "4.17.15",
+    "minimatch": "3.0.4"
+  },
+  "devDependencies": {
+    "@types/jest": "24.0.18",
+    "@types/nock": "11.1.0",
+    "@types/node": "12.7.8",
+    "@types/node-fetch": "2.5.2",
+    "graphql": "14.5.8",
+    "husky": "3.0.5",
+    "lint-staged": "9.4.0",
+    "nock": "11.3.5",
+    "prettier": "1.18.2",
+    "rimraf": "3.0.0",
+    "tsdx": "0.9.2",
+    "tslib": "1.10.0",
+    "typescript": "3.6.3"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/graphcool/graphql-config.git"
+    "url": "https://github.com/kamilkisiela/graphql-config.git"
   },
+  "homepage": "https://github.com/kamilkisiela/graphql-config#readme",
   "keywords": [
     "graphql",
     "config",
@@ -32,30 +53,13 @@
   ],
   "author": "Johannes Schickling <johannes@graph.cool>",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/graphcool/graphql-config/issues"
+  "lint-staged": {
+    "*.{ts,graphql}": [
+      "prettier --write",
+      "git add"
+    ]
   },
-  "homepage": "https://github.com/graphcool/graphql-config#readme",
-  "devDependencies": {
-    "@types/graphql": "0.13.3",
-    "@types/node": "9.4.6",
-    "@types/node-fetch": "1.6.7",
-    "ava": "0.25.0",
-    "cpx": "1.5.0",
-    "graphql": "14.0.2",
-    "rimraf": "2.6.2",
-    "tslint": "5.9.1",
-    "tslint-config-standard": "7.0.0",
-    "typescript": "2.7.2"
-  },
-  "dependencies": {
-    "graphql-import": "^0.7.1",
-    "graphql-request": "^1.5.0",
-    "js-yaml": "^3.13.1",
-    "lodash": "^4.17.4",
-    "minimatch": "^3.0.4"
-  },
-  "peerDependencies": {
-    "graphql": "^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0"
+  "engines": {
+    "node": ">= 6.0.0"
   }
 }

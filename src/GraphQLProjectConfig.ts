@@ -1,22 +1,11 @@
-import { dirname, resolve, relative, join } from 'path'
-
-import {
-  GraphQLSchema,
-  printSchema,
-  introspectionQuery,
-  IntrospectionQuery,
-  buildClientSchema,
-} from 'graphql'
-
-import { GraphQLClient } from 'graphql-request'
-
+import {dirname, resolve, relative, join} from 'path';
+import {GraphQLSchema, printSchema} from 'graphql';
 import {
   IntrospectionResult,
   GraphQLResolvedConfigData,
   GraphQLConfigData,
   GraphQLConfigExtensions,
-} from './types'
-
+} from './types';
 import {
   matchesGlobs,
   mergeConfigs,
@@ -24,85 +13,85 @@ import {
   validateConfig,
   schemaToIntrospection,
   normalizeGlob,
-} from './utils'
-
-import {
-  GraphQLEndpointsExtension
-} from './extensions'
+} from './utils';
+import {GraphQLEndpointsExtension} from './extensions';
 
 /*
  * this class can be used for simple usecases where there is no need in per-file API
  */
 export class GraphQLProjectConfig {
-  public config: GraphQLResolvedConfigData
-  public configPath: string
-  public projectName?: string
+  public config: GraphQLResolvedConfigData;
+  public configPath: string;
+  public projectName?: string;
 
   constructor(
     config: GraphQLConfigData,
     configPath: string,
-    projectName?: string
+    projectName?: string,
   ) {
-    validateConfig(config)
-    this.config = loadProjectConfig(config, projectName)
-    this.configPath = configPath
-    this.projectName = projectName
+    validateConfig(config);
+    this.config = loadProjectConfig(config, projectName);
+    this.configPath = configPath;
+    this.projectName = projectName;
   }
 
   resolveConfigPath(relativePath: string): string {
-    return resolve(this.configDir, relativePath)
+    return resolve(this.configDir, relativePath);
   }
 
   includesFile(fileUri: string): boolean {
-    const filePath = fileUri.startsWith('file://') ?
-      fileUri.substr(7) : fileUri;
-    const fullFilePath = filePath.startsWith(this.configDir) ?
-      filePath : resolve(join(this.configDir, filePath));
+    const filePath = fileUri.startsWith('file://')
+      ? fileUri.substr(7)
+      : fileUri;
+    const fullFilePath = filePath.startsWith(this.configDir)
+      ? filePath
+      : resolve(join(this.configDir, filePath));
     const relativePath = relative(this.configDir, fullFilePath);
     return (
-      (
-        !this.config.includes ||
-        matchesGlobs(relativePath, this.configDir, this.includes)
-      ) && !matchesGlobs(relativePath, this.configDir, this.excludes)
-    )
+      (!this.config.includes ||
+        matchesGlobs(relativePath, this.configDir, this.includes)) &&
+      !matchesGlobs(relativePath, this.configDir, this.excludes)
+    );
   }
 
   getSchema(): GraphQLSchema {
     if (this.schemaPath) {
-      return readSchema(this.resolveConfigPath(this.schemaPath))
+      return readSchema(this.resolveConfigPath(this.schemaPath));
     }
     throw new Error(
-      `"schemaPath" is required but not provided in ${this.configPath}`
-    )
+      `"schemaPath" is required but not provided in ${this.configPath}`,
+    );
   }
 
   async resolveIntrospection(): Promise<IntrospectionResult> {
-    return schemaToIntrospection(this.getSchema())
+    return schemaToIntrospection(this.getSchema());
   }
 
   getSchemaSDL(): string {
-    return printSchema(this.getSchema())
+    return printSchema(this.getSchema());
   }
 
   // Getters
   get configDir() {
-    return dirname(this.configPath)
+    return dirname(this.configPath);
   }
 
   get schemaPath(): string | null {
-    return this.config.schemaPath ? this.resolveConfigPath(this.config.schemaPath) : null
+    return this.config.schemaPath
+      ? this.resolveConfigPath(this.config.schemaPath)
+      : null;
   }
 
   get includes(): string[] {
-    return (this.config.includes || []).map(normalizeGlob)
+    return (this.config.includes || []).map(normalizeGlob);
   }
 
   get excludes(): string[] {
-    return (this.config.excludes || []).map(normalizeGlob)
+    return (this.config.excludes || []).map(normalizeGlob);
   }
 
   get extensions(): GraphQLConfigExtensions {
-    return this.config.extensions || {}
+    return this.config.extensions || {};
   }
 
   /*
@@ -110,50 +99,47 @@ export class GraphQLProjectConfig {
   */
   get endpointsExtension(): GraphQLEndpointsExtension | null {
     if (!this.extensions.endpoints) {
-      return null
+      return null;
     }
 
-    const {endpoints} = this.extensions
+    const {endpoints} = this.extensions;
 
     if (typeof endpoints !== 'object' || Array.isArray(endpoints)) {
-      throw new Error(`${this.configPath}: "endpoints" should be an object`)
+      throw new Error(`${this.configPath}: "endpoints" should be an object`);
     }
 
     if (Object.keys(endpoints).length === 0) {
-      return null
+      return null;
     }
 
     return new GraphQLEndpointsExtension(
       this.extensions.endpoints,
-      this.configPath
-    )
+      this.configPath,
+    );
   }
 }
 
-function loadProjectConfig(
-  config: GraphQLConfigData,
-  projectName?: string
-) {
-  const { projects, ...configBase } = config
+function loadProjectConfig(config: GraphQLConfigData, projectName?: string) {
+  const {projects, ...configBase} = config;
 
   if (projects == null || !Object.keys(projects).length) {
-    return config
+    return config;
   }
 
   if (!projectName) {
     throw new Error(
       `Project name must be specified for multiproject config. ` +
-      `Valid project names: ${Object.keys(projects).join(', ')}`
-    )
+        `Valid project names: ${Object.keys(projects).join(', ')}`,
+    );
   }
 
-  const projectConfig = projects[projectName]
+  const projectConfig = projects[projectName];
   if (!projectConfig) {
     throw new Error(
       `"${projectName}" is not a valid project name. ` +
-      `Valid project names: ${Object.keys(projects).join(', ')}`
-    )
+        `Valid project names: ${Object.keys(projects).join(', ')}`,
+    );
   }
 
-  return mergeConfigs(configBase, projectConfig)
+  return mergeConfigs(configBase, projectConfig);
 }

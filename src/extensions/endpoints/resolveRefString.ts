@@ -1,53 +1,53 @@
 export function resolveRefString(str: string, values?: object): string {
-  const { strings, rawRefs } = parse(str)
-  const refValues = rawRefs.map(ref => resolveRef(ref, values))
+  const {strings, rawRefs} = parse(str);
+  const refValues = rawRefs.map(ref => resolveRef(ref, values));
 
-  let res = ''
+  let res = '';
   for (let i = 0; i < refValues.length; i++) {
-    res += strings[i]
-    res += refValues[i]
+    res += strings[i];
+    res += refValues[i];
   }
-  res += strings.pop()
-  return res
+  res += strings.pop();
+  return res;
 }
 
-export function resolveEnvsInValues<T extends { [key: string]: any }>(
+export function resolveEnvsInValues<T extends Record<string, any>>(
   config: T,
-  env: { [name: string]: string | undefined },
+  env: {[name: string]: string | undefined},
 ): T {
   for (let key in config) {
-    const value = config[key]
+    const value = config[key];
     if (typeof value === 'string') {
-      config[key] = resolveRefString(value, { env })
+      config[key] = resolveRefString(value, {env}) as any;
     } else if (typeof value === 'object') {
-      config[key] = resolveEnvsInValues(value, env)
+      config[key] = resolveEnvsInValues(value, env);
     }
   }
-  return config
+  return config;
 }
 
-export function getUsedEnvs(config: any): { [name: string]: string } {
-  const result = {}
+export function getUsedEnvs(config: any): {[name: string]: string} {
+  const result = {};
 
   const traverse = val => {
     if (typeof val === 'string') {
-      const rawRefs = parse(val).rawRefs
+      const rawRefs = parse(val).rawRefs;
       for (let ref of rawRefs) {
-        result[parseRef(ref).ref] = resolveRef(ref, {}, false)
+        result[parseRef(ref).ref] = resolveRef(ref, {}, false);
       }
     } else if (typeof val === 'object') {
       for (let key in val) {
-        traverse(val[key])
+        traverse(val[key]);
       }
     }
-  }
-  traverse(config)
-  return result
+  };
+  traverse(config);
+  return result;
 }
 
-function parseRef(rawRef: string): { type: string; ref: string } {
-  const [type, ref] = rawRef.split(/\s*:\s*/)
-  return { type, ref }
+function parseRef(rawRef: string): {type: string; ref: string} {
+  const [type, ref] = rawRef.split(/\s*:\s*/);
+  return {type, ref};
 }
 
 function resolveRef(
@@ -55,47 +55,47 @@ function resolveRef(
   values: any = {},
   throwIfUndef: boolean = true,
 ): string | null {
-  const { type, ref } = parseRef(rawRef)
+  const {type, ref} = parseRef(rawRef);
 
   if (type === 'env') {
     if (!ref) {
-      throw new Error(`Reference value is not present for ${type}: ${rawRef}`)
+      throw new Error(`Reference value is not present for ${type}: ${rawRef}`);
     }
 
-    const refValue = (values.env && values.env[ref]) || process.env[ref]
+    const refValue = (values.env && values.env[ref]) || process.env[ref];
     if (!refValue) {
       if (throwIfUndef) {
-        throw new Error(`Environment variable ${ref} is not set`)
+        throw new Error(`Environment variable ${ref} is not set`);
       } else {
-        return null
+        return null;
       }
     }
-    return refValue
+    return refValue;
   } else {
     // support only 'env' for now
     throw new Error(
       'Undefined reference type ${refType}. Only "env" is supported',
-    )
+    );
   }
 }
 
-function parse(str: string): { strings: string[]; rawRefs: string[] } {
-  const regex = /\${([^}]*)}/g
-  const strings: string[] = []
-  const rawRefs: string[] = []
+function parse(str: string): {strings: string[]; rawRefs: string[]} {
+  const regex = /\${([^}]*)}/g;
+  const strings: string[] = [];
+  const rawRefs: string[] = [];
 
-  let prevIdx = 0
-  let match
+  let prevIdx = 0;
+  let match;
   // tslint:disable-next-line:no-conditional-assignment
   while ((match = regex.exec(str)) !== null) {
     if (match.index > 0 && str[match.index - 1] === '\\') {
-      continue
+      continue;
     }
 
-    strings.push(str.substring(prevIdx, match.index))
-    rawRefs.push(match[1])
-    prevIdx = match.index + match[0].length
+    strings.push(str.substring(prevIdx, match.index));
+    rawRefs.push(match[1]);
+    prevIdx = match.index + match[0].length;
   }
-  strings.push(str.substring(prevIdx))
-  return { strings, rawRefs }
+  strings.push(str.substring(prevIdx));
+  return {strings, rawRefs};
 }
