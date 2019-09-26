@@ -1,21 +1,50 @@
-import {readConfig, validateConfig} from './utils';
-import {findGraphQLConfigFile} from './findGraphQLConfigFile';
+import cosmiconfig from 'cosmiconfig';
+import {ConfigNotFoundError, ConfigEmptyError} from './errors';
 import {GraphQLConfig} from './GraphQLConfig';
 import {GraphQLProjectConfig} from './GraphQLProjectConfig';
 
-export function getGraphQLConfig(
+export async function getGraphQLConfig(
   rootDir: string = process.cwd(),
-): GraphQLConfig {
-  const configPath = findGraphQLConfigFile(rootDir);
-  const config = readConfig(configPath);
-  validateConfig(config);
+): Promise<GraphQLConfig> {
+  const moduleName = 'graphql';
+  const result = await cosmiconfig('graphql', {
+    loaders: {
+      [`.${moduleName}config`]: (cosmiconfig as any).loadJson,
+    },
+    searchPlaces: [
+      'package.json',
+      `.${moduleName}rc`,
+      `.${moduleName}rc.json`,
+      `.${moduleName}rc.yaml`,
+      `.${moduleName}rc.yml`,
+      `.${moduleName}rc.js`,
+      `${moduleName}.config.js`,
+      // deprecated
+      `.${moduleName}config`,
+      `.${moduleName}config.yml`,
+      `.${moduleName}config.yaml`,
+    ],
+  }).search(rootDir);
 
-  return new GraphQLConfig(config, configPath);
+  if (!result) {
+    throw new ConfigNotFoundError(
+      `GraphQL Config file is not available in the provided config ` +
+        `directory: ${rootDir}\nPlease check the config directory.`,
+    );
+  }
+
+  if (result.isEmpty) {
+    throw new ConfigEmptyError(
+      `GraphQL Config file is empty.\nPlease check ${result.filepath}`,
+    );
+  }
+
+  return new GraphQLConfig(result.config as any, result.filepath);
 }
 
-export function getGraphQLProjectConfig(
+export async function getGraphQLProjectConfig(
   rootDir?: string,
   projectName: string | undefined = process.env.GRAPHQL_CONFIG_PROJECT,
-): GraphQLProjectConfig {
-  return getGraphQLConfig(rootDir).getProjectConfig(projectName);
+): Promise<GraphQLProjectConfig> {
+  return (await getGraphQLConfig(rootDir)).getProjectConfig(projectName);
 }

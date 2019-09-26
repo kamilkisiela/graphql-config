@@ -15,3 +15,11 @@ export class ConfigNotFoundError extends ExtendableBuiltin(Error) {
     this.message = message;
   }
 }
+
+export class ConfigEmptyError extends ExtendableBuiltin(Error) {
+  constructor(message: string) {
+    super(message);
+    this.name = this.constructor.name;
+    this.message = message;
+  }
+}

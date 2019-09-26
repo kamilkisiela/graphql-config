@@ -10,7 +10,6 @@ import {
   matchesGlobs,
   mergeConfigs,
   readSchema,
-  validateConfig,
   schemaToIntrospection,
   normalizeGlob,
 } from './utils';
@@ -29,7 +28,6 @@ export class GraphQLProjectConfig {
     configPath: string,
     projectName?: string,
   ) {
-    validateConfig(config);
     this.config = loadProjectConfig(config, projectName);
     this.configPath = configPath;
     this.projectName = projectName;

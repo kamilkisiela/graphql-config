@@ -7,7 +7,7 @@
   "typings": "dist/index.d.ts",
   "sideEffects": false,
   "scripts": {
-    "prepublish": "yarn build",
+    "prepublishOnly": "yarn build",
     "clean": "rimraf dist",
     "prebuild": "yarn clean",
     "build": "tsdx build",
@@ -19,6 +19,7 @@
     "graphql": "^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0"
   },
   "dependencies": {
+    "cosmiconfig": "5.2.1",
     "graphql-import": "0.7.1",
     "graphql-request": "1.8.2",
     "js-yaml": "3.13.1",
@@ -26,7 +27,9 @@
     "minimatch": "3.0.4"
   },
   "devDependencies": {
+    "@types/cosmiconfig": "5.0.3",
     "@types/jest": "24.0.18",
+    "@types/lodash": "4.14.139",
     "@types/nock": "11.1.0",
     "@types/node": "12.7.8",
     "@types/node-fetch": "2.5.2",

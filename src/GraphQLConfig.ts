@@ -1,6 +1,6 @@
 import {dirname} from 'path';
-import {values} from 'lodash';
-import {validateConfig, writeConfig} from './utils';
+import values from 'lodash/values';
+import {writeConfig} from './utils';
 
 import {GraphQLConfigData} from './types';
 
@@ -11,7 +11,6 @@ export class GraphQLConfig {
   public configPath: string;
 
   constructor(config: GraphQLConfigData, configPath: string) {
-    validateConfig(config);
     this.config = config;
     this.configPath = configPath;
   }
