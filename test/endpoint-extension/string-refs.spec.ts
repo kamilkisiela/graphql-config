@@ -6,8 +6,8 @@ import {
 import {serveSchema} from '../utils';
 
 let endpoints: GraphQLEndpointsExtension;
-beforeEach(() => {
-  endpoints = getGraphQLProjectConfig(__dirname).endpointsExtension!;
+beforeEach(async () => {
+  endpoints = (await getGraphQLProjectConfig(__dirname)).endpointsExtension!;
 });
 
 test('getEndpointsMap', async () => {

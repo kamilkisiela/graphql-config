@@ -6,8 +6,8 @@ const CONFIG_DIR = join(__dirname, 'config');
 
 let config: GraphQLConfig;
 
-beforeEach(() => {
-  config = getGraphQLConfig(CONFIG_DIR);
+beforeEach(async () => {
+  config = await getGraphQLConfig(CONFIG_DIR);
 });
 
 test('returns a correct name', () => {

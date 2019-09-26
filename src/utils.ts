@@ -70,10 +70,6 @@ export function matchesGlobs(
   });
 }
 
-export function validateConfig(config: GraphQLConfigData) {
-  // FIXME: implement
-}
-
 export function mergeConfigs(
   dest: GraphQLConfigData,
   src: GraphQLConfigData,
