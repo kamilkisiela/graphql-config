@@ -1,5 +1,8 @@
+.rts2_cache_cjs
+.rts2_cache_esm
+.rts2_cache_umd
 .DS_Store
 .idea
 node_modules
 *.map
-lib
+dist
