@@ -1,5 +1,5 @@
-import { dirname, resolve, relative, join } from 'path';
-import { GraphQLSchema, printSchema } from 'graphql';
+import {dirname, resolve, relative, join} from 'path';
+import {GraphQLSchema, printSchema} from 'graphql';
 import {
   IntrospectionResult,
   GraphQLResolvedConfigData,
@@ -14,7 +14,7 @@ import {
   schemaToIntrospection,
   normalizeGlob,
 } from './utils';
-import { GraphQLEndpointsExtension } from './extensions';
+import {GraphQLEndpointsExtension} from './extensions';
 
 /*
  * this class can be used for simple usecases where there is no need in per-file API
@@ -102,7 +102,7 @@ export class GraphQLProjectConfig {
       return null;
     }
 
-    const { endpoints } = this.extensions;
+    const {endpoints} = this.extensions;
 
     if (typeof endpoints !== 'object' || Array.isArray(endpoints)) {
       throw new Error(`${this.configPath}: "endpoints" should be an object`);
@@ -120,7 +120,7 @@ export class GraphQLProjectConfig {
 }
 
 function loadProjectConfig(config: GraphQLConfigData, projectName?: string) {
-  const { projects, ...configBase } = config;
+  const {projects, ...configBase} = config;
 
   if (projects == null || !Object.keys(projects).length) {
     return config;

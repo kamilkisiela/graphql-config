@@ -1,6 +1,6 @@
-import { lstatSync, readFileSync, writeFileSync } from 'fs';
-import { extname, join } from 'path';
-import { importSchema } from 'graphql-import';
+import {lstatSync, readFileSync, writeFileSync} from 'fs';
+import {extname, join} from 'path';
+import {importSchema} from 'graphql-import';
 import minimatch from 'minimatch';
 import yaml from 'js-yaml';
 import {
@@ -14,7 +14,7 @@ import {
   IntrospectionQuery,
 } from 'graphql';
 
-import { GraphQLConfigData, IntrospectionResult } from './types';
+import {GraphQLConfigData, IntrospectionResult} from './types';
 
 export function readConfig(configPath: string): GraphQLConfigData {
   let config;
@@ -60,12 +60,12 @@ export function matchesGlobs(
     try {
       const globStat = lstatSync(join(configDir, glob));
       const globToMatch = globStat.isDirectory() ? `${glob}/**` : glob;
-      return minimatch(filePath, globToMatch, { matchBase: true });
+      return minimatch(filePath, globToMatch, {matchBase: true});
     } catch (error) {
       // Out of errors that lstat provides, EACCES and ENOENT are the
       // most likely. For both cases, run the match with the raw glob
       // and return the result.
-      return minimatch(filePath, glob, { matchBase: true });
+      return minimatch(filePath, glob, {matchBase: true});
     }
   });
 }
@@ -78,12 +78,12 @@ export function mergeConfigs(
   dest: GraphQLConfigData,
   src: GraphQLConfigData,
 ): GraphQLConfigData {
-  const result = { ...dest, ...src };
+  const result = {...dest, ...src};
   if (dest.extensions && src.extensions) {
-    result.extensions = { ...dest.extensions, ...src.extensions };
+    result.extensions = {...dest.extensions, ...src.extensions};
   }
   if (dest.projects && src.projects) {
-    result.projects = { ...dest.projects, ...src.projects };
+    result.projects = {...dest.projects, ...src.projects};
   }
   return result;
 }
@@ -97,7 +97,7 @@ export function schemaToIntrospection(schema: GraphQLSchema) {
 export function introspectionToSchema(
   introspection:
     | IntrospectionResult
-    | (IntrospectionQuery & { errors: undefined; data: undefined }),
+    | (IntrospectionQuery & {errors: undefined; data: undefined}),
 ) {
   if (introspection.errors != null) {
     throw new Error('Introspection result contains errors');
@@ -116,7 +116,7 @@ export function readSchema(path): GraphQLSchema {
     case '.graphql':
       return valueToSchema(importSchema(path));
     case '.json':
-      const data = readFileSync(path, { encoding: 'utf-8' });
+      const data = readFileSync(path, {encoding: 'utf-8'});
       const introspection = JSON.parse(data);
       return valueToSchema(introspection);
     default:
@@ -144,7 +144,7 @@ function valueToSchema(
 export async function writeSchema(
   path: string,
   schema: GraphQLSchema,
-  schemaExtensions?: { [name: string]: string },
+  schemaExtensions?: {[name: string]: string},
 ): Promise<void> {
   schema = valueToSchema(schema);
   let data: string;
@@ -174,7 +174,7 @@ export async function writeSchema(
   writeFileSync(path, data, 'utf-8');
 }
 
-export function getSchemaExtensions(path: string): { [name: string]: string } {
+export function getSchemaExtensions(path: string): {[name: string]: string} {
   const data = readFileSync(path, 'utf-8');
   switch (extname(path)) {
     case '.graphql':

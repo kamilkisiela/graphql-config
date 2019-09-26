@@ -1,7 +1,7 @@
-import { readConfig, validateConfig } from './utils';
-import { findGraphQLConfigFile } from './findGraphQLConfigFile';
-import { GraphQLConfig } from './GraphQLConfig';
-import { GraphQLProjectConfig } from './GraphQLProjectConfig';
+import {readConfig, validateConfig} from './utils';
+import {findGraphQLConfigFile} from './findGraphQLConfigFile';
+import {GraphQLConfig} from './GraphQLConfig';
+import {GraphQLProjectConfig} from './GraphQLProjectConfig';
 
 export function getGraphQLConfig(
   rootDir: string = process.cwd(),

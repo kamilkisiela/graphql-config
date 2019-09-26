@@ -1,6 +1,6 @@
-import { graphql, introspectionQuery } from 'graphql';
-import { GraphQLProjectConfig } from '../../src';
-import { serveSchema } from '../utils';
+import {graphql, introspectionQuery} from 'graphql';
+import {GraphQLProjectConfig} from '../../src';
+import {serveSchema} from '../utils';
 
 beforeAll(() => {
   serveSchema(33333);
@@ -21,7 +21,7 @@ test('getEndpointsMap when endpoint is string url', async () => {
   const config = new GraphQLProjectConfig(configData, confPath);
   const endpoints = config.endpointsExtension;
   expect(endpoints && endpoints.getRawEndpointsMap()).toEqual({
-    dev: { url: 'http://default' },
+    dev: {url: 'http://default'},
   });
 });
 

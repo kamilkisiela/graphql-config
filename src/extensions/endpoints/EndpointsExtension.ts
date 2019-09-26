@@ -1,4 +1,4 @@
-import { GraphQLClient } from 'graphql-request';
+import {GraphQLClient} from 'graphql-request';
 import {
   GraphQLSchema,
   printSchema,
@@ -6,17 +6,17 @@ import {
   introspectionQuery,
 } from 'graphql';
 
-import { resolveEnvsInValues, getUsedEnvs } from './resolveRefString';
-import { IntrospectionResult } from '../../types';
+import {resolveEnvsInValues, getUsedEnvs} from './resolveRefString';
+import {IntrospectionResult} from '../../types';
 
 export type GraphQLConfigEnpointsSubscription = {
   url: string;
-  connectionParams?: { [name: string]: string | undefined };
+  connectionParams?: {[name: string]: string | undefined};
 };
 
 export type GraphQLConfigEnpointConfig = {
   url: string;
-  headers?: { [name: string]: string };
+  headers?: {[name: string]: string};
   subscription?: GraphQLConfigEnpointsSubscription;
 };
 
@@ -47,7 +47,7 @@ export class GraphQLEndpointsExtension {
     for (let name in this.raw) {
       const rawEndpoint = this.raw[name];
       if (typeof rawEndpoint === 'string') {
-        endpoints[name] = { url: rawEndpoint };
+        endpoints[name] = {url: rawEndpoint};
       } else {
         endpoints[name] = rawEndpoint;
       }
@@ -55,15 +55,13 @@ export class GraphQLEndpointsExtension {
     return endpoints;
   }
 
-  getEnvVarsForEndpoint(
-    endpointName: string,
-  ): { [name: string]: string | null } {
+  getEnvVarsForEndpoint(endpointName: string): {[name: string]: string | null} {
     return getUsedEnvs(this.getRawEndpoint(endpointName));
   }
 
   getEndpoint(
     endpointName: string,
-    env: { [name: string]: string | undefined } = process.env,
+    env: {[name: string]: string | undefined} = process.env,
   ): GraphQLEndpoint {
     const endpoint = this.getRawEndpoint(endpointName);
     try {
@@ -118,7 +116,7 @@ export class GraphQLEndpointsExtension {
 
 export class GraphQLEndpoint {
   public url: string;
-  public headers: { [name: string]: string };
+  public headers: {[name: string]: string};
   public subscription: GraphQLConfigEnpointsSubscription;
 
   constructor(resolvedConfig: GraphQLConfigEnpointConfig) {
@@ -135,7 +133,7 @@ export class GraphQLEndpoint {
   async resolveIntrospection(): Promise<IntrospectionResult> {
     const client = this.getClient();
     const data = await client.request(introspectionQuery);
-    return { data } as IntrospectionResult;
+    return {data} as IntrospectionResult;
   }
 
   async resolveSchema(): Promise<GraphQLSchema> {

@@ -1,6 +1,6 @@
-import { join, resolve } from 'path';
-import { printSchema, buildSchema } from 'graphql';
-import { getGraphQLConfig, GraphQLConfig } from '../../src';
+import {join, resolve} from 'path';
+import {printSchema, buildSchema} from 'graphql';
+import {getGraphQLConfig, GraphQLConfig} from '../../src';
 
 const CONFIG_DIR = join(__dirname, 'config');
 

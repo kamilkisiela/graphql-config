@@ -1,5 +1,5 @@
-import { printSchema, buildSchema } from 'graphql';
-import { getGraphQLConfig } from '../../src';
+import {printSchema, buildSchema} from 'graphql';
+import {getGraphQLConfig} from '../../src';
 
 test('reads single schema', () => {
   const config = getGraphQLConfig(__dirname);

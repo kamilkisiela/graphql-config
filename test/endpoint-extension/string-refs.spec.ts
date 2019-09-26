@@ -3,7 +3,7 @@ import {
   GraphQLEndpointsExtension,
   getUsedEnvs,
 } from '../../src';
-import { serveSchema } from '../utils';
+import {serveSchema} from '../utils';
 
 let endpoints: GraphQLEndpointsExtension;
 beforeEach(() => {
@@ -41,7 +41,7 @@ test('ability to pass external values as env vars to resolveSchemaFromEndpoint',
   serveSchema(33333);
   expect(() => {
     return endpoints
-      .getEndpoint('default', { TEST_ENDPOINT_URL: 'http://127.0.0.1:33333' })
+      .getEndpoint('default', {TEST_ENDPOINT_URL: 'http://127.0.0.1:33333'})
       .resolveSchema();
   }).not.toThrow();
 });

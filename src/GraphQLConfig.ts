@@ -1,10 +1,10 @@
-import { dirname } from 'path';
-import { values } from 'lodash';
-import { validateConfig, writeConfig } from './utils';
+import {dirname} from 'path';
+import {values} from 'lodash';
+import {validateConfig, writeConfig} from './utils';
 
-import { GraphQLConfigData } from './types';
+import {GraphQLConfigData} from './types';
 
-import { GraphQLProjectConfig } from './GraphQLProjectConfig';
+import {GraphQLProjectConfig} from './GraphQLProjectConfig';
 
 export class GraphQLConfig {
   public config: GraphQLConfigData;
@@ -25,7 +25,7 @@ export class GraphQLConfig {
   }
 
   getConfigForFile(filePath: string): GraphQLProjectConfig | undefined {
-    const { projects } = this.config;
+    const {projects} = this.config;
 
     if (!projects || Object.keys(projects).length === 0) {
       const config = new GraphQLProjectConfig(
@@ -48,7 +48,7 @@ export class GraphQLConfig {
     return (proj && proj.projectName) || undefined;
   }
 
-  getProjects(): { [name: string]: GraphQLProjectConfig } | undefined {
+  getProjects(): {[name: string]: GraphQLProjectConfig} | undefined {
     const result = {};
     for (const projectName in this.config.projects || {}) {
       result[projectName] = this.getProjectConfig(projectName);

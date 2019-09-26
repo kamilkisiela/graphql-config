@@ -1,7 +1,7 @@
-import { resolve, join, dirname, basename } from 'path';
-import { existsSync, readdirSync, lstatSync } from 'fs';
+import {resolve, join, dirname, basename} from 'path';
+import {existsSync, readdirSync, lstatSync} from 'fs';
 
-import { ConfigNotFoundError } from './errors';
+import {ConfigNotFoundError} from './errors';
 
 export const GRAPHQL_CONFIG_NAME = '.graphqlconfig';
 export const GRAPHQL_CONFIG_YAML_NAME = '.graphqlconfig.yaml';

@@ -1,4 +1,4 @@
-import { getGraphQLProjectConfig } from '../../src';
+import {getGraphQLProjectConfig} from '../../src';
 
 test('yaml', async () => {
   const config = getGraphQLProjectConfig(__dirname);

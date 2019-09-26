@@ -1,5 +1,5 @@
 export function resolveRefString(str: string, values?: object): string {
-  const { strings, rawRefs } = parse(str);
+  const {strings, rawRefs} = parse(str);
   const refValues = rawRefs.map(ref => resolveRef(ref, values));
 
   let res = '';
@@ -13,12 +13,12 @@ export function resolveRefString(str: string, values?: object): string {
 
 export function resolveEnvsInValues<T extends Record<string, any>>(
   config: T,
-  env: { [name: string]: string | undefined },
+  env: {[name: string]: string | undefined},
 ): T {
   for (let key in config) {
     const value = config[key];
     if (typeof value === 'string') {
-      config[key] = resolveRefString(value, { env }) as any;
+      config[key] = resolveRefString(value, {env}) as any;
     } else if (typeof value === 'object') {
       config[key] = resolveEnvsInValues(value, env);
     }
@@ -26,7 +26,7 @@ export function resolveEnvsInValues<T extends Record<string, any>>(
   return config;
 }
 
-export function getUsedEnvs(config: any): { [name: string]: string } {
+export function getUsedEnvs(config: any): {[name: string]: string} {
   const result = {};
 
   const traverse = val => {
@@ -45,9 +45,9 @@ export function getUsedEnvs(config: any): { [name: string]: string } {
   return result;
 }
 
-function parseRef(rawRef: string): { type: string; ref: string } {
+function parseRef(rawRef: string): {type: string; ref: string} {
   const [type, ref] = rawRef.split(/\s*:\s*/);
-  return { type, ref };
+  return {type, ref};
 }
 
 function resolveRef(
@@ -55,7 +55,7 @@ function resolveRef(
   values: any = {},
   throwIfUndef: boolean = true,
 ): string | null {
-  const { type, ref } = parseRef(rawRef);
+  const {type, ref} = parseRef(rawRef);
 
   if (type === 'env') {
     if (!ref) {
@@ -79,7 +79,7 @@ function resolveRef(
   }
 }
 
-function parse(str: string): { strings: string[]; rawRefs: string[] } {
+function parse(str: string): {strings: string[]; rawRefs: string[]} {
   const regex = /\${([^}]*)}/g;
   const strings: string[] = [];
   const rawRefs: string[] = [];
@@ -97,5 +97,5 @@ function parse(str: string): { strings: string[]; rawRefs: string[] } {
     prevIdx = match.index + match[0].length;
   }
   strings.push(str.substring(prevIdx));
-  return { strings, rawRefs };
+  return {strings, rawRefs};
 }

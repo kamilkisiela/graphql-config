@@ -1,5 +1,5 @@
-import { IntrospectionQuery } from 'graphql';
-import { GraphQLConfigEnpointsData } from './extensions/';
+import {IntrospectionQuery} from 'graphql';
+import {GraphQLConfigEnpointsData} from './extensions/';
 
 export type IntrospectionResult = {
   data: IntrospectionQuery;
@@ -22,5 +22,5 @@ export type GraphQLResolvedConfigData = {
 };
 
 export type GraphQLConfigData = GraphQLResolvedConfigData & {
-  projects?: { [projectName: string]: GraphQLResolvedConfigData };
+  projects?: {[projectName: string]: GraphQLResolvedConfigData};
 };
