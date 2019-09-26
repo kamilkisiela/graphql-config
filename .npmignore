@@ -1,8 +1,10 @@
+.github
+.vscode
 docs
 examples
 resources
 src
-custom.d.ts
+test
 renovate.json
 specification.md
 tsconfig.json
