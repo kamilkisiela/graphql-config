@@ -23,5 +23,4 @@ jobs:
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
           LABELS: "!wip"
-          AUTOMERGE: "dependencies"
           MERGE_METHOD: "squash"
