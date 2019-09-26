@@ -1,9 +1,8 @@
-import test from 'ava'
-import { getGraphQLProjectConfig } from '../../'
+import { getGraphQLProjectConfig } from '../../src';
 
-test(async t => {
-  const config = getGraphQLProjectConfig(__dirname)
-  const resolvedSchema = await config.resolveIntrospection()
+test('yaml', async () => {
+  const config = getGraphQLProjectConfig(__dirname);
+  const resolvedSchema = await config.resolveIntrospection();
 
-  t.snapshot(resolvedSchema)
-})
+  expect(resolvedSchema).toMatchSnapshot();
+});

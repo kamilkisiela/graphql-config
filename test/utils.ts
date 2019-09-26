@@ -1,15 +1,12 @@
-const schema = require('./schema.json')
-import { createServer } from 'http'
+const schema = require('./schema.json');
+import nock from 'nock';
 
-export function serveSchema(port = 33333): Promise<any> {
-  const handleRequest = (request, response) => {
-    response.writeHead(200, { 'Content-Type': 'application/json' })
-    response.end(JSON.stringify(schema))
-  }
+const body = JSON.stringify(schema);
 
-  const server = createServer(handleRequest)
-
-  return new Promise(resolve => {
-    server.listen(port, resolve)
-  })
+export function serveSchema(port: number) {
+  nock(`http://127.0.0.1:${port}`)
+    .post('/')
+    .reply(200, body, {
+      'Content-Type': 'application/json',
+    });
 }

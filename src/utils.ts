@@ -14,8 +14,6 @@ import {
   IntrospectionQuery,
 } from 'graphql';
 
-console.log(minimatch, yaml);
-
 import { GraphQLConfigData, IntrospectionResult } from './types';
 
 export function readConfig(configPath: string): GraphQLConfigData {

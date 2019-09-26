@@ -1,71 +1,67 @@
-import test from 'ava'
-import { join, resolve } from 'path'
-import { printSchema } from 'graphql'
-import { getGraphQLConfig, GraphQLConfig } from '../../'
+import { join, resolve } from 'path';
+import { printSchema, buildSchema } from 'graphql';
+import { getGraphQLConfig, GraphQLConfig } from '../../src';
 
-const CONFIG_DIR = join(__dirname, 'config')
+const CONFIG_DIR = join(__dirname, 'config');
 
-let config: GraphQLConfig
+let config: GraphQLConfig;
 
-test.beforeEach(() => {
-  config = getGraphQLConfig(CONFIG_DIR)
-})
+beforeEach(() => {
+  config = getGraphQLConfig(CONFIG_DIR);
+});
 
-test('returns a correct name', t => {
-  const testWithSchemaConfig = config.getProjectConfig('testWithSchema')
-  t.deepEqual(testWithSchemaConfig.projectName, 'testWithSchema')
-})
+test('returns a correct name', () => {
+  const testWithSchemaConfig = config.getProjectConfig('testWithSchema');
+  expect(testWithSchemaConfig.projectName).toEqual('testWithSchema');
+});
 
-test('returns config for file', t => {
+test('returns config for file', () => {
   const testWithSchemaConfig = config.getConfigForFile(
     resolve('./config/schema-a.graphql'),
-  )
+  );
   if (testWithSchemaConfig) {
-    t.deepEqual(testWithSchemaConfig.projectName, 'testWithSchema')
-  } else {
-    t.fail()
+    expect(testWithSchemaConfig.projectName).toEqual('testWithSchema');
   }
-})
 
-test('returns a correct root dir', t => {
-  t.deepEqual(config.configDir, CONFIG_DIR)
-})
+  expect.assertions(1);
+});
 
-test('returns a correct schema path', t => {
-  t.deepEqual(
-    config.getProjectConfig('testWithSchema').schemaPath,
+test('returns a correct root dir', () => {
+  expect(config.configDir).toEqual(CONFIG_DIR);
+});
+
+test('returns a correct schema path', () => {
+  expect(config.getProjectConfig('testWithSchema').schemaPath).toEqual(
     join(CONFIG_DIR, '__schema__/StarWarsSchema.graphql'),
-  )
-  t.deepEqual(config.getProjectConfig('testWithoutSchema').schemaPath, null)
-})
+  );
+  expect(config.getProjectConfig('testWithoutSchema').schemaPath).toEqual(null);
+});
 
-test('reads single schema', t => {
+test('reads single schema', () => {
   const typeDefs = `\
 type Query {
   hello: String!
 }
-`
+`;
 
-  t.is(
-    printSchema(config.getProjectConfig('testSchemaA').getSchema()),
+  expect(printSchema(config.getProjectConfig('testSchemaA').getSchema())).toBe(
     typeDefs,
-  )
-})
+  );
+});
 
-test('reads imported schema', t => {
-  const typeDefs = `\
-type Query {
-  hello: String!
-  user: User!
-}
+test('reads imported schema', () => {
+  const typeDefs = /* GraphQL */ `
+    type Query {
+      hello: String!
+      user: User!
+    }
 
-type User {
-  name: String
-}
-`
+    type User {
+      name: String
+    }
+  `;
 
-  t.is(
-    printSchema(config.getProjectConfig('testSchemaB').getSchema()),
-    typeDefs,
-  )
-})
+  expect(printSchema(config.getProjectConfig('testSchemaB').getSchema())).toBe(
+    printSchema(buildSchema(typeDefs)),
+  );
+});

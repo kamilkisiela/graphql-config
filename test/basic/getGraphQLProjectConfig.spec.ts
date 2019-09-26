@@ -1,9 +1,8 @@
-import test from 'ava'
-import { getGraphQLProjectConfig } from '../../'
+import { getGraphQLProjectConfig } from '../../src'
 
-test('resolves schema from file', async t => {
+test('resolves schema from file', async () => {
   const config = getGraphQLProjectConfig(__dirname)
   const resolvedSchema = await config.resolveIntrospection()
 
-  t.snapshot(resolvedSchema)
+  expect(resolvedSchema).toMatchSnapshot()
 })

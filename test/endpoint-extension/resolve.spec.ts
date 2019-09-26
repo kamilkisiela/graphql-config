@@ -1,15 +1,14 @@
-import test from 'ava'
-import { graphql, introspectionQuery } from 'graphql'
-import { GraphQLProjectConfig } from '../../'
-import { serveSchema } from '../utils'
+import { graphql, introspectionQuery } from 'graphql';
+import { GraphQLProjectConfig } from '../../src';
+import { serveSchema } from '../utils';
 
-test.before(async t => {
-  return await serveSchema()
-})
+beforeAll(() => {
+  serveSchema(33333);
+});
 
-const confPath = `${__dirname}/.graphqlconfig`
+const confPath = `${__dirname}/.graphqlconfig`;
 
-test('getEndpointsMap when endpoint is string url', async t => {
+test('getEndpointsMap when endpoint is string url', async () => {
   const configData = {
     schemaPath: '../schema.json',
     extensions: {
@@ -17,16 +16,16 @@ test('getEndpointsMap when endpoint is string url', async t => {
         dev: 'http://default',
       },
     },
-  }
+  };
 
-  const config = new GraphQLProjectConfig(configData, confPath)
-  const endpoints = config.endpointsExtension
-  t.deepEqual(endpoints && endpoints.getRawEndpointsMap(), {
+  const config = new GraphQLProjectConfig(configData, confPath);
+  const endpoints = config.endpointsExtension;
+  expect(endpoints && endpoints.getRawEndpointsMap()).toEqual({
     dev: { url: 'http://default' },
-  })
-})
+  });
+});
 
-test('getEndpointsMap when endpoint is single endpoint config', async t => {
+test('getEndpointsMap when endpoint is single endpoint config', async () => {
   const configData = {
     schemaPath: '../schema.json',
     extensions: {
@@ -39,16 +38,16 @@ test('getEndpointsMap when endpoint is single endpoint config', async t => {
         },
       },
     },
-  }
+  };
 
-  const config = new GraphQLProjectConfig(configData, confPath, undefined)
-  const endpoint = config.endpointsExtension
-  t.deepEqual(endpoint && endpoint.getRawEndpointsMap(), {
+  const config = new GraphQLProjectConfig(configData, confPath, undefined);
+  const endpoint = config.endpointsExtension;
+  expect(endpoint && endpoint.getRawEndpointsMap()).toEqual({
     dev: configData.extensions.endpoints.dev,
-  })
-})
+  });
+});
 
-test('getEndpointsMap when endpoint is endpoints map', async t => {
+test('getEndpointsMap when endpoint is endpoints map', async () => {
   const configData = {
     schemaPath: '../schema.json',
     extensions: {
@@ -62,12 +61,12 @@ test('getEndpointsMap when endpoint is endpoints map', async t => {
         },
       },
     },
-  }
+  };
 
-  const config = new GraphQLProjectConfig(configData, confPath, undefined)
+  const config = new GraphQLProjectConfig(configData, confPath, undefined);
 
-  const endpoint = config.endpointsExtension
-  t.deepEqual(endpoint && endpoint.getRawEndpointsMap(), {
+  const endpoint = config.endpointsExtension;
+  expect(endpoint && endpoint.getRawEndpointsMap()).toEqual({
     dev: {
       url: 'http://dev',
     },
@@ -77,10 +76,10 @@ test('getEndpointsMap when endpoint is endpoints map', async t => {
         url: 'ws://prod',
       },
     },
-  })
-})
+  });
+});
 
-test('resolveSchemaFromEndpoint should throw if non-existing endpoint is specified', async t => {
+test('resolveSchemaFromEndpoint should throw if non-existing endpoint is specified', async () => {
   const configData = {
     schemaPath: '../schema.json',
     extensions: {
@@ -93,20 +92,17 @@ test('resolveSchemaFromEndpoint should throw if non-existing endpoint is specifi
         },
       },
     },
-  }
-  const config = new GraphQLProjectConfig(configData, confPath, undefined)
-  let error
-  const endpoint = config.endpointsExtension
-  error = t.throws(
+  };
+  const config = new GraphQLProjectConfig(configData, confPath, undefined);
+  const endpoint = config.endpointsExtension;
+  expect(
     () => endpoint && endpoint.getEndpoint('prod').resolveSchema(),
-  )
-  t.regex(
-    error.message,
+  ).toThrowError(
     /"prod" is not valid endpoint name. Valid endpoint names: dev/,
-  )
-})
+  );
+});
 
-test('resolveSchemaFromEndpoint HTTP', async t => {
+test('resolveSchemaFromEndpoint HTTP', async () => {
   const configData = {
     schemaPath: '../schema.json',
     extensions: {
@@ -114,15 +110,15 @@ test('resolveSchemaFromEndpoint HTTP', async t => {
         dev: 'http://127.0.0.1:33333',
       },
     },
-  }
+  };
 
-  const config = new GraphQLProjectConfig(configData, confPath, undefined)
+  const config = new GraphQLProjectConfig(configData, confPath, undefined);
   if (!config.endpointsExtension) {
-    throw 'endpointExtension can\'t be empty'
+    throw 'endpointExtension can\'t be empty';
   }
   const schema = await config.endpointsExtension
     .getEndpoint('dev')
-    .resolveSchema()
-  const resolvedIntrospection = await graphql(schema, introspectionQuery)
-  t.snapshot(resolvedIntrospection)
-})
+    .resolveSchema();
+  const resolvedIntrospection = await graphql(schema, introspectionQuery);
+  expect(resolvedIntrospection).toMatchSnapshot();
+});
