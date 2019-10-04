@@ -1,7 +1,6 @@
-export {getGraphQLConfig, getGraphQLProjectConfig} from './getGraphQLConfig';
-export {writeSchema, getSchemaExtensions} from './utils';
-export * from './errors';
-export * from './extensions';
-export {GraphQLConfig} from './GraphQLConfig';
-export {GraphQLProjectConfig} from './GraphQLProjectConfig';
+export {GraphQLConfig, loadConfig} from './config';
+export {GraphQLProjectConfig} from './project-config';
+export {GraphQLExtensionDeclaration} from './extension';
+export {Source, SchemaLoader, DocumentLoader, UniversalLoader} from './loaders';
 export * from './types';
+export * from './errors';

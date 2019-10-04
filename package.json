@@ -1,18 +1,17 @@
 {
   "name": "graphql-config",
-  "version": "2.2.1",
+  "version": "3.0.0-alpha.3",
   "description": "The easiest way to configure your development environment with your GraphQL schema (supported by most tools, editors & IDEs)",
   "main": "dist/index.js",
-  "module": "dist/graphql-config.esm.js",
   "typings": "dist/index.d.ts",
   "sideEffects": false,
   "scripts": {
     "prepublishOnly": "yarn build",
     "clean": "rimraf dist",
     "prebuild": "yarn clean",
-    "build": "tsdx build",
+    "build": "tsc",
     "format": "prettier --write '{src,test}/**/*.{ts,graphql}'",
-    "test": "tsdx test",
+    "test": "exit 0",
     "precommit": "lint-staged"
   },
   "peerDependencies": {
@@ -20,28 +19,27 @@
   },
   "dependencies": {
     "cosmiconfig": "5.2.1",
-    "graphql-import": "0.7.1",
-    "graphql-request": "1.8.2",
-    "js-yaml": "3.13.1",
-    "lodash": "4.17.15",
-    "minimatch": "3.0.4"
+    "globby": "10.0.1",
+    "graphql-toolkit": "0.5.17",
+    "lodash": "4.17.15"
   },
   "devDependencies": {
     "@types/cosmiconfig": "5.0.3",
-    "@types/jest": "24.0.18",
-    "@types/lodash": "4.14.139",
+    "@types/jest": "24.0.19",
+    "@types/lodash": "4.14.144",
     "@types/nock": "11.1.0",
-    "@types/node": "12.7.8",
+    "@types/node": "12.11.1",
     "@types/node-fetch": "2.5.2",
     "graphql": "14.5.8",
-    "husky": "3.0.5",
-    "lint-staged": "9.4.0",
-    "nock": "11.3.5",
+    "husky": "3.0.9",
+    "jest": "24.9.0",
+    "lint-staged": "9.4.2",
+    "nock": "11.4.0",
     "prettier": "1.18.2",
     "rimraf": "3.0.0",
-    "tsdx": "0.9.2",
+    "ts-jest": "24.1.0",
     "tslib": "1.10.0",
-    "typescript": "3.6.3"
+    "typescript": "3.6.4"
   },
   "repository": {
     "type": "git",
