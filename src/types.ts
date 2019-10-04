@@ -1,26 +1,40 @@
-import {IntrospectionQuery} from 'graphql';
-import {GraphQLConfigEnpointsData} from './extensions/';
+type WithList<T> = T | T[];
+type ElementOf<TList> = TList extends Array<infer TElement> ? TElement : never;
+export type PointerWithConfiguration<T = any> = {[key: string]: T};
 
-export type IntrospectionResult = {
-  data: IntrospectionQuery;
-  extensions?: Object;
-  errors?: any;
-};
+// Schema pointers
+export type SchemaUrlPointer =
+  | string
+  | {[url: string]: {headers?: {[headerName: string]: string}}};
+export type SchemaLocalPathPointer = string | PointerWithConfiguration;
+export type SchemaGlobPathPointer = string | PointerWithConfiguration;
+export type SchemaPointer = WithList<
+  SchemaUrlPointer | SchemaLocalPathPointer | SchemaGlobPathPointer
+>;
+export type SchemaPointerSingle = ElementOf<SchemaPointer>;
 
-export type GraphQLConfigExtensions = {
-  endpoints?: GraphQLConfigEnpointsData;
+// Document pointers
+export type DocumentGlobPathPointer = string | PointerWithConfiguration;
+export type DocumentPointer = WithList<DocumentGlobPathPointer>;
+export type DocumentPointerSingle = ElementOf<DocumentPointer>;
+
+export interface IExtensions {
   [name: string]: any;
-};
+}
 
-export type GraphQLResolvedConfigData = {
-  schemaPath: string;
+export interface IGraphQLProjects {
+  projects: Record<string, IGraphQLProject>;
+}
 
-  includes?: Array<string>;
-  excludes?: Array<string>;
+export type IGraphQLConfig = IGraphQLProject | IGraphQLProjects;
 
-  extensions?: GraphQLConfigExtensions;
-};
+export interface IGraphQLProject {
+  schema: SchemaPointer;
+  documents?: DocumentPointer;
+  extensions?: IExtensions;
+}
 
-export type GraphQLConfigData = GraphQLResolvedConfigData & {
-  projects?: {[projectName: string]: GraphQLResolvedConfigData};
-};
+export interface GraphQLCofigResult {
+  config: IGraphQLConfig;
+  filepath: string;
+}
