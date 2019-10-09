@@ -1,6 +1,7 @@
 # graphql-config
 
 [![Build Status](https://travis-ci.org/prisma/graphql-config.svg?branch=master)](https://travis-ci.org/prisma/graphql-config) [![npm version](https://badge.fury.io/js/graphql-config.svg)](https://badge.fury.io/js/graphql-config)
+[![Discord Chat](https://img.shields.io/discord/625400653321076807)](https://discord.gg/xud7bH9)
 
 > The README reflects the new [graphql-config protocol](specification.md).
 > Old graphql-config-parser documentation [can be found here](https://github.com/graphcool/graphql-config/tree/graphql-config-parser)
