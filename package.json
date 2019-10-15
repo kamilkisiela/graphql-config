@@ -26,7 +26,7 @@
     "minimatch": "3.0.4"
   },
   "devDependencies": {
-    "@types/jest": "24.0.18",
+    "@types/jest": "24.0.19",
     "@types/nock": "11.1.0",
     "@types/node": "12.7.8",
     "@types/node-fetch": "2.5.2",
