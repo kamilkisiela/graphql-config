@@ -93,8 +93,8 @@ function replaceEnv(content: string) {
   // Not:
   //  ${NAME:}
   const R = /\$\{([A-Z0-9_]+(\:[^\:]+)?)\}/gi;
-  return content.replace(R, item => {
-    const [name, value] = item[1].split(':');
+  return content.replace(R, (_, result) => {
+    const [name, value] = result.split(':');
 
     return process.env[name] ? String(process.env[name]) : value;
   });
