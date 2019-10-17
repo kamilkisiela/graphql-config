@@ -7,8 +7,6 @@ import {
   GraphQLCofigResult,
 } from './types';
 
-const configName = 'graphql';
-
 const cwd = typeof process !== 'undefined' ? process.cwd() : undefined;
 
 export function isMultipleProjectConfig(
@@ -28,7 +26,7 @@ export async function getConfig(filepath: string): Promise<GraphQLCofigResult> {
     throw new Error(`Defining a file path is required`);
   }
 
-  const result = await cosmiconfig(configName).load(filepath);
+  const result = await createCosmiConfig().load(filepath);
 
   if (!result) {
     throw new ConfigNotFoundError(
@@ -61,7 +59,7 @@ export async function findConfig(
     throw new Error(`Defining a root directiry is required`);
   }
 
-  const result = await cosmiconfig(configName).search(rootDir);
+  const result = await createCosmiConfig().search(rootDir);
 
   if (!result) {
     throw new ConfigNotFoundError(
@@ -85,4 +83,54 @@ export async function findConfig(
     config: result.config as any,
     filepath: result.filepath,
   };
+}
+
+function replaceEnv(content: string) {
+  // https://regex101.com/r/sRTYo9/1
+  // Yes:
+  //  ${NAME:DEFAULT}
+  //  ${NAME}
+  // Not:
+  //  ${NAME:}
+  const R = /\$\{([A-Z0-9_]+(\:[^\:]+)?)\}/gi;
+  return content.replace(R, item => {
+    const [name, value] = item[1].split(':');
+
+    return process.env[name] ? String(process.env[name]) : value;
+  });
+}
+
+function transformContent(content: string): string {
+  return replaceEnv(content);
+}
+
+const cosmi: any = cosmiconfig;
+const createCustomLoader = (
+  loader: cosmiconfig.SyncLoader,
+): cosmiconfig.LoaderEntry => {
+  return {
+    sync(filepath, content) {
+      return loader(filepath, transformContent(content));
+    },
+    async(filepath, content) {
+      return loader(filepath, transformContent(content));
+    },
+  };
+};
+
+const loadYaml = createCustomLoader(cosmi.loadYaml);
+const loadJson = createCustomLoader(cosmi.loadJson);
+
+function createCosmiConfig() {
+  // We need to wrap loaders in order to access and transform file content (as string)
+  // Cosmiconfig has transform option but at this point config is not a string but an object
+  return cosmiconfig('graphql', {
+    loaders: {
+      '.js': {sync: cosmi.loadJs, async: cosmi.loadJs},
+      '.json': loadJson,
+      '.yaml': loadYaml,
+      '.yml': loadYaml,
+      noExt: loadYaml,
+    },
+  });
 }
