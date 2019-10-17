@@ -112,6 +112,22 @@ export class GraphQLConfig {
     return project;
   }
 
+  getProjectForFile(filepath: string): GraphQLProjectConfig | never {
+    for (const projectName in this.projects) {
+      if (this.projects.hasOwnProperty(projectName)) {
+        const project = this.projects[projectName];
+
+        if (project.match(filepath)) {
+          return project;
+        }
+      }
+    }
+
+    throw new ProjectNotFoundError(
+      `File '${filepath}' doesn't match any project`,
+    );
+  }
+
   getDefault(): GraphQLProjectConfig | never {
     return this.getProject('default');
   }

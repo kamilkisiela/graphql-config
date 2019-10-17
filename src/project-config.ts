@@ -2,6 +2,7 @@ import {GraphQLSchema, DocumentNode, buildASTSchema} from 'graphql';
 import {dirname} from 'path';
 import {mergeTypeDefs} from 'graphql-toolkit';
 import flatten from 'lodash/flatten';
+import minimatch from 'minimatch';
 import {ExtensionMissingError} from './errors';
 import {GraphQLExtensionsRegistry} from './extension';
 import {Source} from './loaders';
@@ -10,6 +11,7 @@ import {
   IGraphQLProject,
   SchemaPointer,
   DocumentPointer,
+  SchemaLocalPathPointer,
 } from './types';
 
 function pick<T, K extends keyof T>(key: K, items: T[]): T[K][] {
@@ -140,4 +142,34 @@ export class GraphQLProjectConfig {
 
     return this._extensionsRegistry.loaders.documents.load(pointer);
   }
+
+  match(filepath: string): boolean {
+    return [this.schema, this.documents].some(pointer =>
+      match(filepath, pointer),
+    );
+  }
+}
+
+// TODO: think about absolute and relative paths, both in pointers and filepath
+function match(
+  filepath: string,
+  pointer?: SchemaPointer | DocumentPointer,
+): boolean {
+  if (!pointer) {
+    return false;
+  }
+
+  if (Array.isArray(pointer)) {
+    return pointer.some(p => match(filepath, p));
+  }
+
+  if (typeof pointer === 'string') {
+    return minimatch(filepath, pointer);
+  }
+
+  if (typeof pointer === 'object') {
+    return match(filepath, Object.keys(pointer)[0]);
+  }
+
+  return false;
 }
