@@ -149,7 +149,7 @@ export class GraphQLProjectConfig {
   }
 }
 
-// XXX: it works but uses nodejs
+// XXX: it works but uses nodejs - expose normalization of file and dir paths in config
 function match(
   filepath: string,
   dirpath: string,

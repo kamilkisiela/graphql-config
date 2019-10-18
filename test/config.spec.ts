@@ -50,7 +50,7 @@ describe('environment variables', () => {
 });
 
 describe('project matching by file path', () => {
-  test('', async () => {
+  test('basic check', async () => {
     temp.createFile(
       '.graphqlrc',
       `
