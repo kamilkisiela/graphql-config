@@ -7,6 +7,7 @@
     "**/.DS_Store": true,
     "dist": true,
     ".rts2_cache_cjs": true,
-    ".rts2_cache_esm": true
+    ".rts2_cache_esm": true,
+    "coverage": true
   }
 }
