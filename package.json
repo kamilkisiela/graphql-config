@@ -11,7 +11,7 @@
     "prebuild": "yarn clean",
     "build": "tsc",
     "format": "prettier --write '{src,test}/**/*.{ts,graphql}'",
-    "test": "exit 0",
+    "test": "jest",
     "precommit": "lint-staged"
   },
   "peerDependencies": {
@@ -30,11 +30,14 @@
     "@types/nock": "11.1.0",
     "@types/node": "12.11.1",
     "@types/node-fetch": "2.5.2",
+    "del": "5.1.0",
     "graphql": "14.5.8",
     "husky": "3.0.9",
     "jest": "24.9.0",
     "lint-staged": "9.4.2",
+    "make-dir": "3.0.0",
     "nock": "11.4.0",
+    "parent-module": "2.0.0",
     "prettier": "1.18.2",
     "rimraf": "3.0.0",
     "ts-jest": "24.1.0",
