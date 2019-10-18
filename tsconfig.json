@@ -12,7 +12,10 @@
     "declaration": true,
     "importHelpers": true,
     "moduleResolution": "node",
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true
   },
   "exclude": [
     "node_modules",
