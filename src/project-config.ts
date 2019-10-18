@@ -1,7 +1,8 @@
 import {GraphQLSchema, DocumentNode, buildASTSchema} from 'graphql';
-import {dirname} from 'path';
+import {dirname, isAbsolute, relative, normalize} from 'path';
 import {mergeTypeDefs} from 'graphql-toolkit';
 import flatten from 'lodash/flatten';
+import minimatch from 'minimatch';
 import {ExtensionMissingError} from './errors';
 import {GraphQLExtensionsRegistry} from './extension';
 import {Source} from './loaders';
@@ -140,4 +141,38 @@ export class GraphQLProjectConfig {
 
     return this._extensionsRegistry.loaders.documents.load(pointer);
   }
+
+  match(filepath: string): boolean {
+    return [this.schema, this.documents].some(pointer =>
+      match(filepath, this.dirpath, pointer),
+    );
+  }
+}
+
+// XXX: it works but uses nodejs
+function match(
+  filepath: string,
+  dirpath: string,
+  pointer?: SchemaPointer | DocumentPointer,
+): boolean {
+  if (!pointer) {
+    return false;
+  }
+
+  if (Array.isArray(pointer)) {
+    return pointer.some(p => match(filepath, dirpath, p));
+  }
+
+  if (typeof pointer === 'string') {
+    const normalizedFilepath = normalize(
+      isAbsolute(filepath) ? relative(dirpath, filepath) : filepath,
+    );
+    return minimatch(normalizedFilepath, normalize(pointer));
+  }
+
+  if (typeof pointer === 'object') {
+    return match(filepath, dirpath, Object.keys(pointer)[0]);
+  }
+
+  return false;
 }
