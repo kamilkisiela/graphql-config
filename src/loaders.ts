@@ -76,7 +76,7 @@ export class LoadersRegistry<TPointer> {
 
     if (isPointerWithConfiguration(pointer)) {
       const key = Object.keys(pointer)[0];
-      return this.load(key as any, pointer[key]);
+      return this.load(key as any, (pointer as PointerWithConfiguration)[key]);
     }
 
     if (this._loaders.length === 0) {

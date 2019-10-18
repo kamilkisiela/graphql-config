@@ -1,14 +1,4 @@
-function ExtendableBuiltin<T extends Function>(cls: T): T {
-  function ExtendableBuiltin() {
-    cls.apply(this, arguments);
-  }
-  ExtendableBuiltin.prototype = Object.create(cls.prototype);
-  Object.setPrototypeOf(ExtendableBuiltin, cls);
-
-  return ExtendableBuiltin as any;
-}
-
-export class ConfigNotFoundError extends ExtendableBuiltin(Error) {
+export class ConfigNotFoundError extends Error {
   constructor(message: string) {
     super(message);
     this.name = this.constructor.name;
@@ -16,7 +6,7 @@ export class ConfigNotFoundError extends ExtendableBuiltin(Error) {
   }
 }
 
-export class ConfigEmptyError extends ExtendableBuiltin(Error) {
+export class ConfigEmptyError extends Error {
   constructor(message: string) {
     super(message);
     this.name = this.constructor.name;
@@ -24,7 +14,7 @@ export class ConfigEmptyError extends ExtendableBuiltin(Error) {
   }
 }
 
-export class ConfigInvalidError extends ExtendableBuiltin(Error) {
+export class ConfigInvalidError extends Error {
   constructor(message: string) {
     super(message);
     this.name = this.constructor.name;
@@ -32,7 +22,7 @@ export class ConfigInvalidError extends ExtendableBuiltin(Error) {
   }
 }
 
-export class ProjectNotFoundError extends ExtendableBuiltin(Error) {
+export class ProjectNotFoundError extends Error {
   constructor(message: string) {
     super(message);
     this.name = this.constructor.name;
@@ -40,7 +30,7 @@ export class ProjectNotFoundError extends ExtendableBuiltin(Error) {
   }
 }
 
-export class LoadersMissingError extends ExtendableBuiltin(Error) {
+export class LoadersMissingError extends Error {
   constructor(message: string) {
     super(message);
     this.name = this.constructor.name;
@@ -48,7 +38,7 @@ export class LoadersMissingError extends ExtendableBuiltin(Error) {
   }
 }
 
-export class LoaderNoResultError extends ExtendableBuiltin(Error) {
+export class LoaderNoResultError extends Error {
   constructor(message: string) {
     super(message);
     this.name = this.constructor.name;
@@ -56,7 +46,7 @@ export class LoaderNoResultError extends ExtendableBuiltin(Error) {
   }
 }
 
-export class ExtensionMissingError extends ExtendableBuiltin(Error) {
+export class ExtensionMissingError extends Error {
   constructor(message: string) {
     super(message);
     this.name = this.constructor.name;
