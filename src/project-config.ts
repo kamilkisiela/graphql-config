@@ -1,7 +1,6 @@
 import {GraphQLSchema, DocumentNode, buildASTSchema} from 'graphql';
 import {dirname, isAbsolute, relative, normalize} from 'path';
 import {mergeTypeDefs} from 'graphql-toolkit';
-import flatten from 'lodash/flatten';
 import minimatch from 'minimatch';
 import {ExtensionMissingError} from './errors';
 import {GraphQLExtensionsRegistry} from './extension';
@@ -12,6 +11,7 @@ import {
   SchemaPointer,
   DocumentPointer,
 } from './types';
+import {flatten} from './helpers';
 
 function pick<T, K extends keyof T>(key: K, items: T[]): T[K][] {
   return items.map(item => item[key]);

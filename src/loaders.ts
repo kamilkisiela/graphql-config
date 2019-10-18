@@ -1,11 +1,11 @@
 import {DocumentNode} from 'graphql';
-import flatten from 'lodash/flatten';
 import {LoadersMissingError, LoaderNoResultError} from './errors';
 import {
   SchemaPointerSingle,
   DocumentPointerSingle,
   PointerWithConfiguration,
 } from './types';
+import {flatten} from './helpers';
 
 export class Source {
   document: DocumentNode;

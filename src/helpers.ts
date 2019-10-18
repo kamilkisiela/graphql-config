@@ -134,3 +134,7 @@ function createCosmiConfig() {
     },
   });
 }
+
+export function flatten<T>(arr: T[]): T extends (infer A)[] ? A[] : T[] {
+  return Array.prototype.concat(...arr) as any;
+}
