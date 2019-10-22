@@ -28,7 +28,7 @@
   "devDependencies": {
     "@types/jest": "24.0.18",
     "@types/nock": "11.1.0",
-    "@types/node": "12.7.8",
+    "@types/node": "12.11.4",
     "@types/node-fetch": "2.5.2",
     "graphql": "14.5.8",
     "husky": "3.0.5",
