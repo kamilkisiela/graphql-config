@@ -40,8 +40,8 @@ export async function loadConfig({
     return new GraphQLConfig(found, extensions);
   } catch (error) {
     if (
-      (throwOnMissing && error instanceof ConfigNotFoundError) ||
-      (throwOnEmpty && error instanceof ConfigEmptyError)
+      (!throwOnMissing && error instanceof ConfigNotFoundError) ||
+      (!throwOnEmpty && error instanceof ConfigEmptyError)
     ) {
       return;
     }
