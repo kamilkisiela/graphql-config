@@ -25,12 +25,13 @@
   },
   "dependencies": {
     "@graphql-toolkit/common": "0.6.1-alpha-c775427.3+c775427",
-    "@graphql-toolkit/graphql-file-loader":  "0.6.1-alpha-c775427.3+c775427",
-    "@graphql-toolkit/json-file-loader":  "0.6.1-alpha-c775427.3+c775427",
-    "@graphql-toolkit/url-loader":  "0.6.1-alpha-c775427.3+c775427",
+    "@graphql-toolkit/graphql-file-loader": "0.6.1-alpha-c775427.3+c775427",
+    "@graphql-toolkit/json-file-loader": "0.6.1-alpha-c775427.3+c775427",
     "@graphql-toolkit/schema-merging": "0.6.1-alpha-c775427.3+c775427",
+    "@graphql-toolkit/url-loader": "0.6.1-alpha-c775427.3+c775427",
     "cosmiconfig": "5.2.1",
-    "globby": "10.0.1"
+    "globby": "10.0.1",
+    "minimatch": "3.0.4"
   },
   "devDependencies": {
     "@types/cosmiconfig": "5.0.3",
