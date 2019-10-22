@@ -1,26 +1,19 @@
-import {DocumentNode} from 'graphql';
-import {LoadersMissingError, LoaderNoResultError} from './errors';
 import {
-  SchemaPointerSingle,
+  Source,
+  Loader,
+  UniversalLoader,
+  SchemaLoader,
+  DocumentLoader,
   DocumentPointerSingle,
-  PointerWithConfiguration,
-} from './types';
-import {flatten} from './helpers';
+  SchemaPointerSingle,
+} from '@graphql-toolkit/common';
+import {GraphQLFileLoader} from '@graphql-toolkit/graphql-file-loader';
+import {UrlLoader} from '@graphql-toolkit/url-loader';
+import {JsonFileLoader} from '@graphql-toolkit/json-file-loader';
 
-export class Source {
-  document: DocumentNode;
-  location?: string;
-  constructor({
-    document,
-    location,
-  }: {
-    document: DocumentNode;
-    location?: string;
-  }) {
-    this.document = document;
-    this.location = location;
-  }
-}
+import {LoadersMissingError, LoaderNoResultError} from './errors';
+import {flatten} from './helpers';
+import {PointerWithConfiguration} from './types';
 
 function isGlob(pointer: any): pointer is string {
   return typeof pointer === 'string' && pointer.includes('*');
@@ -41,22 +34,25 @@ function isSourceArray(sources: any): sources is Source[] {
   return Array.isArray(sources);
 }
 
-export type Loader<TPointer, TOptions = any> = (
-  pointer: TPointer,
-  options?: TOptions,
-) => Promise<Source | void>;
-
 export type SchemaLoader = Loader<SchemaPointerSingle>;
 export type DocumentLoader = Loader<DocumentPointerSingle>;
 export type UniversalLoader = Loader<
   SchemaPointerSingle | DocumentPointerSingle
 >;
 
-export class LoadersRegistry<TPointer> {
-  private _loaders: Loader<TPointer>[] = [];
+export class LoadersRegistry<
+  TPointer extends SchemaPointerSingle | DocumentPointerSingle
+> {
+  private _loaders: Loader<TPointer>[] = [
+    new GraphQLFileLoader(),
+    new UrlLoader(),
+    new JsonFileLoader(),
+  ];
 
   register(loader: Loader<TPointer>): void {
-    this._loaders.push(loader);
+    if (!this._loaders.some(l => l.loaderId() === loader.loaderId())) {
+      this._loaders.push(loader);
+    }
   }
 
   async load(pointer: TPointer, options?: any): Promise<Source[]> {
@@ -83,11 +79,12 @@ export class LoadersRegistry<TPointer> {
       throw new LoadersMissingError(`Loaders are missing`);
     }
 
-    for (const load of this._loaders) {
-      const result = await load(pointer, options);
-
-      if (result) {
-        return [result];
+    for (const loader of this._loaders) {
+      if (await loader.canLoad(pointer, options)) {
+        const result = await loader.load(pointer, options);
+        if (result) {
+          return [result];
+        }
       }
     }
 

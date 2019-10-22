@@ -1,5 +1,8 @@
+import {
+  SchemaPointerSingle,
+  DocumentPointerSingle,
+} from '@graphql-toolkit/common';
 import {LoadersRegistry} from './loaders';
-import {SchemaPointerSingle, DocumentPointerSingle} from './types';
 
 export type GraphQLExtensionDeclaration = (
   api: ExtensionAPI,

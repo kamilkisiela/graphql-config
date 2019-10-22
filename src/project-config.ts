@@ -1,10 +1,10 @@
 import {GraphQLSchema, DocumentNode, buildASTSchema} from 'graphql';
 import {dirname, isAbsolute, relative, normalize} from 'path';
-import {mergeTypeDefs} from 'graphql-toolkit';
+import {mergeTypeDefs} from '@graphql-toolkit/schema-merging';
+import {Source} from '@graphql-toolkit/common';
 import minimatch from 'minimatch';
 import {ExtensionMissingError} from './errors';
 import {GraphQLExtensionsRegistry} from './extension';
-import {Source} from './loaders';
 import {
   IExtensions,
   IGraphQLProject,

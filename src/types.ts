@@ -1,22 +1,7 @@
-type WithList<T> = T | T[];
-type ElementOf<TList> = TList extends Array<infer TElement> ? TElement : never;
+import {DocumentPointer, SchemaPointer} from '@graphql-toolkit/common';
+export {DocumentPointer, SchemaPointer, Source} from '@graphql-toolkit/common';
+
 export type PointerWithConfiguration<T = any> = {[key: string]: T};
-
-// Schema pointers
-export type SchemaUrlPointer =
-  | string
-  | {[url: string]: {headers?: {[headerName: string]: string}}};
-export type SchemaLocalPathPointer = string | PointerWithConfiguration;
-export type SchemaGlobPathPointer = string | PointerWithConfiguration;
-export type SchemaPointer = WithList<
-  SchemaUrlPointer | SchemaLocalPathPointer | SchemaGlobPathPointer
->;
-export type SchemaPointerSingle = ElementOf<SchemaPointer>;
-
-// Document pointers
-export type DocumentGlobPathPointer = string | PointerWithConfiguration;
-export type DocumentPointer = WithList<DocumentGlobPathPointer>;
-export type DocumentPointerSingle = ElementOf<DocumentPointer>;
 
 export interface IExtensions {
   [name: string]: any;
