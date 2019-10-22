@@ -22,3 +22,6 @@ export interface GraphQLCofigResult {
   config: IGraphQLConfig;
   filepath: string;
 }
+
+// Kamil: somehow our build process doesn't emit `types.d.ts` file, this should force it...
+export function ɵ() {}
