@@ -1,16 +1,11 @@
 import {GraphQLSchema, DocumentNode, buildASTSchema} from 'graphql';
 import {dirname, isAbsolute, relative, normalize} from 'path';
 import {mergeTypeDefs} from '@graphql-toolkit/schema-merging';
-import {Source} from '@graphql-toolkit/common';
+import {Source, SchemaPointer, DocumentPointer} from '@graphql-toolkit/common';
 import minimatch from 'minimatch';
 import {ExtensionMissingError} from './errors';
 import {GraphQLExtensionsRegistry} from './extension';
-import {
-  IExtensions,
-  IGraphQLProject,
-  SchemaPointer,
-  DocumentPointer,
-} from './types';
+import {IExtensions, IGraphQLProject} from './types';
 import {flatten} from './helpers';
 
 function pick<T, K extends keyof T>(key: K, items: T[]): T[K][] {
