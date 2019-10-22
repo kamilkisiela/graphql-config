@@ -1,15 +1,9 @@
 import {
   Source,
   Loader,
-  UniversalLoader,
-  SchemaLoader,
-  DocumentLoader,
   DocumentPointerSingle,
   SchemaPointerSingle,
 } from '@graphql-toolkit/common';
-import {GraphQLFileLoader} from '@graphql-toolkit/graphql-file-loader';
-import {UrlLoader} from '@graphql-toolkit/url-loader';
-import {JsonFileLoader} from '@graphql-toolkit/json-file-loader';
 
 import {LoadersMissingError, LoaderNoResultError} from './errors';
 import {flatten} from './helpers';
@@ -34,20 +28,10 @@ function isSourceArray(sources: any): sources is Source[] {
   return Array.isArray(sources);
 }
 
-export type SchemaLoader = Loader<SchemaPointerSingle>;
-export type DocumentLoader = Loader<DocumentPointerSingle>;
-export type UniversalLoader = Loader<
-  SchemaPointerSingle | DocumentPointerSingle
->;
-
 export class LoadersRegistry<
   TPointer extends SchemaPointerSingle | DocumentPointerSingle
 > {
-  private _loaders: Loader<TPointer>[] = [
-    new GraphQLFileLoader(),
-    new UrlLoader(),
-    new JsonFileLoader(),
-  ];
+  private _loaders: Loader<TPointer>[] = [];
 
   register(loader: Loader<TPointer>): void {
     if (!this._loaders.some(l => l.loaderId() === loader.loaderId())) {

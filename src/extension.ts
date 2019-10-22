@@ -2,6 +2,9 @@ import {
   SchemaPointerSingle,
   DocumentPointerSingle,
 } from '@graphql-toolkit/common';
+import {GraphQLFileLoader} from '@graphql-toolkit/graphql-file-loader';
+import {UrlLoader} from '@graphql-toolkit/url-loader';
+import {JsonFileLoader} from '@graphql-toolkit/json-file-loader';
 import {LoadersRegistry} from './loaders';
 
 export type GraphQLExtensionDeclaration = (
@@ -29,6 +32,15 @@ export class GraphQLExtensionsRegistry {
     schema: new LoadersRegistry<SchemaPointerSingle>(),
     documents: new LoadersRegistry<DocumentPointerSingle>(),
   };
+
+  constructor() {
+    // schema
+    this.loaders.schema.register(new GraphQLFileLoader());
+    this.loaders.schema.register(new UrlLoader());
+    this.loaders.schema.register(new JsonFileLoader());
+    // documents
+    this.loaders.documents.register(new GraphQLFileLoader());
+  }
 
   register(extensionFn: GraphQLExtensionDeclaration): void {
     const extension = extensionFn({
