@@ -120,4 +120,54 @@ describe('project matching by file path', () => {
       'baz',
     );
   });
+
+  test('consider include', async () => {
+    temp.createFile(
+      '.graphqlrc',
+      `
+      projects: 
+        foo:
+          schema: ./foo.graphql
+          include: ./foo/*.ts
+        bar:
+          schema: ./bar.graphql
+          documents: ./documents/**/*.graphql
+    `,
+    );
+
+    const config = (await loadConfig({
+      rootDir: temp.dir,
+    }))!;
+
+    expect(config.getProjectForFile('./foo/component.ts').name).toBe('foo');
+    expect(config.getProjectForFile('./documents/barbar.graphql').name).toBe(
+      'bar',
+    );
+  });
+
+  test('consider exclude', async () => {
+    temp.createFile(
+      '.graphqlrc',
+      `
+      projects: 
+        foo:
+          schema: ./foo.graphql
+          include: ./foo/*.ts
+          exclude: ./foo/ignored/**
+        bar:
+          schema: ./bar.graphql
+          documents: ./documents/**/*.graphql
+    `,
+    );
+
+    const config = (await loadConfig({
+      rootDir: temp.dir,
+    }))!;
+
+    expect(config.getProjectForFile('./foo/component.ts').name).toBe('foo');
+    // should point to a next project that includes the file
+    expect(config.getProjectForFile('./foo/ignored/component.ts').name).toBe(
+      'bar',
+    );
+  });
 });
