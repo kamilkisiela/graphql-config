@@ -4,8 +4,6 @@
   "description": "The easiest way to configure your development environment with your GraphQL schema (supported by most tools, editors & IDEs)",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
-  "unpkg": "dist/index.umd.js",
-  "umd": "dist/index.umd.js",
   "typings": "dist/index.d.ts",
   "sideEffects": false,
   "scripts": {
