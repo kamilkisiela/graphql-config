@@ -1,0 +1,5 @@
+{
+  "GraphQL Config": {
+    "Basics": ["introduction", "installation", "usage", "schema", "documents"]
+  }
+}
