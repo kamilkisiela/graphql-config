@@ -68,9 +68,6 @@ export class LoadersRegistry<
       return this.load(key as any, (pointer as PointerWithConfiguration)[key]);
     }
 
-    if (typeof pointer === 'string') {
-    }
-
     if (this._loaders.length === 0) {
       throw new LoadersMissingError(`Loaders are missing`);
     }
