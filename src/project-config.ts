@@ -188,7 +188,7 @@ function match(
     const normalizedFilepath = normalize(
       isAbsolute(filepath) ? relative(dirpath, filepath) : filepath,
     );
-    return minimatch(normalizedFilepath, normalize(pointer));
+    return minimatch(normalizedFilepath, normalize(pointer), {dot: true});
   }
 
   if (typeof pointer === 'object') {
