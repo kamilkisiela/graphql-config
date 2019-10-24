@@ -1,12 +1,15 @@
-export {getGraphQLConfig, getGraphQLProjectConfig} from './getGraphQLConfig';
+export {GraphQLConfig, loadConfig} from './config';
+export {GraphQLProjectConfig} from './project-config';
+export {GraphQLExtensionDeclaration} from './extension';
 export {
-  GRAPHQL_CONFIG_NAME,
-  GRAPHQL_CONFIG_YAML_NAME,
-  findGraphQLConfigFile,
-} from './findGraphQLConfigFile';
-export {writeSchema, validateConfig, getSchemaExtensions} from './utils';
-export * from './errors';
-export * from './extensions/';
-export {GraphQLConfig} from './GraphQLConfig';
-export {GraphQLProjectConfig} from './GraphQLProjectConfig';
+  Source,
+  SchemaLoader,
+  DocumentLoader,
+  UniversalLoader,
+  SchemaPointerSingle,
+  SchemaPointer,
+  DocumentPointerSingle,
+  DocumentPointer,
+} from '@graphql-toolkit/common';
 export * from './types';
+export * from './errors';

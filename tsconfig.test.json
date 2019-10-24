@@ -1,0 +1,11 @@
+{
+  "extends": "./tsconfig",
+  "compilerOptions": {
+    "module": "commonjs",
+    "types": ["node", "jest"]
+  },
+  "include": [
+    "test",
+    "src"
+  ]
+}

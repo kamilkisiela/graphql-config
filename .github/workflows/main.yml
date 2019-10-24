@@ -12,10 +12,12 @@ jobs:
       - name: Use Node.js ${{ matrix.node_version }}
         uses: actions/setup-node@master
         with:
-          version: ${{ matrix.node_version }}
+          node-version: ${{ matrix.node_version }}
       - name: Install
         run: yarn
       - name: Test
         run: yarn test
+      - name: Lint
+        run: yarn lint
       - name: Build
         run: yarn build

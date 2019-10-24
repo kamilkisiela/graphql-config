@@ -8,11 +8,15 @@
       "dom",
       "esnext.asynciterable"
     ],
-    "outDir": "lib",
+    "outDir": "dist",
     "declaration": true,
+    "declarationMap": true,
     "importHelpers": true,
     "moduleResolution": "node",
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true
   },
   "exclude": [
     "node_modules",

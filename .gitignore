@@ -1,8 +1,6 @@
-.rts2_cache_cjs
-.rts2_cache_esm
-.rts2_cache_umd
-.DS_Store
-.idea
-node_modules
+.DS_Store/
+.idea/
+node_modules/
+coverage/
+dist/
 *.map
-dist

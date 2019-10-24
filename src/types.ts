@@ -1,26 +1,27 @@
-import {IntrospectionQuery} from 'graphql';
-import {GraphQLConfigEnpointsData} from './extensions/';
+import {DocumentPointer, SchemaPointer} from '@graphql-toolkit/common';
 
-export type IntrospectionResult = {
-  data: IntrospectionQuery;
-  extensions?: Object;
-  errors?: any;
-};
+export type PointerWithConfiguration<T = any> = {[key: string]: T};
 
-export type GraphQLConfigExtensions = {
-  endpoints?: GraphQLConfigEnpointsData;
+export interface IExtensions {
   [name: string]: any;
-};
+}
 
-export type GraphQLResolvedConfigData = {
-  schemaPath: string;
+export interface IGraphQLProjects {
+  projects: Record<string, IGraphQLProject>;
+}
 
-  includes?: Array<string>;
-  excludes?: Array<string>;
+export type IGraphQLConfig = IGraphQLProject | IGraphQLProjects;
 
-  extensions?: GraphQLConfigExtensions;
-};
+export interface IGraphQLProject {
+  schema: SchemaPointer;
+  documents?: DocumentPointer;
+  extensions?: IExtensions;
+}
 
-export type GraphQLConfigData = GraphQLResolvedConfigData & {
-  projects?: {[projectName: string]: GraphQLResolvedConfigData};
-};
+export interface GraphQLCofigResult {
+  config: IGraphQLConfig;
+  filepath: string;
+}
+
+// Kamil: somehow our build process doesn't emit `types.d.ts` file, this should force it...
+export function ɵ() {}
