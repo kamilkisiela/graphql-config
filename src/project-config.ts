@@ -15,6 +15,8 @@ function pick<T, K extends keyof T>(key: K, items: T[]): T[K][] {
 export class GraphQLProjectConfig {
   readonly schema: SchemaPointer;
   readonly documents?: DocumentPointer;
+  readonly include?: string | string[];
+  readonly exclude?: string | string[];
   readonly extensions: IExtensions;
   readonly filepath: string;
   readonly dirpath: string;
@@ -39,6 +41,8 @@ export class GraphQLProjectConfig {
     this.extensions = config.extensions || {};
     this.schema = config.schema;
     this.documents = config.documents;
+    this.include = config.include;
+    this.exclude = config.exclude;
 
     this._extensionsRegistry = extensionsRegistry;
   }
@@ -138,9 +142,31 @@ export class GraphQLProjectConfig {
   }
 
   match(filepath: string): boolean {
-    return [this.schema, this.documents].some(pointer =>
+    const isSchemaOrDocument = [this.schema, this.documents].some(pointer =>
       match(filepath, this.dirpath, pointer),
     );
+
+    if (isSchemaOrDocument) {
+      return true;
+    }
+
+    const isExcluded = this.exclude
+      ? match(filepath, this.dirpath, this.exclude)
+      : false;
+
+    if (isExcluded) {
+      return false;
+    }
+
+    const isIncluded = this.include
+      ? match(filepath, this.dirpath, this.include)
+      : false;
+
+    if (isIncluded) {
+      return true;
+    }
+
+    return false;
   }
 }
 

@@ -16,6 +16,8 @@ export interface IGraphQLProject {
   schema: SchemaPointer;
   documents?: DocumentPointer;
   extensions?: IExtensions;
+  include?: string | string[];
+  exclude?: string | string[];
 }
 
 export interface GraphQLCofigResult {
