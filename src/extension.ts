@@ -28,12 +28,17 @@ export class GraphQLExtensionsRegistry {
     [name: string]: GraphQLConfigExtension;
   } = {};
 
-  readonly loaders = {
-    schema: new LoadersRegistry<SchemaPointerSingle>(),
-    documents: new LoadersRegistry<DocumentPointerSingle>(),
+  readonly loaders: {
+    schema: LoadersRegistry<SchemaPointerSingle>;
+    documents: LoadersRegistry<DocumentPointerSingle>;
   };
 
-  constructor() {
+  constructor({cwd}: {cwd: string}) {
+    this.loaders = {
+      schema: new LoadersRegistry<SchemaPointerSingle>({cwd}),
+      documents: new LoadersRegistry<DocumentPointerSingle>({cwd}),
+    };
+
     // schema
     this.loaders.schema.register(new GraphQLFileLoader());
     this.loaders.schema.register(new UrlLoader());

@@ -32,6 +32,11 @@ export class LoadersRegistry<
   TPointer extends SchemaPointerSingle | DocumentPointerSingle
 > {
   private _loaders: Loader<TPointer>[] = [];
+  private readonly cwd: string;
+
+  constructor({cwd}: {cwd: string}) {
+    this.cwd = cwd;
+  }
 
   register(loader: Loader<TPointer>): void {
     if (!this._loaders.some(l => l.loaderId() === loader.loaderId())) {
@@ -44,9 +49,13 @@ export class LoadersRegistry<
       options = {};
     }
 
+    options.cwd = this.cwd;
+
     if (isGlob(pointer)) {
       const {default: globby} = await import('globby');
-      const filepaths = await globby(pointer);
+      const filepaths = await globby(pointer, {
+        cwd: this.cwd,
+      });
       const results = await Promise.all(
         filepaths.map(filepath => this.load(filepath as any, options)),
       );
