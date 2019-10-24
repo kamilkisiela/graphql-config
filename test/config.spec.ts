@@ -17,6 +17,37 @@ afterAll(() => {
   process.env.SCHEMA = undefined;
 });
 
+describe('loaders', () => {
+  test('load a single graphql file', async () => {
+    temp.createFile(
+      '.graphqlrc',
+      `
+      schema: schema.graphql
+    `,
+    );
+
+    temp.createFile(
+      'schema.graphql',
+      /* GraphQL */ `
+        type Query {
+          foo: String
+        }
+      `,
+    );
+
+    const config = await loadConfig({
+      rootDir: temp.dir,
+    });
+
+    const schema = await config!.getDefault().getSchema();
+    const query = schema.getQueryType()!;
+    const fields = Object.keys(query.getFields());
+
+    expect(query).toBeDefined();
+    expect(fields).toContainEqual('foo');
+  });
+});
+
 describe('environment variables', () => {
   test('not defined but with a default value', async () => {
     temp.createFile(

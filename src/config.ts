@@ -71,7 +71,7 @@ export class GraphQLConfig {
     this._rawConfig = raw.config;
     this.filepath = raw.filepath;
     this.dirpath = dirname(raw.filepath);
-    this.extensions = new GraphQLExtensionsRegistry();
+    this.extensions = new GraphQLExtensionsRegistry({cwd: this.dirpath});
 
     extensions.forEach(extension => {
       this.extensions.register(extension);
