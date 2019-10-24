@@ -4,7 +4,7 @@ title: Usage
 sidebar_label: Usage
 ---
 
-## Possible config files
+## Config search places
 
 - `.graphqlrc` _(YAML and JSON)_
 - `.graphqlrc.json`
@@ -65,3 +65,38 @@ extensions:
 ```
 
 Now [GraphQL Code Generator](https://graphql-code-generator.com/) is able to consume that data. 
+
+## Projects
+
+GraphQL Config allows to define multiple project within the same config file.
+
+Think of it this way, when you write config:
+
+```yaml
+schema: './schema.graphql'
+documents: './src/components/**/*.graphql'
+```
+
+You pretty much creates a default project.
+
+In order to have multiple projects you write config this way:
+
+```yaml
+projects:
+  foo: 
+    schema: './packages/foo/schema.graphql'
+    documents: './packages/foo/src/components/**/*.graphql'
+  bar:
+    schema: './packages/bar/schema.graphql'
+```
+
+It's also possible to define many projects where one is default. You simply put `default` as project's name:
+
+```yaml
+projects:
+  default: 
+    schema: './packages/foo/schema.graphql'
+    documents: './packages/foo/src/components/**/*.graphql'
+  bar:
+    schema: './packages/bar/schema.graphql'
+```

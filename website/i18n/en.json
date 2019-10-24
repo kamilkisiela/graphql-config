@@ -5,9 +5,17 @@
     "previous": "Previous",
     "tagline": "One configuration for all your GraphQL tools",
     "docs": {
+      "api": {
+        "title": "Consuming API",
+        "sidebar_label": "Consuming API"
+      },
       "documents": {
         "title": "Specifying documents",
         "sidebar_label": "Specifying documents"
+      },
+      "extensions": {
+        "title": "Writing and Consuming Extensions",
+        "sidebar_label": "Extensions"
       },
       "installation": {
         "title": "Installation",
@@ -16,6 +24,14 @@
       "introduction": {
         "title": "Introduction to GraphQL Config",
         "sidebar_label": "Introduction"
+      },
+      "load-config": {
+        "title": "Loading Config",
+        "sidebar_label": "Loading Config"
+      },
+      "loaders": {
+        "title": "Loaders",
+        "sidebar_label": "Loaders"
       },
       "README": {
         "title": "README"
@@ -34,7 +50,8 @@
       "GitHub": "GitHub"
     },
     "categories": {
-      "Basics": "Basics"
+      "I'm a user": "I'm a user",
+      "I'm a library author": "I'm a library author"
     }
   },
   "pages-strings": {
