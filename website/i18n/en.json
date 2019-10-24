@@ -5,8 +5,9 @@
     "previous": "Previous",
     "tagline": "One configuration for all your GraphQL tools",
     "docs": {
-      "extensions": {
-        "title": "extensions"
+      "documents": {
+        "title": "Specifying documents",
+        "sidebar_label": "Specifying documents"
       },
       "installation": {
         "title": "Installation",
