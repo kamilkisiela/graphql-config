@@ -1,6 +1,6 @@
 # GraphQL Configuration
 
-There are many ways to configure your application to use GraphQL, and while it is often enough to specify configuration options directly in your application code, maintaining and understanding the hard-coded configuration options may become a challenge as the scale grows. We recommend configuring your application with a `.graphqlconfig` file that contains commonly needed GraphQL-related artifacts.
+There are many ways to configure your application to use GraphQL, and while it is often enough to specify configuration options directly in your application code, maintaining and understanding the hard-coded configuration options may become a challenge as the scale grows. We recommend configuring your application with a `.graphqlrc` file that contains commonly needed GraphQL-related artifacts.
 
 ## GraphQL Configuration Format
 
@@ -8,7 +8,7 @@ After inspecting many GraphQL applications for use cases and communicating with 
 
 ```ts
 // For the ease of understanding/formatting, we're using a
-// Flow-like type to define the configuration format.
+// TypeScript-like type to define the configuration format.
 
 type GraphQLConfiguration =
   GraphQLProjectConfiguration & {
@@ -18,10 +18,11 @@ type GraphQLConfiguration =
   };
 
 type GraphQLProjectConfiguration = {
-  // the name of this project. If absent, the key of this
-  // project config object will be used as the project name.
-  name?: string,
-  schemaPath?: string, // a file with schema IDL
+  // File or files with schema
+  schema?: GlobPath | GlobPath | Array<GlobPath | string>,
+
+  // File or files with operations and fragments
+  documents?: GlobPath | Array<GlobPath>,
 
   // For multiple applications with overlapping files,
   // these configuration options may be helpful
@@ -34,7 +35,7 @@ type GraphQLProjectConfiguration = {
 };
 
 type GraphQLConfigurationExtension = {
-  [name: string]: mixed
+  [name: string]: any
 };
 ```
 
@@ -43,70 +44,28 @@ type GraphQLConfigurationExtension = {
 Usually, for a simple GraphQL applications, the only required configuration is a way to fetch a GraphQL schema:
 ```json
 {
-  "schemaPath": "./schema.graphql"
+  "schema": "./schema.graphql"
 }
 ```
 
-For multiple apps with isolated directories, there are mainly two ways to set up the configuration. Each app can either use the `projects` property to specify each application's configuration, or have a separate `.graphqlconfig` file for each project root.
+For multiple apps with isolated directories, there are mainly two ways to set up the configuration. Each app can either use the `projects` property to specify each application's configuration, or have a separate `.graphql` file for each project root.
 ```json
 {
   "projects": {
     "appA": {
-      "schemaPath": "./appA/appASchema.graphql"
+      "schema": "./appA/appASchema.graphql"
     },
     "appB": {
-      "schemaPath": "./appB/resources/appBSchema.graphql"
+      "schema": "./appB/resources/appBSchema.graphql"
     }
   }
 }
 ```
 
-Or each app can have a separate `.graphqlconfig` file per each application and/or directories:
+Or each app can have a separate `.graphqlrc` file per each application and/or directories:
 ```
-./appA/.graphqlconfig
-./appB/.graphqlconfig
-```
-
-## Default Configuration Properties
-
-> Treat the top-level configuration properties as default values to use if a project configuration scope omits them.
-
-Consider the below GraphQL configuration:
-```json
-{
-  "projects": {
-    "projectA": {
-      "schemaPath": "./resources/schema.graphql",
-      "includes": ["./projectA/graphql/*.graphql"]
-    },
-    "projectB": {
-      "schemaPath": "../resources/schema.graphql",
-      "includes": ["./projectB/graphql/*.graphql"]
-    },
-    "projectC": {
-      "schemaPath": "./schema-for-projectC.graphql"
-    }
-  }
-}
-```
-
-Since projectA and projectB share the same schema file, we can push the `schemaPath` property to the top level, and treat it as a default value for a schema path. In this case, the application using this configuration should treat each project config as a more specific scope, and look at the top level scope with default properties as a fallback.
-```
-{
-  "schemaPath": "./resources/schema.graphql",
-  "projects": {
-    "projectA": {
-      "includes": ["./projectA/graphql/*.graphql"]
-    },
-    "projectB": {
-      "includes": ["./projectB/graphql/*.graphql"]
-    },
-    "projectC": {
-      // "schemaPath" in this scope should take precedence
-      "schemaPath": "./schema-for-projectC.graphql"
-    }
-  }
-}
+./appA/.graphqlrc
+./appB/.graphqlrc
 ```
 
 ## `extensions` as Namespaces
@@ -119,7 +78,7 @@ For example, some application may choose to build using Webpack and need to spec
 
 ```
 {
-  "schemaPath": "...",
+  "schema": "...",
   "extensions": {
     "webpack": {
       // Webpack-specific options here!
@@ -134,83 +93,16 @@ For example, some application may choose to build using Webpack and need to spec
 
 Below are what we're experimenting with for additional fields. Before including in the official recommendation, we would like to iterate on a few different codebases first.
 
-## 'Env' Variable
-
-An env property is useful to facilitate the build and deployment if your application needs to introduce a GraphQL-specific environment variable and run build steps with it:
-
-```
-// run a development build with a production GraphQL database
-GRAPHQL_ENV=production && NODE_ENV=development && babel-node ./server.js
-```
-
-Also, an env property allows an easier adoption of this GraphQL configuration format for non-JavaScript codebases.
-
-The proposed usage for the property is as follows:
-```json
-{
-  "schemaPath": "./schema.graphql",
-  "extensions": {
-    "env": {
-      "production": {
-        "schemaUrl": "http://your-app.com/graphqlschema"
-      },
-      "development": {
-        "schemaPath": "./dev-schema.graphql"
-      }
-    }
-  }
-}
-```
-GraphQL configurations do not support this property because there isn't a clear example how to utilize this property yet.
-
-## Configuring GraphQL endpoint
-
-For a simple GraphQL endpoints, the only required configuration is an URL:
-```json
-{
-  "schemaPath": "./schema.graphql",
-  "extensions": {
-    "endpoints": {
-      "dev": "http://your-app.com/graphql"
-    }
-  }
-}
-```
-
-Additional header values could be added if needed:
-```json
-{
-  "schemaPath": "./schema.graphql",
-  "extensions": {
-    "endpoints": {
-      "dev": {
-        "url": "http://your-app.com/graphql",
-        "headers": {
-          "Authorization": "Bearer ${env:YOUR_APP_TOKEN}"
-        }
-      }
-    }
-  }
-}
-```
-
-**Note**: Don't specify passwords, tokens, etc. inside your `.graphqlconfig`. Use [Environment variables](#referencing-environment-variables) for that.
-
 ### Referencing Environment Variables
 
 To reference environment variables, use the `${env:SOME_VAR}` syntax, for example:
 ```json
 {
-  "schemaPath": "./schema.graphql",
+  "schema": "./schema.graphql",
   "extensions": {
-    "endpoints": {
-      "dev": {
-        "url": "http://your-app.com/graphql",
-        "headers": {
-          "User-Agent": "Build script",
-          "Authorization": "Bearer ${env:YOUR_APP_TOKEN}"
-        }
-      }
+    "customExtension": {
+      "token": "${TOKEN}",
+      "username": "${USERNAME:'default'}"
     }
   }
 }
@@ -218,92 +110,25 @@ To reference environment variables, use the `${env:SOME_VAR}` syntax, for exampl
 
 Note: To escape a `${` sequence just prefix it with a backslash like `\${some value}`.
 
-### Subscription support
-
-Separate endpoint for subscription can be defined and `connectionParams` can be used to provide additional values:
-```json
-{
-  "schemaPath": "./schema.graphql",
-  "extensions": {
-    "endpoints": {
-      "dev": {
-        "url": "http://your-app.com/graphql",
-        "subscription": {
-          "url": "ws://your-app.com:5000/",
-          "connectionParams": {
-            "Token": "${env:YOUR_APP_TOKEN}"
-          }
-        }
-      }
-    }
-  }
-}
-```
-
-### Support for multiple endpoints
-
-In situation where multiple endpoints are supported they can be specified like that:
-```json
-{
-  "schemaPath": "./schema.graphql",
-  "extensions": {
-    "endpoints": {
-      "prod": {
-        "url": "https://your-app.com/graphql",
-        "subscription": {
-          "url": "wss://subscriptions.graph.cool/v1/instagram"
-        }
-      },
-      "dev": {
-        "url": "http://localhost:3000/graphql",
-        "subscription": {
-          "url": "ws://localhost:3001"
-        }
-      }
-    }
-  }
-}
-```
-
 Note: `url` can't be used as a key of this map.
-
-## Configuring a schema defined programmatically
-
-Suppose you have a schema defined using objects from `graphql-js`:
-```js
-// In schema.js,
-const queryType = new GraphQLObjectType({ name: 'Query' });
-export const schema = new GraphQLSchema({ query: queryType });
-```
-
-Because this is a valid GraphQL schema that can be used within applications, we want to provide a way to configure the schema defined in this way:
-```json
-{
-  "schemaPath": "./schema.graphql",
-  "extensions": {
-    "schemaModule": "./schema.js"
-  }
-}
-```
-
-This is not yet supported in GraphQL configuration because we're not sure what shape the type for the exported module is, nor whether this belongs in a JS-specific sub-configuration.
 
 ## Including a set of customized validation rules
 
 Sometimes a GraphQL application wants to either define an additional set of validation rules or specify a list of validation rules to be run at build/runtime. The GraphQL configuration can be a good place to locate where to look for this:
+
 ```js
 // In customRules.js,
 export const customRules: Array<(context: ValidationContext) => any> = { ... };
 
-// And in .graphqlconfig, specify where the custom rules are:
+// And in .graphqlrc, specify where the custom rules are:
 {
-  "schemaPath": "./schema.graphql",
+  "schema": "./schema.graphql",
   "extensions": {
     "customValidationRules": "./customRules.js"
   }
 }
 {
-  "schemaPath": "./schema.graphql",
+  "schema": "./schema.graphql",
   "extensions": {
     "customValidationRules": [ "./customRules.js", "./moreCustomRules.js" ]
   }

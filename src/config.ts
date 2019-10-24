@@ -19,19 +19,21 @@ import {
 
 const cwd = typeof process !== 'undefined' ? process.cwd() : undefined;
 
+interface LoadConfigOptions {
+  filepath?: string;
+  rootDir?: string;
+  extensions?: GraphQLExtensionDeclaration[];
+  throwOnMissing?: boolean;
+  throwOnEmpty?: boolean;
+}
+
 export async function loadConfig({
   filepath,
   rootDir = cwd,
   extensions = [],
   throwOnMissing = true,
   throwOnEmpty = true,
-}: {
-  filepath?: string;
-  rootDir?: string;
-  extensions?: GraphQLExtensionDeclaration[];
-  throwOnMissing?: boolean;
-  throwOnEmpty?: boolean;
-}) {
+}: LoadConfigOptions) {
   try {
     const found = filepath
       ? await getConfig(filepath)

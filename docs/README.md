@@ -3,72 +3,46 @@
 The library exports the following entities:
 
 **Functions:**
-- [`findGraphQLConfigFile`](#findgraphqlconfigfile)
-- [`getGraphQLConfig`](#getgraphqlconfig)
-- [`getGraphQLProjectConfig`](#getgraphqlprojectconfig)
+
+- [`loadConfig`](#loadConfig)
 
 **Classes:**
+
 - [`GraphQLConfig`](#graphqlconfig)
 - [`GraphQLProjectConfig`](#graphqlprojectconfig)
 - [`GraphQLEndpointExtension`](#graphqlendpointsextension)
 
-Advanced .graphqlconfig may contain a few `projects` with `includes/excludes` configured,
+Advanced .graphqlrc may contain a few `projects` with `includes/excludes` configured,
 so if your tool works on per-file basis use `getGraphQLConfig` and `GraphQLConfig`.
 For simpler use-cases when your tool needs only a schema `getGraphQLProjectConfig` and
 `GraphQLProjectConfig` should be used.
 
-## `findGraphQLConfigFile`
+## `loadConfig`
 
-`function findGraphQLConfigFile(filePath: string): string`
+`function loadConfig(options: LoadConfigOptions): string`
 
-Starting from `filePath` and up the directory tree returns path to the first reached `.graphqlconfig`
-or `.graphqlconfig.yaml` file. Throws `ConfigNotFoundError` error when config is not found.
+Starting from current working directory and down the directory tree until `options.rootDir` returns path to the first reached graphql config file. Throws `ConfigNotFoundError` error when config is not found.
 
-**Arguments**:
-  - `filePath` - file path or directory to start search from
+**Options**:
 
-## `getGraphQLConfig`
-
-`function getGraphQLConfig(rootDir: string = process.cwd()): GraphQLConfig`
-
-**Arguments**:
-  - `rootDir` - root dir of a project
-
-Parses the first found config file starting from the `rootDir`.
-Returns an instance of [`GraphQLConfig`](#graphqlconfig)
-
-
-## `getGraphQLProjectConfig`
-
-```js
-export function getGraphQLProjectConfig(
-  rootDir?: string,
-  projectName: string = process.env.GRAPHQL_CONFIG_PROJECT
-): GraphQLProjectConfig
-```
-
-**Arguments**:
-- `rootDir` - root dir of a project
-- `projectName` - optional projectName (for multiproject configs). Defaults to the value of
-  `GRAPHQL_CONFIG_PROJECT` environment variables
-
-Parses the first found config file starting from the `rootDir`.
-Returns an instance of [`GraphQLProjectConfig`](#graphqlprojectconfig)
-
+- `filepath` - path of the config file
+- `rootDir` - directory where the config may be or where GraphQL Config should stop looking for a config file (starting at current working directory)
+- `extensions` - an array of `GraphQLExtensionDeclaration`
+- `throwOnMissing` - throw on missing config (default: true)
+- `throwOnEmpty` - throw on empty config file (default: true)
 
 ## `GraphQLConfig`
 
 ```js
 class GraphQLConfig {
-  config: GraphQLConfigData
-  configPath: string
+  filepath: string;
+  dirpath: string;
+  projects: { [name: string]: GraphQLProjectConfig };
+  extensions: GraphQLExtensionsRegistry
 
-  get configDir(): string
-
-  getProjectConfig(projectName?: string): GraphQLProjectConfig
-  getConfigForFile(filePath: string): GraphQLProjectConfig | undefined
-  getProjectNameForFile(filePath: string): string | undefined
-  getProjects(): { [name: string]: GraphQLProjectConfig } | undefined
+  getDefault(): GraphQLProjectConfig | never;
+  getProject(name?: string): GraphQLProjectConfig | never;
+  getProjectForFile(filepath: string): GraphQLProjectConfig | never;
 }
 ```
 
@@ -76,79 +50,31 @@ class GraphQLConfig {
 
 ```js
 class GraphQLProjectConfig {
-  config: GraphQLResolvedConfigData
-  configPath: string
-  projectName?: string
+  schema: SchemaPointer;
+  documents?: DocumentPointer;
+  name: string;
+  filepath: string;
+  dirpath: string;
+  
+  // Extensions
+  extensions: IExtensions;
+  hasExtension(name: string): boolean;
+  extension<T = any>(name: string): T
 
-  resolveConfigPath(relativePath: string): string // resolves path relative to config
-  includesFile(filePath: string): boolean
+  // Schema
+  getSchema(): Promise<GraphQLSchema>;
+  getSchema(out: 'DocumentNode'): Promise<DocumentNode>;
+  getSchema(out: 'GraphQLSchema'): Promise<GraphQLSchema>;
 
-  getSchema(): GraphQLSchema
-  getSchemaSDL(): string
-  async resolveIntrospection(): Promise<IntrospectionResult>
+  loadSchema(pointer: SchemaPointer): Promise<GraphQLSchema>;
+  loadSchema(pointer: SchemaPointer, out: 'DocumentNode'): Promise<DocumentNode>;
+  loadSchema(pointer: SchemaPointer, out: 'GraphQLSchema'): Promise<GraphQLSchema>;
 
-  // getters
-  get configDir()
-  get schemaPath(): string | null
-  get includes(): string[]
-  get excludes(): string[]
-  get extensions(): GraphQLConfigExtensions
+  // Documents
+  getDocuments(): Promise<Source[]>;
+  loadDocuments(pointer: DocumentPointer): Promise<Source[]>;
 
-  // extension related helper functions
-  get endpointsExtension(): GraphQLEndpointExtension | null
+  match(filepath: string): boolean
 }
 ```
 
-## `GraphQLEndpointsExtension`
-
-Instance of `GraphQLEndpointExtension` can be retrieved from an instance of `GraphQLProjectConfig`
-using `endpointsExtension` getter:
-
-```js
-import { getGraphQLProjectConfig } from 'graphql-config';
-
-const config = getGraphQLProjectConfig('./optionalProjectDir');
-const endpointsExtension = config.endpointsExtension;
-// use endpointsExtension
-```
-
-The difficulty with endpoints is that they can contain
-[references to the environment variables](../specification.md#referencing-environment-variables):
-
-```js
-"headers": {
-  "Authorization": "Bearer ${env:AUTH_TOKEN}"
-}
-```
-
-If your tool is run from console all references will be automatically resolved from
-OS environment variables.
-But if the tool is not started from console it doesn't have access to the OS env variables.
-In this case you have to provide them (e.g. ask user to input them).
-Below is the example of how to do this using this lib:
-
-```js
-import { getGraphQLProjectConfig } from 'graphql-config';
-
-const config = getGraphQLProjectConfig('./optionalProjectDir');
-const endpointsExt = config.endpointsExtension;
-
-// get endpoint names (it will always have at least one item 'default')
-const endpointNames = Object.keys(endpointsExt.getRawEndpointsMap());
-
-const chosenEndpointName = endpointNames[0]; // user can select this
-
-const usedEnvs = endpointsExt.getEnvVarsForEndpoint(chosenEndpointName);
-// `usedEnvs` is the map from env name to the resolved value or null if can't resolve
-// use this map to present user with UI to fill the missing variables
-const filledEnvs = getEnvsFromUI(); // some your function
-const endpoint = endpointsExt.getEndpoint(chosenEndpointName, filledEnvs);
-
-// now use endpoint to create a GraphQL Client to this endpoint
-const client = endpoint.getClient();
-await client.request('....');
-// or to resolve schema
-const schema = await endpoint.resolveSchema();
-```
-
-For more detailed documentation refer [to the implementation](../src/extensions/endpoint/)
