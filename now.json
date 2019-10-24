@@ -1,0 +1,10 @@
+{
+  "name": "graphql-config",
+  "version": 2,
+  "alias": ["graphql-config"],
+  "public": false,
+  "github": {
+    "enabled": true,
+    "silent": true
+  }
+}
