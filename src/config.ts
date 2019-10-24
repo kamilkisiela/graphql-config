@@ -115,11 +115,24 @@ export class GraphQLConfig {
   }
 
   getProjectForFile(filepath: string): GraphQLProjectConfig | never {
+    // Looks for a project that includes the file or the file is a part of schema or documents
     for (const projectName in this.projects) {
       if (this.projects.hasOwnProperty(projectName)) {
         const project = this.projects[projectName];
 
         if (project.match(filepath)) {
+          return project;
+        }
+      }
+    }
+
+    // The file doesn't match any of the project
+    // Looks for a first project that has no `include` and `exclude`
+    for (const projectName in this.projects) {
+      if (this.projects.hasOwnProperty(projectName)) {
+        const project = this.projects[projectName];
+
+        if (!project.include && !project.exclude) {
           return project;
         }
       }
