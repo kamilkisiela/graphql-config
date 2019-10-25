@@ -1,5 +1,7 @@
 # GraphQL Config
 
+![GraphQL Config](https://i.imgur.com/hw5tXw2.gif "GraphQL Config")
+
 The easiest way to configure your development environment with your GraphQL schema (supported by most tools, editors & IDEs).
 
 - website: https://graphql-config.com
