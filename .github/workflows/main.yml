@@ -1,5 +1,12 @@
 name: CI
-on: [push]
+on: 
+  push:
+    paths:
+      - '**.js'
+      - '**.ts'
+      - '**.json'
+      - '**.yaml'
+      - '**.yml'
 jobs:
   test:
     name: Test on node ${{ matrix.node_version }}
