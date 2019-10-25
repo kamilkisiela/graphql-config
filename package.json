@@ -37,7 +37,7 @@
   },
   "devDependencies": {
     "@types/cosmiconfig": "5.0.3",
-    "@types/jest": "24.0.19",
+    "@types/jest": "24.0.20",
     "@types/nock": "11.1.0",
     "@types/node": "12.11.7",
     "@types/node-fetch": "2.5.2",
