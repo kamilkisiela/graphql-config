@@ -14,6 +14,7 @@
     "format": "prettier --write '{src,test}/**/*.{ts,graphql}'",
     "lint": "eslint '{src,test}/**/*.ts'",
     "test": "jest",
+    "now-build": "(cd website && yarn && yarn build && mv build/graphql-config ../public)",
     "precommit": "lint-staged",
     "release": "npm publish dist"
   },
@@ -62,14 +63,14 @@
     "type": "git",
     "url": "https://github.com/kamilkisiela/graphql-config.git"
   },
-  "homepage": "https://github.com/kamilkisiela/graphql-config#readme",
+  "homepage": "https://graphql-config.com",
   "keywords": [
     "graphql",
     "config",
     "relay",
     "apollo"
   ],
-  "author": "Johannes Schickling <johannes@graph.cool>",
+  "author": "Kamil Kisiela <kamil.kisiela@gmail.com>",
   "license": "MIT",
   "lint-staged": {
     "*.{ts,graphql}": [

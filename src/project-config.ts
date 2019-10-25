@@ -64,6 +64,8 @@ export class GraphQLProjectConfig {
       ...this.extensions[name],
       schema: this.schema,
       documents: this.documents,
+      include: this.include,
+      exclude: this.exclude,
     };
   }
 
