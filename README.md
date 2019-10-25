@@ -15,8 +15,10 @@ documents: ./src/components/**/*.jsx
 
 Install:
 
+```bash
   yarn add graphql-config
   npm install graphql-config
+```
 
 Use:
 
