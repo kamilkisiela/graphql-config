@@ -95,7 +95,9 @@ Allows to access extension's configuration + `schema`, `documents`, `include` an
 ### `getSchema()`
 
 _type: `getSchema(): Promise<GraphQLSchema>`_
+
 _type: `getSchema(out: 'DocumentNode'): Promise<DocumentNode>`_
+
 _type: `getSchema(out: 'GraphQLSchema'): Promise<GraphQLSchema>`_
 
 Allows to access `GraphQLSchema` object based on provided information (in `schema` property of project's configuration).
