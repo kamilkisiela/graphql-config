@@ -6,7 +6,7 @@ sidebar_label: Loading Config
 
 ## loadConfig
 
-It's the starting point of using GraphQL Config. It looks for a config file in [predefined search places](./usage.md#config-search-places) in the currently working directory.
+It's the starting point of using GraphQL Config. It looks for a config file in [predefined search places](./user-usage.md#config-search-places) in the currently working directory.
 
 A basic usage:
 

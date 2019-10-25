@@ -13,8 +13,12 @@ documents: ./src/components/**/*.jsx
 
 ## Usage
 
-yarn add graphql-config
-npm install graphql-config
+Install:
+
+  yarn add graphql-config
+  npm install graphql-config
+
+Use:
 
 ```typescript
 import {loadConfig} from 'graphql-config';

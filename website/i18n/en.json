@@ -5,25 +5,21 @@
     "previous": "Previous",
     "tagline": "One configuration for all your GraphQL tools",
     "docs": {
+      "graphql-config": {
+        "title": "GraphQLConfig",
+        "sidebar_label": "GraphQLConfig"
+      },
+      "graphql-project-config": {
+        "title": "GraphQLProjectConfig",
+        "sidebar_label": "GraphQLProjectConfig"
+      },
       "api": {
         "title": "Consuming API",
         "sidebar_label": "Consuming API"
       },
-      "documents": {
-        "title": "Specifying documents",
-        "sidebar_label": "Specifying documents"
-      },
       "extensions": {
         "title": "Writing and Consuming Extensions",
         "sidebar_label": "Extensions"
-      },
-      "installation": {
-        "title": "Installation",
-        "sidebar_label": "Installation"
-      },
-      "introduction": {
-        "title": "Introduction to GraphQL Config",
-        "sidebar_label": "Introduction"
       },
       "load-config": {
         "title": "Loading Config",
@@ -35,6 +31,18 @@
       },
       "README": {
         "title": "README"
+      },
+      "documents": {
+        "title": "Specifying documents",
+        "sidebar_label": "Specifying documents"
+      },
+      "installation": {
+        "title": "Installation",
+        "sidebar_label": "Installation"
+      },
+      "introduction": {
+        "title": "Introduction to GraphQL Config",
+        "sidebar_label": "Introduction"
       },
       "schema": {
         "title": "Specifying schema",
