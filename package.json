@@ -1,6 +1,6 @@
 {
   "name": "graphql-config",
-  "version": "3.0.0-alpha.13",
+  "version": "3.0.0-alpha.14",
   "description": "The easiest way to configure your development environment with your GraphQL schema (supported by most tools, editors & IDEs)",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
@@ -16,7 +16,8 @@
     "test": "jest",
     "now-build": "(cd website && yarn && yarn build && mv build/graphql-config ../public)",
     "precommit": "lint-staged",
-    "release": "npm publish dist"
+    "release": "npm publish dist",
+    "release:next": "npm publish dist --tag next"
   },
   "files": [
     "dist/*"
