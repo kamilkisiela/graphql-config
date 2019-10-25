@@ -6,9 +6,9 @@ sidebar_label: Loading Config
 
 ## loadConfig
 
-It's the starting point of using GraphQL Config. It looks for a config file in [predefined search places](./user-usage.md#config-search-places) in the currently working directory.
+This function is the starting point for using GraphQL Config. It looks for a config file in [predefined search places](./user-usage.md#config-search-places) in the currently working directory.
 
-A basic usage:
+A basic usage example:
 
 ```typescript
 import {loadConfig} from 'graphql-config';
@@ -48,4 +48,4 @@ GraphQL Config throws an error where there's no config file by default.
 
 _type: `boolean`_
 
-GraphQL Config by default throws an error if there's a config file but is empty.
+GraphQL Config by default throws an error if there's a config file but the file is empty.
