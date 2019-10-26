@@ -4,7 +4,7 @@ title: GraphQLConfig
 sidebar_label: GraphQLConfig
 ---
 
-The `GraphQLConfig` is what you get as a result of calling [`loadConfig`](./author-load-config.md).
+The `GraphQLConfig` object is instantiated by calling [`loadConfig`](./author-load-config.md).
 
 A basic usage:
 
