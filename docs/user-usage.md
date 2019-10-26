@@ -39,7 +39,7 @@ By default, GraphQL Config is able to find and extract documents from graphql fi
 
 ## Include / Exclude
 
-When you want to point out files related to the schema, like React components and make your IDE GraphQL Extension recognize them, you're able to do it in `include` and `exlude` items:
+When you want to point out files related to the schema--for instance, React components--and make your IDE GraphQL Extension recognize those files, you can `include` and `exlude` items:
 
 ```yaml
 ...
@@ -47,11 +47,11 @@ include: src/components/**/*.jsx
 exclude: src/components/__ignored__/**/*.jsx
 ```
 
-> Remember that all files specified in `schema` or `documents` are included by default
+> Remember that all files specified in `schema` or `documents` are included by default.
 
 ## Extensions
 
-In order to pass information to GraphQL Config's consumers (like IDE extensions, node libraries), there's `extensions` section that is a key-value object.
+In order to pass information to GraphQL Config's consumers (like IDE extensions, Node libraries), you can use an `extensions` section that is a key-value object.
 
 ```yaml
 schema: './schema/*.graphql'
@@ -68,18 +68,16 @@ Now [GraphQL Code Generator](https://graphql-code-generator.com/) is able to con
 
 ## Projects
 
-GraphQL Config allows to define multiple project within the same config file.
+GraphQL Config allows you to define multiple projects within the same config file.
 
-Think of it this way, when you write config:
+Consider, for instance, writing the following configuration:
 
 ```yaml
 schema: './schema.graphql'
 documents: './src/components/**/*.graphql'
 ```
 
-You pretty much creates a default project.
-
-In order to have multiple projects you write config this way:
+This basically creates a singular, default project. In order to extend configuration to multiple projects, you can use the following approach:
 
 ```yaml
 projects:
@@ -90,7 +88,7 @@ projects:
     schema: './packages/bar/schema.graphql'
 ```
 
-It's also possible to define many projects where one is default. You simply put `default` as project's name:
+It's also possible to define many projects where one is the default. You can simply add `default` as that project's name:
 
 ```yaml
 projects:
