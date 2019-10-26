@@ -18,7 +18,7 @@ From the developer perspective, you gain simplicity and a central place to setup
 
 ## As a library author
 
-From the tool's author point of view, it becomes easier to maintain the code respobsible for handling configuration, loading GraphQL Schema or even files with GraphQL operations and fragments. GraphQL Config provides a set of useful methods and an easy to work with API.
+From the point of view of a library author, GraphQL Config makes it easier to maintain the code responsible for handling configuration, loading GraphQL schemas or even files with GraphQL operations and fragments. GraphQL Config provides a set of useful methods and an easy-to-work-with API.
 
 ## Example
 
