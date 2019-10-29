@@ -147,6 +147,15 @@
     aggregate-error "3.0.1"
     lodash "4.17.15"
 
+"@graphql-toolkit/common@0.6.3":
+  version "0.6.3"
+  resolved "https://registry.yarnpkg.com/@graphql-toolkit/common/-/common-0.6.3.tgz#f4891b8e80ae490ab525ff6ef9fedf317437a500"
+  integrity sha512-WcXQv6B4PBmx6fNsZhIMD91/+pAxN182ZfTf6WmLUerR5RLyZlWEaX76XgxTEDNHbbuyu5SAAQWYemUPA/Fnuw==
+  dependencies:
+    "@kamilkisiela/graphql-tools" "4.0.6"
+    aggregate-error "3.0.1"
+    lodash "4.17.15"
+
 "@graphql-toolkit/graphql-file-loader@0.6.2":
   version "0.6.2"
   resolved "https://registry.yarnpkg.com/@graphql-toolkit/graphql-file-loader/-/graphql-file-loader-0.6.2.tgz#d25ce29640c8ce6949e7bfb9976b57e3e1ec523d"
@@ -155,12 +164,12 @@
     "@graphql-toolkit/common" "0.6.2"
     graphql-import "0.7.1"
 
-"@graphql-toolkit/json-file-loader@0.6.2":
-  version "0.6.2"
-  resolved "https://registry.yarnpkg.com/@graphql-toolkit/json-file-loader/-/json-file-loader-0.6.2.tgz#d4c8cb42980bdbae8d979669b271ff7e0d2d1075"
-  integrity sha512-J/oac+QwwLZgjP7aWglFAaBpM3e06KjjbBrR/XOhMJhSwf2kzfWFBYrbYhx4IcxQPr9QqPLW18o1Rwbd3reUSw==
+"@graphql-toolkit/json-file-loader@0.6.3":
+  version "0.6.3"
+  resolved "https://registry.yarnpkg.com/@graphql-toolkit/json-file-loader/-/json-file-loader-0.6.3.tgz#1a986c3cf81765a5d950f37ccbb15301916afae2"
+  integrity sha512-h4WD0Apr+9tn0rDMXF8HfZiiNczITkzD/dFaDqwcvf+vgbSjlzcTuYot1utN45sIhGPppEmU3GqR2yz5kxfhrQ==
   dependencies:
-    "@graphql-toolkit/common" "0.6.2"
+    "@graphql-toolkit/common" "0.6.3"
 
 "@graphql-toolkit/schema-merging@0.6.2":
   version "0.6.2"
