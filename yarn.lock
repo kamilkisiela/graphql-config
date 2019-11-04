@@ -138,15 +138,6 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@graphql-toolkit/common@0.6.2":
-  version "0.6.2"
-  resolved "https://registry.yarnpkg.com/@graphql-toolkit/common/-/common-0.6.2.tgz#60990c37be4aeee59469dc15f534f73b4fbcacd1"
-  integrity sha512-iwm9xzHvpa03lz/fdIJOyZS59nkMWMjAojyIOXv1qRVoyxgHg5UP4Fguo0F+rl/uW9KOtjypN9ljpz4f6KEMaw==
-  dependencies:
-    "@kamilkisiela/graphql-tools" "4.0.6"
-    aggregate-error "3.0.1"
-    lodash "4.17.15"
-
 "@graphql-toolkit/common@0.6.6":
   version "0.6.6"
   resolved "https://registry.yarnpkg.com/@graphql-toolkit/common/-/common-0.6.6.tgz#78e40a60eff843497140abf18733e170de4a1a40"
@@ -156,12 +147,12 @@
     aggregate-error "3.0.1"
     lodash "4.17.15"
 
-"@graphql-toolkit/graphql-file-loader@0.6.2":
-  version "0.6.2"
-  resolved "https://registry.yarnpkg.com/@graphql-toolkit/graphql-file-loader/-/graphql-file-loader-0.6.2.tgz#d25ce29640c8ce6949e7bfb9976b57e3e1ec523d"
-  integrity sha512-G1gkkNKjy3jflSNe7iShPsnx+rT4cx/jTHTL3eO1cGqYNlkpQbaray+O+ahR637MVio3KET2Xvv0p7opgosQ7w==
+"@graphql-toolkit/graphql-file-loader@0.6.6":
+  version "0.6.6"
+  resolved "https://registry.yarnpkg.com/@graphql-toolkit/graphql-file-loader/-/graphql-file-loader-0.6.6.tgz#76cf528355fb1747b2b20b44cd1d9f3a2024ca92"
+  integrity sha512-hpk+zVgf+UgAQLDbYQ3/Zz6hhUdzfRjKvKOpTSdLNOW7S5ptOB0B76SYHVsjClFjyphanLwx1UraZzjoU7/Dhg==
   dependencies:
-    "@graphql-toolkit/common" "0.6.2"
+    "@graphql-toolkit/common" "0.6.6"
     graphql-import "0.7.1"
 
 "@graphql-toolkit/json-file-loader@0.6.6":
@@ -180,12 +171,12 @@
     "@kamilkisiela/graphql-tools" "4.0.6"
     deepmerge "4.2.2"
 
-"@graphql-toolkit/url-loader@0.6.2":
-  version "0.6.2"
-  resolved "https://registry.yarnpkg.com/@graphql-toolkit/url-loader/-/url-loader-0.6.2.tgz#3c7e3cd62f8a9cd2bb3e663e8f208da2cae5b9b2"
-  integrity sha512-mdCp7OwT7EzCt2i+6uyO6fjocPy+gHorf/juls6oKVNcKXgSdk/EKkuLHqmBnx4zQZwbQfzcSXHjQ9YBse9U1A==
+"@graphql-toolkit/url-loader@0.6.6":
+  version "0.6.6"
+  resolved "https://registry.yarnpkg.com/@graphql-toolkit/url-loader/-/url-loader-0.6.6.tgz#b0dbca04d1a133ad36f0d2e697a0ea25fd6c8ba8"
+  integrity sha512-0XKZyNX2d1v313PVFrZvLwGKk0ZCKKUVfsgtNLScP4p5K/4+dvCk0JKYFr5IBONoN5yonXApjJUzjZoTt6QC0g==
   dependencies:
-    "@graphql-toolkit/common" "0.6.2"
+    "@graphql-toolkit/common" "0.6.6"
     cross-fetch "3.0.4"
     valid-url "1.0.9"
 
@@ -523,35 +514,36 @@
   dependencies:
     "@types/yargs-parser" "*"
 
-"@typescript-eslint/experimental-utils@2.6.0":
-  version "2.6.0"
-  resolved "https://registry.yarnpkg.com/@typescript-eslint/experimental-utils/-/experimental-utils-2.6.0.tgz#ed70bef72822bff54031ff0615fc888b9e2b6e8a"
-  integrity sha512-34BAFpNOwHXeqT+AvdalLxOvcPYnCxA5JGmBAFL64RGMdP0u65rXjii7l/nwpgk5aLEE1LaqF+SsCU0/Cb64xA==
+"@typescript-eslint/experimental-utils@2.6.1":
+  version "2.6.1"
+  resolved "https://registry.yarnpkg.com/@typescript-eslint/experimental-utils/-/experimental-utils-2.6.1.tgz#eddaca17a399ebf93a8628923233b4f93793acfd"
+  integrity sha512-EVrrUhl5yBt7fC7c62lWmriq4MIc49zpN3JmrKqfiFXPXCM5ErfEcZYfKOhZXkW6MBjFcJ5kGZqu1b+lyyExUw==
   dependencies:
     "@types/json-schema" "^7.0.3"
-    "@typescript-eslint/typescript-estree" "2.6.0"
+    "@typescript-eslint/typescript-estree" "2.6.1"
     eslint-scope "^5.0.0"
 
-"@typescript-eslint/parser@2.6.0":
-  version "2.6.0"
-  resolved "https://registry.yarnpkg.com/@typescript-eslint/parser/-/parser-2.6.0.tgz#5106295c6a7056287b4719e24aae8d6293d5af49"
-  integrity sha512-AvLejMmkcjRTJ2KD72v565W4slSrrzUIzkReu1JN34b8JnsEsxx7S9Xx/qXEuMQas0mkdUfETr0j3zOhq2DIqQ==
+"@typescript-eslint/parser@2.6.1":
+  version "2.6.1"
+  resolved "https://registry.yarnpkg.com/@typescript-eslint/parser/-/parser-2.6.1.tgz#3c00116baa0d696bc334ca18ac5286b34793993c"
+  integrity sha512-PDPkUkZ4c7yA+FWqigjwf3ngPUgoLaGjMlFh6TRtbjhqxFBnkElDfckSjm98q9cMr4xRzZ15VrS/xKm6QHYf0w==
   dependencies:
     "@types/eslint-visitor-keys" "^1.0.0"
-    "@typescript-eslint/experimental-utils" "2.6.0"
-    "@typescript-eslint/typescript-estree" "2.6.0"
+    "@typescript-eslint/experimental-utils" "2.6.1"
+    "@typescript-eslint/typescript-estree" "2.6.1"
     eslint-visitor-keys "^1.1.0"
 
-"@typescript-eslint/typescript-estree@2.6.0":
-  version "2.6.0"
-  resolved "https://registry.yarnpkg.com/@typescript-eslint/typescript-estree/-/typescript-estree-2.6.0.tgz#d3e9d8e001492e2b9124c4d4bd4e7f03c0fd7254"
-  integrity sha512-A3lSBVIdj2Gp0lFEL6in2eSPqJ33uAc3Ko+Y4brhjkxzjbzLnwBH22CwsW2sCo+iwogfIyvb56/AJri15H0u5Q==
+"@typescript-eslint/typescript-estree@2.6.1":
+  version "2.6.1"
+  resolved "https://registry.yarnpkg.com/@typescript-eslint/typescript-estree/-/typescript-estree-2.6.1.tgz#fb363dd4ca23384745c5ea4b7f4c867432b00d31"
+  integrity sha512-+sTnssW6bcbDZKE8Ce7VV6LdzkQz2Bxk7jzk1J8H1rovoTxnm6iXvYIyncvNsaB/kBCOM63j/LNJfm27bNdUoA==
   dependencies:
     debug "^4.1.1"
     glob "^7.1.4"
     is-glob "^4.0.1"
     lodash.unescape "4.0.1"
     semver "^6.3.0"
+    tsutils "^3.17.1"
 
 "@wry/equality@^0.1.2":
   version "0.1.9"
@@ -4764,10 +4756,17 @@ ts-jest@24.1.0:
     semver "^5.5"
     yargs-parser "10.x"
 
-tslib@1.10.0, tslib@^1.9.0, tslib@^1.9.3:
+tslib@1.10.0, tslib@^1.8.1, tslib@^1.9.0, tslib@^1.9.3:
   version "1.10.0"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.10.0.tgz#c3c19f95973fb0a62973fb09d90d961ee43e5c8a"
   integrity sha512-qOebF53frne81cf0S9B41ByenJ3/IuH8yJKngAX35CmiZySA0khhkovshKK+jGCaMnVomla7gVlIcc3EvKPbTQ==
+
+tsutils@^3.17.1:
+  version "3.17.1"
+  resolved "https://registry.yarnpkg.com/tsutils/-/tsutils-3.17.1.tgz#ed719917f11ca0dee586272b2ac49e015a2dd759"
+  integrity sha512-kzeQ5B8H3w60nFY2g8cJIuH7JDpsALXySGtwGJ0p2LSjLgay3NdIpqq5SoOBe46bKDW2iq25irHCr8wjomUS2g==
+  dependencies:
+    tslib "^1.8.1"
 
 tunnel-agent@^0.6.0:
   version "0.6.0"
