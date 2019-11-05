@@ -40,7 +40,7 @@
     "@types/jest": "24.0.21",
     "@types/nock": "11.1.0",
     "@types/node": "12.12.5",
-    "@types/node-fetch": "2.5.2",
+    "@types/node-fetch": "2.5.3",
     "@typescript-eslint/parser": "2.6.1",
     "del": "5.1.0",
     "eslint": "6.6.0",
