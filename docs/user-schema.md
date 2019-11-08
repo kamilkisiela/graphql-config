@@ -61,5 +61,5 @@ schema: ${SCHEMA_FILE:./schema.json}
 If you want to define a fallback endpoint you may wrap your value with quotation marks.
 
 ```yaml
-schema: ${SCHEMA_ENDPOINT:"http://localhost:9000"}
+schema: ${SCHEMA_ENDPOINT:"http://localhost:4000/graphql"}
 ```
