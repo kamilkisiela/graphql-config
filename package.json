@@ -39,7 +39,7 @@
     "@types/cosmiconfig": "5.0.3",
     "@types/jest": "24.0.22",
     "@types/nock": "11.1.0",
-    "@types/node": "12.12.6",
+    "@types/node": "12.12.7",
     "@types/node-fetch": "2.5.3",
     "@typescript-eslint/parser": "2.6.1",
     "del": "5.1.0",
