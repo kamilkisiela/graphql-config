@@ -51,4 +51,15 @@ In case you want to access a running GraphQL server via its endpoint, you can pa
 schema: http://localhost:4000/graphql
 ```
 
+### Environment variables
+It is possible to load definitions from environment variables, with or without fallback values.
 
+```yaml
+schema: ${SCHEMA_FILE:./schema.json}
+```
+
+If you want to define a fallback endpoint you may wrap your value with quotation marks.
+
+```yaml
+schema: ${SCHEMA_ENDPOINT:"http://localhost:9000"}
+```
