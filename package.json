@@ -51,7 +51,7 @@
     "make-dir": "3.0.0",
     "nock": "11.7.0",
     "parent-module": "2.0.0",
-    "prettier": "1.18.2",
+    "prettier": "1.19.0",
     "rimraf": "3.0.0",
     "rollup": "1.26.3",
     "rollup-plugin-generate-package-json": "3.1.3",
