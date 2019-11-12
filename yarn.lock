@@ -4141,10 +4141,10 @@ rimraf@^2.5.4, rimraf@^2.6.1, rimraf@^2.6.3:
   dependencies:
     glob "^7.1.3"
 
-rollup-plugin-generate-package-json@3.1.3:
-  version "3.1.3"
-  resolved "https://registry.yarnpkg.com/rollup-plugin-generate-package-json/-/rollup-plugin-generate-package-json-3.1.3.tgz#66b253a2e8e10e2fcd067937495e33851886ac6b"
-  integrity sha512-x9n1fgtPUzz53sAm7N1Y/1FfQ2nRDOqrltJO3AlhQ0h9ApTsWSTVnjFePsZVKcxYVu4B5SbYyZoayXKQFXUiiQ==
+rollup-plugin-generate-package-json@3.1.4:
+  version "3.1.4"
+  resolved "https://registry.yarnpkg.com/rollup-plugin-generate-package-json/-/rollup-plugin-generate-package-json-3.1.4.tgz#3a89ac8da1aeefda59fca12a0d5e5e85f0de2e20"
+  integrity sha512-Qbb9osMybQdhskm/XRCv6z7X5SDME5bVsXJUeifPOC3M2mcaDM6yldbmd3oMTwZTlNQ6+86G3KY6uGbpbI5I8A==
   dependencies:
     read-pkg "^5.1.1"
     write-pkg "^4.0.0"
