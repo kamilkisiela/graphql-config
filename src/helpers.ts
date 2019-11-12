@@ -1,4 +1,4 @@
-import cosmiconfig from 'cosmiconfig';
+import {cosmiconfig, Loader, defaultLoaders} from 'cosmiconfig';
 import {ConfigNotFoundError, ConfigEmptyError, composeMessage} from './errors';
 import {
   IGraphQLConfig,
@@ -105,29 +105,21 @@ function transformContent(content: string): string {
   return replaceEnv(content);
 }
 
-const cosmi: any = cosmiconfig;
-const createCustomLoader = (
-  loader: cosmiconfig.SyncLoader,
-): cosmiconfig.LoaderEntry => {
-  return {
-    sync(filepath, content) {
-      return loader(filepath, transformContent(content));
-    },
-    async(filepath, content) {
-      return loader(filepath, transformContent(content));
-    },
+const createCustomLoader = (loader: Loader): Loader => {
+  return (filepath, content) => {
+    return loader(filepath, transformContent(content));
   };
 };
 
-const loadYaml = createCustomLoader(cosmi.loadYaml);
-const loadJson = createCustomLoader(cosmi.loadJson);
-
 function createCosmiConfig() {
+  const loadYaml = createCustomLoader(defaultLoaders['.yaml']);
+  const loadJson = createCustomLoader(defaultLoaders['.json']);
+
   // We need to wrap loaders in order to access and transform file content (as string)
   // Cosmiconfig has transform option but at this point config is not a string but an object
   return cosmiconfig('graphql', {
     loaders: {
-      '.js': {sync: cosmi.loadJs, async: cosmi.loadJs},
+      '.js': defaultLoaders['.js'],
       '.json': loadJson,
       '.yaml': loadYaml,
       '.yml': loadYaml,
