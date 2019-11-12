@@ -26,11 +26,11 @@
     "graphql": "^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0"
   },
   "dependencies": {
-    "@graphql-toolkit/common": "0.7.1-alpha-797c3cc.1+797c3cc",
-    "@graphql-toolkit/graphql-file-loader": "0.7.1-alpha-797c3cc.1+797c3cc",
-    "@graphql-toolkit/json-file-loader": "0.7.1-alpha-797c3cc.1+797c3cc",
-    "@graphql-toolkit/schema-merging": "0.7.1-alpha-797c3cc.1+797c3cc",
-    "@graphql-toolkit/url-loader": "0.7.1-alpha-797c3cc.1+797c3cc",
+    "@graphql-toolkit/common": "0.7.1",
+    "@graphql-toolkit/graphql-file-loader": "0.7.1",
+    "@graphql-toolkit/json-file-loader": "0.7.1",
+    "@graphql-toolkit/schema-merging": "0.7.1",
+    "@graphql-toolkit/url-loader": "0.7.1",
     "cosmiconfig": "6.0.0",
     "globby": "10.0.1",
     "minimatch": "3.0.4"
