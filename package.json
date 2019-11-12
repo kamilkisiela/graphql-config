@@ -29,7 +29,7 @@
     "@graphql-toolkit/common": "0.6.8",
     "@graphql-toolkit/graphql-file-loader": "0.6.7",
     "@graphql-toolkit/json-file-loader": "0.6.7",
-    "@graphql-toolkit/schema-merging": "0.6.8",
+    "@graphql-toolkit/schema-merging": "0.7.0",
     "@graphql-toolkit/url-loader": "0.6.8",
     "cosmiconfig": "5.2.1",
     "globby": "10.0.1",
