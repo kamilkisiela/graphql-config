@@ -145,48 +145,50 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@graphql-toolkit/common@0.7.0":
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/@graphql-toolkit/common/-/common-0.7.0.tgz#d557a9ba9e3c2cff8b65681d0a09f062337f0b4d"
-  integrity sha512-/zsfk44WHtk18r2b+1WB9smsrQ2Kfs0Qy/8j8ZfjV3Rmm4V1oz1e02eAT4wpOwxYUk7o/V6Bi0I+0ek6YytK/A==
+"@graphql-toolkit/common@0.7.1-alpha-797c3cc.1+797c3cc":
+  version "0.7.1-alpha-797c3cc.1"
+  resolved "https://registry.yarnpkg.com/@graphql-toolkit/common/-/common-0.7.1-alpha-797c3cc.1.tgz#681585ff98244ca0c26c8eab049783ca7228f347"
+  integrity sha512-8ODDlV/yyvUBwMmE9VtuLcnPFFnSl8AOyhW2YliUi4PPEz0di4xdfQtUAzgt4zqjgkr5tIPjW/Osyjsk5GTbqA==
   dependencies:
     "@kamilkisiela/graphql-tools" "4.0.6"
     aggregate-error "3.0.1"
     lodash "4.17.15"
 
-"@graphql-toolkit/graphql-file-loader@0.7.0":
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/@graphql-toolkit/graphql-file-loader/-/graphql-file-loader-0.7.0.tgz#ef348447bdcb202bfb729b1246d58da892a08f41"
-  integrity sha512-o7gSQWhs+6w6XZXfOXwuYg/IWbmAJYCIr6sfJsDJLxJPHRcsWA87UfIwcTpY83PbIHWzK+Qizy/2+PIQ6tnoLA==
+"@graphql-toolkit/graphql-file-loader@0.7.1-alpha-797c3cc.1+797c3cc":
+  version "0.7.1-alpha-797c3cc.1"
+  resolved "https://registry.yarnpkg.com/@graphql-toolkit/graphql-file-loader/-/graphql-file-loader-0.7.1-alpha-797c3cc.1.tgz#0e55831472a44bd157a5575ec1986c7048202029"
+  integrity sha512-eqyiv4pTdFEmboRJHZpl5SZJ/ZnQJdTUCT5lp+i1epqFgMRz7cPAo7GL1Cc334e0aj+q4P3WmP0zEry+hyIOgQ==
   dependencies:
-    "@graphql-toolkit/common" "0.7.0"
+    "@graphql-toolkit/common" "0.7.1-alpha-797c3cc.1+797c3cc"
     graphql-import "0.7.1"
+    is-valid-path "0.1.1"
     tslib "1.10.0"
 
-"@graphql-toolkit/json-file-loader@0.7.0":
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/@graphql-toolkit/json-file-loader/-/json-file-loader-0.7.0.tgz#36cf33100448bbaa18806337dfcbafd6cb86203c"
-  integrity sha512-9m3pd3SuqEugT6/bnlGbrw6aJaX1L02POC8arBNzS31Bu5pqZOc0E+UBVrMhEpqtadwLL6S1i8tHTZw9E3Civw==
+"@graphql-toolkit/json-file-loader@0.7.1-alpha-797c3cc.1+797c3cc":
+  version "0.7.1-alpha-797c3cc.1"
+  resolved "https://registry.yarnpkg.com/@graphql-toolkit/json-file-loader/-/json-file-loader-0.7.1-alpha-797c3cc.1.tgz#650ca2fd5c964a1001b4b7e397462451cba2c8b6"
+  integrity sha512-BuU+h9myHGIHSkFDKvD3ft200b0SsvVWRcAXK98ZbPTKRz/KPeKBFniR2soIiyzgCmYAUNbNQtp3UrAwQ5tW3g==
   dependencies:
-    "@graphql-toolkit/common" "0.7.0"
+    "@graphql-toolkit/common" "0.7.1-alpha-797c3cc.1+797c3cc"
+    is-valid-path "0.1.1"
     tslib "1.10.0"
 
-"@graphql-toolkit/schema-merging@0.7.0":
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/@graphql-toolkit/schema-merging/-/schema-merging-0.7.0.tgz#8218bf2b60719a5f71ff826a5f4e71e4cc254090"
-  integrity sha512-D1FQFG2L2alWDtc1Cer5ebTDPHJU4zJ7NMSpppI5TMNValO0Nt3JB2QpGar4Ty8HpHxKIspZAUCGbeNAzdyusg==
+"@graphql-toolkit/schema-merging@0.7.1-alpha-797c3cc.1+797c3cc":
+  version "0.7.1-alpha-797c3cc.1"
+  resolved "https://registry.yarnpkg.com/@graphql-toolkit/schema-merging/-/schema-merging-0.7.1-alpha-797c3cc.1.tgz#f09dde20d2d3f9f9a73f386f31df3a5372a75041"
+  integrity sha512-YoHR8yYULiz3S8Agj7L0CxeR26C+tCkNUUJ7a/ELXBXhjcLBAHWQb/A9e36SKmNWjeDTwv6/7F7lOqGZ+NoSNg==
   dependencies:
-    "@graphql-toolkit/common" "0.7.0"
+    "@graphql-toolkit/common" "0.7.1-alpha-797c3cc.1+797c3cc"
     "@kamilkisiela/graphql-tools" "4.0.6"
     deepmerge "4.2.2"
     tslib "1.10.0"
 
-"@graphql-toolkit/url-loader@0.7.0":
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/@graphql-toolkit/url-loader/-/url-loader-0.7.0.tgz#2e56ab141feccf703cc8a2a6dee8162c5f0c2199"
-  integrity sha512-OxEVrGM5bWUah7x6/1uw14tiRWh7d5r+lT3EfjHMmUYjNEZLE8QgLZ1SGixjghbBjk+Hmd5upm/oym09ZEsnQw==
+"@graphql-toolkit/url-loader@0.7.1-alpha-797c3cc.1+797c3cc":
+  version "0.7.1-alpha-797c3cc.1"
+  resolved "https://registry.yarnpkg.com/@graphql-toolkit/url-loader/-/url-loader-0.7.1-alpha-797c3cc.1.tgz#78c237b84374cbefb9a46ef94d5ac7c6a6da0d4d"
+  integrity sha512-OZwIU1oXM4Ik1rMaRMEOdKGAOuhUPHLagGFbKYZf1Ht537LD1wIVcDxcfmg7zoQ2FkJmmt96OxuG183W1SwsHQ==
   dependencies:
-    "@graphql-toolkit/common" "0.7.0"
+    "@graphql-toolkit/common" "0.7.1-alpha-797c3cc.1+797c3cc"
     cross-fetch "3.0.4"
     tslib "1.10.0"
     valid-url "1.0.9"
@@ -2337,6 +2339,11 @@ is-extendable@^1.0.1:
   dependencies:
     is-plain-object "^2.0.4"
 
+is-extglob@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/is-extglob/-/is-extglob-1.0.0.tgz#ac468177c4943405a092fc8f29760c6ffc6206c0"
+  integrity sha1-rEaBd8SUNAWgkvyPKXYMb/xiBsA=
+
 is-extglob@^2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/is-extglob/-/is-extglob-2.1.1.tgz#a88c02535791f02ed37c76a1b9ea9773c833f8c2"
@@ -2364,12 +2371,26 @@ is-generator-fn@^2.0.0:
   resolved "https://registry.yarnpkg.com/is-generator-fn/-/is-generator-fn-2.1.0.tgz#7d140adc389aaf3011a8f2a2a4cfa6faadffb118"
   integrity sha512-cTIB4yPYL/Grw0EaSzASzg6bBy9gqCofvWN8okThAYIxKJZC+udlRAmGbM0XLeniEJSs8uEgHPGuHSe1XsOLSQ==
 
+is-glob@^2.0.0:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/is-glob/-/is-glob-2.0.1.tgz#d096f926a3ded5600f3fdfd91198cb0888c2d863"
+  integrity sha1-0Jb5JqPe1WAPP9/ZEZjLCIjC2GM=
+  dependencies:
+    is-extglob "^1.0.0"
+
 is-glob@^4.0.0, is-glob@^4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/is-glob/-/is-glob-4.0.1.tgz#7567dbe9f2f5e2467bc77ab83c4a29482407a5dc"
   integrity sha512-5G0tKtBTFImOqDnLB2hG6Bp2qcKEFduo4tZu9MT/H6NQv/ghhy30o55ufafxJ/LdH79LLs2Kfrn85TLKyA7BUg==
   dependencies:
     is-extglob "^2.1.1"
+
+is-invalid-path@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/is-invalid-path/-/is-invalid-path-0.1.0.tgz#307a855b3cf1a938b44ea70d2c61106053714f34"
+  integrity sha1-MHqFWzzxqTi0TqcNLGEQYFNxTzQ=
+  dependencies:
+    is-glob "^2.0.0"
 
 is-number@^3.0.0:
   version "3.0.0"
@@ -2455,6 +2476,13 @@ is-typedarray@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/is-typedarray/-/is-typedarray-1.0.0.tgz#e479c80858df0c1b11ddda6940f96011fcda4a9a"
   integrity sha1-5HnICFjfDBsR3dppQPlgEfzaSpo=
+
+is-valid-path@0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/is-valid-path/-/is-valid-path-0.1.1.tgz#110f9ff74c37f663e1ec7915eb451f2db93ac9df"
+  integrity sha1-EQ+f90w39mPh7HkV60UfLbk6yd8=
+  dependencies:
+    is-invalid-path "^0.1.0"
 
 is-windows@^1.0.2:
   version "1.0.2"
