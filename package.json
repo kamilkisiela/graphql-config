@@ -54,6 +54,7 @@
     "read-pkg": "5.2.0",
     "rimraf": "3.0.0",
     "rollup": "1.26.5",
+    "rollup-plugin-generate-package-json": "3.1.4",
     "rollup-plugin-typescript2": "0.25.2",
     "ts-jest": "24.1.0",
     "tslib": "1.10.0",
