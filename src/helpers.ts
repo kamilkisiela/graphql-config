@@ -86,18 +86,34 @@ export async function findConfig(
 }
 
 function replaceEnv(content: string) {
-  // https://regex101.com/r/k9saS6/1
+  // https://regex101.com/r/k9saS6/2
   // Yes:
   //  ${NAME:DEFAULT}
   //  ${NAME:"DEFAULT"}
   //  ${NAME}
   // Not:
   //  ${NAME:}
-  const R = /\$\{(?<name>[A-Z0-9_]+)(\:((?<value>[^\:]+)|(\"(?<customValue>[^\"]+)\")))?\}/gi;
-  return content.replace(R, (...args) => {
-    const {name, value, customValue} = args[9];
 
-    return process.env[name] ? String(process.env[name]) : value || customValue;
+  const R = /\$\{([A-Z0-9_]+(\:[^\}]+)?)\}/gi;
+
+  return content.replace(R, (_, result: string) => {
+    let [name, value, ...rest] = result.split(':');
+
+    if (value) {
+      if (rest && rest.length) {
+        value = [value, ...rest].join(':');
+      }
+
+      value = value.trim();
+
+      if (value.startsWith(`"`)) {
+        value = value.replace(/^\"([^\"]+)\"$/g, '$1');
+      } else if (value.startsWith(`'`)) {
+        value = value.replace(/^\'([^\']+)\'$/g, '$1');
+      }
+    }
+
+    return process.env[name] ? String(process.env[name]) : value;
   });
 }
 
