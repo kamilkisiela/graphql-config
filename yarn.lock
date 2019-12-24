@@ -156,6 +156,16 @@
     aggregate-error "3.0.1"
     lodash "4.17.15"
 
+"@graphql-toolkit/common@0.7.5":
+  version "0.7.5"
+  resolved "https://registry.yarnpkg.com/@graphql-toolkit/common/-/common-0.7.5.tgz#4fbca5a2bb562ff4bc7adc0e494cb6d21283472b"
+  integrity sha512-pu7tKY6KW7+4noJQPCbIxKzv54tSl/FME9wU0rNSwcr4O3By+pv7VCYXxkhCSnftJcXsXAuAcdjcV2CBsjnZNg==
+  dependencies:
+    "@kamilkisiela/graphql-tools" "4.0.6"
+    aggregate-error "3.0.1"
+    is-glob "4.0.1"
+    lodash "4.17.15"
+
 "@graphql-toolkit/graphql-file-loader@0.6.7":
   version "0.6.7"
   resolved "https://registry.yarnpkg.com/@graphql-toolkit/graphql-file-loader/-/graphql-file-loader-0.6.7.tgz#f1b0d3357b28b71167b7c1f15661918be50e4a88"
@@ -164,12 +174,13 @@
     "@graphql-toolkit/common" "0.6.7"
     graphql-import "0.7.1"
 
-"@graphql-toolkit/json-file-loader@0.6.7":
-  version "0.6.7"
-  resolved "https://registry.yarnpkg.com/@graphql-toolkit/json-file-loader/-/json-file-loader-0.6.7.tgz#3a6150f41d52184668412c2351b5fb97a0968433"
-  integrity sha512-ZE9UmZT1si8MAd39TfmUDOGb4emKeE4rIJ4Ho9qwp9+a4P6Xl3pRxSZDcMe7V6K9F2Dg7PGl0TpUgsIPnxJzTQ==
+"@graphql-toolkit/json-file-loader@0.7.5":
+  version "0.7.5"
+  resolved "https://registry.yarnpkg.com/@graphql-toolkit/json-file-loader/-/json-file-loader-0.7.5.tgz#89ff5ec195fd04f1adb0b5da6bb647ebe0461c1e"
+  integrity sha512-JRoqNV4FBsV0t2qo3nb++wfWgQzfToEERrnJc11EWCXgMkn0jMfWFHYru+gqCvSvzcoa3fymD3ceDUxZ4ERlgw==
   dependencies:
-    "@graphql-toolkit/common" "0.6.7"
+    "@graphql-toolkit/common" "0.7.5"
+    tslib "1.10.0"
 
 "@graphql-toolkit/schema-merging@0.6.8":
   version "0.6.8"
@@ -2355,7 +2366,7 @@ is-generator-fn@^2.0.0:
   resolved "https://registry.yarnpkg.com/is-generator-fn/-/is-generator-fn-2.1.0.tgz#7d140adc389aaf3011a8f2a2a4cfa6faadffb118"
   integrity sha512-cTIB4yPYL/Grw0EaSzASzg6bBy9gqCofvWN8okThAYIxKJZC+udlRAmGbM0XLeniEJSs8uEgHPGuHSe1XsOLSQ==
 
-is-glob@^4.0.0, is-glob@^4.0.1:
+is-glob@4.0.1, is-glob@^4.0.0, is-glob@^4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/is-glob/-/is-glob-4.0.1.tgz#7567dbe9f2f5e2467bc77ab83c4a29482407a5dc"
   integrity sha512-5G0tKtBTFImOqDnLB2hG6Bp2qcKEFduo4tZu9MT/H6NQv/ghhy30o55ufafxJ/LdH79LLs2Kfrn85TLKyA7BUg==
