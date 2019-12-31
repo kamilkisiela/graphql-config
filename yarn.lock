@@ -156,6 +156,16 @@
     aggregate-error "3.0.1"
     lodash "4.17.15"
 
+"@graphql-toolkit/common@0.8.0":
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/@graphql-toolkit/common/-/common-0.8.0.tgz#2bc21effaea0c35a65d464ba35bca24bae5c40d9"
+  integrity sha512-Dhr5dt5HbQe63t8teo0MEt1YnYQhfIKfbm25lZLCXxwR6aPfetzRUEfTDFrrlP+ltTA7JU7ujk9DjsEZM4uxAw==
+  dependencies:
+    "@kamilkisiela/graphql-tools" "4.0.6"
+    aggregate-error "3.0.1"
+    is-glob "4.0.1"
+    lodash "4.17.15"
+
 "@graphql-toolkit/graphql-file-loader@0.6.7":
   version "0.6.7"
   resolved "https://registry.yarnpkg.com/@graphql-toolkit/graphql-file-loader/-/graphql-file-loader-0.6.7.tgz#f1b0d3357b28b71167b7c1f15661918be50e4a88"
@@ -171,12 +181,12 @@
   dependencies:
     "@graphql-toolkit/common" "0.6.7"
 
-"@graphql-toolkit/schema-merging@0.6.8":
-  version "0.6.8"
-  resolved "https://registry.yarnpkg.com/@graphql-toolkit/schema-merging/-/schema-merging-0.6.8.tgz#67c0d83f9975026b20a69fca6a01f9b7d04ebbdb"
-  integrity sha512-/QhyfscZLqJLOgM0fD9Dxb5ps9OYyaOPxNS2mgjvX++jbNkJW2128b3KrB0nJzFdVEiOllRoaYHGKM4w8lvhmg==
+"@graphql-toolkit/schema-merging@0.8.0":
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/@graphql-toolkit/schema-merging/-/schema-merging-0.8.0.tgz#8ad00ec4cb87c249b1daa0abcfa1005b53865dba"
+  integrity sha512-u9gOoYux6DfckuEdv9jg+r3iLY6RFjzej5moRtJPowjbHBGOP/QbrY4W+0HiPa5QcOxJYj1sGc3FvSJC/HViyw==
   dependencies:
-    "@graphql-toolkit/common" "0.6.8"
+    "@graphql-toolkit/common" "0.8.0"
     "@kamilkisiela/graphql-tools" "4.0.6"
     deepmerge "4.2.2"
     tslib "1.10.0"
@@ -2355,7 +2365,7 @@ is-generator-fn@^2.0.0:
   resolved "https://registry.yarnpkg.com/is-generator-fn/-/is-generator-fn-2.1.0.tgz#7d140adc389aaf3011a8f2a2a4cfa6faadffb118"
   integrity sha512-cTIB4yPYL/Grw0EaSzASzg6bBy9gqCofvWN8okThAYIxKJZC+udlRAmGbM0XLeniEJSs8uEgHPGuHSe1XsOLSQ==
 
-is-glob@^4.0.0, is-glob@^4.0.1:
+is-glob@4.0.1, is-glob@^4.0.0, is-glob@^4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/is-glob/-/is-glob-4.0.1.tgz#7567dbe9f2f5e2467bc77ab83c4a29482407a5dc"
   integrity sha512-5G0tKtBTFImOqDnLB2hG6Bp2qcKEFduo4tZu9MT/H6NQv/ghhy30o55ufafxJ/LdH79LLs2Kfrn85TLKyA7BUg==
