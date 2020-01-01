@@ -156,13 +156,23 @@
     aggregate-error "3.0.1"
     lodash "4.17.15"
 
-"@graphql-toolkit/graphql-file-loader@0.6.7":
-  version "0.6.7"
-  resolved "https://registry.yarnpkg.com/@graphql-toolkit/graphql-file-loader/-/graphql-file-loader-0.6.7.tgz#f1b0d3357b28b71167b7c1f15661918be50e4a88"
-  integrity sha512-A4LAUhQDiz0yFL5tFzSHw+Jg+2NpmkfdJmgXGvz+7m54P1qh48B1rME5+j8nXbE3STg5jXge9STXwmBVzvE7pg==
+"@graphql-toolkit/common@0.8.0":
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/@graphql-toolkit/common/-/common-0.8.0.tgz#2bc21effaea0c35a65d464ba35bca24bae5c40d9"
+  integrity sha512-Dhr5dt5HbQe63t8teo0MEt1YnYQhfIKfbm25lZLCXxwR6aPfetzRUEfTDFrrlP+ltTA7JU7ujk9DjsEZM4uxAw==
   dependencies:
-    "@graphql-toolkit/common" "0.6.7"
-    graphql-import "0.7.1"
+    "@kamilkisiela/graphql-tools" "4.0.6"
+    aggregate-error "3.0.1"
+    is-glob "4.0.1"
+    lodash "4.17.15"
+
+"@graphql-toolkit/graphql-file-loader@0.8.0":
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/@graphql-toolkit/graphql-file-loader/-/graphql-file-loader-0.8.0.tgz#a591b8763e314d1a624e4f2c0fdd745d646e2998"
+  integrity sha512-jf6GiqhxB/EjU8KM89MUmXy62F8t0Hlh6COXy7xzWm4x2z2BBRm73MxrW9G/3HswCei2YxoptN/lvPpBg0dHNg==
+  dependencies:
+    "@graphql-toolkit/common" "0.8.0"
+    tslib "1.10.0"
 
 "@graphql-toolkit/json-file-loader@0.6.7":
   version "0.6.7"
@@ -1984,14 +1994,6 @@ graceful-fs@^4.1.11, graceful-fs@^4.1.15, graceful-fs@^4.1.2, graceful-fs@^4.1.6
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.2.tgz#6f0952605d0140c1cfdb138ed005775b92d67b02"
   integrity sha512-IItsdsea19BoLC7ELy13q1iJFNmd7ofZH5+X/pJr90/nRoPEX0DJo1dHDbgtYWOhJhcCgMDTOw84RZ72q6lB+Q==
 
-graphql-import@0.7.1:
-  version "0.7.1"
-  resolved "https://registry.yarnpkg.com/graphql-import/-/graphql-import-0.7.1.tgz#4add8d91a5f752d764b0a4a7a461fcd93136f223"
-  integrity sha512-YpwpaPjRUVlw2SN3OPljpWbVRWAhMAyfSba5U47qGMOSsPLi2gYeJtngGpymjm9nk57RFWEpjqwh4+dpYuFAPw==
-  dependencies:
-    lodash "^4.17.4"
-    resolve-from "^4.0.0"
-
 graphql@14.5.8:
   version "14.5.8"
   resolved "https://registry.yarnpkg.com/graphql/-/graphql-14.5.8.tgz#504f3d3114cb9a0a3f359bbbcf38d9e5bf6a6b3c"
@@ -2355,7 +2357,7 @@ is-generator-fn@^2.0.0:
   resolved "https://registry.yarnpkg.com/is-generator-fn/-/is-generator-fn-2.1.0.tgz#7d140adc389aaf3011a8f2a2a4cfa6faadffb118"
   integrity sha512-cTIB4yPYL/Grw0EaSzASzg6bBy9gqCofvWN8okThAYIxKJZC+udlRAmGbM0XLeniEJSs8uEgHPGuHSe1XsOLSQ==
 
-is-glob@^4.0.0, is-glob@^4.0.1:
+is-glob@4.0.1, is-glob@^4.0.0, is-glob@^4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/is-glob/-/is-glob-4.0.1.tgz#7567dbe9f2f5e2467bc77ab83c4a29482407a5dc"
   integrity sha512-5G0tKtBTFImOqDnLB2hG6Bp2qcKEFduo4tZu9MT/H6NQv/ghhy30o55ufafxJ/LdH79LLs2Kfrn85TLKyA7BUg==
@@ -3148,7 +3150,7 @@ lodash.unescape@4.0.1:
   resolved "https://registry.yarnpkg.com/lodash.unescape/-/lodash.unescape-4.0.1.tgz#bf2249886ce514cda112fae9218cdc065211fc9c"
   integrity sha1-vyJJiGzlFM2hEvrpIYzcBlIR/Jw=
 
-lodash@4.17.15, lodash@^4.17.11, lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.4:
+lodash@4.17.15, lodash@^4.17.11, lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.15:
   version "4.17.15"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
   integrity sha512-8xOcRHvCjnocdS5cpwXQXVzmmh5e5+saE2QGoeQmbKmRS6J3VQppPOIt0MnmE+4xlZoumy0GPG0D0MVIQbNA1A==
