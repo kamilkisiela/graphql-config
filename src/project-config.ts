@@ -108,7 +108,7 @@ export class GraphQLProjectConfig {
         ),
       );
 
-      schema = mergeTypeDefs(pick('document', flatten(schemas)));
+      schema = mergeTypeDefs(flatten(schemas).map(s => s.document));
     } else {
       schema = mergeTypeDefs(
         pick(
