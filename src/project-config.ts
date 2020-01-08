@@ -1,7 +1,7 @@
 import {GraphQLSchema, DocumentNode, parse, print} from 'graphql';
 import {dirname, isAbsolute, relative, normalize} from 'path';
 import {mergeTypeDefs} from '@graphql-toolkit/schema-merging';
-import {Source, SchemaPointer, DocumentPointer} from '@graphql-toolkit/common';
+import {Source} from '@graphql-toolkit/common';
 import minimatch from 'minimatch';
 import {ExtensionMissingError} from './errors';
 import {GraphQLExtensionsRegistry} from './extension';
@@ -12,8 +12,10 @@ import {
 } from '@graphql-toolkit/core';
 
 export class GraphQLProjectConfig {
-  readonly schema: SchemaPointer;
-  readonly documents?: DocumentPointer;
+  readonly schema: UnnormalizedTypeDefPointer | UnnormalizedTypeDefPointer[];
+  readonly documents?:
+    | UnnormalizedTypeDefPointer
+    | UnnormalizedTypeDefPointer[];
   readonly include?: string | string[];
   readonly exclude?: string | string[];
   readonly extensions: IExtensions;
@@ -71,9 +73,10 @@ export class GraphQLProjectConfig {
   async getSchema(): Promise<GraphQLSchema>;
   async getSchema(out: 'DocumentNode'): Promise<DocumentNode>;
   async getSchema(out: 'GraphQLSchema'): Promise<GraphQLSchema>;
+  async getSchema(out: 'string'): Promise<string>;
   async getSchema(
-    out?: 'GraphQLSchema' | 'DocumentNode',
-  ): Promise<GraphQLSchema | DocumentNode> {
+    out?: 'GraphQLSchema' | 'DocumentNode' | 'string',
+  ): Promise<GraphQLSchema | DocumentNode | string> {
     return this.loadSchema(this.schema, out as any);
   }
 
@@ -104,6 +107,7 @@ export class GraphQLProjectConfig {
     pointer: UnnormalizedTypeDefPointer | UnnormalizedTypeDefPointer[],
     out?: 'GraphQLSchema' | 'DocumentNode' | 'string',
   ): Promise<GraphQLSchema | DocumentNode | string> {
+    out = out || 'GraphQLSchema';
     if (out === 'GraphQLSchema') {
       return this._extensionsRegistry.loaders.schema.loadSchema(pointer);
     } else {
@@ -130,7 +134,9 @@ export class GraphQLProjectConfig {
     }
   }
 
-  async loadDocuments(pointer: DocumentPointer): Promise<Source[]> {
+  async loadDocuments(
+    pointer: UnnormalizedTypeDefPointer | UnnormalizedTypeDefPointer[],
+  ): Promise<Source[]> {
     if (!pointer) {
       return [];
     }
@@ -171,7 +177,7 @@ export class GraphQLProjectConfig {
 function match(
   filepath: string,
   dirpath: string,
-  pointer?: SchemaPointer | DocumentPointer,
+  pointer?: UnnormalizedTypeDefPointer | UnnormalizedTypeDefPointer[],
 ): boolean {
   if (!pointer) {
     return false;
