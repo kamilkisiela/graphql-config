@@ -1,7 +1,3 @@
-import {
-  SchemaPointerSingle,
-  DocumentPointerSingle,
-} from '@graphql-toolkit/common';
 import {GraphQLFileLoader} from '@graphql-toolkit/graphql-file-loader';
 import {UrlLoader} from '@graphql-toolkit/url-loader';
 import {JsonFileLoader} from '@graphql-toolkit/json-file-loader';
@@ -14,8 +10,8 @@ export type GraphQLExtensionDeclaration = (
 export interface ExtensionAPI {
   logger: any;
   loaders: {
-    schema: Pick<LoadersRegistry<SchemaPointerSingle>, 'register'>;
-    documents: Pick<LoadersRegistry<DocumentPointerSingle>, 'register'>;
+    schema: Pick<LoadersRegistry, 'register'>;
+    documents: Pick<LoadersRegistry, 'register'>;
   };
 }
 
@@ -29,14 +25,14 @@ export class GraphQLExtensionsRegistry {
   } = {};
 
   readonly loaders: {
-    schema: LoadersRegistry<SchemaPointerSingle>;
-    documents: LoadersRegistry<DocumentPointerSingle>;
+    schema: LoadersRegistry;
+    documents: LoadersRegistry;
   };
 
   constructor({cwd}: {cwd: string}) {
     this.loaders = {
-      schema: new LoadersRegistry<SchemaPointerSingle>({cwd}),
-      documents: new LoadersRegistry<DocumentPointerSingle>({cwd}),
+      schema: new LoadersRegistry({cwd}),
+      documents: new LoadersRegistry({cwd}),
     };
 
     // schema
