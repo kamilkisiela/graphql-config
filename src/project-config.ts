@@ -6,7 +6,10 @@ import minimatch from 'minimatch';
 import {ExtensionMissingError} from './errors';
 import {GraphQLExtensionsRegistry} from './extension';
 import {IExtensions, IGraphQLProject} from './types';
-import {UnnormalizedTypeDefPointer} from '@graphql-toolkit/core';
+import {
+  UnnormalizedTypeDefPointer,
+  OPERATION_KINDS,
+} from '@graphql-toolkit/core';
 
 export class GraphQLProjectConfig {
   readonly schema: SchemaPointer;
@@ -106,6 +109,9 @@ export class GraphQLProjectConfig {
     } else {
       const sources = await this._extensionsRegistry.loaders.schema.loadTypeDefs(
         pointer,
+        {
+          filterKinds: OPERATION_KINDS,
+        },
       );
       const mergedTypedefs = mergeTypeDefs(sources.map(s => s.document));
       if (typeof mergedTypedefs === 'string') {
