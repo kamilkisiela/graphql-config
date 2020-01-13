@@ -1,4 +1,5 @@
-import {dirname, resolve, relative, join} from 'path';
+import {dirname, resolve, relative, join, normalize} from 'path';
+import {platform} from 'os';
 import {GraphQLSchema, printSchema} from 'graphql';
 import {
   IntrospectionResult,
@@ -15,6 +16,8 @@ import {
   normalizeGlob,
 } from './utils';
 import {GraphQLEndpointsExtension} from './extensions';
+
+const isWindows = platform() === 'win32';
 
 /*
  * this class can be used for simple usecases where there is no need in per-file API
@@ -40,9 +43,19 @@ export class GraphQLProjectConfig {
   }
 
   includesFile(fileUri: string): boolean {
-    const filePath = fileUri.startsWith('file://')
-      ? fileUri.substr(7)
-      : fileUri;
+    let filePath = fileUri;
+
+    if (fileUri.startsWith('file://')) {
+      if (isWindows) {
+        filePath = filePath.substr(8);
+        filePath = decodeURIComponent(filePath);
+        filePath = normalize(filePath);
+      } else {
+        filePath = filePath.substr(7);
+        filePath = decodeURIComponent(filePath);
+      }
+    }
+
     const fullFilePath = filePath.startsWith(this.configDir)
       ? filePath
       : resolve(join(this.configDir, filePath));
