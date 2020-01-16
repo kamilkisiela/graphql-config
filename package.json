@@ -1,16 +1,23 @@
 {
   "name": "graphql-config",
-  "version": "3.0.0-alpha.14",
+  "version": "3.0.0-alpha.18",
   "description": "The easiest way to configure your development environment with your GraphQL schema (supported by most tools, editors & IDEs)",
-  "main": "dist/index.js",
-  "module": "dist/index.es.js",
-  "typings": "dist/index.d.ts",
   "sideEffects": false,
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.esm.js",
+  "typings": "dist/index.d.ts",
+  "typescript": {
+    "definition": "dist/index.d.ts"
+  },
+  "buildOptions": {
+    "input": "./src/index.ts"
+  },
   "scripts": {
     "prepublishOnly": "yarn build",
     "clean": "rimraf dist",
     "prebuild": "yarn clean",
-    "build": "rollup -c rollup.config.js",
+    "build": "bob",
+    "prepack": "bob-update-version",
     "format": "prettier --write '{src,test}/**/*.{ts,graphql}'",
     "lint": "eslint '{src,test}/**/*.ts'",
     "test": "jest",
@@ -26,16 +33,18 @@
     "graphql": "^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0"
   },
   "dependencies": {
-    "@graphql-toolkit/common": "0.7.1",
-    "@graphql-toolkit/graphql-file-loader": "0.7.1",
-    "@graphql-toolkit/json-file-loader": "0.7.1",
-    "@graphql-toolkit/schema-merging": "0.7.1",
-    "@graphql-toolkit/url-loader": "0.7.1",
+    "@graphql-toolkit/common": "0.9.1",
+    "@graphql-toolkit/core": "0.9.1",
+    "@graphql-toolkit/graphql-file-loader": "0.9.1",
+    "@graphql-toolkit/json-file-loader": "0.9.1",
+    "@graphql-toolkit/schema-merging": "0.9.1",
+    "@graphql-toolkit/url-loader": "0.9.1",
     "cosmiconfig": "6.0.0",
     "globby": "10.0.1",
     "minimatch": "3.0.4"
   },
   "devDependencies": {
+    "bob-the-bundler": "0.2.2",
     "@types/jest": "24.0.22",
     "@types/nock": "11.1.0",
     "@types/node": "12.12.7",
@@ -53,9 +62,6 @@
     "prettier": "1.19.1",
     "read-pkg": "5.2.0",
     "rimraf": "3.0.0",
-    "rollup": "1.26.5",
-    "rollup-plugin-generate-package-json": "3.1.4",
-    "rollup-plugin-typescript2": "0.25.2",
     "ts-jest": "24.1.0",
     "tslib": "1.10.0",
     "typescript": "3.7.2",

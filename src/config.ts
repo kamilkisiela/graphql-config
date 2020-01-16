@@ -1,5 +1,5 @@
 import {dirname} from 'path';
-import {IGraphQLConfig, GraphQLCofigResult} from './types';
+import {IGraphQLConfig, GraphQLConfigResult} from './types';
 import {GraphQLProjectConfig} from './project-config';
 import {
   isMultipleProjectConfig,
@@ -65,7 +65,7 @@ export class GraphQLConfig {
   readonly extensions: GraphQLExtensionsRegistry;
 
   constructor(
-    raw: GraphQLCofigResult,
+    raw: GraphQLConfigResult,
     extensions: GraphQLExtensionDeclaration[],
   ) {
     this._rawConfig = raw.config;
