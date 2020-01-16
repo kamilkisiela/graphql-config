@@ -55,7 +55,7 @@
     "graphql": "14.5.8",
     "husky": "3.0.9",
     "jest": "24.9.0",
-    "lint-staged": "9.4.2",
+    "lint-staged": "9.5.0",
     "make-dir": "3.0.0",
     "nock": "11.7.0",
     "parent-module": "2.0.0",
