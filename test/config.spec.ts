@@ -80,6 +80,22 @@ describe('environment variables', () => {
     expect(config!.getDefault().schema).toEqual(url);
   });
 
+  test('not defined but with a default value inside quotation marks', async () => {
+    const url = 'http://localhost:9000';
+    temp.createFile(
+      '.graphqlrc',
+      `
+      schema: \${FOO:${url}}
+    `,
+    );
+
+    const config = await loadConfig({
+      rootDir: temp.dir,
+    });
+
+    expect(config!.getDefault().schema).toEqual(url);
+  });
+
   test('defined and with a default value', async () => {
     temp.createFile(
       '.graphqlrc',

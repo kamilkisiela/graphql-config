@@ -1,4 +1,4 @@
-import cosmiconfig from 'cosmiconfig';
+import {cosmiconfig, Loader, defaultLoaders} from 'cosmiconfig';
 import {ConfigNotFoundError, ConfigEmptyError, composeMessage} from './errors';
 import {
   IGraphQLConfig,
@@ -88,18 +88,34 @@ export async function findConfig(
 }
 
 function replaceEnv(content: string) {
-  // https://regex101.com/r/k9saS6/1
+  // https://regex101.com/r/k9saS6/2
   // Yes:
   //  ${NAME:DEFAULT}
   //  ${NAME:"DEFAULT"}
   //  ${NAME}
   // Not:
   //  ${NAME:}
-  const R = /\$\{(?<name>[A-Z0-9_]+)(\:((?<value>[^\:]+)|(\"(?<customValue>[^\"]+)\")))?\}/gi;
-  return content.replace(R, (...args) => {
-    const {name, value, customValue} = args[9];
 
-    return process.env[name] ? String(process.env[name]) : value || customValue;
+  const R = /\$\{([A-Z0-9_]+(\:[^\}]+)?)\}/gi;
+
+  return content.replace(R, (_, result: string) => {
+    let [name, value, ...rest] = result.split(':');
+
+    if (value) {
+      if (rest && rest.length) {
+        value = [value, ...rest].join(':');
+      }
+
+      value = value.trim();
+
+      if (value.startsWith(`"`)) {
+        value = value.replace(/^\"([^\"]+)\"$/g, '$1');
+      } else if (value.startsWith(`'`)) {
+        value = value.replace(/^\'([^\']+)\'$/g, '$1');
+      }
+    }
+
+    return process.env[name] ? String(process.env[name]) : value;
   });
 }
 
@@ -107,29 +123,21 @@ function transformContent(content: string): string {
   return replaceEnv(content);
 }
 
-const cosmi: any = cosmiconfig;
-const createCustomLoader = (
-  loader: cosmiconfig.SyncLoader,
-): cosmiconfig.LoaderEntry => {
-  return {
-    sync(filepath, content) {
-      return loader(filepath, transformContent(content));
-    },
-    async(filepath, content) {
-      return loader(filepath, transformContent(content));
-    },
+const createCustomLoader = (loader: Loader): Loader => {
+  return (filepath, content) => {
+    return loader(filepath, transformContent(content));
   };
 };
 
-const loadYaml = createCustomLoader(cosmi.loadYaml);
-const loadJson = createCustomLoader(cosmi.loadJson);
-
 function createCosmiConfig() {
+  const loadYaml = createCustomLoader(defaultLoaders['.yaml']);
+  const loadJson = createCustomLoader(defaultLoaders['.json']);
+
   // We need to wrap loaders in order to access and transform file content (as string)
   // Cosmiconfig has transform option but at this point config is not a string but an object
   return cosmiconfig('graphql', {
     loaders: {
-      '.js': {sync: cosmi.loadJs, async: cosmi.loadJs},
+      '.js': defaultLoaders['.js'],
       '.json': loadJson,
       '.yaml': loadYaml,
       '.yml': loadYaml,
