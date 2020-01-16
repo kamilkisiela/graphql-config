@@ -2,6 +2,17 @@
 # yarn lockfile v1
 
 
+"@ardatan/graphql-tools@4.1.0":
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/@ardatan/graphql-tools/-/graphql-tools-4.1.0.tgz#183508ef4e3d4966f763cb1634a81be1c1255f8d"
+  integrity sha512-0b+KH5RZN9vCMpEjxrwFwZ7v3K6QDjs1EH+R6eRrgKMR2X274JWqYraHKLWE1uJ8iwrkRaOYfCV12jLVuvWS+A==
+  dependencies:
+    apollo-link "^1.2.3"
+    apollo-utilities "^1.0.1"
+    deprecated-decorator "^0.1.6"
+    iterall "^1.1.3"
+    uuid "^3.1.0"
+
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.5.5":
   version "7.5.5"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.5.5.tgz#bc0782f6d69f7b7d49531219699b988f669a8f9d"
@@ -153,6 +164,15 @@
   integrity sha512-vvxLMumGhFsSU/SPbMHsHPtr1WpD98EngSVzDoH4EfiobT8O9RKCaK/Nr57nWxbk1+A0iAC3OrHYugp46au5sQ==
   dependencies:
     "@kamilkisiela/graphql-tools" "4.0.6"
+    aggregate-error "3.0.1"
+    lodash "4.17.15"
+
+"@graphql-toolkit/common@0.9.1":
+  version "0.9.1"
+  resolved "https://registry.yarnpkg.com/@graphql-toolkit/common/-/common-0.9.1.tgz#b18ed68c8170a4a9cc6a7ce2fa5b77e2420ce1c8"
+  integrity sha512-V1lVWQXNC45dmQqKW+xi1ROEPZSLTLd0fsRYu+4rYruzgyZ4X20v6VMLOAZxIhTSpWpzwF2P1WF4R0s38FxPUg==
+  dependencies:
+    "@ardatan/graphql-tools" "4.1.0"
     aggregate-error "3.0.1"
     lodash "4.17.15"
 
