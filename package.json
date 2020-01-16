@@ -40,7 +40,7 @@
     "@graphql-toolkit/schema-merging": "0.9.1",
     "@graphql-toolkit/url-loader": "0.9.1",
     "cosmiconfig": "6.0.0",
-    "globby": "10.0.1",
+    "globby": "11.0.0",
     "minimatch": "3.0.4"
   },
   "devDependencies": {
