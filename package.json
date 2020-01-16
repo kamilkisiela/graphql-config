@@ -1,6 +1,6 @@
 {
   "name": "graphql-config",
-  "version": "3.0.0-alpha.17",
+  "version": "3.0.0-alpha.18",
   "description": "The easiest way to configure your development environment with your GraphQL schema (supported by most tools, editors & IDEs)",
   "sideEffects": false,
   "main": "dist/index.cjs.js",
@@ -33,12 +33,12 @@
     "graphql": "^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0"
   },
   "dependencies": {
-    "@graphql-toolkit/common": "0.9.1-alpha-b002745.19+b002745",
-    "@graphql-toolkit/core": "0.9.1-alpha-b002745.19+b002745",
-    "@graphql-toolkit/graphql-file-loader": "0.9.1-alpha-b002745.19+b002745",
-    "@graphql-toolkit/json-file-loader": "0.9.1-alpha-b002745.19+b002745",
-    "@graphql-toolkit/schema-merging": "0.9.1-alpha-b002745.19+b002745",
-    "@graphql-toolkit/url-loader": "0.9.1-alpha-b002745.19+b002745",
+    "@graphql-toolkit/common": "0.9.1",
+    "@graphql-toolkit/core": "0.9.1",
+    "@graphql-toolkit/graphql-file-loader": "0.9.1",
+    "@graphql-toolkit/json-file-loader": "0.9.1",
+    "@graphql-toolkit/schema-merging": "0.9.1",
+    "@graphql-toolkit/url-loader": "0.9.1",
     "cosmiconfig": "5.2.1",
     "globby": "10.0.1",
     "minimatch": "3.0.4"
