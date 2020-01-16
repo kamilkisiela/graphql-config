@@ -4,7 +4,7 @@ import {
   IGraphQLConfig,
   IGraphQLProject,
   IGraphQLProjects,
-  GraphQLCofigResult,
+  GraphQLConfigResult,
 } from './types';
 
 const cwd = typeof process !== 'undefined' ? process.cwd() : undefined;
@@ -21,7 +21,9 @@ export function isSingleProjectConfig(
   return typeof (config as IGraphQLProject).schema !== 'undefined';
 }
 
-export async function getConfig(filepath: string): Promise<GraphQLCofigResult> {
+export async function getConfig(
+  filepath: string,
+): Promise<GraphQLConfigResult> {
   if (!filepath) {
     throw new Error(`Defining a file path is required`);
   }
@@ -54,7 +56,7 @@ export async function getConfig(filepath: string): Promise<GraphQLCofigResult> {
 
 export async function findConfig(
   rootDir: string = cwd!,
-): Promise<GraphQLCofigResult> {
+): Promise<GraphQLConfigResult> {
   if (!rootDir) {
     throw new Error(`Defining a root directiry is required`);
   }

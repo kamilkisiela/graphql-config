@@ -1,20 +1,21 @@
-import {GraphQLSchema, DocumentNode, buildASTSchema} from 'graphql';
+import {GraphQLSchema, DocumentNode, parse, print} from 'graphql';
 import {dirname, isAbsolute, relative, normalize} from 'path';
 import {mergeTypeDefs} from '@graphql-toolkit/schema-merging';
-import {Source, SchemaPointer, DocumentPointer} from '@graphql-toolkit/common';
+import {Source} from '@graphql-toolkit/common';
 import minimatch from 'minimatch';
 import {ExtensionMissingError} from './errors';
 import {GraphQLExtensionsRegistry} from './extension';
 import {IExtensions, IGraphQLProject} from './types';
-import {flatten} from './helpers';
-
-function pick<T, K extends keyof T>(key: K, items: T[]): T[K][] {
-  return items.map(item => item[key]);
-}
+import {
+  UnnormalizedTypeDefPointer,
+  OPERATION_KINDS,
+} from '@graphql-toolkit/core';
 
 export class GraphQLProjectConfig {
-  readonly schema: SchemaPointer;
-  readonly documents?: DocumentPointer;
+  readonly schema: UnnormalizedTypeDefPointer | UnnormalizedTypeDefPointer[];
+  readonly documents?:
+    | UnnormalizedTypeDefPointer
+    | UnnormalizedTypeDefPointer[];
   readonly include?: string | string[];
   readonly exclude?: string | string[];
   readonly extensions: IExtensions;
@@ -72,9 +73,10 @@ export class GraphQLProjectConfig {
   async getSchema(): Promise<GraphQLSchema>;
   async getSchema(out: 'DocumentNode'): Promise<DocumentNode>;
   async getSchema(out: 'GraphQLSchema'): Promise<GraphQLSchema>;
+  async getSchema(out: 'string'): Promise<string>;
   async getSchema(
-    out?: 'GraphQLSchema' | 'DocumentNode',
-  ): Promise<GraphQLSchema | DocumentNode> {
+    out?: 'GraphQLSchema' | 'DocumentNode' | 'string',
+  ): Promise<GraphQLSchema | DocumentNode | string> {
     return this.loadSchema(this.schema, out as any);
   }
 
@@ -86,61 +88,60 @@ export class GraphQLProjectConfig {
     return this.loadDocuments(this.documents);
   }
 
-  async loadSchema(pointer: SchemaPointer): Promise<GraphQLSchema>;
   async loadSchema(
-    pointer: SchemaPointer,
+    pointer: UnnormalizedTypeDefPointer | UnnormalizedTypeDefPointer[],
+  ): Promise<GraphQLSchema>;
+  async loadSchema(
+    pointer: UnnormalizedTypeDefPointer | UnnormalizedTypeDefPointer[],
+    out: 'string',
+  ): Promise<GraphQLSchema>;
+  async loadSchema(
+    pointer: UnnormalizedTypeDefPointer | UnnormalizedTypeDefPointer[],
     out: 'DocumentNode',
   ): Promise<DocumentNode>;
   async loadSchema(
-    pointer: SchemaPointer,
+    pointer: UnnormalizedTypeDefPointer | UnnormalizedTypeDefPointer[],
     out: 'GraphQLSchema',
   ): Promise<GraphQLSchema>;
   async loadSchema(
-    pointer: SchemaPointer,
-    out?: 'GraphQLSchema' | 'DocumentNode',
-  ): Promise<GraphQLSchema | DocumentNode> {
-    let schema: DocumentNode;
-
-    if (Array.isArray(pointer)) {
-      const schemas = await Promise.all(
-        pointer.map(_pointer =>
-          this._extensionsRegistry.loaders.schema.load(_pointer),
-        ),
-      );
-
-      schema = mergeTypeDefs(pick('document', flatten(schemas)));
+    pointer: UnnormalizedTypeDefPointer | UnnormalizedTypeDefPointer[],
+    out?: 'GraphQLSchema' | 'DocumentNode' | 'string',
+  ): Promise<GraphQLSchema | DocumentNode | string> {
+    out = out || 'GraphQLSchema';
+    if (out === 'GraphQLSchema') {
+      return this._extensionsRegistry.loaders.schema.loadSchema(pointer);
     } else {
-      schema = mergeTypeDefs(
-        pick(
-          'document',
-          await this._extensionsRegistry.loaders.schema.load(pointer),
-        ),
+      const sources = await this._extensionsRegistry.loaders.schema.loadTypeDefs(
+        pointer,
+        {
+          filterKinds: OPERATION_KINDS,
+        },
       );
+      const mergedTypedefs = mergeTypeDefs(sources.map(s => s.document));
+      if (typeof mergedTypedefs === 'string') {
+        if (out === 'string') {
+          return mergedTypedefs;
+        } else if (out === 'DocumentNode') {
+          return parse(mergedTypedefs);
+        }
+      } else if ('kind' in mergedTypedefs) {
+        if (out === 'DocumentNode') {
+          return mergedTypedefs;
+        } else if (out === 'string') {
+          return print(mergedTypedefs);
+        }
+      }
     }
-
-    if (out === 'DocumentNode') {
-      return schema;
-    }
-
-    return buildASTSchema(schema);
   }
 
-  async loadDocuments(pointer: DocumentPointer): Promise<Source[]> {
+  async loadDocuments(
+    pointer: UnnormalizedTypeDefPointer | UnnormalizedTypeDefPointer[],
+  ): Promise<Source[]> {
     if (!pointer) {
       return [];
     }
 
-    if (Array.isArray(pointer)) {
-      return flatten(
-        await Promise.all(
-          pointer.map(_pointer =>
-            this._extensionsRegistry.loaders.documents.load(_pointer),
-          ),
-        ),
-      );
-    }
-
-    return this._extensionsRegistry.loaders.documents.load(pointer);
+    return this._extensionsRegistry.loaders.documents.loadDocuments(pointer);
   }
 
   match(filepath: string): boolean {
@@ -176,7 +177,7 @@ export class GraphQLProjectConfig {
 function match(
   filepath: string,
   dirpath: string,
-  pointer?: SchemaPointer | DocumentPointer,
+  pointer?: UnnormalizedTypeDefPointer | UnnormalizedTypeDefPointer[],
 ): boolean {
   if (!pointer) {
     return false;

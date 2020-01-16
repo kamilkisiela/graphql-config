@@ -20,7 +20,7 @@ export interface IGraphQLProject {
   exclude?: string | string[];
 }
 
-export interface GraphQLCofigResult {
+export interface GraphQLConfigResult {
   config: IGraphQLConfig;
   filepath: string;
 }

@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "module": "esnext",
-    "strictNullChecks": true,
     "target": "es5",
     "lib": [
       "es2017",
@@ -14,7 +13,6 @@
     "importHelpers": true,
     "moduleResolution": "node",
     "esModuleInterop": true,
-    "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true
   },
