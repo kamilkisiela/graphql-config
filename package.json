@@ -45,7 +45,7 @@
   },
   "devDependencies": {
     "bob-the-bundler": "0.2.2",
-    "@types/cosmiconfig": "5.0.3",
+    "@types/cosmiconfig": "6.0.0",
     "@types/jest": "24.0.22",
     "@types/nock": "11.1.0",
     "@types/node": "12.12.7",
