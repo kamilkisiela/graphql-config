@@ -47,7 +47,7 @@
     "bob-the-bundler": "0.2.2",
     "@types/jest": "24.9.0",
     "@types/nock": "11.1.0",
-    "@types/node": "13.1.7",
+    "@types/node": "13.1.8",
     "@types/node-fetch": "2.5.4",
     "@typescript-eslint/parser": "2.16.0",
     "del": "5.1.0",
