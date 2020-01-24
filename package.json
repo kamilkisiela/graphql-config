@@ -37,7 +37,7 @@
     "@graphql-toolkit/core": "0.9.1",
     "@graphql-toolkit/graphql-file-loader": "0.9.1",
     "@graphql-toolkit/json-file-loader": "0.9.1",
-    "@graphql-toolkit/schema-merging": "0.9.1",
+    "@graphql-toolkit/schema-merging": "0.9.4",
     "@graphql-toolkit/url-loader": "0.9.1",
     "cosmiconfig": "6.0.0",
     "globby": "11.0.0",
