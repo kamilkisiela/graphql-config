@@ -54,7 +54,7 @@
     "eslint": "6.8.0",
     "graphql": "14.5.8",
     "husky": "4.2.1",
-    "jest": "24.9.0",
+    "jest": "25.1.0",
     "lint-staged": "10.0.2",
     "make-dir": "3.0.0",
     "nock": "11.7.2",
@@ -62,7 +62,7 @@
     "prettier": "1.19.1",
     "read-pkg": "5.2.0",
     "rimraf": "3.0.0",
-    "ts-jest": "24.3.0",
+    "ts-jest": "25.0.0",
     "tslib": "1.10.0",
     "typescript": "3.7.5",
     "write-pkg": "4.0.0"
