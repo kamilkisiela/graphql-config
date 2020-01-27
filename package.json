@@ -34,7 +34,7 @@
   },
   "dependencies": {
     "@graphql-toolkit/common": "0.9.5",
-    "@graphql-toolkit/core": "0.9.4",
+    "@graphql-toolkit/core": "0.9.5",
     "@graphql-toolkit/graphql-file-loader": "0.9.4",
     "@graphql-toolkit/json-file-loader": "0.9.4",
     "@graphql-toolkit/schema-merging": "0.9.5",
