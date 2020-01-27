@@ -350,6 +350,16 @@
     graphql-tools "4.0.6"
     tslib "1.10.0"
 
+"@graphql-toolkit/schema-merging@0.9.5":
+  version "0.9.5"
+  resolved "https://registry.yarnpkg.com/@graphql-toolkit/schema-merging/-/schema-merging-0.9.5.tgz#c88ca970d5d6ce9183ce2acb38a8173a1f8164ed"
+  integrity sha512-rNgE2o3y0y2Gn+KK10PpdoJDOMPnhO5jJ1FUed8X65Nhb505ljUfGpZi4wSBkkn3g8enQNxO0azF1ewX4JSnVA==
+  dependencies:
+    "@ardatan/graphql-tools" "4.1.0"
+    "@graphql-toolkit/common" "0.9.5"
+    deepmerge "4.2.2"
+    tslib "1.10.0"
+
 "@graphql-toolkit/url-loader@0.9.4":
   version "0.9.4"
   resolved "https://registry.yarnpkg.com/@graphql-toolkit/url-loader/-/url-loader-0.9.4.tgz#b8d5095dd9bfe842005121decfeddac8f3e67929"
