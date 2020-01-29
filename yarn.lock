@@ -290,15 +290,6 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@graphql-toolkit/common@0.9.6":
-  version "0.9.6"
-  resolved "https://registry.yarnpkg.com/@graphql-toolkit/common/-/common-0.9.6.tgz#8335cdcbfbc6b593098bd9ab47de2c8b661f22a6"
-  integrity sha512-KnNo55Jrf80V17H0LoQeKeT1DTnVnsBvJv2NNQAYdcy5k11ELXuRQ3nJN9YjGhxsp5TOHiHIGh4CQcUlmlllVA==
-  dependencies:
-    "@ardatan/graphql-tools" "4.1.0"
-    aggregate-error "3.0.1"
-    lodash "4.17.15"
-
 "@graphql-toolkit/common@0.9.7":
   version "0.9.7"
   resolved "https://registry.yarnpkg.com/@graphql-toolkit/common/-/common-0.9.7.tgz#63bc6233c4fd88bc94dfe6a3ec85b8f961f780f9"
@@ -308,13 +299,13 @@
     aggregate-error "3.0.1"
     lodash "4.17.15"
 
-"@graphql-toolkit/core@0.9.6":
-  version "0.9.6"
-  resolved "https://registry.yarnpkg.com/@graphql-toolkit/core/-/core-0.9.6.tgz#42a27bd6edd68d01d8402a8cd3c632a251f636da"
-  integrity sha512-kqqlqPUwcEpznv95tGrL+FmpvRq8HlTd9yZOpozifJf5aUcdyjTffVZwtqYX7/d+hAEr2I6Md3zZfOJG6onHuQ==
+"@graphql-toolkit/core@0.9.7":
+  version "0.9.7"
+  resolved "https://registry.yarnpkg.com/@graphql-toolkit/core/-/core-0.9.7.tgz#a68fff000f3aedb6584c22f3f6b641885aec0f56"
+  integrity sha512-w1WU0iOq6AEBTICDxcu1xjFruFfGCHg6ERdWTWdIBOTn30qysIC0ek+XWN67vF9yV9QIdAxNu66gXKjUUWm2Tg==
   dependencies:
-    "@graphql-toolkit/common" "0.9.6"
-    "@graphql-toolkit/schema-merging" "0.9.6"
+    "@graphql-toolkit/common" "0.9.7"
+    "@graphql-toolkit/schema-merging" "0.9.7"
     aggregate-error "3.0.1"
     globby "11.0.0"
     import-from "^3.0.0"
@@ -339,16 +330,6 @@
   integrity sha512-MNnCX201p011FPOm/rlDLkBTpx4LvooG9pdMU1ijRD/sqpHSkhZ2U/aKyoiDDKrLUgK7cvHws1KXBvLcg7r6aQ==
   dependencies:
     "@graphql-toolkit/common" "0.9.7"
-    tslib "1.10.0"
-
-"@graphql-toolkit/schema-merging@0.9.6":
-  version "0.9.6"
-  resolved "https://registry.yarnpkg.com/@graphql-toolkit/schema-merging/-/schema-merging-0.9.6.tgz#c714a4daab93e6abc1423dae439faa5e2eadfb2e"
-  integrity sha512-uatZr9rAMbXqDl8HfTpjxH+g9UlC+NKhTlIeM21YnrpBwTo+16ahHAhAdT0500umXiI6K/wOqsnMeMfF1Va7gA==
-  dependencies:
-    "@ardatan/graphql-tools" "4.1.0"
-    "@graphql-toolkit/common" "0.9.6"
-    deepmerge "4.2.2"
     tslib "1.10.0"
 
 "@graphql-toolkit/schema-merging@0.9.7":
