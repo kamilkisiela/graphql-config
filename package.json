@@ -57,7 +57,7 @@
     "jest": "25.1.0",
     "lint-staged": "10.0.7",
     "make-dir": "3.0.2",
-    "nock": "11.8.2",
+    "nock": "11.9.0",
     "parent-module": "2.0.0",
     "prettier": "1.19.1",
     "read-pkg": "5.2.0",
