@@ -64,7 +64,7 @@
     "rimraf": "3.0.2",
     "ts-jest": "25.2.1",
     "tslib": "1.11.1",
-    "typescript": "3.8.2",
+    "typescript": "3.8.3",
     "write-pkg": "4.0.0"
   },
   "repository": {
