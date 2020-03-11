@@ -21,14 +21,18 @@ export function isSingleProjectConfig(
   return typeof (config as IGraphQLProject).schema !== 'undefined';
 }
 
-export async function getConfig(
-  filepath: string,
-): Promise<GraphQLConfigResult> {
+export async function getConfig({
+  filepath,
+  configName,
+}: {
+  filepath: string;
+  configName: string;
+}): Promise<GraphQLConfigResult> {
   if (!filepath) {
     throw new Error(`Defining a file path is required`);
   }
 
-  const result = await createCosmiConfig().load(filepath);
+  const result = await createCosmiConfig(configName).load(filepath);
 
   if (!result) {
     throw new ConfigNotFoundError(
@@ -54,14 +58,18 @@ export async function getConfig(
   };
 }
 
-export async function findConfig(
-  rootDir: string = cwd!,
-): Promise<GraphQLConfigResult> {
+export async function findConfig({
+  rootDir = cwd!,
+  configName,
+}: {
+  rootDir: string;
+  configName: string;
+}): Promise<GraphQLConfigResult> {
   if (!rootDir) {
-    throw new Error(`Defining a root directiry is required`);
+    throw new Error(`Defining a root directory is required`);
   }
 
-  const result = await createCosmiConfig().search(rootDir);
+  const result = await createCosmiConfig(configName).search(rootDir);
 
   if (!result) {
     throw new ConfigNotFoundError(
@@ -129,13 +137,13 @@ const createCustomLoader = (loader: Loader): Loader => {
   };
 };
 
-function createCosmiConfig() {
+function createCosmiConfig(moduleName: string) {
   const loadYaml = createCustomLoader(defaultLoaders['.yaml']);
   const loadJson = createCustomLoader(defaultLoaders['.json']);
 
   // We need to wrap loaders in order to access and transform file content (as string)
   // Cosmiconfig has transform option but at this point config is not a string but an object
-  return cosmiconfig('graphql', {
+  return cosmiconfig(moduleName, {
     loaders: {
       '.js': defaultLoaders['.js'],
       '.json': loadJson,

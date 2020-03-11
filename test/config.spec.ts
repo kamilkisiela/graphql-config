@@ -1,6 +1,7 @@
 import {resolve} from 'path';
 import {TempDir} from './utils/temp-dir';
 import {loadConfig} from '../src/config';
+import {ConfigNotFoundError} from '../src/errors';
 
 const temp = new TempDir();
 
@@ -201,5 +202,43 @@ describe('project matching by file path', () => {
     expect(config.getProjectForFile('./foo/ignored/component.ts').name).toBe(
       'bar',
     );
+  });
+
+  test('customizable config name', async () => {
+    const schemaFile = 'schema.graphql';
+    
+    temp.createFile(
+      schemaFile,
+      /* GraphQL */ `
+        type Query {
+          foo: String
+        }
+      `,
+    );
+    temp.createFile(
+      'foo.config.js',
+      `
+      module.exports = {
+        schema: '${schemaFile}'
+      }
+    `,
+    );
+
+    try {
+      await loadConfig({
+        rootDir: temp.dir,
+      });
+
+      throw new Error('Should not be here');
+    } catch (error) {
+      expect(error).toBeInstanceOf(ConfigNotFoundError);
+    }
+
+    const config = await loadConfig({
+      rootDir: temp.dir,
+      configName: 'foo',
+    });
+
+    expect(config!.getDefault().schema).toEqual(schemaFile);
   });
 });

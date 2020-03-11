@@ -18,6 +18,7 @@ import {
 } from './extension';
 
 const cwd = typeof process !== 'undefined' ? process.cwd() : undefined;
+const defaultConfigName = 'graphql';
 
 interface LoadConfigOptions {
   filepath?: string;
@@ -25,6 +26,7 @@ interface LoadConfigOptions {
   extensions?: GraphQLExtensionDeclaration[];
   throwOnMissing?: boolean;
   throwOnEmpty?: boolean;
+  configName?: string;
 }
 
 export async function loadConfig({
@@ -33,11 +35,18 @@ export async function loadConfig({
   extensions = [],
   throwOnMissing = true,
   throwOnEmpty = true,
+  configName = defaultConfigName,
 }: LoadConfigOptions) {
   try {
     const found = filepath
-      ? await getConfig(filepath)
-      : await findConfig(rootDir);
+      ? await getConfig({
+          filepath,
+          configName,
+        })
+      : await findConfig({
+          rootDir,
+          configName,
+        });
 
     return new GraphQLConfig(found, extensions);
   } catch (error) {
