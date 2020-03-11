@@ -16,6 +16,7 @@ import {
   GraphQLExtensionDeclaration,
   GraphQLExtensionsRegistry,
 } from './extension';
+import {EndpointsExtension} from './extensions/endpoints';
 
 const cwd = typeof process !== 'undefined' ? process.cwd() : undefined;
 const defaultConfigName = 'graphql';
@@ -81,6 +82,9 @@ export class GraphQLConfig {
     this.filepath = raw.filepath;
     this.dirpath = dirname(raw.filepath);
     this.extensions = new GraphQLExtensionsRegistry({cwd: this.dirpath});
+
+    // Register Endpoints
+    this.extensions.register(EndpointsExtension)
 
     extensions.forEach(extension => {
       this.extensions.register(extension);
