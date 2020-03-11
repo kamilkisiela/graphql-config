@@ -141,9 +141,21 @@ function createCosmiConfig(moduleName: string) {
   const loadYaml = createCustomLoader(defaultLoaders['.yaml']);
   const loadJson = createCustomLoader(defaultLoaders['.json']);
 
+  const searchPlaces = [
+    `#.config.js`,
+    '#.config.json',
+    '#.config.yaml',
+    '#.config.yml',
+    '.#rc',
+    '.#rc.json',
+    '.#rc.yml',
+    '.#rc.yaml',
+  ];
+
   // We need to wrap loaders in order to access and transform file content (as string)
   // Cosmiconfig has transform option but at this point config is not a string but an object
   return cosmiconfig(moduleName, {
+    searchPlaces: searchPlaces.map(place => place.replace('#', moduleName)),
     loaders: {
       '.js': defaultLoaders['.js'],
       '.json': loadJson,
