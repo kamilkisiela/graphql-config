@@ -32,6 +32,12 @@ _type: `string`_
 
 A path of a directory where GraphQL Config should look for a file _(uses process.cwd() by default)_.
 
+### `configName`
+
+_type: `string`_
+
+A name of the config file. It's `graphql` by default. Using `relay` as a config name instructs GraphQL Config to look for all the variations of possible config file names where one of them is `relay.config.js`.
+
 ### `extensions`
 
 _type: `GraphQLExtensionDeclaration[]`_
