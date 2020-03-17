@@ -317,13 +317,13 @@
     graphql-tools-fork "8.9.6"
     lodash "4.17.15"
 
-"@graphql-toolkit/core@0.9.8":
-  version "0.9.8"
-  resolved "https://registry.yarnpkg.com/@graphql-toolkit/core/-/core-0.9.8.tgz#56927c175787bcd5759eec88729bcae65812448d"
-  integrity sha512-8uSWTVKByf9L6yEWA5KOUb4rZ6Zj5akBeeIjRiHIHort84bBdCzQLXJgfGwE5BcQlykqYeYs+8egp+aLkVJPxw==
+"@graphql-toolkit/core@0.9.9":
+  version "0.9.9"
+  resolved "https://registry.yarnpkg.com/@graphql-toolkit/core/-/core-0.9.9.tgz#27867f4455730460c53812fbc95d6bdcb6d1de27"
+  integrity sha512-dBF7li142ngThwfGHMCPPkNVQyUF/rfJFkXI7SpFshGJ/GfBh3yoocI745obP7ELEkxiWq/CSgVDqjX5Hjzvqg==
   dependencies:
-    "@graphql-toolkit/common" "0.9.8"
-    "@graphql-toolkit/schema-merging" "0.9.8"
+    "@graphql-toolkit/common" "0.9.9"
+    "@graphql-toolkit/schema-merging" "0.9.9"
     aggregate-error "3.0.1"
     globby "11.0.0"
     import-from "^3.0.0"
