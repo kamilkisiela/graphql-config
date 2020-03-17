@@ -39,6 +39,8 @@ async function main() {
 }
 ```
 
+> Synchronous version: `loadConfigSync`
+
 Now that everything is ready, GraphQL Config understands there's the Inspector extension.
 
 In order to access information stored in the config file, do the following:

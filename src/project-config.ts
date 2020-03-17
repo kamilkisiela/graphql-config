@@ -11,8 +11,11 @@ import {
   OPERATION_KINDS,
 } from '@graphql-toolkit/core';
 
+type Pointer = UnnormalizedTypeDefPointer | UnnormalizedTypeDefPointer[];
+type SchemaOutput = 'GraphQLSchema' | 'DocumentNode' | 'string';
+
 export class GraphQLProjectConfig {
-  readonly schema: UnnormalizedTypeDefPointer | UnnormalizedTypeDefPointer[];
+  readonly schema: Pointer;
   readonly documents?:
     | UnnormalizedTypeDefPointer
     | UnnormalizedTypeDefPointer[];
@@ -70,15 +73,27 @@ export class GraphQLProjectConfig {
     };
   }
 
+  // Get Schema
+
   async getSchema(): Promise<GraphQLSchema>;
   async getSchema(out: 'DocumentNode'): Promise<DocumentNode>;
   async getSchema(out: 'GraphQLSchema'): Promise<GraphQLSchema>;
   async getSchema(out: 'string'): Promise<string>;
   async getSchema(
-    out?: 'GraphQLSchema' | 'DocumentNode' | 'string',
+    out?: SchemaOutput,
   ): Promise<GraphQLSchema | DocumentNode | string> {
     return this.loadSchema(this.schema, out as any);
   }
+
+  getSchemaSync(): GraphQLSchema;
+  getSchemaSync(out: 'DocumentNode'): DocumentNode;
+  getSchemaSync(out: 'GraphQLSchema'): GraphQLSchema;
+  getSchemaSync(out: 'string'): string;
+  getSchemaSync(out?: SchemaOutput): GraphQLSchema | DocumentNode | string {
+    return this.loadSchemaSync(this.schema, out as any);
+  }
+
+  // Get Documents
 
   async getDocuments(): Promise<Source[]> {
     if (!this.documents) {
@@ -88,61 +103,91 @@ export class GraphQLProjectConfig {
     return this.loadDocuments(this.documents);
   }
 
+  getDocumentsSync(): Source[] {
+    if (!this.documents) {
+      return [];
+    }
+
+    return this.loadDocumentsSync(this.documents);
+  }
+
+  // Load Schema
+
+  async loadSchema(pointer: Pointer): Promise<GraphQLSchema>;
+  async loadSchema(pointer: Pointer, out: 'string'): Promise<GraphQLSchema>;
   async loadSchema(
-    pointer: UnnormalizedTypeDefPointer | UnnormalizedTypeDefPointer[],
-  ): Promise<GraphQLSchema>;
-  async loadSchema(
-    pointer: UnnormalizedTypeDefPointer | UnnormalizedTypeDefPointer[],
-    out: 'string',
-  ): Promise<GraphQLSchema>;
-  async loadSchema(
-    pointer: UnnormalizedTypeDefPointer | UnnormalizedTypeDefPointer[],
+    pointer: Pointer,
     out: 'DocumentNode',
   ): Promise<DocumentNode>;
   async loadSchema(
-    pointer: UnnormalizedTypeDefPointer | UnnormalizedTypeDefPointer[],
+    pointer: Pointer,
     out: 'GraphQLSchema',
   ): Promise<GraphQLSchema>;
   async loadSchema(
-    pointer: UnnormalizedTypeDefPointer | UnnormalizedTypeDefPointer[],
-    out?: 'GraphQLSchema' | 'DocumentNode' | 'string',
+    pointer: Pointer,
+    out?: SchemaOutput,
   ): Promise<GraphQLSchema | DocumentNode | string> {
     out = out || 'GraphQLSchema';
+
     if (out === 'GraphQLSchema') {
       return this._extensionsRegistry.loaders.schema.loadSchema(pointer);
-    } else {
-      const sources = await this._extensionsRegistry.loaders.schema.loadTypeDefs(
-        pointer,
-        {
-          filterKinds: OPERATION_KINDS,
-        },
-      );
-      const mergedTypedefs = mergeTypeDefs(sources.map(s => s.document));
-      if (typeof mergedTypedefs === 'string') {
-        if (out === 'string') {
-          return mergedTypedefs;
-        } else if (out === 'DocumentNode') {
-          return parse(mergedTypedefs);
-        }
-      } else if ('kind' in mergedTypedefs) {
-        if (out === 'DocumentNode') {
-          return mergedTypedefs;
-        } else if (out === 'string') {
-          return print(mergedTypedefs);
-        }
-      }
     }
+
+    const sources = await this._extensionsRegistry.loaders.schema.loadTypeDefs(
+      pointer,
+      {
+        filterKinds: OPERATION_KINDS,
+      },
+    );
+
+    return mergeTypes(sources, out);
   }
 
-  async loadDocuments(
-    pointer: UnnormalizedTypeDefPointer | UnnormalizedTypeDefPointer[],
-  ): Promise<Source[]> {
+  loadSchemaSync(pointer: Pointer): GraphQLSchema;
+  loadSchemaSync(pointer: Pointer, out: 'string'): GraphQLSchema;
+  loadSchemaSync(pointer: Pointer, out: 'DocumentNode'): DocumentNode;
+  loadSchemaSync(pointer: Pointer, out: 'GraphQLSchema'): GraphQLSchema;
+  loadSchemaSync(
+    pointer: Pointer,
+    out?: 'GraphQLSchema' | 'DocumentNode' | 'string',
+  ): GraphQLSchema | DocumentNode | string {
+    out = out || 'GraphQLSchema';
+
+    if (out === 'GraphQLSchema') {
+      return this._extensionsRegistry.loaders.schema.loadSchemaSync(pointer);
+    }
+
+    const sources = this._extensionsRegistry.loaders.schema.loadTypeDefsSync(
+      pointer,
+      {
+        filterKinds: OPERATION_KINDS,
+      },
+    );
+
+    return mergeTypes(sources, out);
+  }
+
+  // Load Documents
+
+  async loadDocuments(pointer: Pointer): Promise<Source[]> {
     if (!pointer) {
       return [];
     }
 
     return this._extensionsRegistry.loaders.documents.loadDocuments(pointer);
   }
+
+  loadDocumentsSync(pointer: Pointer): Source[] {
+    if (!pointer) {
+      return [];
+    }
+
+    return this._extensionsRegistry.loaders.documents.loadDocumentsSync(
+      pointer,
+    );
+  }
+
+  // Rest
 
   match(filepath: string): boolean {
     const isSchemaOrDocument = [this.schema, this.documents].some(pointer =>
@@ -174,11 +219,7 @@ export class GraphQLProjectConfig {
 }
 
 // XXX: it works but uses nodejs - expose normalization of file and dir paths in config
-function match(
-  filepath: string,
-  dirpath: string,
-  pointer?: UnnormalizedTypeDefPointer | UnnormalizedTypeDefPointer[],
-): boolean {
+function match(filepath: string, dirpath: string, pointer?: Pointer): boolean {
   if (!pointer) {
     return false;
   }
@@ -199,4 +240,22 @@ function match(
   }
 
   return false;
+}
+
+function mergeTypes(sources: Source[], out: SchemaOutput) {
+  const mergedTypedefs = mergeTypeDefs(sources.map(s => s.document));
+
+  if (typeof mergedTypedefs === 'string') {
+    if (out === 'string') {
+      return mergedTypedefs;
+    } else if (out === 'DocumentNode') {
+      return parse(mergedTypedefs);
+    }
+  } else if ('kind' in mergedTypedefs) {
+    if (out === 'DocumentNode') {
+      return mergedTypedefs;
+    } else if (out === 'string') {
+      return print(mergedTypedefs);
+    }
+  }
 }

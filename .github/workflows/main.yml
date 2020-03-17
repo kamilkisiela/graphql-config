@@ -9,10 +9,11 @@ on:
       - '**.yml'
 jobs:
   test:
-    name: Test on node ${{ matrix.node_version }}
-    runs-on: ubuntu-latest
+    name: Test on node ${{ matrix.node_version }} and ${{matrix.os}}
+    runs-on: ${{matrix.os}}
     strategy:
       matrix:
+        os: [ubuntu-latest, windows-latest]
         node_version: [10, 12, 13]
     steps:
       - uses: actions/checkout@master
@@ -20,11 +21,22 @@ jobs:
         uses: actions/setup-node@master
         with:
           node-version: ${{ matrix.node_version }}
+      
+      - uses: actions/cache@v1
+        id: yarn-cache
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock') }}
+      
       - name: Install
         run: yarn
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
+      
       - name: Test
         run: yarn test
+      
       - name: Lint
         run: yarn lint
+      
       - name: Build
         run: yarn build

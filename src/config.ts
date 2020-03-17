@@ -6,6 +6,8 @@ import {
   isSingleProjectConfig,
   findConfig,
   getConfig,
+  getConfigSync,
+  findConfigSync,
 } from './helpers';
 import {
   ProjectNotFoundError,
@@ -30,14 +32,29 @@ interface LoadConfigOptions {
   configName?: string;
 }
 
-export async function loadConfig({
-  filepath,
-  rootDir = cwd,
-  extensions = [],
-  throwOnMissing = true,
-  throwOnEmpty = true,
-  configName = defaultConfigName,
-}: LoadConfigOptions) {
+const defaultLoadConfigOptions: LoadConfigOptions = {
+  rootDir: cwd,
+  extensions: [],
+  throwOnMissing: true,
+  throwOnEmpty: true,
+  configName: defaultConfigName,
+};
+
+export async function loadConfig(
+  options: LoadConfigOptions,
+): Promise<GraphQLConfig | undefined> {
+  const {
+    filepath,
+    configName,
+    rootDir,
+    extensions,
+    throwOnEmpty,
+    throwOnMissing,
+  } = {
+    ...defaultLoadConfigOptions,
+    ...options,
+  };
+
   try {
     const found = filepath
       ? await getConfig({
@@ -51,15 +68,52 @@ export async function loadConfig({
 
     return new GraphQLConfig(found, extensions);
   } catch (error) {
-    if (
-      (!throwOnMissing && error instanceof ConfigNotFoundError) ||
-      (!throwOnEmpty && error instanceof ConfigEmptyError)
-    ) {
-      return;
-    }
-
-    throw error;
+    return handleError(error, {throwOnMissing, throwOnEmpty});
   }
+}
+
+export function loadConfigSync(options: LoadConfigOptions) {
+  const {
+    filepath,
+    configName,
+    rootDir,
+    extensions,
+    throwOnEmpty,
+    throwOnMissing,
+  } = {
+    ...defaultLoadConfigOptions,
+    ...options,
+  };
+
+  try {
+    const found = filepath
+      ? getConfigSync({
+          filepath,
+          configName,
+        })
+      : findConfigSync({
+          rootDir,
+          configName,
+        });
+
+    return new GraphQLConfig(found, extensions);
+  } catch (error) {
+    return handleError(error, {throwOnMissing, throwOnEmpty});
+  }
+}
+
+function handleError(
+  error: any,
+  options: Pick<LoadConfigOptions, 'throwOnMissing' | 'throwOnEmpty'>,
+): never | undefined {
+  if (
+    (!options.throwOnMissing && error instanceof ConfigNotFoundError) ||
+    (!options.throwOnEmpty && error instanceof ConfigEmptyError)
+  ) {
+    return;
+  }
+
+  throw error;
 }
 
 export class GraphQLConfig {
@@ -84,7 +138,7 @@ export class GraphQLConfig {
     this.extensions = new GraphQLExtensionsRegistry({cwd: this.dirpath});
 
     // Register Endpoints
-    this.extensions.register(EndpointsExtension)
+    this.extensions.register(EndpointsExtension);
 
     extensions.forEach(extension => {
       this.extensions.register(extension);

@@ -102,9 +102,25 @@ _type: `getSchema(out: 'GraphQLSchema'): Promise<GraphQLSchema>`_
 
 Allows to access `GraphQLSchema` object based on provided information (in `schema` property of project's configuration).
 
+### `getSchemaSync()`
+
+_type: `getSchemaSync(): GraphQLSchema`_
+
+_type: `getSchemaSync(out: 'DocumentNode'): DocumentNode`_
+
+_type: `getSchemaSync(out: 'GraphQLSchema'): GraphQLSchema`_
+
+Allows to access `GraphQLSchema` object based on provided information (in `schema` property of project's configuration).
+
 ### `getDocuments()`
 
 _type: `getDocuments(): Promise<Source[]>`_
+
+Access Operations and Fragments wrapped with `Source` class based on provided information (in `documents` property of project's configuration).
+
+### `getDocumentsSync()`
+
+_type: `getDocumentsSync(): Source[]`_
 
 Access Operations and Fragments wrapped with `Source` class based on provided information (in `documents` property of project's configuration).
 
