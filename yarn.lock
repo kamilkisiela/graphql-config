@@ -299,15 +299,6 @@
     aggregate-error "3.0.1"
     lodash "4.17.15"
 
-"@graphql-toolkit/common@0.9.8":
-  version "0.9.8"
-  resolved "https://registry.yarnpkg.com/@graphql-toolkit/common/-/common-0.9.8.tgz#2170ca5c4012c745fbccf4e80710fa256520f49f"
-  integrity sha512-LwJd9k/q69RdTJpiwoPQZVEYAXvMXtmFuj7z5JQ6AkzmlVCWuZCiQiq/MQ6KSW7JRmV3sfL5XQX56DHKO/aFvA==
-  dependencies:
-    aggregate-error "3.0.1"
-    graphql-tools-fork "8.9.6"
-    lodash "4.17.15"
-
 "@graphql-toolkit/common@0.9.9":
   version "0.9.9"
   resolved "https://registry.yarnpkg.com/@graphql-toolkit/common/-/common-0.9.9.tgz#56daf4ac85deada766418b91d421592cbf18dcf0"
@@ -334,13 +325,13 @@
     unixify "1.0.0"
     valid-url "1.0.9"
 
-"@graphql-toolkit/graphql-file-loader@0.9.7":
-  version "0.9.7"
-  resolved "https://registry.yarnpkg.com/@graphql-toolkit/graphql-file-loader/-/graphql-file-loader-0.9.7.tgz#1f15dfcf50342ab9e480fbbe2b16896395f36c45"
-  integrity sha512-t7CfYjghuXAtIqzwHhkUoE/u0a918UTOOVtHdLHh8rojjIUfsSeLeqMcFacRv+/z+kyKl9lgi4TE/qiyIpyR5A==
+"@graphql-toolkit/graphql-file-loader@0.9.9":
+  version "0.9.9"
+  resolved "https://registry.yarnpkg.com/@graphql-toolkit/graphql-file-loader/-/graphql-file-loader-0.9.9.tgz#7393c0a6ff8e3ed841e9ebed2a4b4bac5d6e04d2"
+  integrity sha512-xZS3Jcg56/6ukHEgzEKWUgq6sGcFpgg8ufU8rj9bS3aPTMsilZShWNUsDiTXnxdQTYMAaMW1pHJ+bg/SFW6YXQ==
   dependencies:
-    "@graphql-toolkit/common" "0.9.7"
-    tslib "1.10.0"
+    "@graphql-toolkit/common" "0.9.9"
+    tslib "1.11.1"
 
 "@graphql-toolkit/json-file-loader@0.9.7":
   version "0.9.7"
@@ -349,16 +340,6 @@
   dependencies:
     "@graphql-toolkit/common" "0.9.7"
     tslib "1.10.0"
-
-"@graphql-toolkit/schema-merging@0.9.8":
-  version "0.9.8"
-  resolved "https://registry.yarnpkg.com/@graphql-toolkit/schema-merging/-/schema-merging-0.9.8.tgz#a1f5ed404b7dbad06bf249d1a8c6e5f1213d9be4"
-  integrity sha512-01prrR0HV2kF8GCP6XugEEWTbouTo5tWJCFkxESbP6nJHziQDntvbltLuYiKoitcn0PyI8Q6JLjQPQZe7mJbjQ==
-  dependencies:
-    "@graphql-toolkit/common" "0.9.8"
-    deepmerge "4.2.2"
-    graphql-tools-fork "8.9.6"
-    tslib "1.11.1"
 
 "@graphql-toolkit/schema-merging@0.9.9":
   version "0.9.9"
