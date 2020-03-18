@@ -299,15 +299,6 @@
     aggregate-error "3.0.1"
     lodash "4.17.15"
 
-"@graphql-toolkit/common@0.9.8":
-  version "0.9.8"
-  resolved "https://registry.yarnpkg.com/@graphql-toolkit/common/-/common-0.9.8.tgz#2170ca5c4012c745fbccf4e80710fa256520f49f"
-  integrity sha512-LwJd9k/q69RdTJpiwoPQZVEYAXvMXtmFuj7z5JQ6AkzmlVCWuZCiQiq/MQ6KSW7JRmV3sfL5XQX56DHKO/aFvA==
-  dependencies:
-    aggregate-error "3.0.1"
-    graphql-tools-fork "8.9.6"
-    lodash "4.17.15"
-
 "@graphql-toolkit/common@0.9.9":
   version "0.9.9"
   resolved "https://registry.yarnpkg.com/@graphql-toolkit/common/-/common-0.9.9.tgz#56daf4ac85deada766418b91d421592cbf18dcf0"
@@ -350,16 +341,6 @@
     "@graphql-toolkit/common" "0.9.7"
     tslib "1.10.0"
 
-"@graphql-toolkit/schema-merging@0.9.8":
-  version "0.9.8"
-  resolved "https://registry.yarnpkg.com/@graphql-toolkit/schema-merging/-/schema-merging-0.9.8.tgz#a1f5ed404b7dbad06bf249d1a8c6e5f1213d9be4"
-  integrity sha512-01prrR0HV2kF8GCP6XugEEWTbouTo5tWJCFkxESbP6nJHziQDntvbltLuYiKoitcn0PyI8Q6JLjQPQZe7mJbjQ==
-  dependencies:
-    "@graphql-toolkit/common" "0.9.8"
-    deepmerge "4.2.2"
-    graphql-tools-fork "8.9.6"
-    tslib "1.11.1"
-
 "@graphql-toolkit/schema-merging@0.9.9":
   version "0.9.9"
   resolved "https://registry.yarnpkg.com/@graphql-toolkit/schema-merging/-/schema-merging-0.9.9.tgz#3912f94aa4adca8fbc776c07926a73890762cf7e"
@@ -370,15 +351,15 @@
     graphql-tools-fork "8.9.6"
     tslib "1.11.1"
 
-"@graphql-toolkit/url-loader@0.9.7":
-  version "0.9.7"
-  resolved "https://registry.yarnpkg.com/@graphql-toolkit/url-loader/-/url-loader-0.9.7.tgz#222af4f8bb6d87735760555dd100c55fd3d36281"
-  integrity sha512-cOT2XJVZLWOKG4V9ucVtUTqJMW0BJqEqrHvpR8YcIWffrEChmzZQX+ug3BkRNomaUe8ywgExJ80aZuKWeSHvew==
+"@graphql-toolkit/url-loader@0.9.9":
+  version "0.9.9"
+  resolved "https://registry.yarnpkg.com/@graphql-toolkit/url-loader/-/url-loader-0.9.9.tgz#6154d834b946d475458386c5193f5d6e99471c06"
+  integrity sha512-7yvMslD3r7rjJyUCmFI3xcSFSpD/kK84XoO/oVuiq48jqBULd5qeSbVGl4xpEQWfAGw07wc2SBE6Uqg0bhAwiw==
   dependencies:
-    "@ardatan/graphql-tools" "4.1.0"
-    "@graphql-toolkit/common" "0.9.7"
+    "@graphql-toolkit/common" "0.9.9"
     cross-fetch "3.0.4"
-    tslib "1.10.0"
+    graphql-tools-fork "8.9.6"
+    tslib "1.11.1"
     valid-url "1.0.9"
 
 "@istanbuljs/load-nyc-config@^1.0.0":
