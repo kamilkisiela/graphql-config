@@ -1,13 +1,13 @@
 import {join, resolve} from 'path';
 import {printSchema, buildSchema} from 'graphql';
-import {getGraphQLConfig, GraphQLConfig} from '../../src';
+import {getGraphQLConfig, GraphQLConfig} from '../../../src/legacy';
 
 const CONFIG_DIR = join(__dirname, 'config');
 
 let config: GraphQLConfig;
 
-beforeEach(async () => {
-  config = await getGraphQLConfig(CONFIG_DIR);
+beforeEach(() => {
+  config = getGraphQLConfig(CONFIG_DIR);
 });
 
 test('returns a correct name', () => {

@@ -1,8 +1,8 @@
 import {printSchema, buildSchema} from 'graphql';
-import {getGraphQLConfig} from '../../src';
+import {getGraphQLConfig} from '../../../src/legacy';
 
 test('reads single schema', async () => {
-  const config = await getGraphQLConfig(__dirname);
+  const config = getGraphQLConfig(__dirname);
 
   const typeDefs = /* GraphQL */ `
     schema {

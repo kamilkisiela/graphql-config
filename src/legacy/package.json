@@ -1,0 +1,14 @@
+{
+  "name": "graphql-config/legacy",
+  "sideEffects": false,
+  "main": "../../dist/legacy/index.cjs.js",
+  "module": "../../dist/legacy/index.esm.js",
+  "typings": "../../dist/legacy/index.d.ts",
+  "typescript": {
+    "definition": "../../dist/legacy/index.d.ts"
+  },
+  "buildOptions": {
+    "input": "./index.ts",
+    "tsconfig": "../../tsconfig.legacy.json"
+  }
+}

@@ -2,12 +2,12 @@ import {
   getGraphQLProjectConfig,
   GraphQLEndpointsExtension,
   getUsedEnvs,
-} from '../../src';
+} from '../../../src/legacy';
 import {serveSchema} from '../utils';
 
 let endpoints: GraphQLEndpointsExtension;
-beforeEach(async () => {
-  endpoints = (await getGraphQLProjectConfig(__dirname)).endpointsExtension!;
+beforeEach(() => {
+  endpoints = getGraphQLProjectConfig(__dirname).endpointsExtension!;
 });
 
 test('getEndpointsMap', async () => {

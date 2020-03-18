@@ -20,7 +20,7 @@
     "node_modules",
     "dist"
   ],
-  "include": [
+  "files": [
     "./src/index.ts"
   ]
 }

@@ -1,5 +1,5 @@
 import {graphql, introspectionQuery} from 'graphql';
-import {GraphQLProjectConfig} from '../../src';
+import {GraphQLProjectConfig} from '../../../src/legacy';
 import {serveSchema} from '../utils';
 
 beforeAll(() => {

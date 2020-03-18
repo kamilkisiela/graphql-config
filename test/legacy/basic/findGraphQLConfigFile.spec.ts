@@ -1,15 +1,15 @@
 import {join} from 'path';
 import {mkdtempSync} from 'fs';
 import {tmpdir} from 'os';
-import {getGraphQLConfig, ConfigNotFoundError} from '../../src';
+import {getGraphQLConfig, ConfigNotFoundError} from '../../../src/legacy';
 
-test('returns a correct config filename', async () => {
-  const config = await getGraphQLConfig(__dirname);
+test('returns a correct config filename', () => {
+  const config = getGraphQLConfig(__dirname);
   expect(config.configPath).toEqual(join(__dirname, '.graphqlconfig'));
 });
 
 test.skip('returns a correct config filename for 1st level of sub directories', async () => {
-  const config = await getGraphQLConfig(`${__dirname}/../sub-directory-config`);
+  const config = getGraphQLConfig(`${__dirname}/../sub-directory-config`);
   expect(config.configPath).toEqual(
     join(
       `${__dirname}/../sub-directory-config/sub-directory-2`,
@@ -21,7 +21,7 @@ test.skip('returns a correct config filename for 1st level of sub directories', 
 test('throws GraphQLConfigNotFoundError when config is not found', async () => {
   const tempDir = mkdtempSync(join(tmpdir(), 'graphql-config'));
   try {
-    await getGraphQLConfig(tempDir);
+    getGraphQLConfig(tempDir);
   } catch (error) {
     expect(error).toBeInstanceOf(ConfigNotFoundError);
   }

@@ -1,0 +1,7 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "rootDir": "src/legacy"
+  },
+  "files": ["src/legacy/index.ts"]
+}
