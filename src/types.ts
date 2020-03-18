@@ -7,10 +7,17 @@ export interface IExtensions {
 }
 
 export interface IGraphQLProjects {
-  projects: Record<string, IGraphQLProject>;
+  projects: Record<string, IGraphQLProject | IGraphQLProjectLegacy>;
 }
 
-export type IGraphQLConfig = IGraphQLProject | IGraphQLProjects;
+export type IGraphQLConfig = IGraphQLProject | IGraphQLProjects | IGraphQLProjectLegacy;
+
+export interface IGraphQLProjectLegacy {
+  schemaPath: string
+  includes?: string[];
+  excludes?: string[];
+  extensions?: Record<string, any>;
+}
 
 export interface IGraphQLProject {
   schema: SchemaPointer;

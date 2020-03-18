@@ -8,6 +8,7 @@ import {
   getConfig,
   getConfigSync,
   findConfigSync,
+  isLegacyProjectConfig,
 } from './helpers';
 import {
   ProjectNotFoundError,
@@ -19,6 +20,7 @@ import {
   GraphQLExtensionsRegistry,
 } from './extension';
 import {EndpointsExtension} from './extensions/endpoints';
+import {isLegacyConfig} from './helpers/cosmiconfig';
 
 const cwd = typeof process !== 'undefined' ? process.cwd() : undefined;
 const defaultConfigName = 'graphql';
@@ -30,6 +32,7 @@ interface LoadConfigOptions {
   throwOnMissing?: boolean;
   throwOnEmpty?: boolean;
   configName?: string;
+  legacy?: boolean;
 }
 
 const defaultLoadConfigOptions: LoadConfigOptions = {
@@ -38,6 +41,7 @@ const defaultLoadConfigOptions: LoadConfigOptions = {
   throwOnMissing: true,
   throwOnEmpty: true,
   configName: defaultConfigName,
+  legacy: true,
 };
 
 export async function loadConfig(
@@ -50,6 +54,7 @@ export async function loadConfig(
     extensions,
     throwOnEmpty,
     throwOnMissing,
+    legacy,
   } = {
     ...defaultLoadConfigOptions,
     ...options,
@@ -60,10 +65,12 @@ export async function loadConfig(
       ? await getConfig({
           filepath,
           configName,
+          legacy,
         })
       : await findConfig({
           rootDir,
           configName,
+          legacy,
         });
 
     return new GraphQLConfig(found, extensions);
@@ -80,6 +87,7 @@ export function loadConfigSync(options: LoadConfigOptions) {
     extensions,
     throwOnEmpty,
     throwOnMissing,
+    legacy,
   } = {
     ...defaultLoadConfigOptions,
     ...options,
@@ -90,10 +98,12 @@ export function loadConfigSync(options: LoadConfigOptions) {
       ? getConfigSync({
           filepath,
           configName,
+          legacy,
         })
       : findConfigSync({
           rootDir,
           configName,
+          legacy,
         });
 
     return new GraphQLConfig(found, extensions);
@@ -164,6 +174,13 @@ export class GraphQLConfig {
         config: this._rawConfig,
         extensionsRegistry: this.extensions,
       });
+    } else if (isLegacyProjectConfig(this._rawConfig)) {
+      this.projects['default'] = new GraphQLProjectConfig({
+        filepath: this.filepath,
+        name: 'default',
+        config: this._rawConfig,
+        extensionsRegistry: this.extensions,
+      });
     }
   }
 
@@ -212,5 +229,9 @@ export class GraphQLConfig {
 
   getDefault(): GraphQLProjectConfig | never {
     return this.getProject('default');
+  }
+
+  isLegacy(): boolean {
+    return isLegacyConfig(this.filepath);
   }
 }
