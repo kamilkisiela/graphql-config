@@ -299,15 +299,6 @@
     aggregate-error "3.0.1"
     lodash "4.17.15"
 
-"@graphql-toolkit/common@0.9.8":
-  version "0.9.8"
-  resolved "https://registry.yarnpkg.com/@graphql-toolkit/common/-/common-0.9.8.tgz#2170ca5c4012c745fbccf4e80710fa256520f49f"
-  integrity sha512-LwJd9k/q69RdTJpiwoPQZVEYAXvMXtmFuj7z5JQ6AkzmlVCWuZCiQiq/MQ6KSW7JRmV3sfL5XQX56DHKO/aFvA==
-  dependencies:
-    aggregate-error "3.0.1"
-    graphql-tools-fork "8.9.6"
-    lodash "4.17.15"
-
 "@graphql-toolkit/common@0.9.9":
   version "0.9.9"
   resolved "https://registry.yarnpkg.com/@graphql-toolkit/common/-/common-0.9.9.tgz#56daf4ac85deada766418b91d421592cbf18dcf0"
@@ -342,22 +333,12 @@
     "@graphql-toolkit/common" "0.9.7"
     tslib "1.10.0"
 
-"@graphql-toolkit/json-file-loader@0.9.7":
-  version "0.9.7"
-  resolved "https://registry.yarnpkg.com/@graphql-toolkit/json-file-loader/-/json-file-loader-0.9.7.tgz#3f68dfbbc0c55c2b1531b6e200d5cd76ef85bb59"
-  integrity sha512-MNnCX201p011FPOm/rlDLkBTpx4LvooG9pdMU1ijRD/sqpHSkhZ2U/aKyoiDDKrLUgK7cvHws1KXBvLcg7r6aQ==
+"@graphql-toolkit/json-file-loader@0.9.9":
+  version "0.9.9"
+  resolved "https://registry.yarnpkg.com/@graphql-toolkit/json-file-loader/-/json-file-loader-0.9.9.tgz#0ff49c83775aa82395e8ffb300d2bef4b037520d"
+  integrity sha512-rcKjcfrZu0e+S7QPScbSKHs/B+iewnSUkSreOYwjG6a5+Pg2Dh4/uFITjemtR2wyFYtj2aXI9rLCoE271JrFlg==
   dependencies:
-    "@graphql-toolkit/common" "0.9.7"
-    tslib "1.10.0"
-
-"@graphql-toolkit/schema-merging@0.9.8":
-  version "0.9.8"
-  resolved "https://registry.yarnpkg.com/@graphql-toolkit/schema-merging/-/schema-merging-0.9.8.tgz#a1f5ed404b7dbad06bf249d1a8c6e5f1213d9be4"
-  integrity sha512-01prrR0HV2kF8GCP6XugEEWTbouTo5tWJCFkxESbP6nJHziQDntvbltLuYiKoitcn0PyI8Q6JLjQPQZe7mJbjQ==
-  dependencies:
-    "@graphql-toolkit/common" "0.9.8"
-    deepmerge "4.2.2"
-    graphql-tools-fork "8.9.6"
+    "@graphql-toolkit/common" "0.9.9"
     tslib "1.11.1"
 
 "@graphql-toolkit/schema-merging@0.9.9":
