@@ -5,11 +5,12 @@ import {Source} from '@graphql-toolkit/common';
 import minimatch from 'minimatch';
 import {ExtensionMissingError} from './errors';
 import {GraphQLExtensionsRegistry} from './extension';
-import {IExtensions, IGraphQLProject} from './types';
+import {IExtensions, IGraphQLProject, IGraphQLProjectLegacy} from './types';
 import {
   UnnormalizedTypeDefPointer,
   OPERATION_KINDS,
 } from '@graphql-toolkit/core';
+import {isLegacyProjectConfig} from './helpers';
 
 type Pointer = UnnormalizedTypeDefPointer | UnnormalizedTypeDefPointer[];
 type SchemaOutput = 'GraphQLSchema' | 'DocumentNode' | 'string';
@@ -25,6 +26,7 @@ export class GraphQLProjectConfig {
   readonly filepath: string;
   readonly dirpath: string;
   readonly name: string;
+  readonly isLegacy: boolean;
 
   private readonly _extensionsRegistry: GraphQLExtensionsRegistry;
 
@@ -36,17 +38,27 @@ export class GraphQLProjectConfig {
   }: {
     filepath: string;
     name: string;
-    config: IGraphQLProject;
+    config: IGraphQLProject | IGraphQLProjectLegacy;
     extensionsRegistry: GraphQLExtensionsRegistry;
   }) {
     this.filepath = filepath;
     this.dirpath = dirname(filepath);
     this.name = name;
-    this.extensions = config.extensions || {};
-    this.schema = config.schema;
-    this.documents = config.documents;
-    this.include = config.include;
-    this.exclude = config.exclude;
+
+    if (isLegacyProjectConfig(config)) {
+      this.extensions = config.extensions || {};
+      this.schema = config.schemaPath;
+      this.include = config.includes;
+      this.exclude = config.excludes;
+      this.isLegacy = true;
+    } else {
+      this.extensions = config.extensions || {};
+      this.schema = config.schema;
+      this.documents = config.documents;
+      this.include = config.include;
+      this.exclude = config.exclude;
+      this.isLegacy = false;
+    }
 
     this._extensionsRegistry = extensionsRegistry;
   }
@@ -56,6 +68,18 @@ export class GraphQLProjectConfig {
   }
 
   extension<T = any>(name: string): T {
+    if (this.isLegacy) {
+      const extension = this.extensions[name];
+
+      if (!extension) {
+        throw new ExtensionMissingError(
+          `Project ${this.name} is missing ${name} extension`,
+        );
+      }
+
+      return extension;
+    }
+
     const extension = this._extensionsRegistry.get(name);
 
     if (!extension) {

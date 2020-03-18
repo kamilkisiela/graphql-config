@@ -11,6 +11,19 @@ export interface ConfigSearchResult {
   isEmpty?: boolean;
 }
 
+const legacySearchPlaces = [
+  '.graphqlconfig',
+  '.graphqlconfig.json',
+  '.graphqlconfig.yaml',
+  '.graphqlconfig.yml',
+];
+
+export function isLegacyConfig(filepath: string): boolean {
+  filepath = filepath.toLowerCase();
+
+  return legacySearchPlaces.some(name => filepath.endsWith(name));
+}
+
 function replaceEnv(content: string) {
   // https://regex101.com/r/k9saS6/2
   // Yes:
@@ -53,19 +66,33 @@ const createCustomLoader = (loader: Loader): Loader => {
   };
 };
 
-export function createCosmiConfig(moduleName: string) {
-  const options = prepareCosmiconfig(moduleName);
+export function createCosmiConfig(
+  moduleName: string,
+  {
+    legacy,
+  }: {
+    legacy: boolean;
+  },
+) {
+  const options = prepareCosmiconfig(moduleName, {
+    legacy,
+  });
 
   return cosmiconfig(moduleName, options);
 }
 
-export function createCosmiConfigSync(moduleName: string) {
-  const options = prepareCosmiconfig(moduleName);
+export function createCosmiConfigSync(
+  moduleName: string,
+  {legacy}: {legacy: boolean},
+) {
+  const options = prepareCosmiconfig(moduleName, {
+    legacy,
+  });
 
   return cosmiconfigSync(moduleName, options);
 }
 
-function prepareCosmiconfig(moduleName: string) {
+function prepareCosmiconfig(moduleName: string, {legacy}: {legacy: boolean}) {
   const loadYaml = createCustomLoader(defaultLoaders['.yaml']);
   const loadJson = createCustomLoader(defaultLoaders['.json']);
 
@@ -79,6 +106,10 @@ function prepareCosmiconfig(moduleName: string) {
     '.#rc.yml',
     '.#rc.yaml',
   ];
+
+  if (legacy) {
+    searchPlaces.push(...legacySearchPlaces);
+  }
 
   // We need to wrap loaders in order to access and transform file content (as string)
   // Cosmiconfig has transform option but at this point config is not a string but an object

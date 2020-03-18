@@ -10,31 +10,35 @@ const cwd = typeof process !== 'undefined' ? process.cwd() : undefined;
 
 export async function findConfig({
   rootDir = cwd!,
+  legacy = true,
   configName,
 }: {
   rootDir: string;
   configName: string;
+  legacy?: boolean;
 }): Promise<GraphQLConfigResult> {
   validate({rootDir});
 
   return resolve({
     rootDir,
-    result: await createCosmiConfig(configName).search(rootDir),
+    result: await createCosmiConfig(configName, {legacy}).search(rootDir),
   });
 }
 
 export function findConfigSync({
   rootDir = cwd!,
+  legacy = true,
   configName,
 }: {
   rootDir: string;
   configName: string;
+  legacy?: boolean;
 }): GraphQLConfigResult {
   validate({rootDir});
 
   return resolve({
     rootDir,
-    result: createCosmiConfigSync(configName).search(rootDir),
+    result: createCosmiConfigSync(configName, {legacy}).search(rootDir),
   });
 }
 

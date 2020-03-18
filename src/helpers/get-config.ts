@@ -9,14 +9,16 @@ import {
 export async function getConfig({
   filepath,
   configName,
+  legacy = true,
 }: {
   filepath: string;
   configName: string;
+  legacy?: boolean;
 }): Promise<GraphQLConfigResult> {
   validate({filepath});
 
   return resolve({
-    result: await createCosmiConfig(configName).load(filepath),
+    result: await createCosmiConfig(configName, {legacy}).load(filepath),
     filepath,
   });
 }
@@ -24,14 +26,16 @@ export async function getConfig({
 export function getConfigSync({
   filepath,
   configName,
+  legacy = true,
 }: {
   filepath: string;
   configName: string;
+  legacy?: boolean;
 }): GraphQLConfigResult {
   validate({filepath});
 
   return resolve({
-    result: createCosmiConfigSync(configName).load(filepath),
+    result: createCosmiConfigSync(configName, {legacy}).load(filepath),
     filepath,
   });
 }
