@@ -20,8 +20,11 @@ From the developer perspective, you gain simplicity and a central place to setup
 
 From the point of view of a library author, GraphQL Config makes it easier to maintain the code responsible for handling configuration, loading GraphQL schemas or even files with GraphQL operations and fragments. GraphQL Config provides a set of useful methods and an easy-to-work-with API.
 
-## Example
+## Examples
 
+Learn more in [usage docs](usage)
+
+### `.graphqlrc`, or `.graphqlrc.yml/yaml`
 ```yaml
 schema: 'packages/api/src/schema.graphql'
 documents: 'packages/app/src/components/**/*.graphql'
@@ -30,3 +33,19 @@ extensions:
     foo: true
 ```
 
+### `.graphqlrc`, or `.graphqlrc.json`
+```json
+{ "schema": "https://localhost:8000" }
+```
+
+### `graphql.config.js` or `.graphqlrc.js`
+```js
+module.exports = { schema: 'https://localhost:8000' }
+```
+
+### custom paths
+custom extension paths with `.mycustomrc.js` or `mycustom.config.js` using `loadConfig()` parameter [`configName`](load-config#configname)
+```js
+module.exports = { schema: 'https://localhost:8000' }
+
+```
