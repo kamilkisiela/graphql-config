@@ -28,6 +28,4 @@ jobs:
         uses: amondnet/now-deployment@v2.0.1
         with:
           zeit-token: ${{ secrets.NOW_TOKEN }}
-          now-project-id: 'graphql-config'
-          now-org-id: 'kamilkisiela'
           now-args: '--prod'
