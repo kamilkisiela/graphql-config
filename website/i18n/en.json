@@ -13,10 +13,6 @@
         "title": "GraphQLProjectConfig",
         "sidebar_label": "GraphQLProjectConfig"
       },
-      "api": {
-        "title": "Consuming API",
-        "sidebar_label": "Consuming API"
-      },
       "extensions": {
         "title": "Writing and Consuming Extensions",
         "sidebar_label": "Extensions"
@@ -28,9 +24,6 @@
       "loaders": {
         "title": "Loaders",
         "sidebar_label": "Loaders"
-      },
-      "README": {
-        "title": "README"
       },
       "documents": {
         "title": "Specifying documents",
