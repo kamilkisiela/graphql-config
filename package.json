@@ -21,7 +21,6 @@
     "format": "prettier --write \"{src,test}/**/*.{ts,graphql}\"",
     "lint": "eslint \"{src,test}/**/*.ts\"",
     "test": "jest",
-    "now-build": "(cd website && yarn && yarn build && mv build/graphql-config ../public)",
     "precommit": "lint-staged",
     "release": "npm publish dist",
     "release:canary": "yarn build && node ./scripts/canary.js && npm publish dist --tag canary"
