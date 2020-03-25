@@ -7,6 +7,8 @@ import {
   OPERATION_KINDS,
   loadTypedefs,
   loadTypedefsSync,
+  loadSchema,
+  loadSchemaSync,
 } from '@graphql-toolkit/core';
 import {mergeTypeDefs} from '@graphql-toolkit/schema-merging';
 import {GraphQLSchema, DocumentNode, buildASTSchema} from 'graphql';
@@ -58,21 +60,29 @@ export class LoadersRegistry {
     pointer: Pointer,
     options?: Options,
   ): Promise<GraphQLSchema> {
-    const sources = await loadTypedefs(pointer, {
-      filterKinds: OPERATION_KINDS,
-      ...this.createOptions(options),
-    });
+    if (!this._middlewares.length) {
+      return loadSchema(pointer, this.createOptions(options));
+    }
 
-    return this.buildSchema(sources);
+    return this.buildSchemaFromSources(
+      await loadTypedefs(pointer, {
+        filterKinds: OPERATION_KINDS,
+        ...this.createOptions(options),
+      }),
+    );
   }
 
   loadSchemaSync(pointer: Pointer, options?: Options): GraphQLSchema {
-    const sources = loadTypedefsSync(pointer, {
-      filterKinds: OPERATION_KINDS,
-      ...this.createOptions(options),
-    });
+    if (!this._middlewares.length) {
+      return loadSchemaSync(pointer, this.createOptions(options));
+    }
 
-    return this.buildSchema(sources);
+    return this.buildSchemaFromSources(
+      loadTypedefsSync(pointer, {
+        filterKinds: OPERATION_KINDS,
+        ...this.createOptions(options),
+      }),
+    );
   }
 
   private createOptions<T extends object>(options?: T) {
@@ -83,7 +93,7 @@ export class LoadersRegistry {
     };
   }
 
-  private buildSchema(sources: Source[]) {
+  private buildSchemaFromSources(sources: Source[]) {
     const documents: DocumentNode[] = sources.map(source => source.document);
     const document = mergeTypeDefs(documents);
 
