@@ -29,5 +29,4 @@ jobs:
         with:
           zeit-token: ${{ secrets.NOW_TOKEN }}
           now-project-id: 'graphql-config'
-          now-org-id: 'kamilkisiela'
           now-args: '--prod'
