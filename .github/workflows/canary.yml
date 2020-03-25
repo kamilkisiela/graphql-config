@@ -1,0 +1,53 @@
+name: Canary Release
+on: 
+  pull_request:
+    branches-ignore:
+      - master
+  push:
+    branches-ignore:
+      - master
+jobs:
+  release:
+    name: Release Canary Version
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js 12
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      
+      - uses: actions/cache@v1
+        id: yarn-cache
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock') }}
+      
+      - name: Install
+        run: yarn
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
+      
+      - name: Build
+        run: yarn build
+    
+      - name: Release
+        id: release
+        uses: 'kamilkisiela/release-canary@master'
+        if: github.repository == 'kamilkisiela/graphql-config'
+        with:
+          npm-token: ${{ secrets.NPM_TOKEN }}
+          npm-script: 'release:canary'
+      
+      - name: Comment
+        if: steps.release.outputs.released
+        uses: 'kamilkisiela/pr-comment@master'
+        with:
+          message: |
+            The latest changes of this PR are available as alpha in npm: `${{ steps.release.outputs.version }}`
+            
+            Quickly update your package.json by running:
+            
+                npx match-version graphql-config ${{ steps.release.outputs.version }}
+          
+          bot-token: ${{ secrets.BOT_TOKEN }}
+          bot: 'theguild-bot'
