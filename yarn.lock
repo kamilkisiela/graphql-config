@@ -279,7 +279,7 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@graphql-toolkit/common@0.9.10-alpha-154620d.14+154620d":
+"@graphql-toolkit/common@0.9.10-alpha-154620d.14+154620d", "@graphql-toolkit/common@0.9.10-alpha-154620d.14+b7764d5":
   version "0.9.10-alpha-154620d.14"
   resolved "https://registry.yarnpkg.com/@graphql-toolkit/common/-/common-0.9.10-alpha-154620d.14.tgz#64d8e56187b707ecdff4a67a4b541ecb4d6f5dff"
   integrity sha512-2+6V0MlFbM+Gsu17Bj+KWI1kqnSY7UyuGUHhtitUeR5nUBBrfYnyv0tyVol9+j8D79ZlXohPyfpmcTXACy1AHw==

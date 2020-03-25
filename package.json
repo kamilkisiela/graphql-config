@@ -33,7 +33,7 @@
     "graphql": "^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0"
   },
   "dependencies": {
-    "@graphql-toolkit/common": "0.9.10-alpha-b7764d5.0+b7764d5",
+    "@graphql-toolkit/common": "0.9.10-alpha-154620d.14+b7764d5",
     "@graphql-toolkit/core": "0.9.10-alpha-b7764d5.0+b7764d5",
     "@graphql-toolkit/graphql-file-loader": "0.9.10-alpha-154620d.14+b7764d5",
     "@graphql-toolkit/json-file-loader": "0.9.10-alpha-154620d.14+b7764d5",
