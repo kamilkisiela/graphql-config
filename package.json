@@ -44,7 +44,7 @@
     "minimatch": "3.0.4"
   },
   "devDependencies": {
-    "bob-the-bundler": "0.2.2",
+    "bob-the-bundler": "0.3.4",
     "@types/jest": "25.1.4",
     "@types/nock": "11.1.0",
     "@types/node": "13.9.1",
