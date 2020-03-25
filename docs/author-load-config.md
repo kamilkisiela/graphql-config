@@ -8,13 +8,23 @@ sidebar_label: Loading Config
 
 This function is the starting point for using GraphQL Config. It looks for a config file in [predefined search places](./user-usage.md#config-search-places) in the currently working directory.
 
-A basic usage example:
+A basic usage example (async):
 
 ```typescript
 import {loadConfig} from 'graphql-config';
 
 async function main() {
   const config = await loadConfig({...}); // an instance of GraphQLConfig
+}
+```
+
+Synchronous version:
+
+```typescript
+import {loadConfigSync} from 'graphql-config';
+
+function main() {
+  const config = loadConfigSync({...}); // an instance of GraphQLConfig
 }
 ```
 

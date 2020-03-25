@@ -1,6 +1,6 @@
 {
   "name": "graphql-config",
-  "version": "3.0.0-alpha.18",
+  "version": "3.0.0-alpha.22",
   "description": "The easiest way to configure your development environment with your GraphQL schema (supported by most tools, editors & IDEs)",
   "sideEffects": false,
   "main": "dist/index.cjs.js",
@@ -18,8 +18,8 @@
     "prebuild": "yarn clean",
     "build": "bob",
     "prepack": "bob-update-version",
-    "format": "prettier --write '{src,test}/**/*.{ts,graphql}'",
-    "lint": "eslint '{src,test}/**/*.ts'",
+    "format": "prettier --write \"{src,test}/**/*.{ts,graphql}\"",
+    "lint": "eslint \"{src,test}/**/*.ts\"",
     "test": "jest",
     "now-build": "(cd website && yarn && yarn build && mv build/graphql-config ../public)",
     "precommit": "lint-staged",
@@ -33,12 +33,12 @@
     "graphql": "^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0"
   },
   "dependencies": {
-    "@graphql-toolkit/common": "0.9.9",
-    "@graphql-toolkit/core": "0.9.9",
-    "@graphql-toolkit/graphql-file-loader": "0.9.7",
-    "@graphql-toolkit/json-file-loader": "0.9.7",
-    "@graphql-toolkit/schema-merging": "0.9.9",
-    "@graphql-toolkit/url-loader": "0.9.7",
+    "@graphql-toolkit/common": "0.9.10-alpha-b7764d5.0+b7764d5",
+    "@graphql-toolkit/core": "0.9.10-alpha-b7764d5.0+b7764d5",
+    "@graphql-toolkit/graphql-file-loader": "0.9.10-alpha-b7764d5.0+b7764d5",
+    "@graphql-toolkit/json-file-loader": "0.9.10-alpha-b7764d5.0+b7764d5",
+    "@graphql-toolkit/schema-merging": "0.9.10-alpha-b7764d5.0+b7764d5",
+    "@graphql-toolkit/url-loader": "0.9.10-alpha-b7764d5.0+b7764d5",
     "cosmiconfig": "6.0.0",
     "globby": "11.0.0",
     "minimatch": "3.0.4"

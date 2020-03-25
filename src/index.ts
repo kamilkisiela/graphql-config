@@ -1,4 +1,4 @@
-export {GraphQLConfig, loadConfig} from './config';
+export {GraphQLConfig, loadConfig, loadConfigSync} from './config';
 export {GraphQLProjectConfig} from './project-config';
 export {GraphQLExtensionDeclaration} from './extension';
 export {

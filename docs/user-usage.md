@@ -6,12 +6,17 @@ sidebar_label: Usage
 
 ## Config search places
 
+- `graphql.config.json`
+- `graphql.config.js`
+- `graphql.config.yaml`
+- `graphql.config.yml`
+
 - `.graphqlrc` _(YAML and JSON)_
 - `.graphqlrc.json`
 - `.graphqlrc.yaml`
 - `.graphqlrc.yml`
 - `.graphqlrc.js`
-- `graphql.config.js`
+
 - `graphql` property in `package.json`
 
 ## Schema

@@ -1,14 +1,21 @@
-const path = require('path');
-const del = require('del');
-const makeDir = require('make-dir');
-const parentModule = require('parent-module');
-const os = require('os');
+import path from 'path';
+import del from 'del';
+import makeDir from 'make-dir';
+import parentModule from 'parent-module';
+import os from 'os';
+
 const fs = require.requireActual('fs');
 
-export class TempDir {
-  dir: string;
+function normalizeDirectorySlash(pathname: string): string {
+  const normalizeCrossPlatform = pathname.replace(/\\/g, '/');
 
-  constructor() {
+  return normalizeCrossPlatform;
+}
+
+export class TempDir {
+  public dir: string;
+
+  public constructor() {
     /**
      * Get the actual path for temp directories that are symlinks (MacOS).
      * Without the actual path, tests that use process.chdir will unexpectedly
@@ -19,7 +26,7 @@ export class TempDir {
      * Get the pathname of the file that imported util.js.
      * Used to create a unique directory name for each test suite.
      */
-    const parent = parentModule();
+    const parent = parentModule() || 'cosmiconfig';
     const relativeParent = path.relative(process.cwd(), parent);
 
     /**
@@ -32,19 +39,19 @@ export class TempDir {
     makeDir.sync(this.dir);
   }
 
-  absolutePath(dir: string) {
+  public absolutePath(dir: string): string {
     // Use path.join to ensure dir is always inside the working temp directory
     const absolutePath = path.join(this.dir, dir);
 
     return absolutePath;
   }
 
-  createDir(dir: string) {
+  public createDir(dir: string): void {
     const dirname = this.absolutePath(dir);
     makeDir.sync(dirname);
   }
 
-  createFile(file: string, contents: string) {
+  public createFile(file: string, contents: string): void {
     const filePath = this.absolutePath(file);
     const fileDir = path.parse(filePath).dir;
     makeDir.sync(fileDir);
@@ -52,10 +59,10 @@ export class TempDir {
     fs.writeFileSync(filePath, `${contents}\n`);
   }
 
-  getSpyPathCalls(spy: jest.SpyInstance) {
+  public getSpyPathCalls(spy: jest.Mock | jest.SpyInstance): Array<string> {
     const calls = spy.mock.calls;
 
-    const result = calls.map(call => {
+    const result = calls.map((call): string => {
       const filePath = call[0];
       const relativePath = path.relative(this.dir, filePath);
 
@@ -63,7 +70,7 @@ export class TempDir {
        * Replace Windows backslash directory separators with forward slashes
        * so expected paths will be consistent cross platform
        */
-      const normalizeCrossPlatform = relativePath.replace(/\\/g, '/');
+      const normalizeCrossPlatform = normalizeDirectorySlash(relativePath);
 
       return normalizeCrossPlatform;
     });
@@ -71,8 +78,8 @@ export class TempDir {
     return result;
   }
 
-  clean() {
-    const cleanPattern = this.absolutePath('**/*');
+  public clean(): Array<string> {
+    const cleanPattern = normalizeDirectorySlash(this.absolutePath('**/*'));
     const removed = del.sync(cleanPattern, {
       dot: true,
       force: true,
@@ -81,8 +88,11 @@ export class TempDir {
     return removed;
   }
 
-  deleteTempDir() {
-    const removed = del.sync(this.dir, {force: true, dot: true});
+  public deleteTempDir(): Array<string> {
+    const removed = del.sync(normalizeDirectorySlash(this.dir), {
+      force: true,
+      dot: true,
+    });
 
     return removed;
   }
