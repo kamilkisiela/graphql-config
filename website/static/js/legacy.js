@@ -10,7 +10,7 @@ window.addEventListener('load', function () {
     <a href="https://graphql-config.com/legacy">graphql-config.com/legacy</a>.
   `;
 
-  body.appendChild(legacyNote);
+  body.prepend(legacyNote);
 
   body.classList.add('legacy-note');
 });

@@ -1,0 +1,58 @@
+:root {
+  --ifm-color-primary: #e535ab;
+  --ifm-color-primary-dark: #e11da0;
+  --ifm-color-primary-darker: #d41b97;
+  --ifm-color-primary-darkest: #af177d;
+  --ifm-color-primary-light: #e84eb5;
+  --ifm-color-primary-lighter: #ea5abb;
+  --ifm-color-primary-lightest: #ef80ca;
+}
+
+
+/* Legacy Note */
+
+body.legacy-note #legacy-note {
+  display: block;
+}
+
+#legacy-note {
+  display: none;
+  width: 100%;
+  padding: 15px 25px;
+  background-color: #e535ab;
+  color: #ffdcf3;
+  text-align: center;
+
+  position: sticky;
+
+  background: linear-gradient(-45deg, #e535ab, #EA7CC5, #e535ab, #EA7CC5);
+  background-size: 400% 200%;
+	animation: gradient 15s ease infinite;
+}
+
+#legacy-note .important {
+  font-weight: bold;
+  color: #fff;
+}
+
+#legacy-note a {
+  color: #ffdcf3;
+}
+
+#legacy-note a:hover {
+  color: #fff;
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+/* Legacy Note */
