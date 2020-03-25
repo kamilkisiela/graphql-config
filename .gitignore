@@ -6,3 +6,4 @@ dist/
 public/
 *.map
 out.txt
+.now

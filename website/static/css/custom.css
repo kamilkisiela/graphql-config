@@ -16,13 +16,62 @@
 }
 
 a {
-	color: #c200c2;
+  color: #c200c2;
 }
 
 a:hover {
-	text-decoration: underline;
+  text-decoration: underline;
 }
 
+/* Legacy Note */
+
+body.legacy-note #legacy-note {
+  display: block;
+}
+
+#legacy-note {
+  display: none;
+  width: 100%;
+  padding: 30px 25px;
+  background-color: #e535ab;
+  color: #ffdcf3;
+  text-align: center;
+
+  position: fixed;
+  bottom: 0;
+  z-index: 999;
+
+  background: linear-gradient(-45deg, #e535ab, #EA7CC5, #e535ab, #EA7CC5);
+  background-size: 400% 200%;
+	animation: gradient 15s ease infinite;
+}
+
+#legacy-note .important {
+  font-weight: bold;
+  color: #fff;
+}
+
+#legacy-note a {
+  color: #ffdcf3;
+}
+
+#legacy-note a:hover {
+  color: #fff;
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+/* Legacy Note */
 
 /* code-block-buttons */
 pre {
@@ -39,7 +88,7 @@ pre .btnIcon {
   color: #fff;
   background-color: transparent;
   height: 30px;
-  transition: all .25s ease-out;
+  transition: all 0.25s ease-out;
 }
 
 pre .btnIcon:hover {
@@ -53,7 +102,7 @@ pre .btnIcon:hover {
 
 .btnIcon svg {
   fill: currentColor;
-  margin-right: .4em;
+  margin-right: 0.4em;
 }
 
 .btnIcon__label {

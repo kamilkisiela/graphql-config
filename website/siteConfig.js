@@ -52,6 +52,7 @@ const siteConfig = {
     'https://buttons.github.io/buttons.js',
     'https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js',
     '/js/code-block-buttons.js',
+    '/js/legacy.js'
   ],
 
   onPageNav: 'separate',

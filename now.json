@@ -5,5 +5,12 @@
   "public": false,
   "github": {
     "enabled": false
-  }
+  },
+  "routes": [
+    {
+      "src": "/legacy",
+      "status": 301,
+      "headers": {"Location": "https://github.com/kamilkisiela/graphql-config/tree/legacy#graphql-config"}
+    }
+  ]
 }
