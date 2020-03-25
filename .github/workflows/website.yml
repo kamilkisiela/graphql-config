@@ -1,0 +1,17 @@
+name: Website
+on: 
+  push:
+    branches:
+      - master
+jobs:
+  Deploy:
+    name: Deploy website
+    runs-on: ubuntu-latest
+    steps:
+      - name: ZEIT Now Deployment
+        uses: amondnet/now-deployment@v2.0.1
+        with:
+          zeit-token: ${{ secrets.NOW_TOKEN }}
+          now-project-id: 'graphql-config'
+          now-org-id: 'kamilkisiela'
+          now-args: '--prod'
