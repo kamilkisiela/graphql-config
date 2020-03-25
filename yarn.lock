@@ -341,14 +341,14 @@
     graphql-tools-fork "8.9.6"
     tslib "1.11.1"
 
-"@graphql-toolkit/url-loader@0.9.10-alpha-b7764d5.0+b7764d5":
-  version "0.9.10-alpha-b7764d5.0"
-  resolved "https://registry.yarnpkg.com/@graphql-toolkit/url-loader/-/url-loader-0.9.10-alpha-b7764d5.0.tgz#d8d461340001eb8722ff395562904384a5530e4b"
-  integrity sha512-UXUaMwIpXd+wRBXhCjAAp7IYZcYEQi1uVhPKeLpR2fhX5et0W7uFn4b/f1sFduhCQdybB30UexYoWzDirVaIpw==
+"@graphql-toolkit/url-loader@0.9.10-alpha-154620d.14+b7764d5":
+  version "0.9.10-alpha-154620d.14"
+  resolved "https://registry.yarnpkg.com/@graphql-toolkit/url-loader/-/url-loader-0.9.10-alpha-154620d.14.tgz#07cf4997e3883b3b914d22b9a85794ae7fd0c0fb"
+  integrity sha512-Pi/0D6ntyH/omGBn+bkt9It3OimF3t45TBSjmapQmGP08EA4yx+nEUPvIeL2+rDxOxjmB73enm1m8kVJatgg4Q==
   dependencies:
-    "@graphql-toolkit/common" "0.9.10-alpha-b7764d5.0+b7764d5"
+    "@graphql-toolkit/common" "0.9.10-alpha-154620d.14+154620d"
     cross-fetch "3.0.4"
-    graphql-tools-fork "8.9.6"
+    graphql-tools-fork "8.10.0"
     tslib "1.11.1"
     valid-url "1.0.9"
 
