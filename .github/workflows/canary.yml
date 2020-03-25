@@ -13,6 +13,7 @@ jobs:
     if: contains(github.actor, 'renovate') == false
     steps:
       - uses: actions/checkout@v2
+      
       - name: Use Node.js 12
         uses: actions/setup-node@v1
         with:
