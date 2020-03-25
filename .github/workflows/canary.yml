@@ -51,3 +51,4 @@ jobs:
           
           bot-token: ${{ secrets.BOT_TOKEN }}
           bot: 'theguild-bot'
+          github-token: ${{ secrets.GITHUB_TOKEN }}
