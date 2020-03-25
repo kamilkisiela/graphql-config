@@ -4,18 +4,20 @@ import {
   LoadTypedefsOptions,
   loadDocuments,
   loadDocumentsSync,
-  loadSchema,
-  loadSchemaSync,
+  OPERATION_KINDS,
   loadTypedefs,
   loadTypedefsSync,
 } from '@graphql-toolkit/core';
-import {GraphQLSchema} from 'graphql';
+import {mergeTypeDefs} from '@graphql-toolkit/schema-merging';
+import {GraphQLSchema, DocumentNode, buildASTSchema} from 'graphql';
+import {MiddlewareFn, useMiddleware} from './helpers/utils';
 
 type Pointer = UnnormalizedTypeDefPointer | UnnormalizedTypeDefPointer[];
 type Options = Partial<LoadTypedefsOptions>;
 
 export class LoadersRegistry {
   private _loaders: Loader[] = [];
+  private _middlewares: MiddlewareFn<DocumentNode>[] = [];
   private readonly cwd: string;
 
   constructor({cwd}: {cwd: string}) {
@@ -26,6 +28,10 @@ export class LoadersRegistry {
     if (!this._loaders.some(l => l.loaderId() === loader.loaderId())) {
       this._loaders.push(loader);
     }
+  }
+
+  use(middleware: MiddlewareFn<DocumentNode>): void {
+    this._middlewares.push(middleware);
   }
 
   async loadTypeDefs(pointer: Pointer, options?: Options): Promise<Source[]> {
@@ -52,11 +58,21 @@ export class LoadersRegistry {
     pointer: Pointer,
     options?: Options,
   ): Promise<GraphQLSchema> {
-    return loadSchema(pointer, this.createOptions(options));
+    const sources = await loadTypedefs(pointer, {
+      filterKinds: OPERATION_KINDS,
+      ...this.createOptions(options),
+    });
+
+    return this.buildSchema(sources);
   }
 
   loadSchemaSync(pointer: Pointer, options?: Options): GraphQLSchema {
-    return loadSchemaSync(pointer, this.createOptions(options));
+    const sources = loadTypedefsSync(pointer, {
+      filterKinds: OPERATION_KINDS,
+      ...this.createOptions(options),
+    });
+
+    return this.buildSchema(sources);
   }
 
   private createOptions<T extends object>(options?: T) {
@@ -65,5 +81,12 @@ export class LoadersRegistry {
       cwd: this.cwd,
       ...options,
     };
+  }
+
+  private buildSchema(sources: Source[]) {
+    const documents: DocumentNode[] = sources.map(source => source.document);
+    const document = mergeTypeDefs(documents);
+
+    return buildASTSchema(useMiddleware(this._middlewares)(document));
   }
 }

@@ -30,3 +30,15 @@ export function isLegacyProjectConfig(
     typeof (config as IGraphQLProjectLegacy).excludes !== 'undefined'
   );
 }
+
+export type MiddlewareFn<T> = (input: T) => T;
+
+export function useMiddleware<T>(fns: Array<MiddlewareFn<T>>) {
+  return (input: T) => {
+    if (fns.length) {
+      return fns.reduce((obj, cb) => cb(obj), input);
+    }
+
+    return input;
+  };
+}

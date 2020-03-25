@@ -10,7 +10,7 @@ export type GraphQLExtensionDeclaration = (
 export interface ExtensionAPI {
   logger: any;
   loaders: {
-    schema: Pick<LoadersRegistry, 'register'>;
+    schema: Pick<LoadersRegistry, 'register' | 'use'>;
     documents: Pick<LoadersRegistry, 'register'>;
   };
 }
