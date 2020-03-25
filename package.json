@@ -24,7 +24,7 @@
     "now-build": "(cd website && yarn && yarn build && mv build/graphql-config ../public)",
     "precommit": "lint-staged",
     "release": "npm publish dist",
-    "release:next": "npm publish dist --tag next"
+    "release:canary": "yarn build && node ./scripts/canary.js && npm publish dist --tag canary"
   },
   "files": [
     "dist/*"

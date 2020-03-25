@@ -5,3 +5,4 @@ coverage/
 dist/
 public/
 *.map
+out.txt
