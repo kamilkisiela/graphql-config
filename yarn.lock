@@ -323,12 +323,12 @@
     "@graphql-toolkit/common" "0.9.10-alpha-154620d.14+154620d"
     tslib "1.11.1"
 
-"@graphql-toolkit/json-file-loader@0.9.10-alpha-b7764d5.0+b7764d5":
-  version "0.9.10-alpha-b7764d5.0"
-  resolved "https://registry.yarnpkg.com/@graphql-toolkit/json-file-loader/-/json-file-loader-0.9.10-alpha-b7764d5.0.tgz#f427f461c8da954ef798508f950b97f7043155a2"
-  integrity sha512-D7ZYMOgXw12dCa+rdj3UTK7i7jL7yrCCB6F2R2mKIdbsMWSsZaNtED/a4PETXSkaJUlRQtT1jVvB2K9QKFRrcw==
+"@graphql-toolkit/json-file-loader@0.9.10-alpha-154620d.14+b7764d5":
+  version "0.9.10-alpha-154620d.14"
+  resolved "https://registry.yarnpkg.com/@graphql-toolkit/json-file-loader/-/json-file-loader-0.9.10-alpha-154620d.14.tgz#d8dc8bb8840953ce4861b1a08c857b9da40066c1"
+  integrity sha512-zhU/Kp/gSHIH3Yj4CJWgVfqLlkxXB71UXYeYo9wT4enKuyjld5mJg5DUVaFYC0/+pIluav0TzoSM9W9HYnp6hg==
   dependencies:
-    "@graphql-toolkit/common" "0.9.10-alpha-b7764d5.0+b7764d5"
+    "@graphql-toolkit/common" "0.9.10-alpha-154620d.14+154620d"
     tslib "1.11.1"
 
 "@graphql-toolkit/schema-merging@0.9.10-alpha-b7764d5.0+b7764d5":
