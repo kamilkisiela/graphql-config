@@ -18,6 +18,7 @@
     "prebuild": "yarn clean",
     "build": "bob",
     "prepack": "bob-update-version",
+    "now-build": "(cd website && yarn && yarn build && mv build ../public)",
     "format": "prettier --write \"{src,test}/**/*.{ts,graphql}\"",
     "lint": "eslint \"{src,test}/**/*.ts\"",
     "test": "jest",
