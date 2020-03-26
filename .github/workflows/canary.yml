@@ -1,4 +1,4 @@
-name: Release Canary
+name: Canary Release
 on: 
   pull_request:
     branches-ignore:
