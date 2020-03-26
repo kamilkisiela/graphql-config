@@ -6,7 +6,7 @@ module.exports = {
   baseUrl: '/',
   favicon: 'img/logo.ico',
 
-  organizationName: 'The Guild',
+  organizationName: 'kamilkisiela',
   projectName: 'graphql-config',
 
   themeConfig: {
