@@ -2,7 +2,7 @@ name: CI
 on: [pull_request, push]
 jobs:
   test:
-    name: Test on node ${{ matrix.node_version }} and ${{matrix.os}}
+    name: Node ${{ matrix.node_version }} on ${{matrix.os}}
     runs-on: ${{matrix.os}}
     strategy:
       matrix:
