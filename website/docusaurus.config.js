@@ -88,7 +88,10 @@ module.exports = {
       trackingID: 'UA-125180910-4',
     },
   },
-  scripts: ['/js/legacy.js'],
+  scripts: [
+    '/js/light-mode-by-default.js',
+    '/js/legacy.js'
+  ],
   presets: [
     [
       '@docusaurus/preset-classic',
