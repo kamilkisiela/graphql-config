@@ -104,7 +104,7 @@ module.exports = {
           showLastUpdateAuthor: true,
           showLastUpdateTime: true,
           editUrl:
-            'https://github.com/kamilkisiela/graphql-config/edit/master/website/docs/',
+            'https://github.com/kamilkisiela/graphql-config/edit/master/website/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
