@@ -1,3 +1,4 @@
+import {buildSchema, buildASTSchema} from 'graphql';
 import {resolve} from 'path';
 import {TempDir} from './utils/temp-dir';
 import {runTests} from './utils/runner';
@@ -46,6 +47,72 @@ runTests({async: loadConfig, sync: loadConfigSync})((load, mode) => {
         mode === 'async'
           ? await config!.getDefault().getSchema()
           : config!.getDefault().getSchemaSync();
+      const query = schema.getQueryType()!;
+      const fields = Object.keys(query.getFields());
+
+      expect(query).toBeDefined();
+      expect(fields).toContainEqual('foo');
+    });
+
+    test('load a single graphql file as string', async () => {
+      temp.createFile(
+        '.graphqlrc',
+        `
+        schema: schema.graphql
+      `,
+      );
+
+      temp.createFile(
+        'schema.graphql',
+        /* GraphQL */ `
+          type Query {
+            foo: String
+          }
+        `,
+      );
+
+      const config = await load({
+        rootDir: temp.dir,
+      });
+
+      const schema = buildSchema(
+        mode === 'async'
+          ? await config!.getDefault().getSchema('string')
+          : config!.getDefault().getSchemaSync('string'),
+      );
+      const query = schema.getQueryType()!;
+      const fields = Object.keys(query.getFields());
+
+      expect(query).toBeDefined();
+      expect(fields).toContainEqual('foo');
+    });
+
+    test('load a single graphql file as DocumentNode', async () => {
+      temp.createFile(
+        '.graphqlrc',
+        `
+        schema: schema.graphql
+      `,
+      );
+
+      temp.createFile(
+        'schema.graphql',
+        /* GraphQL */ `
+          type Query {
+            foo: String
+          }
+        `,
+      );
+
+      const config = await load({
+        rootDir: temp.dir,
+      });
+
+      const schema = buildASTSchema(
+        mode === 'async'
+          ? await config!.getDefault().getSchema('DocumentNode')
+          : config!.getDefault().getSchemaSync('DocumentNode'),
+      );
       const query = schema.getQueryType()!;
       const fields = Object.keys(query.getFields());
 

@@ -11,11 +11,12 @@ import {
   loadSchemaSync,
 } from '@graphql-toolkit/core';
 import {mergeTypeDefs} from '@graphql-toolkit/schema-merging';
-import {GraphQLSchema, DocumentNode, buildASTSchema} from 'graphql';
+import {GraphQLSchema, DocumentNode, buildASTSchema, print} from 'graphql';
 import {MiddlewareFn, useMiddleware} from './helpers/utils';
 
 type Pointer = UnnormalizedTypeDefPointer | UnnormalizedTypeDefPointer[];
 type Options = Partial<LoadTypedefsOptions>;
+export type SchemaOutput = 'GraphQLSchema' | 'DocumentNode' | 'string';
 
 export class LoadersRegistry {
   private _loaders: Loader[] = [];
@@ -27,7 +28,7 @@ export class LoadersRegistry {
   }
 
   register(loader: Loader): void {
-    if (!this._loaders.some(l => l.loaderId() === loader.loaderId())) {
+    if (!this._loaders.some((l) => l.loaderId() === loader.loaderId())) {
       this._loaders.push(loader);
     }
   }
@@ -56,33 +57,61 @@ export class LoadersRegistry {
     return loadDocumentsSync(pointer, this.createOptions(options));
   }
 
+  async loadSchema(pointer: Pointer): Promise<GraphQLSchema>;
+  async loadSchema(pointer: Pointer, out: 'string'): Promise<GraphQLSchema>;
   async loadSchema(
     pointer: Pointer,
-    options?: Options,
-  ): Promise<GraphQLSchema> {
-    if (!this._middlewares.length) {
-      return loadSchema(pointer, this.createOptions(options));
+    out: 'DocumentNode',
+  ): Promise<DocumentNode>;
+  async loadSchema(
+    pointer: Pointer,
+    out: 'GraphQLSchema',
+  ): Promise<GraphQLSchema>;
+  async loadSchema(
+    pointer: Pointer,
+    out?: SchemaOutput,
+  ): Promise<GraphQLSchema | DocumentNode | string> {
+    out = out || ('GraphQLSchema' as const);
+    const options = this.createOptions({});
+
+    if (out === 'GraphQLSchema' && !this._middlewares.length) {
+      return loadSchema(pointer, options);
     }
 
-    return this.buildSchemaFromSources(
+    const schemaDoc = this.transformSchemaSources(
       await loadTypedefs(pointer, {
         filterKinds: OPERATION_KINDS,
-        ...this.createOptions(options),
+        ...options,
       }),
     );
+
+    // TODO: TS screams about `out` not being compatible with SchemaOutput
+    return this.castSchema(schemaDoc, out as any);
   }
 
-  loadSchemaSync(pointer: Pointer, options?: Options): GraphQLSchema {
-    if (!this._middlewares.length) {
-      return loadSchemaSync(pointer, this.createOptions(options));
+  loadSchemaSync(pointer: Pointer): GraphQLSchema;
+  loadSchemaSync(pointer: Pointer, out: 'string'): GraphQLSchema;
+  loadSchemaSync(pointer: Pointer, out: 'DocumentNode'): DocumentNode;
+  loadSchemaSync(pointer: Pointer, out: 'GraphQLSchema'): GraphQLSchema;
+  loadSchemaSync(
+    pointer: Pointer,
+    out?: 'GraphQLSchema' | 'DocumentNode' | 'string',
+  ): GraphQLSchema | DocumentNode | string {
+    out = out || ('GraphQLSchema' as const);
+    const options = this.createOptions({});
+
+    if (out === 'GraphQLSchema' && !this._middlewares.length) {
+      return loadSchemaSync(pointer, options);
     }
 
-    return this.buildSchemaFromSources(
+    const schemaDoc = this.transformSchemaSources(
       loadTypedefsSync(pointer, {
         filterKinds: OPERATION_KINDS,
-        ...this.createOptions(options),
+        ...options,
       }),
     );
+
+    return this.castSchema(schemaDoc, out as any);
   }
 
   private createOptions<T extends object>(options?: T) {
@@ -93,10 +122,28 @@ export class LoadersRegistry {
     };
   }
 
-  private buildSchemaFromSources(sources: Source[]) {
-    const documents: DocumentNode[] = sources.map(source => source.document);
+  private transformSchemaSources(sources: Source[]) {
+    const documents: DocumentNode[] = sources.map((source) => source.document);
     const document = mergeTypeDefs(documents);
 
-    return buildASTSchema(useMiddleware(this._middlewares)(document));
+    return useMiddleware(this._middlewares)(document);
+  }
+
+  private castSchema(doc: DocumentNode, out: 'string'): string;
+  private castSchema(doc: DocumentNode, out: 'DocumentNode'): DocumentNode;
+  private castSchema(doc: DocumentNode, out: 'GraphQLSchema'): GraphQLSchema;
+  private castSchema(
+    doc: DocumentNode,
+    out: SchemaOutput,
+  ): string | DocumentNode | GraphQLSchema {
+    if (out === 'DocumentNode') {
+      return doc;
+    }
+
+    if (out === 'GraphQLSchema') {
+      return buildASTSchema(doc);
+    }
+
+    return print(doc);
   }
 }
