@@ -17,9 +17,30 @@ The main requirement of an extension is its name. Providing a name lets GraphQL 
 ```typescript
 import {GraphQLExtensionDeclaration} from 'graphql-config';
 
-const InspectorExtension: GraphQLExtensionDeclaration = api => {
+const InspectorExtension: GraphQLExtensionDeclaration = (api) => {
   return {
     name: 'inspector',
+  };
+};
+```
+
+### Schema Middlewares
+
+GraphQL Config lets you intercept the GraphQL Schema loading process which may be helpful when dealing with custom directives like in Relay or Apollo Federation. We call it Middlewares.
+
+```typescript
+import {GraphQLExtensionDeclaration} from 'graphql-config';
+
+const RelayExtension: GraphQLExtensionDeclaration = (api) => {
+  api.loaders.schema.use((document) => {
+    // The middleware receives a DocumentNode object
+    // Adds relay directives
+    // Returns a new DocumentNode
+    return addRelayToDocumentNode(document);
+  });
+
+  return {
+    name: 'relay',
   };
 };
 ```
@@ -34,7 +55,7 @@ import {InspectorExtension} from './extension';
 
 async function main() {
   const config = await loadConfig({
-    extensions: [InspectorExtension]
+    extensions: [InspectorExtension],
   });
 }
 ```
@@ -53,7 +74,7 @@ async function main() {
   const project = config.getDefault();
   // Reads configuration of a named project
   const project = config.getProject('admin');
-  
+
   // Reads extenion's configuration defined in a project
   const inspectorConfig = project.extension('inspector');
 
@@ -101,10 +122,10 @@ The [GraphQL Toolkit](https://github.com/ardatan/graphql-toolkit) library has [a
 For simplicity, we're going to use only [the one](https://github.com/ardatan/graphql-toolkit/tree/master/packages/loaders/code-file) responsible for extracting GraphQL SDL from code files.
 
 ```typescript
-import { CodeFileLoader } from '@graphql-toolkit/code-file-loader';
+import {CodeFileLoader} from '@graphql-toolkit/code-file-loader';
 
-const InspectorExtension: GraphQLExtensionDeclaration = api => {
-  // Lets schema 
+const InspectorExtension: GraphQLExtensionDeclaration = (api) => {
+  // Lets schema
   api.loaders.schema.register(new CodeFileLoader());
   // documents
   api.loaders.documents.register(new CodeFileLoader());
@@ -118,7 +139,7 @@ const InspectorExtension: GraphQLExtensionDeclaration = api => {
 Let's say you have GraphQL SDL modularized across multiple TypeScript files, written like this:
 
 ```typescript
-import { gql } from 'graphql-tag';
+import {gql} from 'graphql-tag';
 
 export const typeDefs = gql`
   type User {
