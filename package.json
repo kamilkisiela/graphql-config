@@ -1,6 +1,6 @@
 {
   "name": "graphql-config",
-  "version": "3.0.0-alpha.22",
+  "version": "3.0.0-rc.0",
   "description": "The easiest way to configure your development environment with your GraphQL schema (supported by most tools, editors & IDEs)",
   "sideEffects": false,
   "main": "dist/index.cjs.js",
