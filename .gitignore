@@ -7,3 +7,5 @@ public/
 *.map
 out.txt
 .now
+yarn.lock
+package-lock.json
