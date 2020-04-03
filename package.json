@@ -47,7 +47,7 @@
     "@graphql-toolkit/graphql-file-loader": "0.10.2",
     "@graphql-toolkit/json-file-loader": "0.10.2",
     "@graphql-toolkit/schema-merging": "0.10.2",
-    "@types/jest": "25.1.4",
+    "@types/jest": "25.1.5",
     "@types/nock": "11.1.0",
     "@types/node": "13.9.8",
     "@types/node-fetch": "2.5.5",
