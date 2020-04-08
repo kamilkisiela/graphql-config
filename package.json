@@ -9,6 +9,10 @@
   "typescript": {
     "definition": "dist/index.d.ts"
   },
+  "exports": {
+    "require": "dist/index.cjs.js",
+    "default": "dist/index.mjs"
+  },
   "scripts": {
     "prepublishOnly": "yarn build",
     "clean": "rimraf dist",
@@ -23,9 +27,6 @@
     "release": "npm publish dist",
     "release:canary": "yarn build && node ./scripts/canary.js && npm publish dist --tag canary"
   },
-  "files": [
-    "dist/*"
-  ],
   "peerDependencies": {
     "graphql": "^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0"
   },
@@ -75,12 +76,15 @@
     "relay",
     "apollo"
   ],
-  "author": "Kamil Kisiela <kamil.kisiela@gmail.com>",
+  "author": {
+    "email": "kamil.kisiela@gmail.com",
+    "name": "Kamil Kisiela",
+    "url": "https://github.com/kamilkisiela"
+  },
   "license": "MIT",
   "lint-staged": {
     "*.{ts,graphql}": [
-      "prettier --write",
-      "git add"
+      "prettier --write"
     ]
   },
   "engines": {
