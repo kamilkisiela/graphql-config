@@ -42,11 +42,11 @@
     "tslib": "^1.11.1"
   },
   "devDependencies": {
-    "@graphql-toolkit/common": "0.10.2",
-    "@graphql-toolkit/core": "0.10.2",
-    "@graphql-toolkit/graphql-file-loader": "0.10.2",
-    "@graphql-toolkit/json-file-loader": "0.10.2",
-    "@graphql-toolkit/schema-merging": "0.10.2",
+    "@graphql-toolkit/common": "0.10.3",
+    "@graphql-toolkit/core": "0.10.3",
+    "@graphql-toolkit/graphql-file-loader": "0.10.3",
+    "@graphql-toolkit/json-file-loader": "0.10.3",
+    "@graphql-toolkit/schema-merging": "0.10.3",
     "@types/jest": "25.2.1",
     "@types/nock": "11.1.0",
     "@types/node": "13.11.0",
