@@ -23,7 +23,6 @@
     "format": "prettier --write \"{src,test}/**/*.{ts,graphql}\"",
     "lint": "eslint \"{src,test}/**/*.ts\"",
     "test": "jest",
-    "precommit": "lint-staged",
     "release": "npm publish dist",
     "release:canary": "yarn build && node ./scripts/canary.js && npm publish dist --tag canary"
   },
@@ -83,9 +82,14 @@
   },
   "license": "MIT",
   "lint-staged": {
-    "*.{ts,graphql}": [
+    "{src,test}/**/*.{ts,graphql}": [
       "prettier --write"
     ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "engines": {
     "node": ">= 10.0.0"

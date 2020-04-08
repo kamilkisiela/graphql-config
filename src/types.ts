@@ -10,10 +10,13 @@ export interface IGraphQLProjects {
   projects: Record<string, IGraphQLProject | IGraphQLProjectLegacy>;
 }
 
-export type IGraphQLConfig = IGraphQLProject | IGraphQLProjects | IGraphQLProjectLegacy;
+export type IGraphQLConfig =
+  | IGraphQLProject
+  | IGraphQLProjects
+  | IGraphQLProjectLegacy;
 
 export interface IGraphQLProjectLegacy {
-  schemaPath: string
+  schemaPath: string;
   includes?: string[];
   excludes?: string[];
   extensions?: Record<string, any>;

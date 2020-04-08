@@ -150,7 +150,7 @@ export class GraphQLConfig {
     // Register Endpoints
     this.extensions.register(EndpointsExtension);
 
-    extensions.forEach(extension => {
+    extensions.forEach((extension) => {
       this.extensions.register(extension);
     });
 

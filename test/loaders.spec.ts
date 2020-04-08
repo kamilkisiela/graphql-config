@@ -49,7 +49,7 @@ describe('middlewares', () => {
       ],
     };
 
-    registry.use(doc => {
+    registry.use((doc) => {
       return {
         ...doc,
         definitions: [...doc.definitions, cacheDirective],
