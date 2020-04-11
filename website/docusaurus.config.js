@@ -11,6 +11,7 @@ module.exports = {
 
   themeConfig: {
     image: 'img/logo.png',
+    sidebarCollapsible: false,
     navbar: {
       title: 'GraphQL Config',
       logo: {
