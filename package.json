@@ -50,7 +50,7 @@
     "@types/jest": "25.2.1",
     "@types/nock": "11.1.0",
     "@types/node": "13.11.1",
-    "@types/node-fetch": "2.5.5",
+    "@types/node-fetch": "2.5.6",
     "@typescript-eslint/parser": "2.27.0",
     "bob-the-bundler": "1.0.0-rc.14",
     "del": "5.1.0",
