@@ -21,7 +21,7 @@
     "test": "jest",
     "release": "npm publish dist",
     "release:canary": "yarn build && node ./scripts/canary.js && npm publish dist --tag canary",
-    "json-schema": "typescript-json-schema './src/types.ts' 'IGraphQLConfig' --out 'config-schema.json' --ignoreErrors --required --titles && prettier --write config-schema.json"
+    "json-schema": "typescript-json-schema src/types.ts IGraphQLConfig --out config-schema.json --ignoreErrors --required --titles && prettier --write config-schema.json"
   },
   "peerDependencies": {
     "graphql": "^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0"
