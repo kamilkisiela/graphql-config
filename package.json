@@ -9,10 +9,6 @@
   "typescript": {
     "definition": "dist/index.d.ts"
   },
-  "exports": {
-    "require": "dist/index.cjs.js",
-    "default": "dist/index.mjs"
-  },
   "scripts": {
     "prepublishOnly": "yarn build",
     "clean": "rimraf dist",
