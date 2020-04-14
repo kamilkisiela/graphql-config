@@ -2,7 +2,7 @@
 
 ### vNEXT
 
-> Read the [Migration chapter](https:/graphql-config/migration)
+> Read the [Migration chapter](https://graphql-config/migration)
 
 - Support GraphQL v15
 - Support CommonJS and ES Modules
