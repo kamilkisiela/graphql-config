@@ -35,17 +35,22 @@ extensions:
 
 ### `.graphqlrc`, or `.graphqlrc.json`
 ```json
-{ "schema": "https://localhost:8000" }
+{
+  "schema": "https://localhost:8000"
+}
 ```
 
 ### `graphql.config.js` or `.graphqlrc.js`
 ```js
-module.exports = { schema: 'https://localhost:8000' }
+module.exports = {
+  schema: 'https://localhost:8000'
+};
 ```
 
 ### custom paths
 custom extension paths with `.mycustomrc.js` or `mycustom.config.js` using `loadConfig()` parameter [`configName`](load-config#configname)
 ```js
-module.exports = { schema: 'https://localhost:8000' }
-
+module.exports = {
+  schema: 'https://localhost:8000'
+};
 ```
