@@ -37,7 +37,6 @@
     "@graphql-toolkit/schema-merging": "~0.10.2",
     "@graphql-toolkit/url-loader": "~0.10.2",
     "cosmiconfig": "6.0.0",
-    "globby": "11.0.0",
     "minimatch": "3.0.4",
     "tslib": "^1.11.1"
   },
@@ -48,9 +47,7 @@
     "@graphql-toolkit/json-file-loader": "0.10.3",
     "@graphql-toolkit/schema-merging": "0.10.3",
     "@types/jest": "25.2.1",
-    "@types/nock": "11.1.0",
     "@types/node": "13.11.1",
-    "@types/node-fetch": "2.5.5",
     "@typescript-eslint/parser": "2.27.0",
     "bob-the-bundler": "1.0.0-rc.14",
     "del": "5.1.0",
@@ -60,15 +57,12 @@
     "jest": "25.3.0",
     "lint-staged": "10.1.2",
     "make-dir": "3.0.2",
-    "nock": "12.0.3",
     "parent-module": "2.0.0",
     "prettier": "2.0.4",
-    "read-pkg": "5.2.0",
     "rimraf": "3.0.2",
     "ts-jest": "25.3.1",
     "tslib": "1.11.1",
-    "typescript": "3.8.3",
-    "write-pkg": "4.0.0"
+    "typescript": "3.8.3"
   },
   "repository": {
     "type": "git",
