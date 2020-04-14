@@ -2,6 +2,8 @@
 
 ### vNEXT
 
+### v3.0.0
+
 > Read the [Migration chapter](https://graphql-config.com/migration)
 
 - Support GraphQL v15
