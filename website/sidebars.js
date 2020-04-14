@@ -14,5 +14,6 @@ module.exports = {
       'graphql-config',
       'graphql-project-config',
     ],
+    Recipes: ['migration'],
   },
 };

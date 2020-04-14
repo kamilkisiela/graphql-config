@@ -96,6 +96,9 @@ module.exports = {
     googleAnalytics: {
       trackingID: 'UA-125180910-4',
     },
+    prism: {
+      theme: require('prism-react-renderer/themes/dracula'),
+    },
   },
   scripts: [
     '/js/light-mode-by-default.js',
