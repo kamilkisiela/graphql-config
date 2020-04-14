@@ -12,7 +12,7 @@
   "scripts": {
     "prepublishOnly": "yarn build",
     "clean": "rimraf dist",
-    "prebuild": "yarn clean",
+    "prebuild": "yarn clean && yarn json-schema",
     "build": "bob build --single",
     "prepack": "bob prepack",
     "now-build": "(cd website && yarn && yarn build && mv build ../public)",
@@ -20,7 +20,8 @@
     "lint": "eslint \"{src,test}/**/*.ts\"",
     "test": "jest",
     "release": "npm publish dist",
-    "release:canary": "yarn build && node ./scripts/canary.js && npm publish dist --tag canary"
+    "release:canary": "yarn build && node ./scripts/canary.js && npm publish dist --tag canary",
+    "json-schema": "typescript-json-schema './src/types.ts' 'IGraphQLConfig' --out 'config-schema.json' --ignoreErrors --required --titles && prettier --write config-schema.json"
   },
   "peerDependencies": {
     "graphql": "^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0"
@@ -58,7 +59,8 @@
     "rimraf": "3.0.2",
     "ts-jest": "25.3.1",
     "tslib": "1.11.1",
-    "typescript": "3.8.3"
+    "typescript": "3.8.3",
+    "typescript-json-schema": "0.42.0"
   },
   "repository": {
     "type": "git",
@@ -77,6 +79,11 @@
     "url": "https://github.com/kamilkisiela"
   },
   "license": "MIT",
+  "buildOptions": {
+    "copy": [
+      "config-schema.json"
+    ]
+  },
   "lint-staged": {
     "{src,test}/**/*.{ts,graphql}": [
       "prettier --write"

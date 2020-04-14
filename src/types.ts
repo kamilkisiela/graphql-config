@@ -2,26 +2,45 @@ import {DocumentPointer, SchemaPointer} from '@graphql-toolkit/common';
 
 export type PointerWithConfiguration<T = any> = {[key: string]: T};
 
+/**
+ * Configuration of each used extension
+ */
 export interface IExtensions {
   [name: string]: any;
 }
 
+/**
+ * Multiple named projects
+ */
 export interface IGraphQLProjects {
-  projects: Record<string, IGraphQLProject | IGraphQLProjectLegacy>;
+  projects: {
+    [name: string]: IGraphQLProject | IGraphQLProjectLegacy;
+  };
 }
 
+/**
+ * Structure of GraphQL Config
+ */
 export type IGraphQLConfig =
   | IGraphQLProject
   | IGraphQLProjects
   | IGraphQLProjectLegacy;
 
+/**
+ * Legacy structure of GraphQL Config v2
+ */
 export interface IGraphQLProjectLegacy {
   schemaPath: string;
   includes?: string[];
   excludes?: string[];
-  extensions?: Record<string, any>;
+  extensions?: {
+    [name: string]: any;
+  };
 }
 
+/**
+ * GraphQL Project
+ */
 export interface IGraphQLProject {
   schema: SchemaPointer;
   documents?: DocumentPointer;
@@ -34,6 +53,3 @@ export interface GraphQLConfigResult {
   config: IGraphQLConfig;
   filepath: string;
 }
-
-// Kamil: somehow our build process doesn't emit `types.d.ts` file, this should force it...
-export function ɵ() {}
