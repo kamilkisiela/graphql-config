@@ -6,11 +6,16 @@
   "github": {
     "enabled": false
   },
-  "routes": [
+  "redirects": [
     {
-      "src": "/legacy",
-      "status": 301,
-      "headers": {"Location": "https://github.com/kamilkisiela/graphql-config/tree/legacy#graphql-config"}
+      "source": "/legacy",
+      "destination": "https://github.com/kamilkisiela/graphql-config/tree/legacy#graphql-config",
+      "statusCode": 301
+    },
+    {
+      "source": "/",
+      "destination": "/introduction",
+      "statusCode": 301 
     }
   ]
 }
