@@ -21,7 +21,7 @@ const legacySearchPlaces = [
 export function isLegacyConfig(filepath: string): boolean {
   filepath = filepath.toLowerCase();
 
-  return legacySearchPlaces.some(name => filepath.endsWith(name));
+  return legacySearchPlaces.some((name) => filepath.endsWith(name));
 }
 
 function replaceEnv(content: string) {
@@ -115,7 +115,7 @@ function prepareCosmiconfig(moduleName: string, {legacy}: {legacy: boolean}) {
   // We need to wrap loaders in order to access and transform file content (as string)
   // Cosmiconfig has transform option but at this point config is not a string but an object
   return {
-    searchPlaces: searchPlaces.map(place => place.replace('#', moduleName)),
+    searchPlaces: searchPlaces.map((place) => place.replace('#', moduleName)),
     loaders: {
       '.js': defaultLoaders['.js'],
       '.json': loadJson,
