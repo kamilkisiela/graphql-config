@@ -10,8 +10,8 @@ module.exports = {
   projectName: 'graphql-config',
 
   themeConfig: {
-    image: 'img/logo.png',
     sidebarCollapsible: false,
+    image: 'img/logo.png',
     navbar: {
       title: 'GraphQL Config',
       logo: {
