@@ -6,8 +6,18 @@
   --ifm-color-primary-light: #e84eb5;
   --ifm-color-primary-lighter: #ea5abb;
   --ifm-color-primary-lightest: #ef80ca;
+
+  --ifm-color-secondary: #bfc7d5;
+  --ifm-footer-link-hover-color: #fff;
 }
 
+a {
+  transition: all 0.2s ease 0s;
+}
+
+button {
+  --ifm-color-content: #fff;
+}
 
 /* Legacy Note */
 

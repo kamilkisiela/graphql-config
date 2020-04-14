@@ -34,7 +34,7 @@ module.exports = {
     },
     footer: {
       style: 'dark',
-      copyright: `Copyright © ${new Date().getFullYear()} The Guild`,
+      copyright: `Copyright © ${new Date().getFullYear()} The Guild. All rights reserved.`,
       links: [
         {
           title: 'Docs',
@@ -64,6 +64,10 @@ module.exports = {
               label: 'Mailing List',
               href: 'https://upscri.be/19qjhi',
             },
+            {
+              label: 'Community Meetings',
+              href: 'https://github.com/the-guild-org/community-meetings',
+            },
           ],
         },
         {
@@ -81,6 +85,10 @@ module.exports = {
               label: 'Twitter',
               href: 'https://twitter.com/kamilkisiela',
             },
+            {
+              label: 'LinkedIn',
+              href: 'https://www.linkedin.com/company/the-guild-software'
+            }
           ],
         },
       ],
@@ -102,8 +110,6 @@ module.exports = {
           routeBasePath: '/',
           include: ['**/*.md', '**/*.mdx'],
           sidebarPath: require.resolve('./sidebars.js'),
-          showLastUpdateAuthor: true,
-          showLastUpdateTime: true,
           editUrl:
             'https://github.com/kamilkisiela/graphql-config/edit/master/website/',
         },
