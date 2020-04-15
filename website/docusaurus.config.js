@@ -96,6 +96,11 @@ module.exports = {
     googleAnalytics: {
       trackingID: 'UA-125180910-4',
     },
+    algolia: {
+      apiKey: 'a7d2334b8294eeb236383af04d10d656',
+      indexName: 'graphql-config',
+      algoliaOptions: {},
+    },
     prism: {
       theme: require('prism-react-renderer/themes/dracula'),
     },
