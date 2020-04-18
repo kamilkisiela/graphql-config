@@ -61,7 +61,7 @@ In order to pass information to GraphQL Config's consumers (like IDE extensions,
 ```yaml
 schema: './schema/*.graphql'
 extensions:
-  graphql-codegen:
+  codegen:
     generates:
       ./src/types.ts:
         plugins:
