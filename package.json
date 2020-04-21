@@ -55,7 +55,7 @@
     "lint-staged": "10.1.7",
     "make-dir": "3.0.2",
     "parent-module": "2.0.0",
-    "prettier": "2.0.4",
+    "prettier": "2.0.5",
     "rimraf": "3.0.2",
     "ts-jest": "25.4.0",
     "tslib": "1.11.1",
