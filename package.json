@@ -53,7 +53,7 @@
     "husky": "4.2.5",
     "jest": "25.4.0",
     "lint-staged": "10.1.7",
-    "make-dir": "3.0.2",
+    "make-dir": "3.1.0",
     "parent-module": "2.0.0",
     "prettier": "2.0.4",
     "rimraf": "3.0.2",
