@@ -2,6 +2,10 @@
 
 ### vNEXT
 
+### v3.0.1
+
+- use GraphQL Toolkit v0.10.6
+
 ### v3.0.0
 
 > Read the [Migration chapter](https://graphql-config.com/migration)
