@@ -2,6 +2,8 @@
 
 ### vNEXT
 
+### v3.0.2
+
 - Fix missing types [#542](https://github.com/kamilkisiela/graphql-config/issues/542)
 
 ### v3.0.1
