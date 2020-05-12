@@ -2,6 +2,8 @@
 
 ### vNEXT
 
+- Fix missing types [#542](https://github.com/kamilkisiela/graphql-config/issues/542)
+
 ### v3.0.1
 
 - use GraphQL Toolkit v0.10.6
