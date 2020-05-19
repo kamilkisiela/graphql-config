@@ -39,7 +39,7 @@
   },
   "devDependencies": {
     "@types/jest": "25.2.1",
-    "@types/node": "13.13.4",
+    "@types/node": "13.13.8",
     "@typescript-eslint/parser": "2.33.0",
     "bob-the-bundler": "1.0.0-rc.14",
     "del": "5.1.0",
