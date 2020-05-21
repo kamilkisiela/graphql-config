@@ -4,7 +4,7 @@ import makeDir from 'make-dir';
 import parentModule from 'parent-module';
 import os from 'os';
 
-const fs = require.requireActual('fs');
+const fs = jest.requireActual('fs');
 
 function normalizeDirectorySlash(pathname: string): string {
   const normalizeCrossPlatform = pathname.replace(/\\/g, '/');

@@ -10,6 +10,6 @@ export {
   SchemaPointer,
   DocumentPointerSingle,
   DocumentPointer,
-} from '@graphql-toolkit/common';
+} from '@graphql-tools/utils';
 export * from './types';
 export * from './errors';

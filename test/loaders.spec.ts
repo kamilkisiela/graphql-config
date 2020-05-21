@@ -6,7 +6,7 @@ const schema = buildSchema(/* GraphQL */ `
   }
 `);
 
-jest.mock('@graphql-toolkit/core', () => {
+jest.mock('@graphql-tools/load', () => {
   return {
     loadTypedefsSync() {
       return [
