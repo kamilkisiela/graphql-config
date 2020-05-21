@@ -1,6 +1,6 @@
-import {GraphQLFileLoader} from '@graphql-toolkit/graphql-file-loader';
-import {UrlLoader} from '@graphql-toolkit/url-loader';
-import {JsonFileLoader} from '@graphql-toolkit/json-file-loader';
+import {GraphQLFileLoader} from '@graphql-tools/graphql-file-loader';
+import {UrlLoader} from '@graphql-tools/url-loader';
+import {JsonFileLoader} from '@graphql-tools/json-file-loader';
 import {LoadersRegistry} from './loaders';
 
 export type GraphQLExtensionDeclaration = (

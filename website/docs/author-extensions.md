@@ -117,12 +117,12 @@ In some cases, you may want to extend that behavior and teach GraphQL Config how
 
 It's now possible thanks to **loaders**.
 
-The [GraphQL Toolkit](https://github.com/ardatan/graphql-toolkit) library has [a few already written loaders](https://github.com/ardatan/graphql-toolkit/tree/master/packages/loaders) that GraphQL Config uses. We mentioned the default loaders, but the repo contains a few extra ones.
+The [GraphQL Tools](https://github.com/ardatan/graphql-tools) library has [a few already written loaders](https://github.com/ardatan/graphql-tools/tree/master/packages/loaders) that GraphQL Config uses. We mentioned the default loaders, but the repo contains a few extra ones.
 
-For simplicity, we're going to use only [the one](https://github.com/ardatan/graphql-toolkit/tree/master/packages/loaders/code-file) responsible for extracting GraphQL SDL from code files.
+For simplicity, we're going to use only [the one](https://github.com/ardatan/graphql-tools/tree/master/packages/loaders/code-file) responsible for extracting GraphQL SDL from code files.
 
 ```typescript
-import {CodeFileLoader} from '@graphql-toolkit/code-file-loader';
+import {CodeFileLoader} from '@graphql-tools/code-file-loader';
 
 const InspectorExtension: GraphQLExtensionDeclaration = (api) => {
   // Lets schema

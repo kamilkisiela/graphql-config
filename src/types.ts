@@ -1,4 +1,4 @@
-import {DocumentPointer, SchemaPointer} from '@graphql-toolkit/common';
+import {DocumentPointer, SchemaPointer} from '@graphql-tools/utils';
 
 export type PointerWithConfiguration<T = any> = {[key: string]: T};
 

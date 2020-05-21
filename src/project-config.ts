@@ -1,11 +1,11 @@
 import {GraphQLSchema, DocumentNode} from 'graphql';
 import {dirname, isAbsolute, relative, normalize} from 'path';
-import {Source} from '@graphql-toolkit/common';
+import {Source} from '@graphql-tools/utils';
+import {UnnormalizedTypeDefPointer} from '@graphql-tools/load';
 import minimatch from 'minimatch';
 import {ExtensionMissingError} from './errors';
 import {GraphQLExtensionsRegistry} from './extension';
 import {IExtensions, IGraphQLProject, IGraphQLProjectLegacy} from './types';
-import {UnnormalizedTypeDefPointer} from '@graphql-toolkit/core';
 import {isLegacyProjectConfig} from './helpers';
 import {SchemaOutput} from './loaders';
 
