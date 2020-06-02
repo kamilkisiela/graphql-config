@@ -107,7 +107,12 @@ module.exports = {
   },
   scripts: [
     '/js/light-mode-by-default.js',
-    '/js/legacy.js'
+    '/js/legacy.js',
+    {
+      src: 'https://the-guild.dev/static/banner.js',
+      async: true,
+      defer: true,
+    },
   ],
   presets: [
     [
