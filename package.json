@@ -55,7 +55,7 @@
     "rimraf": "3.0.2",
     "ts-jest": "26.0.0",
     "tslib": "2.0.0",
-    "typescript": "3.9.3",
+    "typescript": "3.9.5",
     "typescript-json-schema": "0.42.0"
   },
   "repository": {
