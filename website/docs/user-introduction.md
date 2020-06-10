@@ -47,10 +47,17 @@ module.exports = {
 };
 ```
 
-### custom paths
+### Custom paths
 custom extension paths with `.mycustomrc.js` or `mycustom.config.js` using `loadConfig()` parameter [`configName`](load-config#configname)
 ```js
 module.exports = {
   schema: 'https://localhost:8000'
 };
 ```
+
+### Lookup Order
+We are using `cosmiconfig` to load the schema, and it uses the following flow to look for configurations:
+1. a `package.json` property
+2. a JSON or YAML, extensionless "rc file"
+3. an "rc file" with the extensions .json, .yaml, .yml, or .js.
+4. a `.config.js` CommonJS module
