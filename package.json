@@ -45,7 +45,7 @@
     "bob-the-bundler": "1.0.2",
     "del": "5.1.0",
     "eslint": "7.5.0",
-    "graphql": "15.1.0",
+    "graphql": "15.3.0",
     "husky": "4.2.5",
     "jest": "26.0.1",
     "lint-staged": "10.2.11",
