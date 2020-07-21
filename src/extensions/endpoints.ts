@@ -1,6 +1,6 @@
 import {GraphQLExtensionDeclaration} from '../extension';
 
-interface Endpoint {
+export interface Endpoint {
   url: string;
   headers?: {
     [name: string]: string | string[];
