@@ -1,4 +1,10 @@
 import {parse, DirectiveDefinitionNode, buildSchema} from 'graphql';
+import {Loader, Source} from '@graphql-tools/utils';
+import {
+  loadTypedefsSync,
+  loadSchemaSync,
+  loadSchema,
+} from '@graphql-tools/load';
 
 const schema = buildSchema(/* GraphQL */ `
   type Query {
@@ -8,7 +14,7 @@ const schema = buildSchema(/* GraphQL */ `
 
 jest.mock('@graphql-tools/load', () => {
   return {
-    loadTypedefsSync() {
+    loadTypedefsSync: jest.fn(() => {
       return [
         {
           document: parse(/* GraphQL */ `
@@ -18,13 +24,13 @@ jest.mock('@graphql-tools/load', () => {
           `),
         },
       ];
-    },
-    loadSchemaSync() {
+    }),
+    loadSchemaSync: jest.fn(() => {
       return schema;
-    },
-    async loadSchema() {
+    }),
+    loadSchema: jest.fn(async () => {
       return schema;
-    },
+    }),
   };
 });
 
@@ -69,5 +75,54 @@ describe('middlewares', () => {
 
     expect(received).toBe(schema);
     expect(receivedAsync).toBe(schema);
+  });
+});
+
+describe('override', () => {
+  beforeAll(() => {
+    (loadTypedefsSync as any).mockImplementation(
+      jest.requireActual('@graphql-tools/load').loadTypedefsSync,
+    );
+    (loadSchemaSync as any).mockImplementation(
+      jest.requireActual('@graphql-tools/load').loadSchemaSync,
+    );
+    (loadSchema as any).mockImplementation(
+      jest.requireActual('@graphql-tools/load').loadSchema,
+    );
+  });
+
+  test('overrides default loaders', async () => {
+    const registry = new LoadersRegistry({cwd: __dirname});
+    const differentSchema = buildSchema(/* GraphQL */ `
+      type Query {
+        bar: String
+      }
+    `);
+
+    class CustomLoader implements Loader {
+      loaderId(): string {
+        return 'custom';
+      }
+      async canLoad(): Promise<boolean> {
+        return true;
+      }
+      canLoadSync(): boolean {
+        return true;
+      }
+      async load(): Promise<Source> {
+        return {schema: differentSchema};
+      }
+      loadSync(): Source {
+        return {schema: differentSchema};
+      }
+    }
+
+    registry.override([new CustomLoader()]);
+
+    const received = registry.loadSchemaSync('anything');
+    const receivedAsync = await registry.loadSchema('anything');
+
+    expect(received.getQueryType().getFields()['bar']).toBeDefined();
+    expect(receivedAsync.getQueryType().getFields()['bar']).toBeDefined();
   });
 });
