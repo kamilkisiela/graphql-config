@@ -33,6 +33,10 @@ export class LoadersRegistry {
     }
   }
 
+  override(loaders: Loader[]): void {
+    this._loaders = loaders;
+  }
+
   use(middleware: MiddlewareFn<DocumentNode>): void {
     this._middlewares.push(middleware);
   }
