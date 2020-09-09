@@ -6,14 +6,16 @@ import {ExtensionMissingError} from './errors';
 import {GraphQLExtensionsRegistry} from './extension';
 import {IExtensions, IGraphQLProject, IGraphQLProjectLegacy} from './types';
 import {
-  LoadSchemaOptions,
-  LoadTypedefsOptions,
+  LoadSchemaOptions as ToolsLoadSchemaOptions,
+  LoadTypedefsOptions as ToolsLoadTypedefsOptions,
   UnnormalizedTypeDefPointer,
 } from '@graphql-tools/load';
 import {isLegacyProjectConfig} from './helpers';
 import {SchemaOutput} from './loaders';
 
 type Pointer = UnnormalizedTypeDefPointer | UnnormalizedTypeDefPointer[];
+type LoadTypedefsOptions = Partial<ToolsLoadTypedefsOptions>;
+type LoadSchemaOptions = Partial<ToolsLoadSchemaOptions>;
 
 export class GraphQLProjectConfig {
   readonly schema: Pointer;
