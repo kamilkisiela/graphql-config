@@ -5,7 +5,11 @@ import minimatch from 'minimatch';
 import {ExtensionMissingError} from './errors';
 import {GraphQLExtensionsRegistry} from './extension';
 import {IExtensions, IGraphQLProject, IGraphQLProjectLegacy} from './types';
-import {UnnormalizedTypeDefPointer} from '@graphql-tools/load';
+import {
+  LoadSchemaOptions,
+  LoadTypedefsOptions,
+  UnnormalizedTypeDefPointer,
+} from '@graphql-tools/load';
 import {isLegacyProjectConfig} from './helpers';
 import {SchemaOutput} from './loaders';
 
@@ -134,56 +138,85 @@ export class GraphQLProjectConfig {
   // Load Schema
 
   async loadSchema(pointer: Pointer): Promise<GraphQLSchema>;
-  async loadSchema(pointer: Pointer, out: 'string'): Promise<GraphQLSchema>;
+  async loadSchema(
+    pointer: Pointer,
+    out: 'string',
+    options?: LoadSchemaOptions,
+  ): Promise<GraphQLSchema>;
   async loadSchema(
     pointer: Pointer,
     out: 'DocumentNode',
+    options?: LoadSchemaOptions,
   ): Promise<DocumentNode>;
   async loadSchema(
     pointer: Pointer,
     out: 'GraphQLSchema',
+    options?: LoadSchemaOptions,
   ): Promise<GraphQLSchema>;
   async loadSchema(
     pointer: Pointer,
     out?: SchemaOutput,
+    options?: LoadSchemaOptions,
   ): Promise<GraphQLSchema | DocumentNode | string> {
     return this._extensionsRegistry.loaders.schema.loadSchema(
       pointer,
       out as any,
+      options,
     );
   }
 
   loadSchemaSync(pointer: Pointer): GraphQLSchema;
-  loadSchemaSync(pointer: Pointer, out: 'string'): GraphQLSchema;
-  loadSchemaSync(pointer: Pointer, out: 'DocumentNode'): DocumentNode;
-  loadSchemaSync(pointer: Pointer, out: 'GraphQLSchema'): GraphQLSchema;
+  loadSchemaSync(
+    pointer: Pointer,
+    out: 'string',
+    options?: LoadSchemaOptions,
+  ): GraphQLSchema;
+  loadSchemaSync(
+    pointer: Pointer,
+    out: 'DocumentNode',
+    options?: LoadSchemaOptions,
+  ): DocumentNode;
+  loadSchemaSync(
+    pointer: Pointer,
+    out: 'GraphQLSchema',
+    options?: LoadSchemaOptions,
+  ): GraphQLSchema;
   loadSchemaSync(
     pointer: Pointer,
     out?: SchemaOutput,
+    options?: LoadSchemaOptions,
   ): GraphQLSchema | DocumentNode | string {
     return this._extensionsRegistry.loaders.schema.loadSchemaSync(
       pointer,
       out as any,
+      options,
     );
   }
 
   // Load Documents
 
-  async loadDocuments(pointer: Pointer): Promise<Source[]> {
+  async loadDocuments(
+    pointer: Pointer,
+    options?: LoadTypedefsOptions,
+  ): Promise<Source[]> {
     if (!pointer) {
       return [];
     }
 
-    return this._extensionsRegistry.loaders.documents.loadDocuments(pointer);
+    return this._extensionsRegistry.loaders.documents.loadDocuments(
+      pointer,
+      options,
+    );
   }
 
-  loadDocumentsSync(pointer: Pointer): Source[] {
+  loadDocumentsSync(pointer: Pointer, options?: LoadTypedefsOptions): Source[] {
     if (!pointer) {
       return [];
     }
 
     return this._extensionsRegistry.loaders.documents.loadDocumentsSync(
       pointer,
+      options,
     );
   }
 
