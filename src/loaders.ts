@@ -7,7 +7,8 @@ import {
   loadDocuments,
   loadDocumentsSync,
   UnnormalizedTypeDefPointer,
-  LoadTypedefsOptions,
+  LoadTypedefsOptions as ToolsLoadTypedefsOptions,
+  LoadSchemaOptions as ToolsLoadSchemaOptions,
   OPERATION_KINDS,
 } from '@graphql-tools/load';
 import {mergeTypeDefs} from '@graphql-tools/merge';
@@ -15,7 +16,8 @@ import {GraphQLSchema, DocumentNode, buildASTSchema, print} from 'graphql';
 import {MiddlewareFn, useMiddleware} from './helpers/utils';
 
 type Pointer = UnnormalizedTypeDefPointer | UnnormalizedTypeDefPointer[];
-type Options = Partial<LoadTypedefsOptions>;
+type LoadTypedefsOptions = Partial<ToolsLoadTypedefsOptions>;
+type LoadSchemaOptions = Partial<ToolsLoadSchemaOptions>;
 export type SchemaOutput = 'GraphQLSchema' | 'DocumentNode' | 'string';
 
 export class LoadersRegistry {
@@ -41,7 +43,10 @@ export class LoadersRegistry {
     this._middlewares.push(middleware);
   }
 
-  async loadTypeDefs(pointer: Pointer, options?: Options): Promise<Source[]> {
+  async loadTypeDefs(
+    pointer: Pointer,
+    options?: LoadTypedefsOptions,
+  ): Promise<Source[]> {
     return loadTypedefs(pointer, {
       loaders: this._loaders,
       cwd: this.cwd,
@@ -49,43 +54,53 @@ export class LoadersRegistry {
     });
   }
 
-  loadTypeDefsSync(pointer: Pointer, options?: Options): Source[] {
+  loadTypeDefsSync(pointer: Pointer, options?: LoadTypedefsOptions): Source[] {
     return loadTypedefsSync(pointer, this.createOptions(options));
   }
 
-  async loadDocuments(pointer: Pointer, options?: Options): Promise<Source[]> {
+  async loadDocuments(
+    pointer: Pointer,
+    options?: LoadTypedefsOptions,
+  ): Promise<Source[]> {
     return loadDocuments(pointer, this.createOptions(options));
   }
 
-  loadDocumentsSync(pointer: Pointer, options?: Options): Source[] {
+  loadDocumentsSync(pointer: Pointer, options?: LoadTypedefsOptions): Source[] {
     return loadDocumentsSync(pointer, this.createOptions(options));
   }
 
   async loadSchema(pointer: Pointer): Promise<GraphQLSchema>;
-  async loadSchema(pointer: Pointer, out: 'string'): Promise<GraphQLSchema>;
+  async loadSchema(
+    pointer: Pointer,
+    out: 'string',
+    options?: LoadSchemaOptions,
+  ): Promise<GraphQLSchema>;
   async loadSchema(
     pointer: Pointer,
     out: 'DocumentNode',
+    options?: LoadSchemaOptions,
   ): Promise<DocumentNode>;
   async loadSchema(
     pointer: Pointer,
     out: 'GraphQLSchema',
+    options?: LoadSchemaOptions,
   ): Promise<GraphQLSchema>;
   async loadSchema(
     pointer: Pointer,
     out?: SchemaOutput,
+    options?: LoadSchemaOptions,
   ): Promise<GraphQLSchema | DocumentNode | string> {
     out = out || ('GraphQLSchema' as const);
-    const options = this.createOptions({});
+    const loadSchemaOptions = this.createOptions(options);
 
     if (out === 'GraphQLSchema' && !this._middlewares.length) {
-      return loadSchema(pointer, options);
+      return loadSchema(pointer, loadSchemaOptions);
     }
 
     const schemaDoc = this.transformSchemaSources(
       await loadTypedefs(pointer, {
         filterKinds: OPERATION_KINDS,
-        ...options,
+        ...loadSchemaOptions,
       }),
     );
 
@@ -94,24 +109,37 @@ export class LoadersRegistry {
   }
 
   loadSchemaSync(pointer: Pointer): GraphQLSchema;
-  loadSchemaSync(pointer: Pointer, out: 'string'): GraphQLSchema;
-  loadSchemaSync(pointer: Pointer, out: 'DocumentNode'): DocumentNode;
-  loadSchemaSync(pointer: Pointer, out: 'GraphQLSchema'): GraphQLSchema;
+  loadSchemaSync(
+    pointer: Pointer,
+    out: 'string',
+    options?: LoadSchemaOptions,
+  ): GraphQLSchema;
+  loadSchemaSync(
+    pointer: Pointer,
+    out: 'DocumentNode',
+    options?: LoadSchemaOptions,
+  ): DocumentNode;
+  loadSchemaSync(
+    pointer: Pointer,
+    out: 'GraphQLSchema',
+    options?: LoadSchemaOptions,
+  ): GraphQLSchema;
   loadSchemaSync(
     pointer: Pointer,
     out?: 'GraphQLSchema' | 'DocumentNode' | 'string',
+    options?: LoadSchemaOptions,
   ): GraphQLSchema | DocumentNode | string {
     out = out || ('GraphQLSchema' as const);
-    const options = this.createOptions({});
+    const loadSchemaOptions = this.createOptions(options);
 
     if (out === 'GraphQLSchema' && !this._middlewares.length) {
-      return loadSchemaSync(pointer, options);
+      return loadSchemaSync(pointer, loadSchemaOptions);
     }
 
     const schemaDoc = this.transformSchemaSources(
       loadTypedefsSync(pointer, {
         filterKinds: OPERATION_KINDS,
-        ...options,
+        ...loadSchemaOptions,
       }),
     );
 
