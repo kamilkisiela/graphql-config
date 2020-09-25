@@ -47,6 +47,13 @@ module.exports = {
 };
 ```
 
+### `graphql.config.ts` or `.graphqlrc.ts`
+```js
+export default {
+  schema: 'https://localhost:8000'
+};
+```
+
 ### Custom paths
 custom extension paths with `.mycustomrc.js` or `mycustom.config.js` using `loadConfig()` parameter [`configName`](load-config#configname)
 ```js
@@ -59,5 +66,5 @@ module.exports = {
 We are using `cosmiconfig` to load the schema, and it uses the following flow to look for configurations:
 1. a `package.json` property
 2. a JSON or YAML, extensionless "rc file"
-3. an "rc file" with the extensions .json, .yaml, .yml, or .js.
-4. a `.config.js` CommonJS module
+3. an "rc file" with the extensions .json, .yaml, .yml, .ts or .js.
+4. a `.config.js` CommonJS module, or a `.config.ts` Typescript module using [`cosmiconfig-typescript-loader`](https://github.com/EndemolShineGroup/cosmiconfig-typescript-loader)

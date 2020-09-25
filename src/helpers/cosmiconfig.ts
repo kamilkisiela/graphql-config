@@ -4,6 +4,7 @@ import {
   Loader,
   defaultLoaders,
 } from 'cosmiconfig';
+import tsLoader from '@endemolshinegroup/cosmiconfig-typescript-loader';
 import {env} from 'string-env-interpolation';
 
 export interface ConfigSearchResult {
@@ -66,11 +67,13 @@ function prepareCosmiconfig(moduleName: string, {legacy}: {legacy: boolean}) {
   const loadJson = createCustomLoader(defaultLoaders['.json']);
 
   const searchPlaces = [
+    `#.config.ts`,
     `#.config.js`,
     '#.config.json',
     '#.config.yaml',
     '#.config.yml',
     '.#rc',
+    '.#rc.ts',
     '.#rc.js',
     '.#rc.json',
     '.#rc.yml',
@@ -86,6 +89,7 @@ function prepareCosmiconfig(moduleName: string, {legacy}: {legacy: boolean}) {
   return {
     searchPlaces: searchPlaces.map((place) => place.replace('#', moduleName)),
     loaders: {
+      '.ts': tsLoader,
       '.js': defaultLoaders['.js'],
       '.json': loadJson,
       '.yaml': loadYaml,

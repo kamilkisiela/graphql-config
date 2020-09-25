@@ -8,6 +8,7 @@ sidebar_label: Usage
 
 - `graphql.config.json`
 - `graphql.config.js`
+- `graphql.config.ts`
 - `graphql.config.yaml`
 - `graphql.config.yml`
 
@@ -16,6 +17,7 @@ sidebar_label: Usage
 - `.graphqlrc.yaml`
 - `.graphqlrc.yml`
 - `.graphqlrc.js`
+- `.graphqlrc.ts`
 
 - `graphql` property in `package.json`
 
