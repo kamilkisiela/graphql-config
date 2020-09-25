@@ -9,11 +9,14 @@ sidebar_label: Usage
 - `graphql.config.json`
 - `graphql.config.js`
 - `graphql.config.ts`
+- `graphql.config.toml`
 - `graphql.config.yaml`
 - `graphql.config.yml`
 
+
 - `.graphqlrc` _(YAML and JSON)_
 - `.graphqlrc.json`
+- `.graphqlrc.toml`
 - `.graphqlrc.yaml`
 - `.graphqlrc.yml`
 - `.graphqlrc.js`

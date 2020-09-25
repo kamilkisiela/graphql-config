@@ -4,7 +4,8 @@ import {
   Loader,
   defaultLoaders,
 } from 'cosmiconfig';
-import tsLoader from '@endemolshinegroup/cosmiconfig-typescript-loader';
+import loadTs from '@endemolshinegroup/cosmiconfig-typescript-loader';
+import {loadToml} from 'cosmiconfig-toml-loader';
 import {env} from 'string-env-interpolation';
 
 export interface ConfigSearchResult {
@@ -64,6 +65,7 @@ export function createCosmiConfigSync(
 
 function prepareCosmiconfig(moduleName: string, {legacy}: {legacy: boolean}) {
   const loadYaml = createCustomLoader(defaultLoaders['.yaml']);
+  const loadTomlCustom = createCustomLoader(loadToml);
   const loadJson = createCustomLoader(defaultLoaders['.json']);
 
   const searchPlaces = [
@@ -72,12 +74,14 @@ function prepareCosmiconfig(moduleName: string, {legacy}: {legacy: boolean}) {
     '#.config.json',
     '#.config.yaml',
     '#.config.yml',
+    '#.config.toml',
     '.#rc',
     '.#rc.ts',
     '.#rc.js',
     '.#rc.json',
     '.#rc.yml',
     '.#rc.yaml',
+    '.#rc.toml',
   ];
 
   if (legacy) {
@@ -89,11 +93,12 @@ function prepareCosmiconfig(moduleName: string, {legacy}: {legacy: boolean}) {
   return {
     searchPlaces: searchPlaces.map((place) => place.replace('#', moduleName)),
     loaders: {
-      '.ts': tsLoader,
+      '.ts': loadTs,
       '.js': defaultLoaders['.js'],
       '.json': loadJson,
       '.yaml': loadYaml,
       '.yml': loadYaml,
+      '.toml': loadTomlCustom,
       noExt: loadYaml,
     },
   };
