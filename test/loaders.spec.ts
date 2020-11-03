@@ -1,9 +1,15 @@
-import {parse, DirectiveDefinitionNode, buildSchema} from 'graphql';
+import {
+  parse,
+  DirectiveDefinitionNode,
+  buildSchema,
+  GraphQLSchema,
+} from 'graphql';
 import {Loader, Source} from '@graphql-tools/utils';
 import {
   loadTypedefsSync,
   loadSchemaSync,
   loadSchema,
+  LoadSchemaOptions,
 } from '@graphql-tools/load';
 
 const schema = buildSchema(/* GraphQL */ `
@@ -12,16 +18,25 @@ const schema = buildSchema(/* GraphQL */ `
   }
 `);
 
+const document = parse(/* GraphQL */ `
+  type Query {
+    foo: String @cache
+  }
+`);
+
 jest.mock('@graphql-tools/load', () => {
   return {
+    loadTypedefs: jest.fn(() => {
+      return [
+        {
+          document,
+        },
+      ];
+    }),
     loadTypedefsSync: jest.fn(() => {
       return [
         {
-          document: parse(/* GraphQL */ `
-            type Query {
-              foo: String @cache
-            }
-          `),
+          document,
         },
       ];
     }),
@@ -78,6 +93,34 @@ describe('middlewares', () => {
   });
 });
 
+class CustomLoader implements Loader {
+  private schema: GraphQLSchema;
+  constructor(schema) {
+    this.schema = schema;
+  }
+  loaderId(): string {
+    return 'custom';
+  }
+  async canLoad(): Promise<boolean> {
+    return true;
+  }
+  canLoadSync(): boolean {
+    return true;
+  }
+  async load(__dirname: String): Promise<Source> {
+    return {schema: this.schema};
+  }
+  loadSync(): Source {
+    return {schema: this.schema};
+  }
+}
+
+const differentSchema = buildSchema(/* GraphQL */ `
+  type Query {
+    bar: String
+  }
+`);
+
 describe('override', () => {
   beforeAll(() => {
     (loadTypedefsSync as any).mockImplementation(
@@ -93,36 +136,39 @@ describe('override', () => {
 
   test('overrides default loaders', async () => {
     const registry = new LoadersRegistry({cwd: __dirname});
-    const differentSchema = buildSchema(/* GraphQL */ `
-      type Query {
-        bar: String
-      }
-    `);
 
-    class CustomLoader implements Loader {
-      loaderId(): string {
-        return 'custom';
-      }
-      async canLoad(): Promise<boolean> {
-        return true;
-      }
-      canLoadSync(): boolean {
-        return true;
-      }
-      async load(): Promise<Source> {
-        return {schema: differentSchema};
-      }
-      loadSync(): Source {
-        return {schema: differentSchema};
-      }
-    }
-
-    registry.override([new CustomLoader()]);
+    registry.override([new CustomLoader(differentSchema)]);
 
     const received = registry.loadSchemaSync('anything');
     const receivedAsync = await registry.loadSchema('anything');
 
     expect(received.getQueryType().getFields()['bar']).toBeDefined();
     expect(receivedAsync.getQueryType().getFields()['bar']).toBeDefined();
+  });
+
+  test('allows custom loader options', async () => {
+    const registry = new LoadersRegistry({cwd: __dirname});
+    const customOptions = {assumeValidSDL: true} as Partial<LoadSchemaOptions>;
+    const customLoader = new CustomLoader(differentSchema);
+    const expectedOptions = {
+      ...customOptions,
+      cwd: __dirname,
+      loaders: [customLoader],
+    };
+
+    registry.override([customLoader]);
+
+    const received = registry.loadSchemaSync('anything', null, customOptions);
+    const receivedAsync = await registry.loadSchema(
+      'anything',
+      null,
+      customOptions,
+    );
+
+    expect(received.getQueryType().getFields()['bar']).toBeDefined();
+    expect(receivedAsync.getQueryType().getFields()['bar']).toBeDefined();
+    expect(loadSchema).toBeCalledWith('anything', expectedOptions);
+
+    expect(loadSchemaSync).toBeCalledWith('anything', expectedOptions);
   });
 });
