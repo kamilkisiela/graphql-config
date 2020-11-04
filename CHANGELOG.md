@@ -2,6 +2,11 @@
 
 ### vNEXT
 
+### v3.1.0
+
+- TOML and TypeScript loaders [#595](https://github.com/kamilkisiela/graphql-config/pull/595) by [@acao](https://github.com/acao)
+- Add ability to override default loaders [#583](https://github.com/kamilkisiela/graphql-config/pull/583) by [@danielrearden](https://github.com/danielrearden)
+
 ### v3.0.2
 
 - Fix missing types [#542](https://github.com/kamilkisiela/graphql-config/issues/542)
