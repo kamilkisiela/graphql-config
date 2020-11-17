@@ -2,6 +2,10 @@
 
 ### vNEXT
 
+### v3.2.0
+
+- Allow custom options for loadSchema [#593](https://github.com/kamilkisiela/graphql-config/pull/593)
+
 ### v3.1.0
 
 - TOML and TypeScript loaders [#595](https://github.com/kamilkisiela/graphql-config/pull/595) by [@acao](https://github.com/acao)
