@@ -18,10 +18,10 @@ module.exports = {
         alt: 'GraphQL Config Logo',
         src: 'img/logo.png',
       },
-      links: [
+      items: [
         {
           to: '/introduction',
-          activeBasePath: '',
+          // activeBasePath: '',
           label: 'Documentation',
           position: 'right',
         },
@@ -97,8 +97,9 @@ module.exports = {
       trackingID: 'UA-125180910-4',
     },
     algolia: {
-      apiKey: 'a7d2334b8294eeb236383af04d10d656',
-      indexName: 'graphql-config',
+      appId: 'ANRJKXZTRW',
+      apiKey: '811d453fc7f80306044dd5cc4b87e064',
+      indexName: 'theguild',
       algoliaOptions: {},
     },
     prism: {
