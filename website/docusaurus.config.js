@@ -86,8 +86,8 @@ module.exports = {
             },
             {
               label: 'LinkedIn',
-              href: 'https://www.linkedin.com/company/the-guild-software'
-            }
+              href: 'https://www.linkedin.com/company/the-guild-software',
+            },
           ],
         },
       ],
@@ -137,4 +137,6 @@ module.exports = {
       },
     ],
   ],
+  onBrokenLinks: 'warn',
+  onBrokenMarkdownLinks: 'warn',
 };
