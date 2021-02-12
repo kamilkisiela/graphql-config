@@ -63,3 +63,14 @@ If you want to define a fallback endpoint you may wrap your value with quotation
 ```yaml
 schema: ${SCHEMA_ENDPOINT:"http://localhost:4000/graphql"}
 ```
+
+### Passing headers
+If you need to pass headers in the schema request you can do it this way:
+
+```yaml
+schema:
+  - http://localhost:4000/graphql:
+      headers:
+        Authorization: Token
+```
+> Pay special attention to the indentation of the headers block.
