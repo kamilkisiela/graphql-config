@@ -28,3 +28,10 @@ jobs:
           now-args: '--prod'
           now-project-id: ${{ secrets.ZEIT_PROJECT }}
           now-org-id: ${{ secrets.ZEIT_ORG }}
+
+      - name: Index Docs
+        uses: darrenjennings/algolia-docsearch-action@master
+        with:
+          algolia_api_key: ${{ secrets.ALGOLIA_API_KEY }}
+          algolia_application_id: ${{ secrets.ALGOLIA_APPLICATION_ID }}
+          file: algolia/config.json

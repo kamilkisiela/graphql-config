@@ -3,11 +3,13 @@
     "start": "docusaurus start",
     "build": "docusaurus build",
     "swizzle": "docusaurus swizzle",
-    "deploy": "docusaurus deploy"
+    "deploy": "docusaurus deploy",
+    "postinstall": "patch-package"
   },
   "dependencies": {
     "@docusaurus/core": "2.0.0-alpha.66",
     "@docusaurus/preset-classic": "2.0.0-alpha.65",
+    "patch-package": "6.2.2",
     "react": "16.13.1",
     "react-dom": "16.13.1"
   },
@@ -22,5 +24,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "devDependencies": {}
 }
