@@ -17,12 +17,8 @@ jobs:
         uses: actions/setup-node@master
         with:
           node-version: 14
-      - name: Install Dependencies
-        run: yarn install
-      - name: Build Plugins
-        run: yarn build
       - name: Build Website
-        run: cd website && yarn build:website
+        run: cd website && yarn && yarn build
       - name: Deploy Website 🚀
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
