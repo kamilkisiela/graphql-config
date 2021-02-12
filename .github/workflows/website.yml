@@ -21,7 +21,7 @@ jobs:
         with:
           node-version: 13
 
-      - name: ZEIT Now Deployment
+      - name: Vercel Deployment
         uses: amondnet/vercel-action@v20.0.0
         with:
           vercel-token: ${{ secrets.NOW_TOKEN }}
