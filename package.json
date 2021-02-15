@@ -58,7 +58,7 @@
     "ts-jest": "26.4.4",
     "tslib": "2.1.0",
     "typescript": "3.9.7",
-    "typescript-json-schema": "0.43.0"
+    "typescript-json-schema": "0.49.0"
   },
   "repository": {
     "type": "git",
