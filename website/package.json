@@ -1,7 +1,7 @@
 {
   "scripts": {
     "start": "docusaurus start",
-    "build": "docusaurus build",
+    "build": "docusaurus build && node scripts/redirects",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "postinstall": "patch-package"

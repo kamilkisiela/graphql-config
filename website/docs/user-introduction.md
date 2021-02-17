@@ -64,7 +64,7 @@ export default config;
 ```
 
 ### Custom paths
-custom extension paths with `.mycustomrc.js`, `mycustom.config.yml`, etcetera - any filename listed in [usage docs]('./user-usage') with `graphql` replaced by the `loadConfig()` parameter [`configName`](load-config#configname)
+custom extension paths with `.mycustomrc.js`, `mycustom.config.yml`, etcetera - any filename listed in [usage docs](usage) with `graphql` replaced by the `loadConfig()` parameter [`configName`](load-config#configname)
 
 
 ```js

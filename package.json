@@ -15,7 +15,6 @@
     "prebuild": "yarn clean && yarn json-schema",
     "build": "bob build --single",
     "prepack": "bob prepack",
-    "now-build": "(cd website && yarn && yarn build && mv build ../public)",
     "format": "prettier --write \"{src,test}/**/*.{ts,graphql}\"",
     "lint": "eslint \"{src,test}/**/*.ts\"",
     "test": "jest",
