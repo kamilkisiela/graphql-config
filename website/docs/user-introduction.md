@@ -54,9 +54,9 @@ module.exports = {
 
 ### `graphql.config.ts` or `.graphqlrc.ts`
 ```js
-import type { GraphQLConfig } from 'graphql-config'
+import type { IGraphQLConfig } from 'graphql-config'
 
-const config: GraphQLConfig = {
+const config: IGraphQLConfig = {
   schema: 'https://localhost:8000'
 }
 
