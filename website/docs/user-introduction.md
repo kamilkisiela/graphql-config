@@ -54,9 +54,9 @@ module.exports = {
 
 ### `graphql.config.ts` or `.graphqlrc.ts`
 ```js
-import type { GraphQLConfig } from 'graphql-config'
+import type { IGraphQLConfig } from 'graphql-config'
 
-const config: GraphQLConfig = {
+const config: IGraphQLConfig = {
   schema: 'https://localhost:8000'
 }
 
@@ -64,7 +64,7 @@ export default config;
 ```
 
 ### Custom paths
-custom extension paths with `.mycustomrc.js`, `mycustom.config.yml`, etcetera - any filename listed in [usage docs]('./user-usage') with `graphql` replaced by the `loadConfig()` parameter [`configName`](load-config#configname)
+custom extension paths with `.mycustomrc.js`, `mycustom.config.yml`, etcetera - any filename listed in [usage docs](usage) with `graphql` replaced by the `loadConfig()` parameter [`configName`](load-config#configname)
 
 
 ```js
