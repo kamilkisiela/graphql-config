@@ -36,8 +36,7 @@
     "cosmiconfig": "6.0.0",
     "cosmiconfig-toml-loader": "1.0.0",
     "minimatch": "3.0.4",
-    "string-env-interpolation": "1.0.1",
-    "tslib": "^2.0.0"
+    "string-env-interpolation": "1.0.1"
   },
   "devDependencies": {
     "@types/jest": "26.0.20",
