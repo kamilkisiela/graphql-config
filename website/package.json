@@ -7,8 +7,8 @@
     "postinstall": "patch-package"
   },
   "dependencies": {
-    "@docusaurus/core": "2.0.0-alpha.fd17476c3",
-    "@docusaurus/preset-classic": "2.0.0-alpha.fd17476c3",
+    "@docusaurus/core": "2.0.0-alpha.ffe8b6106",
+    "@docusaurus/preset-classic": "2.0.0-alpha.ffe8b6106",
     "patch-package": "6.4.7",
     "react": "16.14.0",
     "react-dom": "16.14.0"
