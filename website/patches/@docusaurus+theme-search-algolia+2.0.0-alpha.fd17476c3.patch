@@ -1,0 +1,13 @@
+diff --git a/node_modules/@docusaurus/theme-search-algolia/src/theme/SearchBar/index.js b/node_modules/@docusaurus/theme-search-algolia/src/theme/SearchBar/index.js
+index c3d6f55..186d1e2 100644
+--- a/node_modules/@docusaurus/theme-search-algolia/src/theme/SearchBar/index.js
++++ b/node_modules/@docusaurus/theme-search-algolia/src/theme/SearchBar/index.js
+@@ -93,7 +93,7 @@ function DocSearch({contextualSearch, ...props}) {
+ 
+   const navigator = useRef({
+     navigate({itemUrl}) {
+-      history.push(itemUrl);
++      window.location.assign(itemUrl);
+     },
+   }).current;
+ 
