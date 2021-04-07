@@ -132,5 +132,6 @@ module.exports = {
       },
     ],
   ],
-  onBrokenLinks: 'warn'
+  onBrokenLinks: 'error',
+  onBrokenMarkdownLinks: 'error'
 };
