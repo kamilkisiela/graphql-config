@@ -7,11 +7,11 @@
     "postinstall": "patch-package"
   },
   "dependencies": {
-    "@docusaurus/core": "2.0.0-alpha.fd17476c3",
-    "@docusaurus/preset-classic": "2.0.0-alpha.fd17476c3",
-    "patch-package": "6.2.2",
-    "react": "16.14.0",
-    "react-dom": "16.14.0"
+    "@docusaurus/core": "2.0.0-alpha.72",
+    "@docusaurus/preset-classic": "2.0.0-alpha.72",
+    "patch-package": "6.4.7",
+    "react": "17.0.2",
+    "react-dom": "17.0.2"
   },
   "browserslist": {
     "production": [
