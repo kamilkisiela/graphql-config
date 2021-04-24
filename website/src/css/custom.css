@@ -19,6 +19,10 @@ button {
   --ifm-color-content: #fff;
 }
 
+.DocSearch {
+  display: none !important;
+}
+
 /* Legacy Note */
 
 body.legacy-note #legacy-note {
@@ -35,9 +39,9 @@ body.legacy-note #legacy-note {
 
   position: sticky;
 
-  background: linear-gradient(-45deg, #e535ab, #EA7CC5, #e535ab, #EA7CC5);
+  background: linear-gradient(-45deg, #e535ab, #ea7cc5, #e535ab, #ea7cc5);
   background-size: 400% 200%;
-	animation: gradient 15s ease infinite;
+  animation: gradient 15s ease infinite;
 }
 
 #legacy-note .important {
@@ -54,15 +58,15 @@ body.legacy-note #legacy-note {
 }
 
 @keyframes gradient {
-	0% {
-		background-position: 0% 50%;
-	}
-	50% {
-		background-position: 100% 50%;
-	}
-	100% {
-		background-position: 0% 50%;
-	}
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 /* Legacy Note */

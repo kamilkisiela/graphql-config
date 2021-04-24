@@ -10,6 +10,9 @@ module.exports = {
   projectName: 'graphql-config',
 
   themeConfig: {
+    colorMode: {
+      disableSwitch: true,
+    },
     sidebarCollapsible: false,
     image: 'img/logo.png',
     navbar: {
@@ -105,15 +108,7 @@ module.exports = {
       theme: require('prism-react-renderer/themes/dracula'),
     },
   },
-  scripts: [
-    '/js/light-mode-by-default.js',
-    '/js/legacy.js',
-    {
-      src: 'https://the-guild.dev/static/banner.js',
-      async: true,
-      defer: true,
-    },
-  ],
+  scripts: ['/js/light-mode-by-default.js', '/js/legacy.js'],
   presets: [
     [
       require.resolve('@docusaurus/preset-classic'),
@@ -128,10 +123,10 @@ module.exports = {
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
-        }
+        },
       },
     ],
   ],
   onBrokenLinks: 'error',
-  onBrokenMarkdownLinks: 'error'
+  onBrokenMarkdownLinks: 'error',
 };
