@@ -19,10 +19,6 @@ button {
   --ifm-color-content: #fff;
 }
 
-.DocSearch {
-  display: none !important;
-}
-
 /* Legacy Note */
 
 body.legacy-note #legacy-note {
