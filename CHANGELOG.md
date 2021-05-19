@@ -2,6 +2,8 @@
 
 ### vNEXT
 
+### v3.3.0
+
 - Add support for loading the config from package.json [#693](https://github.com/kamilkisiela/graphql-config/pull/693) by [@ionut-botizan](https://github.com/ionut-botizan)
 
 ### v3.2.0
