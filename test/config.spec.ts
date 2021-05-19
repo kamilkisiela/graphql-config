@@ -132,7 +132,7 @@ runTests({async: loadConfig, sync: loadConfigSync})((load, mode) => {
     const jsonConfig = `{"schema": "${schemaFile}"}`;
     const packageJsonConfig = `{"${moduleName}": {"schema": "${schemaFile}"}}`;
 
-    const configFiles = [
+    let configFiles = [
       // #.config files
       [`${moduleName}.config.ts`, tsConfig],
       [`${moduleName}.config.js`, jsConfig],
@@ -152,6 +152,12 @@ runTests({async: loadConfig, sync: loadConfigSync})((load, mode) => {
       ['package.json', packageJsonConfig],
     ];
 
+    if (mode === 'sync') {
+      configFiles = configFiles.filter(
+        (configFile) => !configFile[0].endsWith('.ts'),
+      );
+    }
+
     beforeEach(() => {
       temp.clean();
       temp.createFile(
@@ -164,20 +170,23 @@ runTests({async: loadConfig, sync: loadConfigSync})((load, mode) => {
       );
     });
 
-    test.each(configFiles)('load config from "%s"', async (name, content) => {
-      temp.createFile(name, content);
+    test.each(configFiles)(
+      'load config from "%s"',
+      async (name, content) => {
+        temp.createFile(name, content);
 
-      const config = await load({
-        rootDir: temp.dir,
-      });
+        const config = await load({
+          rootDir: temp.dir,
+        });
 
-      const loadedFileName = basename(config!.filepath);
-      const loadedSchema = config!.getDefault()!.schema;
+        const loadedFileName = basename(config!.filepath);
+        const loadedSchema = config!.getDefault()!.schema;
 
-      expect(config).toBeDefined();
-      expect(loadedFileName).toEqual(name);
-      expect(loadedSchema).toEqual(schemaFile);
-    });
+        expect(config).toBeDefined();
+        expect(loadedFileName).toEqual(name);
+        expect(loadedSchema).toEqual(schemaFile);
+      },
+    );
   });
 
   describe('environment variables', () => {
