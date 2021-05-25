@@ -102,7 +102,7 @@ module.exports = {
       theme: require('prism-react-renderer/themes/dracula'),
     },
   },
-  scripts: ['/js/light-mode-by-default.js', '/js/legacy.js'],
+  scripts: ['/js/light-mode-by-default.js', '/js/legacy.js', 'https://the-guild.dev/static/crisp.js'],
   presets: [
     [
       require.resolve('@docusaurus/preset-classic'),
