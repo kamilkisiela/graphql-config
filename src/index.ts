@@ -3,13 +3,7 @@ export {GraphQLProjectConfig} from './project-config';
 export {GraphQLExtensionDeclaration} from './extension';
 export {
   Source,
-  SchemaLoader,
-  DocumentLoader,
-  UniversalLoader,
-  SchemaPointerSingle,
-  SchemaPointer,
-  DocumentPointerSingle,
-  DocumentPointer,
+  Loader
 } from '@graphql-tools/utils';
 export * from './types';
 export * from './errors';

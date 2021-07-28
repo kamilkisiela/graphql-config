@@ -21,7 +21,7 @@ type LoadSchemaOptions = Partial<ToolsLoadSchemaOptions>;
 export type SchemaOutput = 'GraphQLSchema' | 'DocumentNode' | 'string';
 
 export class LoadersRegistry {
-  private _loaders: Loader[] = [];
+  private _loaders: Set<Loader> = new Set();
   private _middlewares: MiddlewareFn<DocumentNode>[] = [];
   private readonly cwd: string;
 
@@ -30,13 +30,11 @@ export class LoadersRegistry {
   }
 
   register(loader: Loader): void {
-    if (!this._loaders.some((l) => l.loaderId() === loader.loaderId())) {
-      this._loaders.push(loader);
-    }
+    this._loaders.add(loader)
   }
 
   override(loaders: Loader[]): void {
-    this._loaders = loaders;
+    this._loaders = new Set(loaders)
   }
 
   use(middleware: MiddlewareFn<DocumentNode>): void {
@@ -48,7 +46,7 @@ export class LoadersRegistry {
     options?: LoadTypedefsOptions,
   ): Promise<Source[]> {
     return loadTypedefs(pointer, {
-      loaders: this._loaders,
+      loaders: Array.from(this._loaders),
       cwd: this.cwd,
       ...options,
     });
@@ -148,7 +146,7 @@ export class LoadersRegistry {
 
   private createOptions<T extends object>(options?: T) {
     return {
-      loaders: this._loaders,
+      loaders: Array.from(this._loaders),
       cwd: this.cwd,
       ...options,
     };
