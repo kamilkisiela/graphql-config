@@ -39,7 +39,7 @@
     "string-env-interpolation": "1.0.1"
   },
   "devDependencies": {
-    "@types/jest": "26.0.22",
+    "@types/jest": "26.0.24",
     "@types/node": "14.17.6",
     "@typescript-eslint/parser": "4.28.5",
     "bob-the-bundler": "1.2.0",
