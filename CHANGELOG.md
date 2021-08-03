@@ -4,7 +4,7 @@
 
 ### 3.4.1
 
-- back to `@graphql-tools/utils` v7
+- back to `@graphql-tools/utils` v7 (fixes [#716](https://github.com/kamilkisiela/graphql-config/issues/716))
 
 ### v3.4.0
 
