@@ -107,11 +107,11 @@ class CustomLoader implements Loader {
   canLoadSync(): boolean {
     return true;
   }
-  async load(__dirname: String): Promise<Array<Source>> {
-    return [{schema: this.schema}];
+  async load(__dirname: String): Promise<Source> {
+    return {schema: this.schema};
   }
-  loadSync(): Array<Source> {
-    return [{schema: this.schema}];
+  loadSync(): Source {
+    return {schema: this.schema};
   }
 }
 

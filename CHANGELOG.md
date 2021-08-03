@@ -2,6 +2,10 @@
 
 ### vNEXT
 
+### 3.4.1
+
+- back to `@graphql-tools/utils` v7
+
 ### v3.4.0
 
 - Update dependencies of `graphql-tools`.
