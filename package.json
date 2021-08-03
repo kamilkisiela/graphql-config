@@ -39,7 +39,7 @@
     "@endemolshinegroup/cosmiconfig-typescript-loader": "3.0.2",
     "@graphql-tools/graphql-file-loader": "^7.0.0",
     "@graphql-tools/json-file-loader": "^7.0.0",
-    "@graphql-tools/load": "^7.0.0",
+    "@graphql-tools/load": "7.1.0-alpha-2e4043d9.0",
     "@graphql-tools/merge": "^6.2.15",
     "@graphql-tools/url-loader": "^7.0.2",
     "@graphql-tools/utils": "^8.0.0",
