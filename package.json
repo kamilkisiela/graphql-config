@@ -3,9 +3,19 @@
   "version": "3.4.0",
   "description": "The easiest way to configure your development environment with your GraphQL schema (supported by most tools, editors & IDEs)",
   "sideEffects": false,
-  "main": "dist/index.cjs.js",
-  "module": "dist/index.esm.js",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
   "typings": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs"
+    },
+    "./*": {
+      "require": "./dist/*.js",
+      "import": "./dist/*.mjs"
+    }
+  },
   "typescript": {
     "definition": "dist/index.d.ts"
   },
