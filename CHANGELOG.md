@@ -2,7 +2,27 @@
 
 ### vNEXT
 
+### v4.0.0
+
+‼️ ‼️ ‼️ BREAKING CHANGE ‼️ ‼️ ‼️
+
+Dropped Node 10 support, due to the need to support ESM in this package.
+
+‼️ ‼️ ‼️ BREAKING CHANGE ‼️ ‼️ ‼️
+
+The signature of `Loader` has been changed in `graphql-tools`, to allow more flexibility.
+
+If you are using `graphql-config` with `extensions`, then the `Extension` you are using needs to adjust to the new return value of `Loader` signature that returns `Source[] | null` instead of `Source`. (see: https://github.com/kamilkisiela/graphql-config/issues/716)
+
+
+Other changes:
+
+- ESM Support
+- Update dependencies of `graphql-tools`.
+
 ### v3.4.0
+
+> Note: A breaking chnage snuk into that version, please see v4.
 
 - Update dependencies of `graphql-tools`.
 
