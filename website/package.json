@@ -8,7 +8,7 @@
   "dependencies": {
     "@docusaurus/core": "2.0.0-beta.6",
     "@docusaurus/preset-classic": "2.0.0-beta.6",
-    "@theguild/components": "1.4.8",
+    "@theguild/components": "1.5.0",
     "react": "17.0.2",
     "react-dom": "17.0.2"
   },
