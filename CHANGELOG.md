@@ -2,6 +2,14 @@
 
 ### vNEXT
 
+### v4.0.2
+
+- Update range of `@graphql-tools/merge` dependency to include v7 and v8
+
+### v4.0.1
+
+- Updated dependencies of `graphql-tools` to latest, to address issues related to documents loading. 
+
 ### v4.0.0
 
 ‼️ ‼️ ‼️ BREAKING CHANGE ‼️ ‼️ ‼️
