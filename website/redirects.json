@@ -1,7 +1,0 @@
-[
-  {
-    "source": "legacy",
-    "destination": "https://github.com/kamilkisiela/graphql-config/tree/legacy#graphql-config",
-    "statusCode": 301
-  }
-]

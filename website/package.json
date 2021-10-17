@@ -1,16 +1,30 @@
 {
   "scripts": {
-    "start": "docusaurus start",
-    "build": "docusaurus build && node scripts/redirects",
-    "swizzle": "docusaurus swizzle",
-    "deploy": "docusaurus deploy"
+    "dev": "concurrently -r \"next-remote-watch ./docs ./src/pages/_app.tsx ./src/pages/_document.tsx\" \"wait-on -s 1 http://localhost:3000 && open-cli http://localhost:3000\"",
+    "next": "next",
+    "analyze": "cross-env ANALYZE=true next build"
   },
   "dependencies": {
-    "@docusaurus/core": "2.0.0-beta.15",
-    "@docusaurus/preset-classic": "2.0.0-beta.15",
-    "@theguild/components": "1.8.7",
+    "@chakra-ui/icons": "^1.0.16",
+    "@chakra-ui/react": "^1.6.10",
+    "@chakra-ui/theme-tools": "^1.2.2",
+    "@chakra-ui/utils": "^1.8.3",
+    "@emotion/react": "^11.4.1",
+    "@emotion/styled": "^11.3.0",
+    "@guild-docs/client": "^1.1.1",
+    "@guild-docs/server": "^2.0.1",
+    "@mdx-js/react": "^1.6.22",
+    "@theguild/components": "1.6.0",
+    "framer-motion": "^4.1.17",
+    "next": "^11.1.2",
+    "next-i18next": "^8.9.0",
+    "next-seo": "^4.28.1",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "react-icons": "^4.3.1",
+    "react-use": "^17.3.1",
+    "shiki": "^0.9.12",
+    "remark-admonitions": "^1.2.1"
   },
   "browserslist": {
     "production": [
@@ -24,5 +38,28 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@next/bundle-analyzer": "^11.1.2",
+    "@types/concurrently": "^6.3.0",
+    "@types/mdx-js__react": "^1.5.4",
+    "@types/node": "^16.11.1",
+    "@types/react": "^17.0.30",
+    "@types/react-dom": "^17.0.9",
+    "concurrently": "^6.3.0",
+    "cross-env": "^7.0.3",
+    "esbuild": "^0.13.8",
+    "esbuild-register": "^3.0.0",
+    "next-remote-watch": "^1.0.0",
+    "open-cli": "^7.0.1",
+    "typescript": "^4.4.4",
+    "wait-on": "^6.0.0"
+  },
+  "pnpm": {
+    "overrides": {
+      "esbuild": ">=0.13.4"
+    }
+  },
+  "resolutions": {
+    "esbuild": ">=0.13.4"
+  }
 }

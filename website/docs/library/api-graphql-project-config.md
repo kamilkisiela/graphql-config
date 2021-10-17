@@ -72,7 +72,7 @@ Value defined in `exclude` property, in the config file.
 
 _type: `{ [projectName: string]: GraphQLProjectConfig }`_
 
-A key-value object where key is a project's name but value contains [`GraphQLProjectConfig`](./api-graphql-project-config.md) object.
+A key-value object where key is a project's name but value contains [`GraphQLProjectConfig`](api-graphql-project-config.md) object.
 
 ### `hasExtension()`
 
