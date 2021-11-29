@@ -13,49 +13,49 @@ In order to make sure you write extensions correctly, import and use the`GraphQL
 
 The main requirement of an extension is its name. Providing a name lets GraphQL Config to match the extension with its namespace in the config file.
 
-```typescript
-import {GraphQLExtensionDeclaration} from 'graphql-config';
+```ts
+import { GraphQLExtensionDeclaration } from 'graphql-config'
 
-const InspectorExtension: GraphQLExtensionDeclaration = (api) => {
+const InspectorExtension: GraphQLExtensionDeclaration = api => {
   return {
-    name: 'inspector',
-  };
-};
+    name: 'inspector'
+  }
+}
 ```
 
 ### Schema Middlewares
 
 GraphQL Config lets you intercept the GraphQL Schema loading process which may be helpful when dealing with custom directives like in Relay or Apollo Federation. We call it Middlewares.
 
-```typescript
-import {GraphQLExtensionDeclaration} from 'graphql-config';
+```ts
+import { GraphQLExtensionDeclaration } from 'graphql-config'
 
-const RelayExtension: GraphQLExtensionDeclaration = (api) => {
-  api.loaders.schema.use((document) => {
+const RelayExtension: GraphQLExtensionDeclaration = api => {
+  api.loaders.schema.use(document => {
     // The middleware receives a DocumentNode object
     // Adds relay directives
     // Returns a new DocumentNode
-    return addRelayToDocumentNode(document);
-  });
+    return addRelayToDocumentNode(document)
+  })
 
   return {
-    name: 'relay',
-  };
-};
+    name: 'relay'
+  }
+}
 ```
 
 ## Consuming extension
 
 As a GraphQL tool author you will likely want to load the config and register your extension in order to understand user's configuration.
 
-```typescript
-import {loadConfig} from 'graphql-config';
-import {InspectorExtension} from './extension';
+```ts
+import { loadConfig } from 'graphql-config'
+import { InspectorExtension } from './extension'
 
 async function main() {
   const config = await loadConfig({
-    extensions: [InspectorExtension],
-  });
+    extensions: [InspectorExtension]
+  })
 }
 ```
 
@@ -65,17 +65,17 @@ Now that everything is ready, GraphQL Config understands there's the Inspector e
 
 In order to access information stored in the config file, do the following:
 
-```typescript
+```ts
 async function main() {
   // ... code from previous steps
 
   // Reads configuration of a default project
-  const project = config.getDefault();
+  const project = config.getDefault()
   // Reads configuration of a named project
-  const project = config.getProject('admin');
+  const project = config.getProject('admin')
 
   // Reads extenion's configuration defined in a project
-  const inspectorConfig = project.extension('inspector');
+  const inspectorConfig = project.extension('inspector')
 
   // Given following config file:
   //
@@ -94,13 +94,13 @@ async function main() {
 
 Getting `GraphQLSchema` is straightforward: each project has `getSchema(): Promise<GraphQLSchema>` method.
 
-```typescript
+```ts
 async function main() {
   // ... code from the previous example
   if (inspectorConfig.validate === true) {
-    const schema = await project.getSchema();
+    const schema = await project.getSchema()
 
-    validateSchema(schema);
+    validateSchema(schema)
   }
 }
 ```
@@ -120,25 +120,25 @@ The [GraphQL Tools](https://github.com/ardatan/graphql-tools) library has [a few
 
 For simplicity, we're going to use only [the one](https://github.com/ardatan/graphql-tools/tree/master/packages/loaders/code-file) responsible for extracting GraphQL SDL from code files.
 
-```typescript
-import {CodeFileLoader} from '@graphql-tools/code-file-loader';
+```ts
+import { CodeFileLoader } from '@graphql-tools/code-file-loader'
 
-const InspectorExtension: GraphQLExtensionDeclaration = (api) => {
+const InspectorExtension: GraphQLExtensionDeclaration = api => {
   // Lets schema
-  api.loaders.schema.register(new CodeFileLoader());
+  api.loaders.schema.register(new CodeFileLoader())
   // documents
-  api.loaders.documents.register(new CodeFileLoader());
+  api.loaders.documents.register(new CodeFileLoader())
 
   return {
-    name: 'inspector',
-  };
-};
+    name: 'inspector'
+  }
+}
 ```
 
 Let's say you have GraphQL SDL modularized across multiple TypeScript files, written like this:
 
-```typescript
-import {gql} from 'graphql-tag';
+```ts
+import { gql } from 'graphql-tag'
 
 export const typeDefs = gql`
   type User {
@@ -149,12 +149,12 @@ export const typeDefs = gql`
   extend type Query {
     user(id: ID!): User!
   }
-`;
+`
 ```
 
 With `CodeFileLoader` you can extract those GraphQL pieces:
 
-```yaml
+```yml
 schema: './src/modules/*.ts' # uses a glob pattern to look for files
 extensions:
   inspector:

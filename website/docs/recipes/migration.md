@@ -53,7 +53,6 @@ Read ["Usage" chapter](usage#documents) to understand new `documents` field.
 
 No changes here, but please read the ["Usage" chapter](usage#extensions).
 
-
 ### projects
 
 No changes here, but please read the ["Usage" chapter](usage#projects).

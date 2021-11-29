@@ -57,4 +57,3 @@ Returns a default project.
 _type: `getProjectForFile(filepath: string): GraphQLProjectConfig | never`_
 
 Allows to get project based on a file path. It might be a path to a GraphQL file that contains SDL or Operations and Fragments but also any file [included](../user/user-usage#include-exclude) in the project.
-

@@ -8,6 +8,14 @@
       "options": {
         "bracketSpacing": true
       }
+    },
+    {
+      "files": "*.{md,mdx}",
+      "options": {
+        "semi": false,
+        "trailingComma": "none",
+        "arrowParens": "avoid"
+      }
     }
   ]
 }

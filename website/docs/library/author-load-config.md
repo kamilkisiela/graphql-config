@@ -18,11 +18,11 @@ async function main() {
 
 Synchronous version:
 
-```typescript
-import {loadConfigSync} from 'graphql-config';
+```ts
+import { loadConfigSync } from 'graphql-config'
 
 function main() {
-  const config = loadConfigSync({...}); // an instance of GraphQLConfig
+  const config = loadConfigSync({ ... }); // an instance of GraphQLConfig
 }
 ```
 
