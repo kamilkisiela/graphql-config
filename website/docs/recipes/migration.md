@@ -12,7 +12,9 @@ This chapter is not for library authors, but users. We explain here a new syntax
 
 We prepared a command-line tool to help you migrate your legacy GraphQL Config:
 
-    npx graphql-config-migrate
+```sh
+npx graphql-config-migrate
+```
 
 The migration tool will ask few questions and move your config files to the new syntax.
 

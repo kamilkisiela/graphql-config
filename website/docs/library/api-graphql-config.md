@@ -7,10 +7,10 @@ The `GraphQLConfig` object is instantiated by calling [`loadConfig`](author-load
 A basic usage:
 
 ```ts
-import {loadConfig} from 'graphql-config';
+import { loadConfig } from 'graphql-config'
 
 async function main() {
-  const config = await loadConfig({...}); // an instance of GraphQLConfig
+  const config = await loadConfig({ ... }) // an instance of GraphQLConfig
 }
 ```
 

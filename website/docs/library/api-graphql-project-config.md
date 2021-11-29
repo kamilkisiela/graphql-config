@@ -7,12 +7,12 @@ The `GraphQLProjectConfig` represents projects defined in GraphQL Config file.
 A basic usage:
 
 ```ts
-import {loadConfig} from 'graphql-config';
+import { loadConfig } from 'graphql-config'
 
 async function main() {
-  const config = await loadConfig({...}); // an instance of GraphQLConfig
+  const config = await loadConfig({ ... }) // an instance of GraphQLConfig
 
-  const project = config.getDefault(); // an instance of GraphQLProjectConfig
+  const project = config.getDefault() // an instance of GraphQLProjectConfig
 }
 ```
 

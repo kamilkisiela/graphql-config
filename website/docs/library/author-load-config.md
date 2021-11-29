@@ -9,10 +9,10 @@ This function is the starting point for using GraphQL Config. It looks for a con
 A basic usage example (async):
 
 ```ts
-import {loadConfig} from 'graphql-config';
+import { loadConfig } from 'graphql-config'
 
 async function main() {
-  const config = await loadConfig({...}); // an instance of GraphQLConfig
+  const config = await loadConfig({ ... }) // an instance of GraphQLConfig
 }
 ```
 
@@ -22,7 +22,7 @@ Synchronous version:
 import { loadConfigSync } from 'graphql-config'
 
 function main() {
-  const config = loadConfigSync({ ... }); // an instance of GraphQLConfig
+  const config = loadConfigSync({ ... }) // an instance of GraphQLConfig
 }
 ```
 

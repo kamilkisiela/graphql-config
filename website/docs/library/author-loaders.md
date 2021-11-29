@@ -13,4 +13,4 @@ title: Loaders
 
 ## Writing loaders
 
-Take a look at some example loaders [here](https://github.com/ardatan/graphql-tools/blob/master/packages/loaders); we also recommend to the explore the [GraphQL File Loader code](https://github.com/ardatan/graphql-tools/blob/master/packages/loaders/graphql-file/src/load-from-gql-file.ts) as you plan your loader.
+Take a look at some example loaders [here](https://github.com/ardatan/graphql-tools/blob/master/packages/loaders), we also recommend to the explore the [GraphQL File Loader code](https://github.com/ardatan/graphql-tools/blob/master/packages/loaders/graphql-file/src/load-from-gql-file.ts) as you plan your loader.
