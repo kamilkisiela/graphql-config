@@ -1,7 +1,5 @@
 ---
-id: schema
 title: Specifying schema
-sidebar_label: Specifying schema
 ---
 
 The simplest config specifies only `schema` which points to the source of GraphQL schema.

@@ -1,5 +1,4 @@
 ---
-id: extensions
 title: Writing and Consuming Extensions
 sidebar_label: Extensions
 ---
@@ -106,7 +105,7 @@ async function main() {
 }
 ```
 
-GraphQL Config is able to generate a schema not only as `GraphQLSchema` object, but also as a `DocumentNode`. (For more info, read the API reference of [`GraphQLProjectConfig`](api-graphql-project-config.md).)
+GraphQL Config is able to generate a schema not only as `GraphQLSchema` object, but also as a `DocumentNode`. (For more info, read the API reference of [`GraphQLProjectConfig`](api-graphql-project-config).)
 It's also capable of loading operations and fragments.
 
 ## Registering Loaders
@@ -164,4 +163,4 @@ extensions:
 
 There are two kinds of loaders. One is responsible for handling schemas, and the other covers Operations and Fragments (we call them both `Documents`).
 
-To read more about loaders, please check ["Loaders" chapter](author-loaders.md)
+To read more about loaders, please check ["Loaders" chapter](author-loaders)

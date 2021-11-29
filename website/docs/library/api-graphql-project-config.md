@@ -1,14 +1,12 @@
 ---
-id: graphql-project-config
 title: GraphQLProjectConfig
-sidebar_label: GraphQLProjectConfig
 ---
 
 The `GraphQLProjectConfig` represents projects defined in GraphQL Config file.
 
 A basic usage:
 
-```typescript
+```ts
 import {loadConfig} from 'graphql-config';
 
 async function main() {
@@ -72,7 +70,7 @@ Value defined in `exclude` property, in the config file.
 
 _type: `{ [projectName: string]: GraphQLProjectConfig }`_
 
-A key-value object where key is a project's name but value contains [`GraphQLProjectConfig`](api-graphql-project-config.md) object.
+A key-value object where key is a project's name but value contains [`GraphQLProjectConfig`](api-graphql-project-config) object.
 
 ### `hasExtension()`
 

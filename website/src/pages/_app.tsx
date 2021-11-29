@@ -98,7 +98,7 @@ const AppContent: FC<AppProps> = (appProps) => {
             children: 'Docs',
             title: 'View GraphQL Config Docs',
             href: '/docs/user/user-introduction',
-            onClick: (e) => handlePushRoute('/docs', e),
+            onClick: (e) => handlePushRoute('/docs/user/user-introduction', e),
           },
         ]}
         cta={{

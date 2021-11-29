@@ -1,16 +1,14 @@
 ---
-id: load-config
 title: Loading Config
-sidebar_label: Loading Config
 ---
 
 ## loadConfig
 
-This function is the starting point for using GraphQL Config. It looks for a config file in [predefined search places](./user-usage.md#config-search-places) in the currently working directory.
+This function is the starting point for using GraphQL Config. It looks for a config file in [predefined search places](user-usage#config-search-places) in the currently working directory.
 
 A basic usage example (async):
 
-```typescript
+```ts
 import {loadConfig} from 'graphql-config';
 
 async function main() {

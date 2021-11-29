@@ -9,3 +9,4 @@ out.txt
 .now
 yarn.lock
 package-lock.json
+.next/

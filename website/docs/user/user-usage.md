@@ -1,7 +1,5 @@
 ---
-id: usage
 title: Usage
-sidebar_label: Usage
 ---
 
 ## Config search places
@@ -34,7 +32,7 @@ schema: ./schema.graphql
 
 Based on the above example you may think GraphQL Config accepts only single graphql files, but it does more than that.
 
-To learn more about possible sources of GraphQL schema read the ["Specifying schema" chapter](user-schema.md).
+To learn more about possible sources of GraphQL schema read the ["Specifying schema" chapter](user-schema).
 
 ## Documents
 
@@ -46,7 +44,7 @@ Another piece of GraphQL may be operations and fragments. In GraphQL Config we c
 documents: src/components/**/*.graphql
 ```
 
-By default, GraphQL Config is able to find and extract documents from graphql files but if you want to extend it with JavaScript and TypeScript files (also tsx and jsx) please read the ["Specifying documents" chapter](user-documents.md).
+By default, GraphQL Config is able to find and extract documents from graphql files but if you want to extend it with JavaScript and TypeScript files (also tsx and jsx) please read the ["Specifying documents" chapter](user-documents).
 
 ## Include / Exclude
 
@@ -76,7 +74,7 @@ extensions:
           - typescript-resolvers
 ```
 
-Now [GraphQL Code Generator](https://graphql-code-generator.com/) is able to consume that data.
+Now [GraphQL Code Generator](https://graphql-code-generator.com) is able to consume that data.
 
 ## Projects
 

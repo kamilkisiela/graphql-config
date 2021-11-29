@@ -1,7 +1,5 @@
 ---
-id: documents
 title: Specifying documents
-sidebar_label: Specifying documents
 ---
 
 GraphQL Config supports not only a schema but GraphQL Operations and Fragments too.
