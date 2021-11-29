@@ -1,12 +1,12 @@
-const {writeFileSync, mkdirSync} = require('fs');
-const {resolve} = require('path');
+const { writeFileSync, mkdirSync } = require('fs');
+const { resolve } = require('path');
 const redirects = require('../redirects.json');
 
 function createRedirect(redirect) {
-  const {source, destination} = redirect;
+  const { source, destination } = redirect;
 
   mkdirSync(resolve(__dirname, `../build/${source}`), {
-    recursive: true
+    recursive: true,
   });
   writeFileSync(
     resolve(__dirname, `../build/${source}/index.html`),
