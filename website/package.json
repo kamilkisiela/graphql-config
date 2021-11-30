@@ -1,4 +1,7 @@
 {
+  "name": "@graphql-config/website",
+  "private": true,
+  "version": "0.0.0",
   "scripts": {
     "lint": "eslint --ignore-path ../.gitignore --ext js,jsx,cjs,mjs,ts,tsx,cts,mts .",
     "dev": "concurrently -r \"next-remote-watch ./docs ./src/pages/_app.tsx ./src/pages/_document.tsx\" \"wait-on -s 1 http://localhost:3000 && open-cli http://localhost:3000\"",

@@ -1,8 +1,8 @@
 {
-  "parser":  "@typescript-eslint/parser",
-  "parserOptions":  {
-    "ecmaVersion":  2018,
-    "sourceType":  "module"
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module"
   },
   "rules": {
     "no-console": "error",
