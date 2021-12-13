@@ -144,6 +144,7 @@ runTests({async: loadConfig, sync: loadConfigSync})((load, mode) => {
       [`.${moduleName}rc`, yamlConfig],
       [`.${moduleName}rc.ts`, tsConfig],
       [`.${moduleName}rc.js`, jsConfig],
+      [`.${moduleName}rc.cjs`, jsConfig],
       [`.${moduleName}rc.json`, jsonConfig],
       [`.${moduleName}rc.yml`, yamlConfig],
       [`.${moduleName}rc.yaml`, yamlConfig],
@@ -170,23 +171,20 @@ runTests({async: loadConfig, sync: loadConfigSync})((load, mode) => {
       );
     });
 
-    test.each(configFiles)(
-      'load config from "%s"',
-      async (name, content) => {
-        temp.createFile(name, content);
+    test.each(configFiles)('load config from "%s"', async (name, content) => {
+      temp.createFile(name, content);
 
-        const config = await load({
-          rootDir: temp.dir,
-        });
+      const config = await load({
+        rootDir: temp.dir,
+      });
 
-        const loadedFileName = basename(config!.filepath);
-        const loadedSchema = config!.getDefault()!.schema;
+      const loadedFileName = basename(config!.filepath);
+      const loadedSchema = config!.getDefault()!.schema;
 
-        expect(config).toBeDefined();
-        expect(loadedFileName).toEqual(name);
-        expect(loadedSchema).toEqual(schemaFile);
-      },
-    );
+      expect(config).toBeDefined();
+      expect(loadedFileName).toEqual(name);
+      expect(loadedSchema).toEqual(schemaFile);
+    });
   });
 
   describe('environment variables', () => {
