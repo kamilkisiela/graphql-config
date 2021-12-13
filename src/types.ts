@@ -1,5 +1,3 @@
-import {DocumentPointer, SchemaPointer} from '@graphql-tools/utils';
-
 export type PointerWithConfiguration<T = any> = {[key: string]: T};
 
 /**
@@ -37,6 +35,13 @@ export interface IGraphQLProjectLegacy {
     [name: string]: any;
   };
 }
+
+export declare type WithList<T> = T | T[];
+export declare type ElementOf<TList> = TList extends Array<infer TElement> ? TElement : never;
+export declare type SchemaPointer = WithList<string>;
+export declare type SchemaPointerSingle = ElementOf<SchemaPointer>;
+export declare type DocumentGlobPathPointer = string;
+export declare type DocumentPointer = WithList<DocumentGlobPathPointer>;
 
 /**
  * GraphQL Project

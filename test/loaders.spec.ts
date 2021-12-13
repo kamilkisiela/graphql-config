@@ -3,6 +3,7 @@ import {
   DirectiveDefinitionNode,
   buildSchema,
   GraphQLSchema,
+  Kind,
 } from 'graphql';
 import {Loader, Source} from '@graphql-tools/utils';
 import {
@@ -56,15 +57,15 @@ describe('middlewares', () => {
     const registry = new LoadersRegistry({cwd: __dirname});
 
     const cacheDirective: DirectiveDefinitionNode = {
-      kind: 'DirectiveDefinition',
+      kind: Kind.DIRECTIVE_DEFINITION,
       name: {
-        kind: 'Name',
+        kind: Kind.NAME,
         value: 'cache',
       },
       repeatable: false,
       locations: [
         {
-          kind: 'Name',
+          kind: Kind.NAME,
           value: 'FIELD_DEFINITION',
         },
       ],
@@ -107,11 +108,11 @@ class CustomLoader implements Loader {
   canLoadSync(): boolean {
     return true;
   }
-  async load(__dirname: String): Promise<Source> {
-    return {schema: this.schema};
+  async load(__dirname: String): Promise<Array<Source>> {
+    return [{schema: this.schema}];
   }
-  loadSync(): Source {
-    return {schema: this.schema};
+  loadSync(): Array<Source> {
+    return [{schema: this.schema}];
   }
 }
 

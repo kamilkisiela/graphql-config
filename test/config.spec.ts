@@ -1,5 +1,5 @@
 import {buildSchema, buildASTSchema} from 'graphql';
-import {resolve} from 'path';
+import {resolve, basename} from 'path';
 import {TempDir} from './utils/temp-dir';
 import {runTests} from './utils/runner';
 import {loadConfig, loadConfigSync} from '../src/config';
@@ -121,6 +121,74 @@ runTests({async: loadConfig, sync: loadConfigSync})((load, mode) => {
     });
   });
 
+  describe('loading from supported config files', () => {
+    const moduleName = 'graphql';
+    const schemaFile = 'schema.graphql';
+
+    const tsConfig = `export default { schema: '${schemaFile}' };`;
+    const jsConfig = `module.exports = { schema: '${schemaFile}' };`;
+    const yamlConfig = `schema: '${schemaFile}'`;
+    const tomlConfig = `schema = "${schemaFile}"`;
+    const jsonConfig = `{"schema": "${schemaFile}"}`;
+    const packageJsonConfig = `{"${moduleName}": {"schema": "${schemaFile}"}}`;
+
+    let configFiles = [
+      // #.config files
+      [`${moduleName}.config.ts`, tsConfig],
+      [`${moduleName}.config.js`, jsConfig],
+      [`${moduleName}.config.json`, jsonConfig],
+      [`${moduleName}.config.yaml`, yamlConfig],
+      [`${moduleName}.config.yml`, yamlConfig],
+      [`${moduleName}.config.toml`, tomlConfig],
+      // .#rc files
+      [`.${moduleName}rc`, yamlConfig],
+      [`.${moduleName}rc.ts`, tsConfig],
+      [`.${moduleName}rc.js`, jsConfig],
+      [`.${moduleName}rc.json`, jsonConfig],
+      [`.${moduleName}rc.yml`, yamlConfig],
+      [`.${moduleName}rc.yaml`, yamlConfig],
+      [`.${moduleName}rc.toml`, tomlConfig],
+      // other files
+      ['package.json', packageJsonConfig],
+    ];
+
+    if (mode === 'sync') {
+      configFiles = configFiles.filter(
+        (configFile) => !configFile[0].endsWith('.ts'),
+      );
+    }
+
+    beforeEach(() => {
+      temp.clean();
+      temp.createFile(
+        schemaFile,
+        /* GraphQL */ `
+          type Query {
+            foo: String
+          }
+        `,
+      );
+    });
+
+    test.each(configFiles)(
+      'load config from "%s"',
+      async (name, content) => {
+        temp.createFile(name, content);
+
+        const config = await load({
+          rootDir: temp.dir,
+        });
+
+        const loadedFileName = basename(config!.filepath);
+        const loadedSchema = config!.getDefault()!.schema;
+
+        expect(config).toBeDefined();
+        expect(loadedFileName).toEqual(name);
+        expect(loadedSchema).toEqual(schemaFile);
+      },
+    );
+  });
+
   describe('environment variables', () => {
     test('not defined but with a default value', async () => {
       temp.createFile(
@@ -190,16 +258,16 @@ runTests({async: loadConfig, sync: loadConfigSync})((load, mode) => {
       temp.createFile(
         '.graphqlrc',
         `
-        projects: 
+        projects:
           foo:
             schema: ./foo.graphql
           bar:
-            schema: 
+            schema:
               - ./bar.graphql:
                 noop: true
           baz:
             schema: ./documents/**/*.graphql
-  
+
           qux:
             schema:
               - ./schemas/foo.graphql
@@ -234,7 +302,7 @@ runTests({async: loadConfig, sync: loadConfigSync})((load, mode) => {
       temp.createFile(
         '.graphqlrc',
         `
-        projects: 
+        projects:
           foo:
             schema: ./foo.graphql
             include: ./foo/*.ts
@@ -258,7 +326,7 @@ runTests({async: loadConfig, sync: loadConfigSync})((load, mode) => {
       temp.createFile(
         '.graphqlrc',
         `
-        projects: 
+        projects:
           foo:
             schema: ./foo.graphql
             include: ./foo/*.ts

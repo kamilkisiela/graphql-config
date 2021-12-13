@@ -10,6 +10,9 @@ module.exports = {
   projectName: 'graphql-config',
 
   themeConfig: {
+    colorMode: {
+      disableSwitch: true,
+    },
     sidebarCollapsible: false,
     image: 'img/logo.png',
     navbar: {
@@ -31,75 +34,8 @@ module.exports = {
         },
       ],
     },
-    footer: {
-      style: 'dark',
-      copyright: `Copyright © ${new Date().getFullYear()} The Guild. All rights reserved.`,
-      links: [
-        {
-          title: 'Docs',
-          items: [
-            {
-              label: 'Introduction',
-              to: 'introduction',
-            },
-            {
-              label: 'Developer Guide',
-              to: 'load-config',
-            },
-          ],
-        },
-        {
-          title: 'Community',
-          items: [
-            {
-              label: 'Discord',
-              href: 'https://discord.gg/xud7bH9',
-            },
-            {
-              label: 'Other projects',
-              href: 'https://github.com/the-guild-org/Stack',
-            },
-            {
-              label: 'Mailing List',
-              href: 'https://upscri.be/19qjhi',
-            },
-            {
-              label: 'Community Meetings',
-              href: 'https://github.com/the-guild-org/community-meetings',
-            },
-          ],
-        },
-        {
-          title: 'Social',
-          items: [
-            {
-              label: 'Blog',
-              href: 'https://medium.com/the-guild',
-            },
-            {
-              label: 'GitHub',
-              href: 'https://github.com/kamilkisiela/graphql-config',
-            },
-            {
-              label: 'Twitter',
-              href: 'https://twitter.com/kamilkisiela',
-            },
-            {
-              label: 'LinkedIn',
-              href: 'https://www.linkedin.com/company/the-guild-software',
-            },
-          ],
-        },
-      ],
-    },
     googleAnalytics: {
       trackingID: 'UA-125180910-4',
-    },
-    algolia: {
-      appId: 'ANRJKXZTRW',
-      apiKey: '811d453fc7f80306044dd5cc4b87e064',
-      indexName: 'theguild',
-      algoliaOptions: {},
     },
     prism: {
       theme: require('prism-react-renderer/themes/dracula'),
@@ -108,11 +44,7 @@ module.exports = {
   scripts: [
     '/js/light-mode-by-default.js',
     '/js/legacy.js',
-    {
-      src: 'https://the-guild.dev/static/banner.js',
-      async: true,
-      defer: true,
-    },
+    'https://the-guild.dev/static/crisp.js',
   ],
   presets: [
     [
@@ -128,10 +60,10 @@ module.exports = {
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
-        }
+        },
       },
     ],
   ],
   onBrokenLinks: 'error',
-  onBrokenMarkdownLinks: 'error'
+  onBrokenMarkdownLinks: 'error',
 };
