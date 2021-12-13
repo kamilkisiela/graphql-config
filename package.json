@@ -57,7 +57,7 @@
     "eslint": "8.4.1",
     "graphql": "16.1.0",
     "husky": "7.0.4",
-    "jest": "27.4.4",
+    "jest": "27.4.5",
     "lint-staged": "12.1.2",
     "make-dir": "3.1.0",
     "parent-module": "2.0.0",
