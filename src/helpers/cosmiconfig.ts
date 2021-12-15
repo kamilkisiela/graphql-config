@@ -78,6 +78,7 @@ function prepareCosmiconfig(moduleName: string, {legacy}: {legacy: boolean}) {
     '.#rc',
     '.#rc.ts',
     '.#rc.js',
+    '.#rc.cjs',
     '.#rc.json',
     '.#rc.yml',
     '.#rc.yaml',
