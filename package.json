@@ -54,7 +54,7 @@
     "@typescript-eslint/parser": "5.8.1",
     "bob-the-bundler": "1.6.0",
     "del": "6.0.0",
-    "eslint": "8.5.0",
+    "eslint": "8.6.0",
     "graphql": "16.2.0",
     "husky": "7.0.4",
     "jest": "27.4.5",
