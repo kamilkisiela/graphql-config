@@ -21,4 +21,4 @@ Use a glob pattern to find and include operations and fragments:
 documents: ./documents/*.graphql
 ```
 
-GraphQL Config reads any matching files and parses them into DocumentNode objects.
+GraphQL Config reads any matching files and parses them into `DocumentNode` objects.

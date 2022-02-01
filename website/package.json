@@ -12,18 +12,18 @@
   },
   "dependencies": {
     "@chakra-ui/icons": "1.1.1",
-    "@chakra-ui/react": "1.7.2",
+    "@chakra-ui/react": "1.8.1",
     "@chakra-ui/theme-tools": "1.3.1",
-    "@guild-docs/client": "1.3.1",
-    "@guild-docs/server": "2.1.4",
-    "@theguild/components": "1.8.2",
-    "framer-motion": "5.3.3",
-    "next": "12.0.4",
-    "next-i18next": "9.2.0",
+    "@guild-docs/client": "1.3.4",
+    "@guild-docs/server": "2.1.6",
+    "@theguild/components": "1.8.7",
+    "framer-motion": "6.2.3",
+    "next": "12.0.10",
+    "next-i18next": "10.2.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "remark-admonitions": "1.2.1",
-    "shiki": "0.9.13"
+    "shiki": "0.10.0"
   },
   "browserslist": {
     "production": [
@@ -38,21 +38,21 @@
     ]
   },
   "devDependencies": {
-    "@next/bundle-analyzer": "12.0.4",
-    "@types/node": "16.11.10",
-    "@types/react": "17.0.37",
+    "@next/bundle-analyzer": "12.0.10",
+    "@types/node": "16.11.22",
+    "@types/react": "17.0.38",
     "@types/react-dom": "17.0.11",
-    "@typescript-eslint/eslint-plugin": "5.4.0",
-    "@typescript-eslint/parser": "5.4.0",
-    "concurrently": "6.4.0",
+    "@typescript-eslint/eslint-plugin": "5.10.2",
+    "@typescript-eslint/parser": "5.10.2",
+    "concurrently": "7.0.0",
     "cross-env": "7.0.3",
-    "esbuild": "0.14.0",
-    "esbuild-register": "3.2.0",
-    "eslint-config-next": "12.0.4",
+    "esbuild": "0.14.16",
+    "esbuild-register": "3.3.2",
+    "eslint-config-next": "12.0.10",
     "eslint-config-prettier": "8.3.0",
     "next-remote-watch": "1.0.0",
     "open-cli": "7.0.1",
-    "typescript": "4.5.2",
+    "typescript": "4.5.5",
     "wait-on": "6.0.0"
   }
 }

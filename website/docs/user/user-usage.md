@@ -39,8 +39,7 @@ To learn more about possible sources of GraphQL schema read the ["Specifying sch
 Another piece of GraphQL may be operations and fragments. In GraphQL Config we call them `documents`.
 
 ```yaml
-
----
+...
 documents: src/components/**/*.graphql
 ```
 
@@ -48,11 +47,10 @@ By default, GraphQL Config is able to find and extract documents from graphql fi
 
 ## Include / Exclude
 
-When you want to point out files related to the schema--for instance, React components--and make your IDE GraphQL Extension recognize those files, you can `include` and `exlude` items:
+When you want to point out files related to the schema (for instance, React components) and make your IDE GraphQL Extension recognize those files, you can `include` and `exlude` items:
 
 ```yaml
-
----
+...
 include: src/components/**/*.jsx
 exclude: src/components/__ignored__/**/*.jsx
 ```
