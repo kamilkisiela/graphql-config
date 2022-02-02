@@ -95,18 +95,18 @@ const AppContent: FC<AppProps> = (appProps) => {
             onClick: (e) => handlePushRoute('/', e),
           },
           {
-            children: 'Docs',
-            title: 'View GraphQL Config Docs',
-            href: '/docs/user/user-introduction',
-            onClick: (e) => handlePushRoute('/docs/user/user-introduction', e),
+            children: 'GitHub',
+            title: "Head to the project's GitHub",
+            href: 'https://github.com/kamilkisiela/graphql-config',
+            target: '_blank',
+            rel: 'noopener noreferrer',
           },
         ]}
         cta={{
           children: 'Get Started',
-          title: 'Start using GraphQL Config',
-          href: 'https://github.com/kamilkisiela/graphql-config',
-          target: '_blank',
-          rel: 'noopener noreferrer',
+          title: 'View GraphQL Config Docs',
+          href: '/docs/user/user-introduction',
+          onClick: (e) => handlePushRoute('/docs/user/user-introduction', e),
         }}
       />
       {isDocs ? (
