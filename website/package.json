@@ -1,16 +1,29 @@
 {
+  "name": "@graphql-config/website",
+  "private": true,
+  "version": "0.0.0",
   "scripts": {
-    "start": "docusaurus start",
-    "build": "docusaurus build && node scripts/redirects",
-    "swizzle": "docusaurus swizzle",
-    "deploy": "docusaurus deploy"
+    "lint": "eslint --ignore-path ../.gitignore --ext js,jsx,cjs,mjs,ts,tsx,cts,mts .",
+    "dev": "concurrently -r \"next-remote-watch ./docs ./src/pages/_app.tsx ./src/pages/_document.tsx\" \"wait-on -s 1 http://localhost:3000 && open-cli http://localhost:3000\"",
+    "next": "next",
+    "build": "next build",
+    "start": "next start",
+    "analyze": "cross-env ANALYZE=true yarn build"
   },
   "dependencies": {
-    "@docusaurus/core": "2.0.0-beta.15",
-    "@docusaurus/preset-classic": "2.0.0-beta.15",
+    "@chakra-ui/icons": "1.1.1",
+    "@chakra-ui/react": "1.8.1",
+    "@chakra-ui/theme-tools": "1.3.1",
+    "@guild-docs/client": "1.3.4",
+    "@guild-docs/server": "2.1.6",
     "@theguild/components": "1.8.7",
+    "framer-motion": "6.2.3",
+    "next": "12.0.10",
+    "next-i18next": "10.2.0",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "remark-admonitions": "1.2.1",
+    "shiki": "0.10.0"
   },
   "browserslist": {
     "production": [
@@ -24,5 +37,22 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@next/bundle-analyzer": "12.0.10",
+    "@types/node": "16.11.22",
+    "@types/react": "17.0.38",
+    "@types/react-dom": "17.0.11",
+    "@typescript-eslint/eslint-plugin": "5.10.2",
+    "@typescript-eslint/parser": "5.10.2",
+    "concurrently": "7.0.0",
+    "cross-env": "7.0.3",
+    "esbuild": "0.14.16",
+    "esbuild-register": "3.3.2",
+    "eslint-config-next": "12.0.10",
+    "eslint-config-prettier": "8.3.0",
+    "next-remote-watch": "1.0.0",
+    "open-cli": "7.0.1",
+    "typescript": "4.5.5",
+    "wait-on": "6.0.0"
+  }
 }

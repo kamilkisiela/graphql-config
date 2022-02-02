@@ -26,7 +26,7 @@
     "build": "bob build --single",
     "prepack": "bob prepack",
     "format": "prettier --write \"{src,test}/**/*.{ts,graphql}\"",
-    "lint": "eslint \"{src,test}/**/*.ts\"",
+    "lint": "eslint --ignore-path .gitignore --ignore-pattern website \"{src,test}/**/*.ts\"",
     "test": "jest",
     "release": "cd dist && npm publish",
     "release:canary": "yarn build && node ./scripts/canary.js && npm publish dist --tag canary",
