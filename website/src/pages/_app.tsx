@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import type { AppProps } from 'next/app';
+import Script from 'next/script';
 import { appWithTranslation } from 'next-i18next';
 import { extendTheme, theme as chakraTheme } from '@chakra-ui/react';
 import { mode } from '@chakra-ui/theme-tools';
@@ -67,6 +68,7 @@ const AppContent: FC<AppProps> = (appProps) => {
 
   return (
     <>
+      <Script async src="https://the-guild.dev/static/crisp.js" />
       <div className="legacy-note">
         <span className="important">Important: </span>
         This documentation covers GraphQL Config v3. For the 2.x doc, check:
