@@ -5,7 +5,6 @@ import { appWithTranslation } from 'next-i18next';
 import { extendTheme, theme as chakraTheme } from '@chakra-ui/react';
 import { mode } from '@chakra-ui/theme-tools';
 import {
-  ExtendComponents,
   handlePushRoute,
   CombinedThemeProvider,
   DocsPage,
@@ -14,12 +13,6 @@ import {
 import { Header, Subheader, FooterExtended } from '@theguild/components';
 import 'remark-admonitions/styles/infima.css';
 import '../../public/style.css';
-
-ExtendComponents({
-  HelloWorld() {
-    return <p>Hello World!</p>;
-  },
-});
 
 const styles: typeof chakraTheme['styles'] = {
   global: (props) => ({
@@ -69,14 +62,6 @@ const AppContent: FC<AppProps> = (appProps) => {
   return (
     <>
       <Script async src="https://the-guild.dev/static/crisp.js" />
-      <div className="legacy-note">
-        <span className="important">Important: </span>
-        This documentation covers GraphQL Config v3. For the 2.x doc, check:
-        <a href="https://graphql-config.com/legacy">
-          graphql-config.com/legacy
-        </a>
-        .
-      </div>
       <Header accentColor={accentColor} activeLink="/open-source" themeSwitch />
       <Subheader
         activeLink={router.asPath}
