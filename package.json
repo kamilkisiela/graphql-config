@@ -50,7 +50,7 @@
   },
   "devDependencies": {
     "@types/jest": "27.4.0",
-    "@types/node": "16.11.24",
+    "@types/node": "16.11.25",
     "@typescript-eslint/parser": "5.11.0",
     "bob-the-bundler": "1.6.1",
     "del": "6.0.0",
