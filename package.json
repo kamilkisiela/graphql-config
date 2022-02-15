@@ -45,7 +45,7 @@
     "@graphql-tools/utils": "^8.5.1",
     "cosmiconfig": "7.0.1",
     "cosmiconfig-toml-loader": "1.0.0",
-    "minimatch": "4.2.1",
+    "minimatch": "5.0.0",
     "string-env-interpolation": "1.0.1"
   },
   "devDependencies": {
