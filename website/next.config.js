@@ -14,6 +14,7 @@ module.exports = withBundleAnalyzer(
     redirects: () => {
       return [
         {
+          permanent: true,
           source: '/legacy',
           destination: '/docs/recipes/migration',
         },
