@@ -11,5 +11,14 @@ module.exports = withBundleAnalyzer(
   withGuildDocs({
     i18n,
     getRoutes: require('./routes.ts').getRoutes,
+    redirects: () => {
+      return [
+        {
+          permanent: true,
+          source: '/legacy',
+          destination: '/docs/recipes/migration',
+        },
+      ]; 
+    },
   }),
 );
