@@ -49,7 +49,7 @@
     "esbuild": "0.14.23",
     "esbuild-register": "3.3.2",
     "eslint-config-next": "12.1.0",
-    "eslint-config-prettier": "8.4.0",
+    "eslint-config-prettier": "8.5.0",
     "next-remote-watch": "1.0.0",
     "open-cli": "7.0.1",
     "typescript": "4.6.2",
