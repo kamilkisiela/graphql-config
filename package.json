@@ -58,7 +58,7 @@
     "graphql": "16.3.0",
     "husky": "7.0.4",
     "jest": "27.5.1",
-    "lint-staged": "12.3.5",
+    "lint-staged": "12.3.6",
     "make-dir": "3.1.0",
     "parent-module": "3.0.0",
     "prettier": "2.5.1",
