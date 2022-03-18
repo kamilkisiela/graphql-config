@@ -83,7 +83,6 @@ function prepareCosmiconfig(moduleName: string, { legacy }: { legacy: boolean })
     loaders: {
       '.ts': loadTs,
       '.js': defaultLoaders['.js'],
-      '.cjs': defaultLoaders['.cjs'],
       '.json': loadJson,
       '.yaml': loadYaml,
       '.yml': loadYaml,
