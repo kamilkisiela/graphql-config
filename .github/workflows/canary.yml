@@ -19,7 +19,7 @@ jobs:
         with:
           node-version: 12
 
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         id: yarn-cache
         with:
           path: node_modules
