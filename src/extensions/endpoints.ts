@@ -1,4 +1,4 @@
-import {GraphQLExtensionDeclaration} from '../extension';
+import { GraphQLExtensionDeclaration } from '../extension';
 
 export interface Endpoint {
   url: string;
@@ -8,7 +8,7 @@ export interface Endpoint {
   introspect?: boolean;
   subscription?: {
     url: string;
-    connectionParams?: {[name: string]: string | undefined};
+    connectionParams?: { [name: string]: string | undefined };
   };
 }
 

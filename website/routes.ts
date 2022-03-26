@@ -5,13 +5,7 @@ export function getRoutes(): IRoutes {
     _: {
       user: {
         $name: "I'm a user",
-        $routes: [
-          'user-introduction',
-          'user-installation',
-          'user-usage',
-          'user-schema',
-          'user-documents',
-        ],
+        $routes: ['user-introduction', 'user-installation', 'user-usage', 'user-schema', 'user-documents'],
       },
       library: {
         $name: "I'm a library author",

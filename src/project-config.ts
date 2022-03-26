@@ -1,17 +1,17 @@
-import {GraphQLSchema, DocumentNode} from 'graphql';
-import {dirname, isAbsolute, relative, normalize} from 'path';
-import {Source} from '@graphql-tools/utils';
+import { GraphQLSchema, DocumentNode } from 'graphql';
+import { dirname, isAbsolute, relative, normalize } from 'path';
+import { Source } from '@graphql-tools/utils';
 import minimatch from 'minimatch';
-import {ExtensionMissingError} from './errors';
-import {GraphQLExtensionsRegistry} from './extension';
-import {IExtensions, IGraphQLProject, IGraphQLProjectLegacy} from './types';
+import { ExtensionMissingError } from './errors';
+import { GraphQLExtensionsRegistry } from './extension';
+import { IExtensions, IGraphQLProject, IGraphQLProjectLegacy } from './types';
 import {
   LoadSchemaOptions as ToolsLoadSchemaOptions,
   LoadTypedefsOptions as ToolsLoadTypedefsOptions,
   UnnormalizedTypeDefPointer,
 } from '@graphql-tools/load';
-import {isLegacyProjectConfig} from './helpers';
-import {SchemaOutput} from './loaders';
+import { isLegacyProjectConfig } from './helpers';
+import { SchemaOutput } from './loaders';
 
 type Pointer = UnnormalizedTypeDefPointer | UnnormalizedTypeDefPointer[];
 type LoadTypedefsOptions = Partial<ToolsLoadTypedefsOptions>;
@@ -19,9 +19,7 @@ type LoadSchemaOptions = Partial<ToolsLoadSchemaOptions>;
 
 export class GraphQLProjectConfig {
   readonly schema: Pointer;
-  readonly documents?:
-    | UnnormalizedTypeDefPointer
-    | UnnormalizedTypeDefPointer[];
+  readonly documents?: UnnormalizedTypeDefPointer | UnnormalizedTypeDefPointer[];
   readonly include?: string | string[];
   readonly exclude?: string | string[];
   readonly extensions: IExtensions;
@@ -74,9 +72,7 @@ export class GraphQLProjectConfig {
       const extension = this.extensions[name];
 
       if (!extension) {
-        throw new ExtensionMissingError(
-          `Project ${this.name} is missing ${name} extension`,
-        );
+        throw new ExtensionMissingError(`Project ${this.name} is missing ${name} extension`);
       }
 
       return extension;
@@ -85,9 +81,7 @@ export class GraphQLProjectConfig {
     const extension = this._extensionsRegistry.get(name);
 
     if (!extension) {
-      throw new ExtensionMissingError(
-        `Project ${this.name} is missing ${name} extension`,
-      );
+      throw new ExtensionMissingError(`Project ${this.name} is missing ${name} extension`);
     }
 
     return {
@@ -105,9 +99,7 @@ export class GraphQLProjectConfig {
   async getSchema(out: 'DocumentNode'): Promise<DocumentNode>;
   async getSchema(out: 'GraphQLSchema'): Promise<GraphQLSchema>;
   async getSchema(out: 'string'): Promise<string>;
-  async getSchema(
-    out?: SchemaOutput,
-  ): Promise<GraphQLSchema | DocumentNode | string> {
+  async getSchema(out?: SchemaOutput): Promise<GraphQLSchema | DocumentNode | string> {
     return this.loadSchema(this.schema, out as any);
   }
 
@@ -140,75 +132,37 @@ export class GraphQLProjectConfig {
   // Load Schema
 
   async loadSchema(pointer: Pointer): Promise<GraphQLSchema>;
-  async loadSchema(
-    pointer: Pointer,
-    out: 'string',
-    options?: LoadSchemaOptions,
-  ): Promise<GraphQLSchema>;
-  async loadSchema(
-    pointer: Pointer,
-    out: 'DocumentNode',
-    options?: LoadSchemaOptions,
-  ): Promise<DocumentNode>;
-  async loadSchema(
-    pointer: Pointer,
-    out: 'GraphQLSchema',
-    options?: LoadSchemaOptions,
-  ): Promise<GraphQLSchema>;
+  async loadSchema(pointer: Pointer, out: 'string', options?: LoadSchemaOptions): Promise<GraphQLSchema>;
+  async loadSchema(pointer: Pointer, out: 'DocumentNode', options?: LoadSchemaOptions): Promise<DocumentNode>;
+  async loadSchema(pointer: Pointer, out: 'GraphQLSchema', options?: LoadSchemaOptions): Promise<GraphQLSchema>;
   async loadSchema(
     pointer: Pointer,
     out?: SchemaOutput,
     options?: LoadSchemaOptions,
   ): Promise<GraphQLSchema | DocumentNode | string> {
-    return this._extensionsRegistry.loaders.schema.loadSchema(
-      pointer,
-      out as any,
-      options,
-    );
+    return this._extensionsRegistry.loaders.schema.loadSchema(pointer, out as any, options);
   }
 
   loadSchemaSync(pointer: Pointer): GraphQLSchema;
-  loadSchemaSync(
-    pointer: Pointer,
-    out: 'string',
-    options?: LoadSchemaOptions,
-  ): GraphQLSchema;
-  loadSchemaSync(
-    pointer: Pointer,
-    out: 'DocumentNode',
-    options?: LoadSchemaOptions,
-  ): DocumentNode;
-  loadSchemaSync(
-    pointer: Pointer,
-    out: 'GraphQLSchema',
-    options?: LoadSchemaOptions,
-  ): GraphQLSchema;
+  loadSchemaSync(pointer: Pointer, out: 'string', options?: LoadSchemaOptions): GraphQLSchema;
+  loadSchemaSync(pointer: Pointer, out: 'DocumentNode', options?: LoadSchemaOptions): DocumentNode;
+  loadSchemaSync(pointer: Pointer, out: 'GraphQLSchema', options?: LoadSchemaOptions): GraphQLSchema;
   loadSchemaSync(
     pointer: Pointer,
     out?: SchemaOutput,
     options?: LoadSchemaOptions,
   ): GraphQLSchema | DocumentNode | string {
-    return this._extensionsRegistry.loaders.schema.loadSchemaSync(
-      pointer,
-      out as any,
-      options,
-    );
+    return this._extensionsRegistry.loaders.schema.loadSchemaSync(pointer, out as any, options);
   }
 
   // Load Documents
 
-  async loadDocuments(
-    pointer: Pointer,
-    options?: LoadTypedefsOptions,
-  ): Promise<Source[]> {
+  async loadDocuments(pointer: Pointer, options?: LoadTypedefsOptions): Promise<Source[]> {
     if (!pointer) {
       return [];
     }
 
-    return this._extensionsRegistry.loaders.documents.loadDocuments(
-      pointer,
-      options,
-    );
+    return this._extensionsRegistry.loaders.documents.loadDocuments(pointer, options);
   }
 
   loadDocumentsSync(pointer: Pointer, options?: LoadTypedefsOptions): Source[] {
@@ -216,34 +170,25 @@ export class GraphQLProjectConfig {
       return [];
     }
 
-    return this._extensionsRegistry.loaders.documents.loadDocumentsSync(
-      pointer,
-      options,
-    );
+    return this._extensionsRegistry.loaders.documents.loadDocumentsSync(pointer, options);
   }
 
   // Rest
 
   match(filepath: string): boolean {
-    const isSchemaOrDocument = [this.schema, this.documents].some((pointer) =>
-      match(filepath, this.dirpath, pointer),
-    );
+    const isSchemaOrDocument = [this.schema, this.documents].some((pointer) => match(filepath, this.dirpath, pointer));
 
     if (isSchemaOrDocument) {
       return true;
     }
 
-    const isExcluded = this.exclude
-      ? match(filepath, this.dirpath, this.exclude)
-      : false;
+    const isExcluded = this.exclude ? match(filepath, this.dirpath, this.exclude) : false;
 
     if (isExcluded) {
       return false;
     }
 
-    const isIncluded = this.include
-      ? match(filepath, this.dirpath, this.include)
-      : false;
+    const isIncluded = this.include ? match(filepath, this.dirpath, this.include) : false;
 
     if (isIncluded) {
       return true;
@@ -264,10 +209,8 @@ function match(filepath: string, dirpath: string, pointer?: Pointer): boolean {
   }
 
   if (typeof pointer === 'string') {
-    const normalizedFilepath = normalize(
-      isAbsolute(filepath) ? relative(dirpath, filepath) : filepath,
-    );
-    return minimatch(normalizedFilepath, normalize(pointer), {dot: true});
+    const normalizedFilepath = normalize(isAbsolute(filepath) ? relative(dirpath, filepath) : filepath);
+    return minimatch(normalizedFilepath, normalize(pointer), { dot: true });
   }
 
   if (typeof pointer === 'object') {

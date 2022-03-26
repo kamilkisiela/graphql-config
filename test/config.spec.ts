@@ -1,9 +1,9 @@
-import {buildSchema, buildASTSchema} from 'graphql';
-import {resolve, basename} from 'path';
-import {TempDir} from './utils/temp-dir';
-import {runTests} from './utils/runner';
-import {loadConfig, loadConfigSync} from '../src/config';
-import {ConfigNotFoundError} from '../src/errors';
+import { buildSchema, buildASTSchema } from 'graphql';
+import { resolve, basename } from 'path';
+import { TempDir } from './utils/temp-dir';
+import { runTests } from './utils/runner';
+import { loadConfig, loadConfigSync } from '../src/config';
+import { ConfigNotFoundError } from '../src/errors';
 
 const temp = new TempDir();
 
@@ -20,7 +20,7 @@ afterAll(() => {
   process.env.SCHEMA = undefined;
 });
 
-runTests({async: loadConfig, sync: loadConfigSync})((load, mode) => {
+runTests({ async: loadConfig, sync: loadConfigSync })((load, mode) => {
   describe('loaders', () => {
     test('load a single graphql file', async () => {
       temp.createFile(
@@ -43,10 +43,7 @@ runTests({async: loadConfig, sync: loadConfigSync})((load, mode) => {
         rootDir: temp.dir,
       });
 
-      const schema =
-        mode === 'async'
-          ? await config!.getDefault().getSchema()
-          : config!.getDefault().getSchemaSync();
+      const schema = mode === 'async' ? await config!.getDefault().getSchema() : config!.getDefault().getSchemaSync();
       const query = schema.getQueryType()!;
       const fields = Object.keys(query.getFields());
 
@@ -154,9 +151,7 @@ runTests({async: loadConfig, sync: loadConfigSync})((load, mode) => {
     ];
 
     if (mode === 'sync') {
-      configFiles = configFiles.filter(
-        (configFile) => !configFile[0].endsWith('.ts'),
-      );
+      configFiles = configFiles.filter((configFile) => !configFile[0].endsWith('.ts'));
     }
 
     beforeEach(() => {
@@ -278,22 +273,12 @@ runTests({async: loadConfig, sync: loadConfigSync})((load, mode) => {
       }))!;
 
       expect(config.getProjectForFile('./foo.graphql').name).toBe('foo');
-      expect(
-        config.getProjectForFile(resolve(temp.dir, './foo.graphql')).name,
-      ).toBe('foo');
+      expect(config.getProjectForFile(resolve(temp.dir, './foo.graphql')).name).toBe('foo');
       expect(config.getProjectForFile('./bar.graphql').name).toBe('bar');
-      expect(
-        config.getProjectForFile(resolve(temp.dir, './bar.graphql')).name,
-      ).toBe('bar');
-      expect(config.getProjectForFile('./schemas/foo.graphql').name).toBe(
-        'qux',
-      );
-      expect(config.getProjectForFile('./schemas/bar.graphql').name).toBe(
-        'qux',
-      );
-      expect(config.getProjectForFile('./documents/baz.graphql').name).toBe(
-        'baz',
-      );
+      expect(config.getProjectForFile(resolve(temp.dir, './bar.graphql')).name).toBe('bar');
+      expect(config.getProjectForFile('./schemas/foo.graphql').name).toBe('qux');
+      expect(config.getProjectForFile('./schemas/bar.graphql').name).toBe('qux');
+      expect(config.getProjectForFile('./documents/baz.graphql').name).toBe('baz');
     });
 
     test('consider include', async () => {
@@ -315,9 +300,7 @@ runTests({async: loadConfig, sync: loadConfigSync})((load, mode) => {
       }))!;
 
       expect(config.getProjectForFile('./foo/component.ts').name).toBe('foo');
-      expect(config.getProjectForFile('./documents/barbar.graphql').name).toBe(
-        'bar',
-      );
+      expect(config.getProjectForFile('./documents/barbar.graphql').name).toBe('bar');
     });
 
     test('consider exclude', async () => {
@@ -341,9 +324,7 @@ runTests({async: loadConfig, sync: loadConfigSync})((load, mode) => {
 
       expect(config.getProjectForFile('./foo/component.ts').name).toBe('foo');
       // should point to a next project that includes the file
-      expect(config.getProjectForFile('./foo/ignored/component.ts').name).toBe(
-        'bar',
-      );
+      expect(config.getProjectForFile('./foo/ignored/component.ts').name).toBe('bar');
     });
 
     test('customizable config name', async () => {

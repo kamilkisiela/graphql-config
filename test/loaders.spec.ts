@@ -1,17 +1,6 @@
-import {
-  parse,
-  DirectiveDefinitionNode,
-  buildSchema,
-  GraphQLSchema,
-  Kind,
-} from 'graphql';
-import {Loader, Source} from '@graphql-tools/utils';
-import {
-  loadTypedefsSync,
-  loadSchemaSync,
-  loadSchema,
-  LoadSchemaOptions,
-} from '@graphql-tools/load';
+import { parse, DirectiveDefinitionNode, buildSchema, GraphQLSchema, Kind } from 'graphql';
+import { Loader, Source } from '@graphql-tools/utils';
+import { loadTypedefsSync, loadSchemaSync, loadSchema, LoadSchemaOptions } from '@graphql-tools/load';
 
 const schema = buildSchema(/* GraphQL */ `
   type Query {
@@ -50,11 +39,11 @@ jest.mock('@graphql-tools/load', () => {
   };
 });
 
-import {LoadersRegistry} from '../src/loaders';
+import { LoadersRegistry } from '../src/loaders';
 
 describe('middlewares', () => {
   test('loads Sources instead of GraphQLSchema when middlewares are defined', () => {
-    const registry = new LoadersRegistry({cwd: __dirname});
+    const registry = new LoadersRegistry({ cwd: __dirname });
 
     const cacheDirective: DirectiveDefinitionNode = {
       kind: Kind.DIRECTIVE_DEFINITION,
@@ -84,7 +73,7 @@ describe('middlewares', () => {
   });
 
   test('no middlewares means we load GraphQLSchema directly', async () => {
-    const registry = new LoadersRegistry({cwd: __dirname});
+    const registry = new LoadersRegistry({ cwd: __dirname });
 
     const received = registry.loadSchemaSync('anything');
     const receivedAsync = await registry.loadSchema('anything');
@@ -109,10 +98,10 @@ class CustomLoader implements Loader {
     return true;
   }
   async load(__dirname: String): Promise<Array<Source>> {
-    return [{schema: this.schema}];
+    return [{ schema: this.schema }];
   }
   loadSync(): Array<Source> {
-    return [{schema: this.schema}];
+    return [{ schema: this.schema }];
   }
 }
 
@@ -124,19 +113,13 @@ const differentSchema = buildSchema(/* GraphQL */ `
 
 describe('override', () => {
   beforeAll(() => {
-    (loadTypedefsSync as any).mockImplementation(
-      jest.requireActual('@graphql-tools/load').loadTypedefsSync,
-    );
-    (loadSchemaSync as any).mockImplementation(
-      jest.requireActual('@graphql-tools/load').loadSchemaSync,
-    );
-    (loadSchema as any).mockImplementation(
-      jest.requireActual('@graphql-tools/load').loadSchema,
-    );
+    (loadTypedefsSync as any).mockImplementation(jest.requireActual('@graphql-tools/load').loadTypedefsSync);
+    (loadSchemaSync as any).mockImplementation(jest.requireActual('@graphql-tools/load').loadSchemaSync);
+    (loadSchema as any).mockImplementation(jest.requireActual('@graphql-tools/load').loadSchema);
   });
 
   test('overrides default loaders', async () => {
-    const registry = new LoadersRegistry({cwd: __dirname});
+    const registry = new LoadersRegistry({ cwd: __dirname });
 
     registry.override([new CustomLoader(differentSchema)]);
 
@@ -148,8 +131,8 @@ describe('override', () => {
   });
 
   test('allows custom loader options', async () => {
-    const registry = new LoadersRegistry({cwd: __dirname});
-    const customOptions = {assumeValidSDL: true} as Partial<LoadSchemaOptions>;
+    const registry = new LoadersRegistry({ cwd: __dirname });
+    const customOptions = { assumeValidSDL: true } as Partial<LoadSchemaOptions>;
     const customLoader = new CustomLoader(differentSchema);
     const expectedOptions = {
       ...customOptions,
@@ -160,11 +143,7 @@ describe('override', () => {
     registry.override([customLoader]);
 
     const received = registry.loadSchemaSync('anything', null, customOptions);
-    const receivedAsync = await registry.loadSchema(
-      'anything',
-      null,
-      customOptions,
-    );
+    const receivedAsync = await registry.loadSchema('anything', null, customOptions);
 
     expect(received.getQueryType().getFields()['bar']).toBeDefined();
     expect(receivedAsync.getQueryType().getFields()['bar']).toBeDefined();

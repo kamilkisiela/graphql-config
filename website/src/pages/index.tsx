@@ -10,10 +10,7 @@ const IndexPage: FC = () => {
         description={
           <>
             <p>One configuration for all your GraphQL tools. </p>
-            <p>
-              The easiest way to configure your development environment with
-              your GraphQL Schema.
-            </p>
+            <p>The easiest way to configure your development environment with your GraphQL Schema.</p>
           </>
         }
         link={{
@@ -35,8 +32,7 @@ const IndexPage: FC = () => {
         items={[
           {
             title: 'Easy To Use',
-            description:
-              'You gain simplicity and a central place to setup your tools.',
+            description: 'You gain simplicity and a central place to setup your tools.',
             image: {
               src: '',
               alt: '',

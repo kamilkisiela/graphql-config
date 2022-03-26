@@ -8,7 +8,7 @@
 
 ### v4.0.1
 
-- Updated dependencies of `graphql-tools` to latest, to address issues related to documents loading. 
+- Updated dependencies of `graphql-tools` to latest, to address issues related to documents loading.
 
 ### v4.0.0
 
@@ -21,7 +21,6 @@ Dropped Node 10 support, due to the need to support ESM in this package.
 The signature of `Loader` has been changed in `graphql-tools`, to allow more flexibility.
 
 If you are using `graphql-config` with `extensions`, then the `Extension` you are using needs to adjust to the new return value of `Loader` signature that returns `Source[] | null` instead of `Source`. (see: https://github.com/kamilkisiela/graphql-config/issues/716)
-
 
 Other changes:
 

@@ -1,20 +1,20 @@
 - color: 814bdd
-  description: ""
+  description: ''
   name: automerge
 - color: ee0701
-  description: ""
+  description: ''
   name: bug
 - color: 0366d6
   description: Pull requests that update a dependency file
   name: dependencies
 - color: 84b6eb
-  description: ""
+  description: ''
   name: enhancement
 - color: 128A0C
-  description: ""
+  description: ''
   name: help wanted
 - color: cc317c
-  description: ""
+  description: ''
   name: question
 - color: 6fe06b
   description: This issue or pull request is published

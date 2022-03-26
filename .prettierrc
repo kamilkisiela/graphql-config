@@ -1,14 +1,8 @@
 {
-  "bracketSpacing": false,
+  "printWidth": 120,
   "singleQuote": true,
   "trailingComma": "all",
   "overrides": [
-    {
-      "files": ["website/**"],
-      "options": {
-        "bracketSpacing": true
-      }
-    },
     {
       "files": "*.{md,mdx}",
       "options": {

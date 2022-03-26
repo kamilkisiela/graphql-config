@@ -1,6 +1,6 @@
-import {dirname} from 'path';
-import {IGraphQLConfig, GraphQLConfigResult} from './types';
-import {GraphQLProjectConfig} from './project-config';
+import { dirname } from 'path';
+import { IGraphQLConfig, GraphQLConfigResult } from './types';
+import { GraphQLProjectConfig } from './project-config';
 import {
   isMultipleProjectConfig,
   isSingleProjectConfig,
@@ -10,17 +10,10 @@ import {
   findConfigSync,
   isLegacyProjectConfig,
 } from './helpers';
-import {
-  ProjectNotFoundError,
-  ConfigNotFoundError,
-  ConfigEmptyError,
-} from './errors';
-import {
-  GraphQLExtensionDeclaration,
-  GraphQLExtensionsRegistry,
-} from './extension';
-import {EndpointsExtension} from './extensions/endpoints';
-import {isLegacyConfig} from './helpers/cosmiconfig';
+import { ProjectNotFoundError, ConfigNotFoundError, ConfigEmptyError } from './errors';
+import { GraphQLExtensionDeclaration, GraphQLExtensionsRegistry } from './extension';
+import { EndpointsExtension } from './extensions/endpoints';
+import { isLegacyConfig } from './helpers/cosmiconfig';
 
 const cwd = typeof process !== 'undefined' ? process.cwd() : undefined;
 const defaultConfigName = 'graphql';
@@ -44,18 +37,8 @@ const defaultLoadConfigOptions: LoadConfigOptions = {
   legacy: true,
 };
 
-export async function loadConfig(
-  options: LoadConfigOptions,
-): Promise<GraphQLConfig | undefined> {
-  const {
-    filepath,
-    configName,
-    rootDir,
-    extensions,
-    throwOnEmpty,
-    throwOnMissing,
-    legacy,
-  } = {
+export async function loadConfig(options: LoadConfigOptions): Promise<GraphQLConfig | undefined> {
+  const { filepath, configName, rootDir, extensions, throwOnEmpty, throwOnMissing, legacy } = {
     ...defaultLoadConfigOptions,
     ...options,
   };
@@ -75,20 +58,12 @@ export async function loadConfig(
 
     return new GraphQLConfig(found, extensions);
   } catch (error) {
-    return handleError(error, {throwOnMissing, throwOnEmpty});
+    return handleError(error, { throwOnMissing, throwOnEmpty });
   }
 }
 
 export function loadConfigSync(options: LoadConfigOptions) {
-  const {
-    filepath,
-    configName,
-    rootDir,
-    extensions,
-    throwOnEmpty,
-    throwOnMissing,
-    legacy,
-  } = {
+  const { filepath, configName, rootDir, extensions, throwOnEmpty, throwOnMissing, legacy } = {
     ...defaultLoadConfigOptions,
     ...options,
   };
@@ -108,7 +83,7 @@ export function loadConfigSync(options: LoadConfigOptions) {
 
     return new GraphQLConfig(found, extensions);
   } catch (error) {
-    return handleError(error, {throwOnMissing, throwOnEmpty});
+    return handleError(error, { throwOnMissing, throwOnEmpty });
   }
 }
 
@@ -138,14 +113,11 @@ export class GraphQLConfig {
 
   readonly extensions: GraphQLExtensionsRegistry;
 
-  constructor(
-    raw: GraphQLConfigResult,
-    extensions: GraphQLExtensionDeclaration[],
-  ) {
+  constructor(raw: GraphQLConfigResult, extensions: GraphQLExtensionDeclaration[]) {
     this._rawConfig = raw.config;
     this.filepath = raw.filepath;
     this.dirpath = dirname(raw.filepath);
-    this.extensions = new GraphQLExtensionsRegistry({cwd: this.dirpath});
+    this.extensions = new GraphQLExtensionsRegistry({ cwd: this.dirpath });
 
     // Register Endpoints
     this.extensions.register(EndpointsExtension);
@@ -222,9 +194,7 @@ export class GraphQLConfig {
       }
     }
 
-    throw new ProjectNotFoundError(
-      `File '${filepath}' doesn't match any project`,
-    );
+    throw new ProjectNotFoundError(`File '${filepath}' doesn't match any project`);
   }
 
   getDefault(): GraphQLProjectConfig | never {

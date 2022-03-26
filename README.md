@@ -1,4 +1,4 @@
-![GraphQL Config](https://i.imgur.com/hw5tXw2.gif "GraphQL Config")
+![GraphQL Config](https://i.imgur.com/hw5tXw2.gif 'GraphQL Config')
 [![npm version](https://badge.fury.io/js/graphql-config.svg)](https://npmjs.com/package/graphql-config)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 [![renovate-app badge](https://img.shields.io/badge/renovate-app-blue.svg)](https://renovateapp.com/)
@@ -16,7 +16,7 @@ The easiest way to configure your development environment with your GraphQL Sche
 ```yaml
 schema: ./schema.json
 documents: ./src/components/**/*.jsx
-```  
+```
 
 ## Installation and Usage
 

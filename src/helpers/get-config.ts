@@ -1,10 +1,6 @@
-import {ConfigNotFoundError, ConfigEmptyError, composeMessage} from '../errors';
-import {GraphQLConfigResult} from '../types';
-import {
-  ConfigSearchResult,
-  createCosmiConfigSync,
-  createCosmiConfig,
-} from './cosmiconfig';
+import { ConfigNotFoundError, ConfigEmptyError, composeMessage } from '../errors';
+import { GraphQLConfigResult } from '../types';
+import { ConfigSearchResult, createCosmiConfigSync, createCosmiConfig } from './cosmiconfig';
 
 export async function getConfig({
   filepath,
@@ -15,10 +11,10 @@ export async function getConfig({
   configName: string;
   legacy?: boolean;
 }): Promise<GraphQLConfigResult> {
-  validate({filepath});
+  validate({ filepath });
 
   return resolve({
-    result: await createCosmiConfig(configName, {legacy}).load(filepath),
+    result: await createCosmiConfig(configName, { legacy }).load(filepath),
     filepath,
   });
 }
@@ -32,39 +28,25 @@ export function getConfigSync({
   configName: string;
   legacy?: boolean;
 }): GraphQLConfigResult {
-  validate({filepath});
+  validate({ filepath });
 
   return resolve({
-    result: createCosmiConfigSync(configName, {legacy}).load(filepath),
+    result: createCosmiConfigSync(configName, { legacy }).load(filepath),
     filepath,
   });
 }
 
 //
 
-function resolve({
-  result,
-  filepath,
-}: {
-  result?: ConfigSearchResult;
-  filepath: string;
-}) {
+function resolve({ result, filepath }: { result?: ConfigSearchResult; filepath: string }) {
   if (!result) {
     throw new ConfigNotFoundError(
-      composeMessage(
-        `GraphQL Config file is not available: ${filepath}`,
-        `Please check the config filepath.`,
-      ),
+      composeMessage(`GraphQL Config file is not available: ${filepath}`, `Please check the config filepath.`),
     );
   }
 
   if (result.isEmpty) {
-    throw new ConfigEmptyError(
-      composeMessage(
-        `GraphQL Config file is empty.`,
-        `Please check ${result.filepath}`,
-      ),
-    );
+    throw new ConfigEmptyError(composeMessage(`GraphQL Config file is empty.`, `Please check ${result.filepath}`));
   }
 
   return {
@@ -73,7 +55,7 @@ function resolve({
   };
 }
 
-function validate({filepath}: {filepath?: string}) {
+function validate({ filepath }: { filepath?: string }) {
   if (!filepath) {
     throw new Error(`Defining a file path is required`);
   }
