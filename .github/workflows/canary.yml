@@ -1,56 +1,69 @@
 name: Canary Release
+
 on:
   pull_request:
-    branches-ignore:
+    branches:
       - master
-  push:
-    branches-ignore:
-      - master
+
 jobs:
-  release:
-    name: Release Canary Version
+  publish-canary:
+    name: Publish Canary
     runs-on: ubuntu-latest
-    if: contains(github.actor, 'renovate') == false
+    if: github.event.pull_request.head.repo.full_name == github.repository
     steps:
-      - uses: actions/checkout@v3
-
-      - name: Use Node.js 12
-        uses: actions/setup-node@v3
+      - name: Checkout Master
+        uses: actions/checkout@v2
         with:
-          node-version: 12
-
-      - uses: actions/cache@v3
-        id: yarn-cache
+          fetch-depth: 0
+      - name: Use Node
+        uses: actions/setup-node@v2
         with:
-          path: node_modules
-          key: ${{ runner.os }}-yarn-${{ hashFiles('package.json') }}
-
-      - name: Install
+          node-version: '16.x'
+      - name: Configure Git Credentials
+        run: |
+          git config --global user.email "theguild-bot@users.noreply.github.com"
+          git config --global user.name "theguild-bot"
+          echo "machine github.com login theguild-bot password ${{secrets.BOT_TOKEN}}" > ~/.netrc
+      - name: Setup NPM credentials
+        run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
+        env:
+          NPM_TOKEN: ${{secrets.NPM_TOKEN}}
+      - name: Cache Yarn
+        uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{runner.os}}-16-8-16-node-modules-${{hashFiles('package.json')}}
+          restore-keys: |
+            ${{runner.os}}-16-8-16-node-modules-${{hashFiles('package.json')}}
+            ${{runner.os}}-16-8-16-node-modules-
+      - name: Install Dependencies using Yarn
         run: yarn
-        if: steps.yarn-cache.outputs.cache-hit != 'true'
-
-      - name: Build
-        run: yarn build
-
-      - name: Release
-        id: release
+      - name: Release Canary
+        id: canary
         uses: 'kamilkisiela/release-canary@master'
         if: github.repository == 'kamilkisiela/graphql-config'
         with:
-          npm-token: ${{ secrets.NPM_TOKEN }}
-          npm-script: 'release:canary'
-
-      - name: Comment
-        if: steps.release.outputs.released
+          npm-token: ${{secrets.NPM_TOKEN}}
+          npm-script: 'yarn release:canary'
+          changesets: true
+      - name: Publish a message
+        if: steps.canary.outputs.released
         uses: 'kamilkisiela/pr-comment@master'
         with:
           message: |
-            The latest changes of this PR are available as alpha in npm: `${{ steps.release.outputs.version }}`
-
-            Quickly update your package.json by running:
-
-                npx match-version graphql-config ${{ steps.release.outputs.version }}
-
-          bot-token: ${{ secrets.BOT_TOKEN }}
+            The latest changes of this PR are available as alpha in npm (based on the declared `changesets`):
+            ```
+            ${{steps.canary.outputs.changesetsPublishedPackages}}
+            ```
+          bot-token: ${{secrets.BOT_TOKEN}}
           bot: 'theguild-bot'
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{secrets.GITHUB_TOKEN}}
+      - name: Publish a empty message
+        if: steps.canary.outputs.released == 'false'
+        uses: 'kamilkisiela/pr-comment@master'
+        with:
+          message: |
+            The latest changes of this PR are not available as alpha, since there are no linked `changesets` for this PR.
+          bot-token: ${{secrets.BOT_TOKEN}}
+          bot: 'theguild-bot'
+          github-token: ${{secrets.GITHUB_TOKEN}}

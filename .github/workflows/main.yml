@@ -8,7 +8,7 @@ on:
       - 'website/**'
 jobs:
   test:
-    name: Node ${{ matrix.node_version }} on ${{matrix.os}}
+    name: Node ${{matrix.node_version}} on ${{matrix.os}}
     runs-on: ${{matrix.os}}
     strategy:
       matrix:
@@ -16,16 +16,16 @@ jobs:
         node_version: [12, 14, 16]
     steps:
       - uses: actions/checkout@master
-      - name: Use Node.js ${{ matrix.node_version }}
+      - name: Use Node.js ${{matrix.node_version}}
         uses: actions/setup-node@master
         with:
-          node-version: ${{ matrix.node_version }}
+          node-version: ${{matrix.node_version}}
 
       - uses: actions/cache@v3
         id: yarn-cache
         with:
           path: node_modules
-          key: ${{ runner.os }}-yarn-${{ hashFiles('package.json') }}
+          key: ${{runner.os}}-yarn-${{hashFiles('package.json')}}
 
       - name: Install
         run: yarn
