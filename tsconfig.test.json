@@ -4,8 +4,5 @@
     "module": "commonjs",
     "types": ["node", "jest"]
   },
-  "include": [
-    "test",
-    "src"
-  ]
+  "include": ["test", "src"]
 }

@@ -4,12 +4,7 @@ import Script from 'next/script';
 import { appWithTranslation } from 'next-i18next';
 import { extendTheme, theme as chakraTheme } from '@chakra-ui/react';
 import { mode } from '@chakra-ui/theme-tools';
-import {
-  handlePushRoute,
-  CombinedThemeProvider,
-  DocsPage,
-  AppSeoProps,
-} from '@guild-docs/client';
+import { handlePushRoute, CombinedThemeProvider, DocsPage, AppSeoProps } from '@guild-docs/client';
 import { Header, Subheader, FooterExtended } from '@theguild/components';
 import 'remark-admonitions/styles/infima.css';
 import '../../public/style.css';
@@ -97,11 +92,7 @@ const AppContent: FC<AppProps> = (appProps) => {
         }}
       />
       {isDocs ? (
-        <DocsPage
-          appProps={appProps}
-          accentColor={accentColor}
-          mdxRoutes={mdxRoutes}
-        />
+        <DocsPage appProps={appProps} accentColor={accentColor} mdxRoutes={mdxRoutes} />
       ) : (
         <Component {...pageProps} />
       )}
@@ -126,11 +117,7 @@ const defaultSeo: AppSeoProps = {
 
 const App: FC<AppProps> = (appProps) => {
   return (
-    <CombinedThemeProvider
-      theme={theme}
-      accentColor={accentColor}
-      defaultSeo={defaultSeo}
-    >
+    <CombinedThemeProvider theme={theme} accentColor={accentColor} defaultSeo={defaultSeo}>
       <AppContentWrapper {...appProps} />
     </CombinedThemeProvider>
   );

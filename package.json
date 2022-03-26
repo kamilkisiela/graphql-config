@@ -26,8 +26,9 @@
     "prebuild": "yarn clean && yarn json-schema",
     "build": "bob build --single",
     "prepack": "bob prepack",
-    "format": "prettier --write \"{src,test}/**/*.{ts,graphql}\"",
-    "lint": "eslint --ignore-path .gitignore --ignore-pattern website \"{src,test}/**/*.ts\"",
+    "prettier": "prettier --ignore-path .gitignore --write --list-different .",
+    "prettier:check": "prettier --ignore-path .gitignore --check .",
+    "lint": "eslint --ignore-path .gitignore .",
     "test": "jest",
     "release": "changeset publish",
     "release:canary": "(ts-node --compiler-options='{\"module\":\"commonjs\"}' scripts/canary-release.ts && yarn build && yarn changeset publish --tag alpha) || echo Skipping Canary...",
@@ -53,10 +54,12 @@
     "@changesets/cli": "2.21.1",
     "@types/jest": "27.4.1",
     "@types/node": "16.11.26",
+    "@typescript-eslint/eslint-plugin": "5.16.0",
     "@typescript-eslint/parser": "5.16.0",
     "bob-the-bundler": "1.6.1",
     "del": "6.0.0",
     "eslint": "8.12.0",
+    "eslint-config-prettier": "8.5.0",
     "graphql": "16.3.0",
     "husky": "7.0.4",
     "jest": "27.5.1",
@@ -94,7 +97,7 @@
     ]
   },
   "lint-staged": {
-    "{src,test}/**/*.{ts,graphql}": [
+    "{src,test}/**/*": [
       "prettier --write"
     ]
   },

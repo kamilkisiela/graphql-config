@@ -1,12 +1,7 @@
-import {
-  cosmiconfig,
-  cosmiconfigSync,
-  Loader,
-  defaultLoaders,
-} from 'cosmiconfig';
+import { cosmiconfig, cosmiconfigSync, Loader, defaultLoaders } from 'cosmiconfig';
 import loadTs from '@endemolshinegroup/cosmiconfig-typescript-loader';
-import {loadToml} from 'cosmiconfig-toml-loader';
-import {env} from 'string-env-interpolation';
+import { loadToml } from 'cosmiconfig-toml-loader';
+import { env } from 'string-env-interpolation';
 
 export interface ConfigSearchResult {
   config: any;
@@ -14,12 +9,7 @@ export interface ConfigSearchResult {
   isEmpty?: boolean;
 }
 
-const legacySearchPlaces = [
-  '.graphqlconfig',
-  '.graphqlconfig.json',
-  '.graphqlconfig.yaml',
-  '.graphqlconfig.yml',
-];
+const legacySearchPlaces = ['.graphqlconfig', '.graphqlconfig.json', '.graphqlconfig.yaml', '.graphqlconfig.yml'];
 
 export function isLegacyConfig(filepath: string): boolean {
   filepath = filepath.toLowerCase();
@@ -52,18 +42,13 @@ export function createCosmiConfig(
   return cosmiconfig(moduleName, options);
 }
 
-export function createCosmiConfigSync(
-  moduleName: string,
-  {legacy}: {legacy: boolean},
-) {
-  const options = prepareCosmiconfig(moduleName, {
-    legacy,
-  });
+export function createCosmiConfigSync(moduleName: string, { legacy }: { legacy: boolean }) {
+  const options = prepareCosmiconfig(moduleName, { legacy });
 
   return cosmiconfigSync(moduleName, options);
 }
 
-function prepareCosmiconfig(moduleName: string, {legacy}: {legacy: boolean}) {
+function prepareCosmiconfig(moduleName: string, { legacy }: { legacy: boolean }) {
   const loadYaml = createCustomLoader(defaultLoaders['.yaml']);
   const loadTomlCustom = createCustomLoader(loadToml);
   const loadJson = createCustomLoader(defaultLoaders['.json']);

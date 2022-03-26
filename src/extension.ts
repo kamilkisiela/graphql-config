@@ -1,11 +1,9 @@
-import {GraphQLFileLoader} from '@graphql-tools/graphql-file-loader';
-import {UrlLoader} from '@graphql-tools/url-loader';
-import {JsonFileLoader} from '@graphql-tools/json-file-loader';
-import {LoadersRegistry} from './loaders';
+import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader';
+import { UrlLoader } from '@graphql-tools/url-loader';
+import { JsonFileLoader } from '@graphql-tools/json-file-loader';
+import { LoadersRegistry } from './loaders';
 
-export type GraphQLExtensionDeclaration = (
-  api: ExtensionAPI,
-) => GraphQLConfigExtension;
+export type GraphQLExtensionDeclaration = (api: ExtensionAPI) => GraphQLConfigExtension;
 
 export interface ExtensionAPI {
   logger: any;
@@ -29,10 +27,10 @@ export class GraphQLExtensionsRegistry {
     documents: LoadersRegistry;
   };
 
-  constructor({cwd}: {cwd: string}) {
+  constructor({ cwd }: { cwd: string }) {
     this.loaders = {
-      schema: new LoadersRegistry({cwd}),
-      documents: new LoadersRegistry({cwd}),
+      schema: new LoadersRegistry({ cwd }),
+      documents: new LoadersRegistry({ cwd }),
     };
 
     // schema

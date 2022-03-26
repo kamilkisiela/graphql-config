@@ -18,7 +18,7 @@ module.exports = withBundleAnalyzer(
           source: '/legacy',
           destination: '/docs/recipes/migration',
         },
-      ]; 
+      ];
     },
   }),
 );
