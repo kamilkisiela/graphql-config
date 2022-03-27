@@ -5,7 +5,7 @@ import { createCosmiConfig, createCosmiConfigSync, ConfigSearchResult } from './
 const cwd = typeof process !== 'undefined' ? process.cwd() : undefined;
 
 export async function findConfig({
-  rootDir = cwd!,
+  rootDir = cwd,
   legacy = true,
   configName,
 }: {
@@ -22,7 +22,7 @@ export async function findConfig({
 }
 
 export function findConfigSync({
-  rootDir = cwd!,
+  rootDir = cwd,
   legacy = true,
   configName,
 }: {

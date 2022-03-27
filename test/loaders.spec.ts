@@ -17,18 +17,10 @@ const document = parse(/* GraphQL */ `
 jest.mock('@graphql-tools/load', () => {
   return {
     loadTypedefs: jest.fn(() => {
-      return [
-        {
-          document,
-        },
-      ];
+      return [{ document }];
     }),
     loadTypedefsSync: jest.fn(() => {
-      return [
-        {
-          document,
-        },
-      ];
+      return [{ document }];
     }),
     loadSchemaSync: jest.fn(() => {
       return schema;
@@ -85,22 +77,28 @@ describe('middlewares', () => {
 
 class CustomLoader implements Loader {
   private schema: GraphQLSchema;
+
   constructor(schema) {
     this.schema = schema;
   }
+
   loaderId(): string {
     return 'custom';
   }
+
   async canLoad(): Promise<boolean> {
     return true;
   }
+
   canLoadSync(): boolean {
     return true;
   }
-  async load(__dirname: String): Promise<Array<Source>> {
+
+  async load(): Promise<Source[]> {
     return [{ schema: this.schema }];
   }
-  loadSync(): Array<Source> {
+
+  loadSync(): Source[] {
     return [{ schema: this.schema }];
   }
 }
@@ -113,9 +111,9 @@ const differentSchema = buildSchema(/* GraphQL */ `
 
 describe('override', () => {
   beforeAll(() => {
-    (loadTypedefsSync as any).mockImplementation(jest.requireActual('@graphql-tools/load').loadTypedefsSync);
-    (loadSchemaSync as any).mockImplementation(jest.requireActual('@graphql-tools/load').loadSchemaSync);
-    (loadSchema as any).mockImplementation(jest.requireActual('@graphql-tools/load').loadSchema);
+    (loadTypedefsSync as jest.Mock).mockImplementation(jest.requireActual('@graphql-tools/load').loadTypedefsSync);
+    (loadSchemaSync as jest.Mock).mockImplementation(jest.requireActual('@graphql-tools/load').loadSchemaSync);
+    (loadSchema as jest.Mock).mockImplementation(jest.requireActual('@graphql-tools/load').loadSchema);
   });
 
   test('overrides default loaders', async () => {
@@ -145,8 +143,8 @@ describe('override', () => {
     const received = registry.loadSchemaSync('anything', null, customOptions);
     const receivedAsync = await registry.loadSchema('anything', null, customOptions);
 
-    expect(received.getQueryType().getFields()['bar']).toBeDefined();
-    expect(receivedAsync.getQueryType().getFields()['bar']).toBeDefined();
+    expect(received.getQueryType().getFields().bar).toBeDefined();
+    expect(receivedAsync.getQueryType().getFields().bar).toBeDefined();
     expect(loadSchema).toBeCalledWith('anything', expectedOptions);
 
     expect(loadSchemaSync).toBeCalledWith('anything', expectedOptions);

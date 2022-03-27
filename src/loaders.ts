@@ -13,7 +13,7 @@ import {
 } from '@graphql-tools/load';
 import { mergeTypeDefs } from '@graphql-tools/merge';
 import { GraphQLSchema, DocumentNode, buildASTSchema, print } from 'graphql';
-import { MiddlewareFn, useMiddleware } from './helpers/utils';
+import { MiddlewareFn, useMiddleware } from './helpers';
 
 type Pointer = UnnormalizedTypeDefPointer | UnnormalizedTypeDefPointer[];
 type LoadTypedefsOptions = Partial<ToolsLoadTypedefsOptions>;
@@ -94,10 +94,10 @@ export class LoadersRegistry {
   loadSchemaSync(pointer: Pointer, out: 'GraphQLSchema', options?: LoadSchemaOptions): GraphQLSchema;
   loadSchemaSync(
     pointer: Pointer,
-    out?: 'GraphQLSchema' | 'DocumentNode' | 'string',
+    out?: SchemaOutput,
     options?: LoadSchemaOptions,
   ): GraphQLSchema | DocumentNode | string {
-    out = out || ('GraphQLSchema' as const);
+    out = out || 'GraphQLSchema';
     const loadSchemaOptions = this.createOptions(options);
 
     if (out === 'GraphQLSchema' && !this._middlewares.length) {

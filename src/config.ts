@@ -107,9 +107,7 @@ export class GraphQLConfig {
   readonly filepath: string;
   readonly dirpath: string;
 
-  readonly projects: {
-    [name: string]: GraphQLProjectConfig;
-  };
+  readonly projects: Record<string, GraphQLProjectConfig> = Object.create(null);
 
   readonly extensions: GraphQLExtensionsRegistry;
 
@@ -126,8 +124,6 @@ export class GraphQLConfig {
       this.extensions.register(extension);
     });
 
-    this.projects = {};
-
     if (isMultipleProjectConfig(this._rawConfig)) {
       for (const projectName in this._rawConfig.projects) {
         const config = this._rawConfig.projects[projectName];
@@ -140,14 +136,14 @@ export class GraphQLConfig {
         });
       }
     } else if (isSingleProjectConfig(this._rawConfig)) {
-      this.projects['default'] = new GraphQLProjectConfig({
+      this.projects.default = new GraphQLProjectConfig({
         filepath: this.filepath,
         name: 'default',
         config: this._rawConfig,
         extensionsRegistry: this.extensions,
       });
     } else if (isLegacyProjectConfig(this._rawConfig)) {
-      this.projects['default'] = new GraphQLProjectConfig({
+      this.projects.default = new GraphQLProjectConfig({
         filepath: this.filepath,
         name: 'default',
         config: this._rawConfig,
@@ -173,24 +169,18 @@ export class GraphQLConfig {
   getProjectForFile(filepath: string): GraphQLProjectConfig | never {
     // Looks for a project that includes the file or the file is a part of schema or documents
     for (const projectName in this.projects) {
-      if (this.projects.hasOwnProperty(projectName)) {
-        const project = this.projects[projectName];
-
-        if (project.match(filepath)) {
-          return project;
-        }
+      const project = this.projects[projectName];
+      if (project?.match(filepath)) {
+        return project;
       }
     }
 
     // The file doesn't match any of the project
     // Looks for a first project that has no `include` and `exclude`
     for (const projectName in this.projects) {
-      if (this.projects.hasOwnProperty(projectName)) {
-        const project = this.projects[projectName];
-
-        if (!project.include && !project.exclude) {
-          return project;
-        }
+      const project = this.projects[projectName];
+      if (project && !project.include && !project.exclude) {
+        return project;
       }
     }
 

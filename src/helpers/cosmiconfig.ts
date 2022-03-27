@@ -43,9 +43,7 @@ export function createCosmiConfig(
 }
 
 export function createCosmiConfigSync(moduleName: string, { legacy }: { legacy: boolean }) {
-  const options = prepareCosmiconfig(moduleName, {
-    legacy,
-  });
+  const options = prepareCosmiconfig(moduleName, { legacy });
 
   return cosmiconfigSync(moduleName, options);
 }

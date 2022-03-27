@@ -188,13 +188,7 @@ export class GraphQLProjectConfig {
       return false;
     }
 
-    const isIncluded = this.include ? match(filepath, this.dirpath, this.include) : false;
-
-    if (isIncluded) {
-      return true;
-    }
-
-    return false;
+    return this.include ? match(filepath, this.dirpath, this.include) : false;
   }
 }
 
