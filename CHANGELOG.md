@@ -1,5 +1,12 @@
 # Change log
 
+## 4.2.0
+
+### Minor Changes
+
+- 0636e9a: feat: support `graphql.config.cjs` config
+- 55f078a: feat: update `graphql-tools` packages
+
 ### vNEXT
 
 ### v4.0.2
