@@ -1,11 +1,13 @@
 name: CI
+
 on:
   pull_request:
-    paths-ignore:
-      - 'website/**'
+    branches: [master]
+    paths-ignore: [website/**]
   push:
-    paths-ignore:
-      - 'website/**'
+    branches: [master]
+    paths-ignore: [website/**]
+
 jobs:
   test:
     name: Node ${{matrix.node_version}} on ${{matrix.os}}
@@ -25,7 +27,7 @@ jobs:
         id: yarn-cache
         with:
           path: node_modules
-          key: ${{runner.os}}-yarn-${{hashFiles('yarn.lock')}}
+          key: ${{runner.os}}-${{matrix.node_version}}-yarn-${{hashFiles('yarn.lock')}}
 
       - name: Install Dependencies
         run: yarn
