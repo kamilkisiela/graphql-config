@@ -20,16 +20,15 @@ const getRelevantChangesets = (baseBranch: string): string[] => {
     .trimEnd();
   console.log('compare point', comparePoint);
 
-  const listModifiedFiles = spawnSync('git', ['diff', '--name-only', comparePoint])
-    .stdout.toString()
-    .trimEnd()
-    .split('\n');
-  console.log('modified files', listModifiedFiles);
+  const modifiedFiles = spawnSync('git', ['diff', '--name-only', comparePoint]).stdout.toString().trimEnd().split('\n');
+  console.log('modified files', modifiedFiles);
 
-  const items = listModifiedFiles.filter((f) => f.startsWith('.changeset')).map((f) => basename(f, '.md'));
-  console.log('items', items);
+  const changesets = modifiedFiles
+    .filter((filePath) => filePath.startsWith('.changeset/'))
+    .map((filePath) => basename(filePath, '.md'));
+  console.log('changesets', changesets);
 
-  return items;
+  return changesets;
 };
 
 const updateVersions = async (): Promise<void | never> => {
@@ -37,7 +36,7 @@ const updateVersions = async (): Promise<void | never> => {
   const packages = await getPackages(cwd);
   const config = await readConfig(cwd, packages);
   const modifiedChangesets = getRelevantChangesets(config.baseBranch);
-  const changesets = (await readChangesets(cwd)).filter((change) => modifiedChangesets.includes(change.id));
+  const changesets = (await readChangesets(cwd)).filter((changeset) => modifiedChangesets.includes(changeset.id));
 
   if (changesets.length === 0) {
     throw new Error('Unable to find any relevant package for canary publishing. Please make sure changesets exists!');

@@ -2,43 +2,63 @@ name: Canary Release
 
 on:
   pull_request:
-    branches:
-      - master
+    branches: [master]
 
 jobs:
+  changes:
+    name: Check Changeset
+    runs-on: ubuntu-latest
+    outputs:
+      # Set job outputs to value from filter step
+      wasChangesetChanged: ${{steps.filter.outputs.changeset}}
+    steps:
+      - name: Check if changeset has been modified
+        uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          filters: |
+            changeset:
+              - added|modified: .changeset/*.md
   publish-canary:
     name: Publish Canary
     runs-on: ubuntu-latest
-    if: github.event.pull_request.head.repo.full_name == github.repository
+    needs: changes
+    if: github.event.pull_request.head.repo.full_name == github.repository && needs.changes.outputs.wasChangesetChanged == 'true'
     steps:
       - name: Checkout Master
         uses: actions/checkout@v3
         with:
           # This makes Actions fetch all Git history so that Changesets can generate changelogs with the correct commits
           fetch-depth: 0
+
       - name: Use Node
         uses: actions/setup-node@v2
         with:
-          node-version: '16.x'
+          node-version: 16
+
       - name: Configure Git Credentials
         run: |
           git config --global user.email "theguild-bot@users.noreply.github.com"
           git config --global user.name "theguild-bot"
           echo "machine github.com login theguild-bot password ${{secrets.BOT_TOKEN}}" > ~/.netrc
+
       - name: Setup NPM credentials
         run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
         env:
           NPM_TOKEN: ${{secrets.NPM_TOKEN}}
+
       - name: Cache Yarn
         uses: actions/cache@v2
         with:
           path: '**/node_modules'
-          key: ${{runner.os}}-16-8-16-node-modules-${{hashFiles('yarn.lock')}}
+          key: ${{runner.os}}-16-yarn-${{hashFiles('yarn.lock')}}
           restore-keys: |
-            ${{runner.os}}-16-8-16-node-modules-${{hashFiles('yarn.lock')}}
-            ${{runner.os}}-16-8-16-node-modules-
-      - name: Install Dependencies using Yarn
+            ${{runner.os}}-16-yarn-${{hashFiles('yarn.lock')}}
+            ${{runner.os}}-16-yarn
+
+      - name: Install Dependencies
         run: yarn
+
       - name: Release Canary
         id: canary
         uses: 'kamilkisiela/release-canary@master'
@@ -47,6 +67,7 @@ jobs:
           npm-token: ${{secrets.NPM_TOKEN}}
           npm-script: 'yarn release:canary'
           changesets: true
+
       - name: Publish a message
         if: steps.canary.outputs.released
         uses: 'kamilkisiela/pr-comment@master'
@@ -57,14 +78,15 @@ jobs:
             ${{steps.canary.outputs.changesetsPublishedPackages}}
             ```
           bot-token: ${{secrets.BOT_TOKEN}}
-          bot: 'theguild-bot'
+          bot: theguild-bot
           github-token: ${{secrets.GITHUB_TOKEN}}
-      - name: Publish a empty message
+
+      - name: Publish an empty message
         if: steps.canary.outputs.released == 'false'
         uses: 'kamilkisiela/pr-comment@master'
         with:
           message: |
             The latest changes of this PR are not available as alpha, since there are no linked `changesets` for this PR.
           bot-token: ${{secrets.BOT_TOKEN}}
-          bot: 'theguild-bot'
+          bot: theguild-bot
           github-token: ${{secrets.GITHUB_TOKEN}}

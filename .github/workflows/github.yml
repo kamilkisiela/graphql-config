@@ -1,10 +1,10 @@
 name: Sync labels
+
 on:
   push:
-    branches:
-      - master
-    paths:
-      - .github/labels.yml
+    branches: [master]
+    paths: [.github/labels.yml]
+
 jobs:
   build:
     runs-on: ubuntu-latest
