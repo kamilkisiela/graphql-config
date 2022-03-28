@@ -22,14 +22,15 @@
   "scripts": {
     "prepublishOnly": "yarn build",
     "clean": "rimraf dist",
+    "postinstall": "patch-package",
     "prebuild": "yarn clean && yarn json-schema",
     "build": "bob build --single",
     "prepack": "bob prepack",
     "format": "prettier --write \"{src,test}/**/*.{ts,graphql}\"",
     "lint": "eslint --ignore-path .gitignore --ignore-pattern website \"{src,test}/**/*.ts\"",
     "test": "jest",
-    "release": "cd dist && npm publish",
-    "release:canary": "yarn build && node ./scripts/canary.js && npm publish dist --tag canary",
+    "release": "changeset publish",
+    "release:canary": "(ts-node --compiler-options='{\"module\":\"commonjs\"}' scripts/canary-release.ts && yarn build && yarn changeset publish --tag alpha) || echo Skipping Canary...",
     "json-schema": "typescript-json-schema src/types.ts IGraphQLConfig --out config-schema.json --ignoreErrors --required --titles && prettier --write config-schema.json"
   },
   "peerDependencies": {
@@ -49,6 +50,7 @@
     "string-env-interpolation": "1.0.1"
   },
   "devDependencies": {
+    "@changesets/cli": "2.21.1",
     "@types/jest": "27.4.1",
     "@types/node": "16.11.26",
     "@typescript-eslint/parser": "5.16.0",
@@ -61,6 +63,7 @@
     "lint-staged": "12.3.7",
     "make-dir": "3.1.0",
     "parent-module": "2.0.0",
+    "patch-package": "6.4.7",
     "prettier": "2.6.1",
     "rimraf": "3.0.2",
     "ts-jest": "27.1.4",
