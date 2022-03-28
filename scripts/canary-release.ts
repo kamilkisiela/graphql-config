@@ -9,7 +9,7 @@ import assembleReleasePlan from '@changesets/assemble-release-plan';
 import applyReleasePlan from '@changesets/apply-release-plan';
 
 const getNewVersion = (version: string, type: 'major' | 'minor' | 'patch'): string => {
-  const gitHash = spawnSync('git', ['rev-parse', '--short', 'HEAD']).stdout.toString().trim();
+  const gitHash = spawnSync('git', ['rev-parse', '--short', 'HEAD']).stdout.toString().trimEnd();
 
   return semver.inc(version, `pre${type}`, true, `alpha-${gitHash}`);
 };
@@ -17,14 +17,14 @@ const getNewVersion = (version: string, type: 'major' | 'minor' | 'patch'): stri
 const getRelevantChangesets = (baseBranch: string): string[] => {
   const comparePoint = spawnSync('git', ['merge-base', `origin/${baseBranch}`, 'HEAD'])
     .stdout.toString()
-    .trim();
+    .trimEnd();
   console.log('compare point', comparePoint);
 
   const listModifiedFiles = spawnSync('git', ['diff', '--name-only', comparePoint])
     .stdout.toString()
-    .trim()
+    .trimEnd()
     .split('\n');
-  console.log('listModifiedFiles', listModifiedFiles);
+  console.log('modified files', listModifiedFiles);
 
   const items = listModifiedFiles.filter((f) => f.startsWith('.changeset')).map((f) => basename(f, '.md'));
   console.log('items', items);
@@ -68,5 +68,5 @@ const updateVersions = async (): Promise<void | never> => {
 };
 
 updateVersions().then(() => {
-  console.info('✅ Done!');
+  console.info('✅  Done!');
 });

@@ -1,5 +1,5 @@
 diff --git a/node_modules/@changesets/apply-release-plan/dist/apply-release-plan.cjs.prod.js b/node_modules/@changesets/apply-release-plan/dist/apply-release-plan.cjs.prod.js
-index a327caf..37c258b 100644
+index 477552c..3f6fa1a 100644
 --- a/node_modules/@changesets/apply-release-plan/dist/apply-release-plan.cjs.prod.js
 +++ b/node_modules/@changesets/apply-release-plan/dist/apply-release-plan.cjs.prod.js
 @@ -64,7 +64,7 @@ function shouldUpdateDependencyBasedOnConfig(release, {depVersionRange: depVersi
@@ -7,7 +7,7 @@ index a327caf..37c258b 100644
  const DEPENDENCY_TYPES = [ "dependencies", "devDependencies", "peerDependencies", "optionalDependencies" ];
  
 -function versionPackage(release, versionsToUpdate, {updateInternalDependencies: updateInternalDependencies, onlyUpdatePeerDependentsWhenOutOfRange: onlyUpdatePeerDependentsWhenOutOfRange, bumpVersionsWithWorkspaceProtocolOnly: bumpVersionsWithWorkspaceProtocolOnly}) {
-+function versionPackage(release, versionsToUpdate, {ignoreRange, updateInternalDependencies: updateInternalDependencies, onlyUpdatePeerDependentsWhenOutOfRange: onlyUpdatePeerDependentsWhenOutOfRange, bumpVersionsWithWorkspaceProtocolOnly: bumpVersionsWithWorkspaceProtocolOnly}) {
++function versionPackage(release, versionsToUpdate, {updateInternalDependencies, onlyUpdatePeerDependentsWhenOutOfRange, bumpVersionsWithWorkspaceProtocolOnly, ignoreRange}) {
    let {newVersion: newVersion, packageJson: packageJson} = release;
    packageJson.version = newVersion;
    for (let depType of DEPENDENCY_TYPES) {
@@ -20,16 +20,16 @@ index a327caf..37c258b 100644
            usesWorkspaceRange && (newNewRange = "workspace:" + newNewRange), deps[name] = newNewRange;
          }
        }
-@@ -167,7 +167,7 @@ async function getCommitsThatAddChangesets(changesetIds, cwd) {
+@@ -156,7 +156,7 @@ async function getCommitsThatAddChangesets(changesetIds, cwd) {
    })), commits;
  }
  
 -async function applyReleasePlan(releasePlan, packages, config$1 = config.defaultConfig, snapshot) {
-+async function applyReleasePlan(releasePlan, packages, config$1 = config.defaultConfig, snapshot, ignoreRange = false) {
++async function applyReleasePlan(releasePlan, packages, config$1 = config.defaultConfig, snapshot, ignoreRange) {
    let cwd = packages.root.dir, touchedFiles = [];
    const packagesByName = new Map(packages.packages.map((x => [ x.packageJson.name, x ])));
-   let {releases: releases, changesets: changesets} = releasePlan;
-@@ -183,6 +183,7 @@ async function applyReleasePlan(releasePlan, packages, config$1 = config.default
+   let {releases: releases, changesets: changesets} = releasePlan, releasesWithPackage = releases.map((release => {
+@@ -170,6 +170,7 @@ async function applyReleasePlan(releasePlan, packages, config$1 = config.default
      version: newVersion,
      type: type
    }))), finalisedRelease = releaseWithChangelogs.map((release => versionPackage(release, versionsToUpdate, {
