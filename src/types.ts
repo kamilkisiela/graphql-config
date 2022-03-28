@@ -1,4 +1,4 @@
-export type PointerWithConfiguration<T = any> = {[key: string]: T};
+export type PointerWithConfiguration<T = any> = { [key: string]: T };
 
 /**
  * Configuration of each used extension
@@ -19,10 +19,7 @@ export interface IGraphQLProjects {
 /**
  * Structure of GraphQL Config
  */
-export type IGraphQLConfig =
-  | IGraphQLProject
-  | IGraphQLProjects
-  | IGraphQLProjectLegacy;
+export type IGraphQLConfig = IGraphQLProject | IGraphQLProjects | IGraphQLProjectLegacy;
 
 /**
  * Legacy structure of GraphQL Config v2

@@ -1,19 +1,13 @@
-type PromiseOf<T extends (...args: any[]) => any> = T extends (
-  ...args: any[]
-) => Promise<infer R>
-  ? R
-  : ReturnType<T>;
+type PromiseOf<T extends (...args: any[]) => any> = T extends (...args: any[]) => Promise<infer R> ? R : ReturnType<T>;
 
 export function runTests<
   TSync extends (...args: any[]) => TResult,
   TAsync extends (...args: any[]) => Promise<TResult>,
-  TResult = ReturnType<TSync>
->({sync: executeSync, async: executeAsync}: {sync: TSync; async: TAsync}) {
+  TResult = ReturnType<TSync>,
+>({ sync: executeSync, async: executeAsync }: { sync: TSync; async: TAsync }) {
   return (
     testRunner: (
-      executeFn: (
-        ...args: Parameters<TSync | TAsync>
-      ) => Promise<PromiseOf<TSync | TAsync>>,
+      executeFn: (...args: Parameters<TSync | TAsync>) => Promise<PromiseOf<TSync | TAsync>>,
       mode: 'sync' | 'async',
     ) => void,
   ) => {

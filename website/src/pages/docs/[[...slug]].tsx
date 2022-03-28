@@ -4,12 +4,7 @@ import { DocsContent, DocsTOC, MDXPage } from '@guild-docs/client';
 import { MDXPaths, MDXProps } from '@guild-docs/server';
 import { getRoutes } from '../../../routes';
 
-export default MDXPage(function PostPage({
-  content,
-  TOC,
-  MetaHead,
-  BottomNavigation,
-}) {
+export default MDXPage(function PostPage({ content, TOC, MetaHead, BottomNavigation }) {
   return (
     <>
       <Head>{MetaHead}</Head>

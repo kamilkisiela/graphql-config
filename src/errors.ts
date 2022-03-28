@@ -1,6 +1,7 @@
+// eslint-disable-next-line @typescript-eslint/ban-types -- TODO: fix lint error
 function ExtendableBuiltin<T extends Function>(cls: T): T {
-  function ExtendableBuiltin(this: any) {
-    cls.apply(this, arguments);
+  function ExtendableBuiltin(this: any, ...args) {
+    cls.apply(this, args);
   }
   ExtendableBuiltin.prototype = Object.create(cls.prototype);
   Object.setPrototypeOf(ExtendableBuiltin, cls);
