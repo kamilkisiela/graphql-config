@@ -54,8 +54,9 @@ function prepareCosmiconfig(moduleName: string, { legacy }: { legacy: boolean })
   const loadJson = createCustomLoader(defaultLoaders['.json']);
 
   const searchPlaces = [
-    `#.config.ts`,
-    `#.config.js`,
+    '#.config.ts',
+    '#.config.js',
+    '#.config.cjs',
     '#.config.json',
     '#.config.yaml',
     '#.config.yml',

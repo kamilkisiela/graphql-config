@@ -124,6 +124,7 @@ runTests({ async: loadConfig, sync: loadConfigSync })((load, mode) => {
       // #.config files
       [`${moduleName}.config.ts`, tsConfig],
       [`${moduleName}.config.js`, jsConfig],
+      [`${moduleName}.config.cjs`, jsConfig],
       [`${moduleName}.config.json`, jsonConfig],
       [`${moduleName}.config.yaml`, yamlConfig],
       [`${moduleName}.config.yml`, yamlConfig],
