@@ -45,7 +45,7 @@
     "@graphql-tools/utils": "^8.5.1",
     "cosmiconfig": "7.0.1",
     "cosmiconfig-toml-loader": "1.0.0",
-    "minimatch": "5.0.1",
+    "minimatch": "4.2.1",
     "string-env-interpolation": "1.0.1"
   },
   "devDependencies": {
@@ -60,7 +60,7 @@
     "jest": "27.5.1",
     "lint-staged": "12.3.7",
     "make-dir": "3.1.0",
-    "parent-module": "3.0.0",
+    "parent-module": "2.0.0",
     "prettier": "2.6.1",
     "rimraf": "3.0.2",
     "ts-jest": "27.1.4",
