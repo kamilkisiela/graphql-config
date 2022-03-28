@@ -31,7 +31,7 @@
     "lint": "eslint --ignore-path .gitignore .",
     "test": "jest",
     "release": "changeset publish",
-    "release:canary": "(ts-node --compiler-options='{\"module\":\"commonjs\"}' scripts/canary-release.ts && yarn build && yarn changeset publish --tag alpha) || echo Skipping Canary...",
+    "release:canary": "ts-node --compiler-options='{\"module\":\"commonjs\"}' scripts/canary-release.ts && yarn build && yarn changeset publish --tag alpha",
     "json-schema": "typescript-json-schema src/types.ts IGraphQLConfig --out config-schema.json --ignoreErrors --required --titles && prettier --write config-schema.json"
   },
   "peerDependencies": {
@@ -39,12 +39,12 @@
   },
   "dependencies": {
     "@endemolshinegroup/cosmiconfig-typescript-loader": "3.0.2",
-    "@graphql-tools/graphql-file-loader": "^7.3.2",
-    "@graphql-tools/json-file-loader": "^7.3.2",
-    "@graphql-tools/load": "^7.4.1",
-    "@graphql-tools/merge": "^8.2.1",
-    "@graphql-tools/url-loader": "^7.4.2",
-    "@graphql-tools/utils": "^8.5.1",
+    "@graphql-tools/graphql-file-loader": "^7.3.7",
+    "@graphql-tools/json-file-loader": "^7.3.7",
+    "@graphql-tools/load": "^7.5.5",
+    "@graphql-tools/merge": "^8.2.6",
+    "@graphql-tools/url-loader": "^7.9.7",
+    "@graphql-tools/utils": "^8.6.5",
     "cosmiconfig": "7.0.1",
     "cosmiconfig-toml-loader": "1.0.0",
     "minimatch": "4.2.1",
@@ -105,6 +105,10 @@
     "hooks": {
       "pre-commit": "lint-staged"
     }
+  },
+  "publishConfig": {
+    "directory": "dist",
+    "access": "public"
   },
   "engines": {
     "node": ">= 10.0.0"
