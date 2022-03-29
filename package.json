@@ -1,6 +1,6 @@
 {
   "name": "graphql-config",
-  "version": "4.2.0",
+  "version": "4.1.0",
   "description": "The easiest way to configure your development environment with your GraphQL schema (supported by most tools, editors & IDEs)",
   "sideEffects": false,
   "main": "dist/index.js",
@@ -30,6 +30,7 @@
     "prettier:check": "prettier --ignore-path .gitignore --check .",
     "lint": "eslint --ignore-path .gitignore .",
     "test": "jest",
+    "prerelease": "yarn build",
     "release": "changeset publish",
     "release:canary": "ts-node --compiler-options='{\"module\":\"commonjs\"}' scripts/canary-release.ts && yarn build && yarn changeset publish --tag alpha",
     "json-schema": "typescript-json-schema src/types.ts IGraphQLConfig --out config-schema.json --ignoreErrors --required --titles && prettier --write config-schema.json"
