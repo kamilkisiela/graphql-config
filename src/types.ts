@@ -3,13 +3,17 @@ export type PointerWithConfiguration<T = any> = { [key: string]: T };
 /**
  * Configuration of each used extension
  */
-export type IExtensions = Record<string, any>;
+export interface IExtensions {
+  [name: string]: any;
+}
 
 /**
  * Multiple named projects
  */
 export interface IGraphQLProjects {
-  projects: Record<string, IGraphQLProject | IGraphQLProjectLegacy>;
+  projects: {
+    [name: string]: IGraphQLProject | IGraphQLProjectLegacy;
+  };
 }
 
 /**
@@ -24,12 +28,20 @@ export interface IGraphQLProjectLegacy {
   schemaPath: string;
   includes?: string[];
   excludes?: string[];
-  extensions?: Record<string, any>;
+  extensions?: IExtensions;
 }
 
 export declare type WithList<T> = T | T[];
 export declare type ElementOf<TList> = TList extends Array<infer TElement> ? TElement : never;
-export declare type SchemaPointer = WithList<string> | Record<string, { headers: Record<string, string> }>[];
+export declare type SchemaPointer =
+  | WithList<string>
+  | {
+      [url: string]: {
+        headers: {
+          [name: string]: string;
+        };
+      };
+    }[];
 export declare type SchemaPointerSingle = ElementOf<SchemaPointer>;
 export declare type DocumentGlobPathPointer = string;
 export declare type DocumentPointer = WithList<DocumentGlobPathPointer>;

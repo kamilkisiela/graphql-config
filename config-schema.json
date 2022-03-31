@@ -13,6 +13,7 @@
   ],
   "definitions": {
     "IExtensions": {
+      "additionalProperties": {},
       "description": "Configuration of each used extension",
       "title": "IExtensions",
       "type": "object"
@@ -76,7 +77,20 @@
             },
             {
               "items": {
-                "$ref": "#/definitions/Record<string,{headers:Record<string,string>;}>"
+                "additionalProperties": {
+                  "properties": {
+                    "headers": {
+                      "additionalProperties": {
+                        "type": "string"
+                      },
+                      "title": "headers",
+                      "type": "object"
+                    }
+                  },
+                  "required": ["headers"],
+                  "type": "object"
+                },
+                "type": "object"
               },
               "type": "array"
             },
@@ -102,7 +116,7 @@
           "type": "array"
         },
         "extensions": {
-          "$ref": "#/definitions/Record<string,any>",
+          "$ref": "#/definitions/IExtensions",
           "title": "extensions"
         },
         "includes": {
@@ -125,24 +139,22 @@
       "description": "Multiple named projects",
       "properties": {
         "projects": {
-          "$ref": "#/definitions/Record<string,IGraphQLProject|IGraphQLProjectLegacy>",
-          "title": "projects"
+          "additionalProperties": {
+            "anyOf": [
+              {
+                "$ref": "#/definitions/IGraphQLProject"
+              },
+              {
+                "$ref": "#/definitions/IGraphQLProjectLegacy"
+              }
+            ]
+          },
+          "title": "projects",
+          "type": "object"
         }
       },
       "required": ["projects"],
       "title": "IGraphQLProjects",
-      "type": "object"
-    },
-    "Record<string,IGraphQLProject|IGraphQLProjectLegacy>": {
-      "title": "Record<string,IGraphQLProject|IGraphQLProjectLegacy>",
-      "type": "object"
-    },
-    "Record<string,any>": {
-      "title": "Record<string,any>",
-      "type": "object"
-    },
-    "Record<string,{headers:Record<string,string>;}>": {
-      "title": "Record<string,{headers:Record<string,string>;}>",
       "type": "object"
     }
   },
