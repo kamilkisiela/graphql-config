@@ -75,7 +75,10 @@
               "type": "array"
             },
             {
-              "$ref": "#/definitions/Record<string,{headers:Record<string,string>;}>"
+              "items": {
+                "$ref": "#/definitions/Record<string,{headers:Record<string,string>;}>"
+              },
+              "type": "array"
             },
             {
               "type": "string"

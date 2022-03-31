@@ -70,7 +70,7 @@ export class LoadersRegistry {
     out?: SchemaOutput,
     options?: LoadSchemaOptions,
   ): Promise<GraphQLSchema | DocumentNode | string> {
-    out = out || ('GraphQLSchema' as const);
+    out = out || 'GraphQLSchema';
     const loadSchemaOptions = this.createOptions(options);
 
     if (out === 'GraphQLSchema' && !this._middlewares.length) {
