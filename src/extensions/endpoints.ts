@@ -7,6 +7,7 @@ export interface Endpoint {
   introspect?: boolean;
   subscription?: {
     url: string;
+    // TODO: remove undefined in v5
     connectionParams?: Record<string, string | undefined>;
   };
 }
