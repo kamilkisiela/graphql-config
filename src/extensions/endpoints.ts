@@ -1,20 +1,17 @@
-import { GraphQLExtensionDeclaration } from '../extension';
+import type { GraphQLExtensionDeclaration } from '../extension';
+import type { WithList } from '../types';
 
 export interface Endpoint {
   url: string;
-  headers?: {
-    [name: string]: string | string[];
-  };
+  headers?: Record<string, WithList<string>>;
   introspect?: boolean;
   subscription?: {
     url: string;
-    connectionParams?: { [name: string]: string | undefined };
+    connectionParams?: Record<string, string | undefined>;
   };
 }
 
-export interface Endpoints {
-  [key: string]: Endpoint;
-}
+export type Endpoints = Record<string, Endpoint>;
 
 export const EndpointsExtension: GraphQLExtensionDeclaration = () => {
   return {

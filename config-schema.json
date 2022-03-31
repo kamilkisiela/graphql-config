@@ -13,7 +13,6 @@
   ],
   "definitions": {
     "IExtensions": {
-      "additionalProperties": {},
       "description": "Configuration of each used extension",
       "title": "IExtensions",
       "type": "object"
@@ -76,6 +75,9 @@
               "type": "array"
             },
             {
+              "$ref": "#/definitions/Record<string,{headers:Record<string,string>;}>"
+            },
+            {
               "type": "string"
             }
           ],
@@ -97,9 +99,8 @@
           "type": "array"
         },
         "extensions": {
-          "additionalProperties": {},
-          "title": "extensions",
-          "type": "object"
+          "$ref": "#/definitions/Record<string,any>",
+          "title": "extensions"
         },
         "includes": {
           "items": {
@@ -121,22 +122,24 @@
       "description": "Multiple named projects",
       "properties": {
         "projects": {
-          "additionalProperties": {
-            "anyOf": [
-              {
-                "$ref": "#/definitions/IGraphQLProject"
-              },
-              {
-                "$ref": "#/definitions/IGraphQLProjectLegacy"
-              }
-            ]
-          },
-          "title": "projects",
-          "type": "object"
+          "$ref": "#/definitions/Record<string,IGraphQLProject|IGraphQLProjectLegacy>",
+          "title": "projects"
         }
       },
       "required": ["projects"],
       "title": "IGraphQLProjects",
+      "type": "object"
+    },
+    "Record<string,IGraphQLProject|IGraphQLProjectLegacy>": {
+      "title": "Record<string,IGraphQLProject|IGraphQLProjectLegacy>",
+      "type": "object"
+    },
+    "Record<string,any>": {
+      "title": "Record<string,any>",
+      "type": "object"
+    },
+    "Record<string,{headers:Record<string,string>;}>": {
+      "title": "Record<string,{headers:Record<string,string>;}>",
       "type": "object"
     }
   },

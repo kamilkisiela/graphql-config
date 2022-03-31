@@ -1,17 +1,17 @@
-import { GraphQLSchema, DocumentNode } from 'graphql';
 import { dirname, isAbsolute, relative, normalize } from 'path';
-import { Source } from '@graphql-tools/utils';
+import type { GraphQLSchema, DocumentNode } from 'graphql';
+import type { Source } from '@graphql-tools/utils';
 import minimatch from 'minimatch';
-import { ExtensionMissingError } from './errors';
-import { GraphQLExtensionsRegistry } from './extension';
-import { IExtensions, IGraphQLProject, IGraphQLProjectLegacy } from './types';
 import {
   LoadSchemaOptions as ToolsLoadSchemaOptions,
   LoadTypedefsOptions as ToolsLoadTypedefsOptions,
   UnnormalizedTypeDefPointer,
 } from '@graphql-tools/load';
+import { ExtensionMissingError } from './errors';
+import type { GraphQLExtensionsRegistry } from './extension';
+import type { IExtensions, IGraphQLProject, IGraphQLProjectLegacy, WithList } from './types';
 import { isLegacyProjectConfig } from './helpers';
-import { SchemaOutput } from './loaders';
+import type { SchemaOutput } from './loaders';
 
 type Pointer = UnnormalizedTypeDefPointer | UnnormalizedTypeDefPointer[];
 type LoadTypedefsOptions = Partial<ToolsLoadTypedefsOptions>;
@@ -20,8 +20,8 @@ type LoadSchemaOptions = Partial<ToolsLoadSchemaOptions>;
 export class GraphQLProjectConfig {
   readonly schema: Pointer;
   readonly documents?: UnnormalizedTypeDefPointer | UnnormalizedTypeDefPointer[];
-  readonly include?: string | string[];
-  readonly exclude?: string | string[];
+  readonly include?: WithList<string>;
+  readonly exclude?: WithList<string>;
   readonly extensions: IExtensions;
   readonly filepath: string;
   readonly dirpath: string;
@@ -44,15 +44,14 @@ export class GraphQLProjectConfig {
     this.filepath = filepath;
     this.dirpath = dirname(filepath);
     this.name = name;
+    this.extensions = config.extensions || {};
 
     if (isLegacyProjectConfig(config)) {
-      this.extensions = config.extensions || {};
       this.schema = config.schemaPath;
       this.include = config.includes;
       this.exclude = config.excludes;
       this.isLegacy = true;
     } else {
-      this.extensions = config.extensions || {};
       this.schema = config.schema;
       this.documents = config.documents;
       this.include = config.include;
@@ -64,7 +63,7 @@ export class GraphQLProjectConfig {
   }
 
   hasExtension(name: string): boolean {
-    return !!this.extensions[name];
+    return Boolean(this.extensions[name]);
   }
 
   extension<T = any>(name: string): T {
