@@ -105,7 +105,9 @@ export class GraphQLConfig {
   private readonly _rawConfig: IGraphQLConfig;
   readonly filepath: string;
   readonly dirpath: string;
-  readonly projects: Record<string, GraphQLProjectConfig> = Object.create(null);
+  // TODO: in v5 change projects to `Object.create(null)` and refactor `graphql-codegen-cli` to remove `projects.hasOwnProperty`
+  // https://github.com/dotansimha/graphql-code-generator/blob/3c6abbde7a20515d9a1d55b4003ef365d248efb5/packages/graphql-codegen-cli/src/graphql-config.ts#L62-L72
+  readonly projects: Record<string, GraphQLProjectConfig> = {};
   readonly extensions: GraphQLExtensionsRegistry;
 
   constructor(raw: GraphQLConfigResult, extensions: GraphQLExtensionDeclaration[]) {
