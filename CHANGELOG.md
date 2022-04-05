@@ -1,5 +1,11 @@
 # Change log
 
+## 4.3.0
+
+### Minor Changes
+
+- aaccd04: feat: improve types to fix JSON schema when schema is passed like object with headers
+
 ## 4.2.0
 
 ### Minor Changes
