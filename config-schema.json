@@ -76,6 +76,25 @@
               "type": "array"
             },
             {
+              "items": {
+                "additionalProperties": {
+                  "properties": {
+                    "headers": {
+                      "additionalProperties": {
+                        "type": "string"
+                      },
+                      "title": "headers",
+                      "type": "object"
+                    }
+                  },
+                  "required": ["headers"],
+                  "type": "object"
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            {
               "type": "string"
             }
           ],
@@ -97,9 +116,8 @@
           "type": "array"
         },
         "extensions": {
-          "additionalProperties": {},
-          "title": "extensions",
-          "type": "object"
+          "$ref": "#/definitions/IExtensions",
+          "title": "extensions"
         },
         "includes": {
           "items": {

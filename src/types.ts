@@ -28,14 +28,20 @@ export interface IGraphQLProjectLegacy {
   schemaPath: string;
   includes?: string[];
   excludes?: string[];
-  extensions?: {
-    [name: string]: any;
-  };
+  extensions?: IExtensions;
 }
 
 export declare type WithList<T> = T | T[];
 export declare type ElementOf<TList> = TList extends Array<infer TElement> ? TElement : never;
-export declare type SchemaPointer = WithList<string>;
+export declare type SchemaPointer =
+  | WithList<string>
+  | {
+      [url: string]: {
+        headers: {
+          [name: string]: string;
+        };
+      };
+    }[];
 export declare type SchemaPointerSingle = ElementOf<SchemaPointer>;
 export declare type DocumentGlobPathPointer = string;
 export declare type DocumentPointer = WithList<DocumentGlobPathPointer>;
@@ -47,8 +53,8 @@ export interface IGraphQLProject {
   schema: SchemaPointer;
   documents?: DocumentPointer;
   extensions?: IExtensions;
-  include?: string | string[];
-  exclude?: string | string[];
+  include?: WithList<string>;
+  exclude?: WithList<string>;
 }
 
 export interface GraphQLConfigResult {

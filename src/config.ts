@@ -1,5 +1,5 @@
 import { dirname } from 'path';
-import { IGraphQLConfig, GraphQLConfigResult } from './types';
+import type { IGraphQLConfig, GraphQLConfigResult } from './types';
 import { GraphQLProjectConfig } from './project-config';
 import {
   isMultipleProjectConfig,
@@ -103,12 +103,9 @@ function handleError(
 
 export class GraphQLConfig {
   private readonly _rawConfig: IGraphQLConfig;
-
   readonly filepath: string;
   readonly dirpath: string;
-
   readonly projects: Record<string, GraphQLProjectConfig> = Object.create(null);
-
   readonly extensions: GraphQLExtensionsRegistry;
 
   constructor(raw: GraphQLConfigResult, extensions: GraphQLExtensionDeclaration[]) {
@@ -120,14 +117,12 @@ export class GraphQLConfig {
     // Register Endpoints
     this.extensions.register(EndpointsExtension);
 
-    extensions.forEach((extension) => {
+    for (const extension of extensions) {
       this.extensions.register(extension);
-    });
+    }
 
     if (isMultipleProjectConfig(this._rawConfig)) {
-      for (const projectName in this._rawConfig.projects) {
-        const config = this._rawConfig.projects[projectName];
-
+      for (const [projectName, config] of Object.entries(this._rawConfig.projects)) {
         this.projects[projectName] = new GraphQLProjectConfig({
           filepath: this.filepath,
           name: projectName,
@@ -135,14 +130,7 @@ export class GraphQLConfig {
           extensionsRegistry: this.extensions,
         });
       }
-    } else if (isSingleProjectConfig(this._rawConfig)) {
-      this.projects.default = new GraphQLProjectConfig({
-        filepath: this.filepath,
-        name: 'default',
-        config: this._rawConfig,
-        extensionsRegistry: this.extensions,
-      });
-    } else if (isLegacyProjectConfig(this._rawConfig)) {
+    } else if (isSingleProjectConfig(this._rawConfig) || isLegacyProjectConfig(this._rawConfig)) {
       this.projects.default = new GraphQLProjectConfig({
         filepath: this.filepath,
         name: 'default',
@@ -168,18 +156,16 @@ export class GraphQLConfig {
 
   getProjectForFile(filepath: string): GraphQLProjectConfig | never {
     // Looks for a project that includes the file or the file is a part of schema or documents
-    for (const projectName in this.projects) {
-      const project = this.projects[projectName];
-      if (project?.match(filepath)) {
+    for (const project of Object.values(this.projects)) {
+      if (project.match(filepath)) {
         return project;
       }
     }
 
     // The file doesn't match any of the project
     // Looks for a first project that has no `include` and `exclude`
-    for (const projectName in this.projects) {
-      const project = this.projects[projectName];
-      if (project && !project.include && !project.exclude) {
+    for (const project of Object.values(this.projects)) {
+      if (!project.include && !project.exclude) {
         return project;
       }
     }
