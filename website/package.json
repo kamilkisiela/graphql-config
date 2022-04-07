@@ -41,7 +41,7 @@
     "@next/bundle-analyzer": "12.1.4",
     "@types/node": "16.11.26",
     "@types/react": "17.0.43",
-    "@types/react-dom": "17.0.14",
+    "@types/react-dom": "17.0.15",
     "@typescript-eslint/eslint-plugin": "5.18.0",
     "@typescript-eslint/parser": "5.18.0",
     "concurrently": "7.1.0",
