@@ -8,7 +8,7 @@ GraphQL Config supports not only a schema but GraphQL Operations and Fragments t
 
 You can specify a list of files:
 
-```yml
+```yaml
 documents:
   - ./documents/foo.graphql
   - ./documents/bar.graphql
@@ -17,7 +17,7 @@ documents:
 
 Use a glob pattern to find and include operations and fragments:
 
-```yml
+```yaml
 documents: ./documents/*.graphql
 ```
 

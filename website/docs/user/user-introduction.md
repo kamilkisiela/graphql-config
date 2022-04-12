@@ -27,7 +27,7 @@ Learn more in [usage docs](usage)
 
 ### `.graphqlrc`, or `.graphqlrc.yml/yaml`
 
-```yml
+```yaml
 schema: 'packages/api/src/schema.graphql'
 documents: 'packages/app/src/components/**/*.graphql'
 extensions:

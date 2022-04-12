@@ -26,7 +26,7 @@ title: Usage
 
 The simplest config specifies only `schema` which points to the source of GraphQL Schema.
 
-```yml
+```yaml
 schema: ./schema.graphql
 ```
 
@@ -61,7 +61,7 @@ exclude: src/components/__ignored__/**/*.jsx
 
 In order to pass information to GraphQL Config's consumers (like IDE extensions, Node libraries), you can use an `extensions` section that is a key-value object.
 
-```yml
+```yaml
 schema: './schema/*.graphql'
 extensions:
   codegen:
@@ -80,14 +80,14 @@ GraphQL Config allows you to define multiple projects within the same config fil
 
 Consider, for instance, writing the following configuration:
 
-```yml
+```yaml
 schema: './schema.graphql'
 documents: './src/components/**/*.graphql'
 ```
 
 This basically creates a singular, default project. In order to extend configuration to multiple projects, you can use the following approach:
 
-```yml
+```yaml
 projects:
   foo:
     schema: './packages/foo/schema.graphql'
@@ -98,7 +98,7 @@ projects:
 
 It's also possible to define many projects where one is the default. You can simply add `default` as that project's name:
 
-```yml
+```yaml
 projects:
   default:
     schema: './packages/foo/schema.graphql'

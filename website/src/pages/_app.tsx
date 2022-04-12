@@ -4,7 +4,7 @@ import Script from 'next/script';
 import { appWithTranslation } from 'next-i18next';
 import { extendTheme, theme as chakraTheme } from '@chakra-ui/react';
 import { mode } from '@chakra-ui/theme-tools';
-import { handlePushRoute, CombinedThemeProvider, DocsPage, AppSeoProps, GoogleAnalytics } from '@guild-docs/client';
+import { handlePushRoute, CombinedThemeProvider, DocsPage, AppSeoProps, useGoogleAnalytics } from '@guild-docs/client';
 import { Header, Subheader, FooterExtended } from '@theguild/components';
 import 'remark-admonitions/styles/infima.css';
 import '../../public/style.css';
@@ -53,6 +53,10 @@ const mdxRoutes = { data: serializedMdx && JSON.parse(serializedMdx) };
 const AppContent: FC<AppProps> = (appProps) => {
   const { Component, pageProps, router } = appProps;
   const isDocs = router.asPath.startsWith('/docs');
+  const googleAnalytics = useGoogleAnalytics({
+    router,
+    trackingId: 'UA-125180910-4'
+  })
 
   return (
     <>
@@ -91,7 +95,8 @@ const AppContent: FC<AppProps> = (appProps) => {
           onClick: (e) => handlePushRoute('/docs/user/user-introduction', e),
         }}
       />
-      <GoogleAnalytics trackingId="UA-125180910-4" />
+      <Script {...googleAnalytics.loadScriptProps} />
+      <Script {...googleAnalytics.configScriptProps} />
       {isDocs ? (
         <DocsPage appProps={appProps} accentColor={accentColor} mdxRoutes={mdxRoutes} />
       ) : (
