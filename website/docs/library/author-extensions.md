@@ -154,7 +154,7 @@ export const typeDefs = gql`
 
 With `CodeFileLoader` you can extract those GraphQL pieces:
 
-```yml
+```yaml
 schema: './src/modules/*.ts' # uses a glob pattern to look for files
 extensions:
   inspector:
