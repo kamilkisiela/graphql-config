@@ -54,7 +54,7 @@ const AppContent: FC<AppProps> = (appProps) => {
   const isDocs = router.asPath.startsWith('/docs');
   const googleAnalytics = useGoogleAnalytics({
     router,
-    trackingId: 'UA-125180910-4'
+    trackingId: 'G-JSN4LT7S7V'
   })
 
   return (
