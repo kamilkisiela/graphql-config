@@ -6,7 +6,6 @@ import { extendTheme, theme as chakraTheme } from '@chakra-ui/react';
 import { mode } from '@chakra-ui/theme-tools';
 import { handlePushRoute, CombinedThemeProvider, DocsPage, AppSeoProps, useGoogleAnalytics } from '@guild-docs/client';
 import { Header, Subheader, FooterExtended } from '@theguild/components';
-import 'remark-admonitions/styles/infima.css';
 import '../../public/style.css';
 
 const styles: typeof chakraTheme['styles'] = {
