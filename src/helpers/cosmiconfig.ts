@@ -1,13 +1,7 @@
 import { cosmiconfig, cosmiconfigSync, Loader, defaultLoaders } from 'cosmiconfig';
-import loadTsPkg from '@endemolshinegroup/cosmiconfig-typescript-loader';
+import loadTs from 'cosmiconfig-typescript-loader';
 import { loadToml } from 'cosmiconfig-toml-loader';
 import { env } from 'string-env-interpolation';
-
-function getDefault<T>(module: T & { default?: T }): T {
-  return module.default || module;
-}
-
-const loadTs = getDefault(loadTsPkg);
 
 export interface ConfigSearchResult {
   config: any;
@@ -87,7 +81,7 @@ function prepareCosmiconfig(moduleName: string, { legacy }: { legacy: boolean })
   return {
     searchPlaces: searchPlaces.map((place) => place.replace('#', moduleName)),
     loaders: {
-      '.ts': loadTs,
+      '.ts': loadTs(),
       '.js': defaultLoaders['.js'],
       '.json': loadJson,
       '.yaml': loadYaml,
