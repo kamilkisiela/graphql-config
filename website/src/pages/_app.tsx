@@ -8,6 +8,9 @@ import { handlePushRoute, CombinedThemeProvider, DocsPage, AppSeoProps, useGoogl
 import { Header, Subheader, FooterExtended } from '@theguild/components';
 import '../../public/style.css';
 
+import '@algolia/autocomplete-theme-classic';
+import '@theguild/components/dist/static/css/SearchBarV2.css';
+
 const styles: typeof chakraTheme['styles'] = {
   global: (props) => ({
     body: {
@@ -54,13 +57,13 @@ const AppContent: FC<AppProps> = (appProps) => {
   const isDocs = router.asPath.startsWith('/docs');
   const googleAnalytics = useGoogleAnalytics({
     router,
-    trackingId: 'G-JSN4LT7S7V'
-  })
+    trackingId: 'G-JSN4LT7S7V',
+  });
 
   return (
     <>
       <Script async src="https://the-guild.dev/static/crisp.js" />
-      <Header accentColor={accentColor} activeLink="/open-source" themeSwitch />
+      <Header accentColor={accentColor} activeLink="/open-source" themeSwitch searchBarProps={{ version: 'v2' }} />
       <Subheader
         activeLink={router.asPath}
         product={{

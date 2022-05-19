@@ -7,7 +7,7 @@ import { i18n } from './next-i18next.config.js';
 const require = createRequire(import.meta.url);
 register({ extensions: ['.ts', '.tsx'] });
 
-const { getRoutes } = require('./routes.ts'); 
+const { getRoutes } = require('./routes.ts');
 
 const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',
@@ -26,6 +26,6 @@ export default withBundleAnalyzer(
         },
       ];
     },
-    swcMinify: true, /* experimental SWS minify */
+    swcMinify: true /* experimental SWS minify */,
   }),
 );
