@@ -1,9 +1,7 @@
 [
   {
     "objectID": "config-api-graphql-config",
-    "headings": [
-      "API"
-    ],
+    "headings": ["API"],
     "toc": [
       {
         "children": [
@@ -51,20 +49,14 @@
     "content": "-",
     "url": "https://www.graphql-config.com/docs/library/api-graphql-config",
     "domain": "https://www.graphql-config.com/",
-    "hierarchy": [
-      "Config",
-      "I'm a library author",
-      "GraphQLConfig"
-    ],
+    "hierarchy": ["Config", "I'm a library author", "GraphQLConfig"],
     "source": "Config",
     "title": "GraphQLConfig",
     "type": "Documentation"
   },
   {
     "objectID": "config-api-graphql-project-config",
-    "headings": [
-      "API"
-    ],
+    "headings": ["API"],
     "toc": [
       {
         "children": [
@@ -162,22 +154,14 @@
     "content": "-",
     "url": "https://www.graphql-config.com/docs/library/api-graphql-project-config",
     "domain": "https://www.graphql-config.com/",
-    "hierarchy": [
-      "Config",
-      "I'm a library author",
-      "GraphQLProjectConfig"
-    ],
+    "hierarchy": ["Config", "I'm a library author", "GraphQLProjectConfig"],
     "source": "Config",
     "title": "GraphQLProjectConfig",
     "type": "Documentation"
   },
   {
     "objectID": "config-author-extensions",
-    "headings": [
-      "How to write extensions",
-      "Consuming extension",
-      "Registering Loaders"
-    ],
+    "headings": ["How to write extensions", "Consuming extension", "Registering Loaders"],
     "toc": [
       {
         "children": [
@@ -204,21 +188,14 @@
     "content": "-",
     "url": "https://www.graphql-config.com/docs/library/author-extensions",
     "domain": "https://www.graphql-config.com/",
-    "hierarchy": [
-      "Config",
-      "I'm a library author",
-      "Writing and Consuming Extensions"
-    ],
+    "hierarchy": ["Config", "I'm a library author", "Writing and Consuming Extensions"],
     "source": "Config",
     "title": "Writing and Consuming Extensions",
     "type": "Documentation"
   },
   {
     "objectID": "config-author-load-config",
-    "headings": [
-      "loadConfig",
-      "Options"
-    ],
+    "headings": ["loadConfig", "Options"],
     "toc": [
       {
         "children": [],
@@ -266,21 +243,14 @@
     "content": "-",
     "url": "https://www.graphql-config.com/docs/library/author-load-config",
     "domain": "https://www.graphql-config.com/",
-    "hierarchy": [
-      "Config",
-      "I'm a library author",
-      "Loading Config"
-    ],
+    "hierarchy": ["Config", "I'm a library author", "Loading Config"],
     "source": "Config",
     "title": "Loading Config",
     "type": "Documentation"
   },
   {
     "objectID": "config-author-loaders",
-    "headings": [
-      "Available loaders",
-      "Writing loaders"
-    ],
+    "headings": ["Available loaders", "Writing loaders"],
     "toc": [
       {
         "children": [],
@@ -296,21 +266,14 @@
     "content": "-",
     "url": "https://www.graphql-config.com/docs/library/author-loaders",
     "domain": "https://www.graphql-config.com/",
-    "hierarchy": [
-      "Config",
-      "I'm a library author",
-      "Loaders"
-    ],
+    "hierarchy": ["Config", "I'm a library author", "Loaders"],
     "source": "Config",
     "title": "Loaders",
     "type": "Documentation"
   },
   {
     "objectID": "config-migration",
-    "headings": [
-      "Migration tool",
-      "New Syntax"
-    ],
+    "headings": ["Migration tool", "New Syntax"],
     "toc": [
       {
         "children": [],
@@ -353,11 +316,7 @@
     "content": "-",
     "url": "https://www.graphql-config.com/docs/recipes/migration",
     "domain": "https://www.graphql-config.com/",
-    "hierarchy": [
-      "Config",
-      "Recipes",
-      "Migration"
-    ],
+    "hierarchy": ["Config", "Recipes", "Migration"],
     "source": "Config",
     "title": "Migration",
     "type": "Documentation"
@@ -369,11 +328,7 @@
     "content": "-",
     "url": "https://www.graphql-config.com/docs/user/user-documents",
     "domain": "https://www.graphql-config.com/",
-    "hierarchy": [
-      "Config",
-      "I'm a user",
-      "Specifying documents"
-    ],
+    "hierarchy": ["Config", "I'm a user", "Specifying documents"],
     "source": "Config",
     "title": "Specifying documents",
     "type": "Documentation"
@@ -385,22 +340,14 @@
     "content": "-",
     "url": "https://www.graphql-config.com/docs/user/user-installation",
     "domain": "https://www.graphql-config.com/",
-    "hierarchy": [
-      "Config",
-      "I'm a user",
-      "Installation"
-    ],
+    "hierarchy": ["Config", "I'm a user", "Installation"],
     "source": "Config",
     "title": "Installation",
     "type": "Documentation"
   },
   {
     "objectID": "config-user-introduction",
-    "headings": [
-      "As a developer",
-      "As a library author",
-      "Examples"
-    ],
+    "headings": ["As a developer", "As a library author", "Examples"],
     "toc": [
       {
         "children": [],
@@ -458,11 +405,7 @@
     "content": "-",
     "url": "https://www.graphql-config.com/docs/user/user-introduction",
     "domain": "https://www.graphql-config.com/",
-    "hierarchy": [
-      "Config",
-      "I'm a user",
-      "Introduction to GraphQL Config"
-    ],
+    "hierarchy": ["Config", "I'm a user", "Introduction to GraphQL Config"],
     "source": "Config",
     "title": "Introduction to GraphQL Config",
     "type": "Documentation"
@@ -474,25 +417,14 @@
     "content": "-",
     "url": "https://www.graphql-config.com/docs/user/user-schema",
     "domain": "https://www.graphql-config.com/",
-    "hierarchy": [
-      "Config",
-      "I'm a user",
-      "Specifying schema"
-    ],
+    "hierarchy": ["Config", "I'm a user", "Specifying schema"],
     "source": "Config",
     "title": "Specifying schema",
     "type": "Documentation"
   },
   {
     "objectID": "config-user-usage",
-    "headings": [
-      "Config search places",
-      "Schema",
-      "Documents",
-      "Include / Exclude",
-      "Extensions",
-      "Projects"
-    ],
+    "headings": ["Config search places", "Schema", "Documents", "Include / Exclude", "Extensions", "Projects"],
     "toc": [
       {
         "children": [],
@@ -528,11 +460,7 @@
     "content": "-",
     "url": "https://www.graphql-config.com/docs/user/user-usage",
     "domain": "https://www.graphql-config.com/",
-    "hierarchy": [
-      "Config",
-      "I'm a user",
-      "Usage"
-    ],
+    "hierarchy": ["Config", "I'm a user", "Usage"],
     "source": "Config",
     "title": "Usage",
     "type": "Documentation"
