@@ -1,0 +1,540 @@
+[
+  {
+    "objectID": "config-api-graphql-config",
+    "headings": [
+      "API"
+    ],
+    "toc": [
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "children": [],
+                "title": "`dirpath`",
+                "anchor": "dirpath"
+              },
+              {
+                "children": [],
+                "title": "`extensions`",
+                "anchor": "extensions"
+              },
+              {
+                "children": [],
+                "title": "`projects`",
+                "anchor": "projects"
+              },
+              {
+                "children": [],
+                "title": "`getProject()`",
+                "anchor": "getproject"
+              },
+              {
+                "children": [],
+                "title": "`getDefault()`",
+                "anchor": "getdefault"
+              },
+              {
+                "children": [],
+                "title": "`getProjectForFile()`",
+                "anchor": "getprojectforfile"
+              }
+            ],
+            "title": "`filepath`",
+            "anchor": "filepath"
+          }
+        ],
+        "title": "API",
+        "anchor": "api"
+      }
+    ],
+    "content": "-",
+    "url": "https://www.graphql-config.com/docs/library/api-graphql-config",
+    "domain": "https://www.graphql-config.com/",
+    "hierarchy": [
+      "Config",
+      "I'm a library author",
+      "GraphQLConfig"
+    ],
+    "source": "Config",
+    "title": "GraphQLConfig",
+    "type": "Documentation"
+  },
+  {
+    "objectID": "config-api-graphql-project-config",
+    "headings": [
+      "API"
+    ],
+    "toc": [
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "children": [],
+                "title": "`filepath`",
+                "anchor": "filepath"
+              },
+              {
+                "children": [],
+                "title": "`dirpath`",
+                "anchor": "dirpath"
+              },
+              {
+                "children": [],
+                "title": "`extensions`",
+                "anchor": "extensions"
+              },
+              {
+                "children": [],
+                "title": "`schema`",
+                "anchor": "schema"
+              },
+              {
+                "children": [],
+                "title": "`documents`",
+                "anchor": "documents"
+              },
+              {
+                "children": [],
+                "title": "`include`",
+                "anchor": "include"
+              },
+              {
+                "children": [],
+                "title": "`exclude`",
+                "anchor": "exclude"
+              },
+              {
+                "children": [],
+                "title": "`projects`",
+                "anchor": "projects"
+              },
+              {
+                "children": [],
+                "title": "`hasExtension()`",
+                "anchor": "hasextension"
+              },
+              {
+                "children": [],
+                "title": "`getDefault()`",
+                "anchor": "getdefault"
+              },
+              {
+                "children": [],
+                "title": "`extension()`",
+                "anchor": "extension"
+              },
+              {
+                "children": [],
+                "title": "`getSchema()`",
+                "anchor": "getschema"
+              },
+              {
+                "children": [],
+                "title": "`getSchemaSync()`",
+                "anchor": "getschemasync"
+              },
+              {
+                "children": [],
+                "title": "`getDocuments()`",
+                "anchor": "getdocuments"
+              },
+              {
+                "children": [],
+                "title": "`getDocumentsSync()`",
+                "anchor": "getdocumentssync"
+              },
+              {
+                "children": [],
+                "title": "`match()`",
+                "anchor": "match"
+              }
+            ],
+            "title": "`name`",
+            "anchor": "name"
+          }
+        ],
+        "title": "API",
+        "anchor": "api"
+      }
+    ],
+    "content": "-",
+    "url": "https://www.graphql-config.com/docs/library/api-graphql-project-config",
+    "domain": "https://www.graphql-config.com/",
+    "hierarchy": [
+      "Config",
+      "I'm a library author",
+      "GraphQLProjectConfig"
+    ],
+    "source": "Config",
+    "title": "GraphQLProjectConfig",
+    "type": "Documentation"
+  },
+  {
+    "objectID": "config-author-extensions",
+    "headings": [
+      "How to write extensions",
+      "Consuming extension",
+      "Registering Loaders"
+    ],
+    "toc": [
+      {
+        "children": [
+          {
+            "children": [],
+            "title": "Schema Middlewares",
+            "anchor": "schema-middlewares"
+          }
+        ],
+        "title": "How to write extensions",
+        "anchor": "how-to-write-extensions"
+      },
+      {
+        "children": [],
+        "title": "Consuming extension",
+        "anchor": "consuming-extension"
+      },
+      {
+        "children": [],
+        "title": "Registering Loaders",
+        "anchor": "registering-loaders"
+      }
+    ],
+    "content": "-",
+    "url": "https://www.graphql-config.com/docs/library/author-extensions",
+    "domain": "https://www.graphql-config.com/",
+    "hierarchy": [
+      "Config",
+      "I'm a library author",
+      "Writing and Consuming Extensions"
+    ],
+    "source": "Config",
+    "title": "Writing and Consuming Extensions",
+    "type": "Documentation"
+  },
+  {
+    "objectID": "config-author-load-config",
+    "headings": [
+      "loadConfig",
+      "Options"
+    ],
+    "toc": [
+      {
+        "children": [],
+        "title": "loadConfig",
+        "anchor": "loadconfig"
+      },
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "children": [],
+                "title": "`rootDir`",
+                "anchor": "rootdir"
+              },
+              {
+                "children": [],
+                "title": "`configName`",
+                "anchor": "configname"
+              },
+              {
+                "children": [],
+                "title": "`extensions`",
+                "anchor": "extensions"
+              },
+              {
+                "children": [],
+                "title": "`throwOnMissing`",
+                "anchor": "throwonmissing"
+              },
+              {
+                "children": [],
+                "title": "`throwOnEmpty`",
+                "anchor": "throwonempty"
+              }
+            ],
+            "title": "`filepath`",
+            "anchor": "filepath"
+          }
+        ],
+        "title": "Options",
+        "anchor": "options"
+      }
+    ],
+    "content": "-",
+    "url": "https://www.graphql-config.com/docs/library/author-load-config",
+    "domain": "https://www.graphql-config.com/",
+    "hierarchy": [
+      "Config",
+      "I'm a library author",
+      "Loading Config"
+    ],
+    "source": "Config",
+    "title": "Loading Config",
+    "type": "Documentation"
+  },
+  {
+    "objectID": "config-author-loaders",
+    "headings": [
+      "Available loaders",
+      "Writing loaders"
+    ],
+    "toc": [
+      {
+        "children": [],
+        "title": "Available loaders",
+        "anchor": "available-loaders"
+      },
+      {
+        "children": [],
+        "title": "Writing loaders",
+        "anchor": "writing-loaders"
+      }
+    ],
+    "content": "-",
+    "url": "https://www.graphql-config.com/docs/library/author-loaders",
+    "domain": "https://www.graphql-config.com/",
+    "hierarchy": [
+      "Config",
+      "I'm a library author",
+      "Loaders"
+    ],
+    "source": "Config",
+    "title": "Loaders",
+    "type": "Documentation"
+  },
+  {
+    "objectID": "config-migration",
+    "headings": [
+      "Migration tool",
+      "New Syntax"
+    ],
+    "toc": [
+      {
+        "children": [],
+        "title": "Migration tool",
+        "anchor": "migration-tool"
+      },
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "children": [],
+                "title": "includes and excludes",
+                "anchor": "includes-and-excludes"
+              },
+              {
+                "children": [],
+                "title": "documents (new)",
+                "anchor": "documents-new"
+              },
+              {
+                "children": [],
+                "title": "extensions",
+                "anchor": "extensions"
+              },
+              {
+                "children": [],
+                "title": "projects",
+                "anchor": "projects"
+              }
+            ],
+            "title": "schemaPath",
+            "anchor": "schemapath"
+          }
+        ],
+        "title": "New Syntax",
+        "anchor": "new-syntax"
+      }
+    ],
+    "content": "-",
+    "url": "https://www.graphql-config.com/docs/recipes/migration",
+    "domain": "https://www.graphql-config.com/",
+    "hierarchy": [
+      "Config",
+      "Recipes",
+      "Migration"
+    ],
+    "source": "Config",
+    "title": "Migration",
+    "type": "Documentation"
+  },
+  {
+    "objectID": "config-user-documents",
+    "headings": [],
+    "toc": [],
+    "content": "-",
+    "url": "https://www.graphql-config.com/docs/user/user-documents",
+    "domain": "https://www.graphql-config.com/",
+    "hierarchy": [
+      "Config",
+      "I'm a user",
+      "Specifying documents"
+    ],
+    "source": "Config",
+    "title": "Specifying documents",
+    "type": "Documentation"
+  },
+  {
+    "objectID": "config-user-installation",
+    "headings": [],
+    "toc": [],
+    "content": "-",
+    "url": "https://www.graphql-config.com/docs/user/user-installation",
+    "domain": "https://www.graphql-config.com/",
+    "hierarchy": [
+      "Config",
+      "I'm a user",
+      "Installation"
+    ],
+    "source": "Config",
+    "title": "Installation",
+    "type": "Documentation"
+  },
+  {
+    "objectID": "config-user-introduction",
+    "headings": [
+      "As a developer",
+      "As a library author",
+      "Examples"
+    ],
+    "toc": [
+      {
+        "children": [],
+        "title": "As a developer",
+        "anchor": "as-a-developer"
+      },
+      {
+        "children": [],
+        "title": "As a library author",
+        "anchor": "as-a-library-author"
+      },
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "children": [],
+                "title": "`.graphqlrc`,`graphql.config.json` or `.graphqlrc.json`",
+                "anchor": "graphqlrcgraphqlconfigjson-or-graphqlrcjson"
+              },
+              {
+                "children": [],
+                "title": "`graphql.config.toml` or `.graphqlrc.toml`",
+                "anchor": "graphqlconfigtoml-or-graphqlrctoml"
+              },
+              {
+                "children": [],
+                "title": "`graphql.config.js` or `.graphqlrc.js`",
+                "anchor": "graphqlconfigjs-or-graphqlrcjs"
+              },
+              {
+                "children": [],
+                "title": "`graphql.config.ts` or `.graphqlrc.ts`",
+                "anchor": "graphqlconfigts-or-graphqlrcts"
+              },
+              {
+                "children": [],
+                "title": "Custom paths",
+                "anchor": "custom-paths"
+              },
+              {
+                "children": [],
+                "title": "Lookup Order",
+                "anchor": "lookup-order"
+              }
+            ],
+            "title": "`.graphqlrc`, or `.graphqlrc.yml/yaml`",
+            "anchor": "graphqlrc-or-graphqlrcymlyaml"
+          }
+        ],
+        "title": "Examples",
+        "anchor": "examples"
+      }
+    ],
+    "content": "-",
+    "url": "https://www.graphql-config.com/docs/user/user-introduction",
+    "domain": "https://www.graphql-config.com/",
+    "hierarchy": [
+      "Config",
+      "I'm a user",
+      "Introduction to GraphQL Config"
+    ],
+    "source": "Config",
+    "title": "Introduction to GraphQL Config",
+    "type": "Documentation"
+  },
+  {
+    "objectID": "config-user-schema",
+    "headings": [],
+    "toc": [],
+    "content": "-",
+    "url": "https://www.graphql-config.com/docs/user/user-schema",
+    "domain": "https://www.graphql-config.com/",
+    "hierarchy": [
+      "Config",
+      "I'm a user",
+      "Specifying schema"
+    ],
+    "source": "Config",
+    "title": "Specifying schema",
+    "type": "Documentation"
+  },
+  {
+    "objectID": "config-user-usage",
+    "headings": [
+      "Config search places",
+      "Schema",
+      "Documents",
+      "Include / Exclude",
+      "Extensions",
+      "Projects"
+    ],
+    "toc": [
+      {
+        "children": [],
+        "title": "Config search places",
+        "anchor": "config-search-places"
+      },
+      {
+        "children": [],
+        "title": "Schema",
+        "anchor": "schema"
+      },
+      {
+        "children": [],
+        "title": "Documents",
+        "anchor": "documents"
+      },
+      {
+        "children": [],
+        "title": "Include / Exclude",
+        "anchor": "include--exclude"
+      },
+      {
+        "children": [],
+        "title": "Extensions",
+        "anchor": "extensions"
+      },
+      {
+        "children": [],
+        "title": "Projects",
+        "anchor": "projects"
+      }
+    ],
+    "content": "-",
+    "url": "https://www.graphql-config.com/docs/user/user-usage",
+    "domain": "https://www.graphql-config.com/",
+    "hierarchy": [
+      "Config",
+      "I'm a user",
+      "Usage"
+    ],
+    "source": "Config",
+    "title": "Usage",
+    "type": "Documentation"
+  }
+]
