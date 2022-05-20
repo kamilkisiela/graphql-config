@@ -50,7 +50,7 @@
     "@typescript-eslint/parser": "5.25.0",
     "concurrently": "7.1.0",
     "cross-env": "7.0.3",
-    "esbuild": "0.14.36",
+    "esbuild": "0.14.39",
     "esbuild-register": "3.3.2",
     "eslint-config-next": "12.1.5",
     "eslint-config-prettier": "8.5.0",
