@@ -1,5 +1,11 @@
 # Change log
 
+## 4.3.1
+
+### Patch Changes
+
+- 44eec8d: Add workaround for default import of typescript config loader to fix ESM support
+
 ## 4.3.0
 
 ### Minor Changes
