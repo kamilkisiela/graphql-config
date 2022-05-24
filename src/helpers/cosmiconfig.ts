@@ -1,7 +1,13 @@
 import { cosmiconfig, cosmiconfigSync, Loader, defaultLoaders } from 'cosmiconfig';
-import loadTs from '@endemolshinegroup/cosmiconfig-typescript-loader';
+import loadTsPkg from '@endemolshinegroup/cosmiconfig-typescript-loader';
 import { loadToml } from 'cosmiconfig-toml-loader';
 import { env } from 'string-env-interpolation';
+
+function getDefault<T>(module: T & { default?: T }): T {
+  return module.default || module;
+}
+
+const loadTs = getDefault(loadTsPkg);
 
 export interface ConfigSearchResult {
   config: any;
