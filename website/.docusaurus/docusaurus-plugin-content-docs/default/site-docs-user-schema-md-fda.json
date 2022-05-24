@@ -1,0 +1,22 @@
+{
+  "unversionedId": "schema",
+  "id": "schema",
+  "isDocsHomePage": false,
+  "title": "Specifying schema",
+  "description": "The simplest config specifies only schema which points to the source of GraphQL schema.",
+  "source": "@site/docs/user-schema.md",
+  "slug": "/schema",
+  "permalink": "/schema",
+  "editUrl": "https://github.com/kamilkisiela/graphql-config/edit/master/website/docs/user-schema.md",
+  "version": "current",
+  "sidebar_label": "Specifying schema",
+  "sidebar": "docs",
+  "previous": {
+    "title": "Usage",
+    "permalink": "/usage"
+  },
+  "next": {
+    "title": "Specifying documents",
+    "permalink": "/documents"
+  }
+}

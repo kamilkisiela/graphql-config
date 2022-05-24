@@ -1,0 +1,22 @@
+{
+  "unversionedId": "graphql-config",
+  "id": "graphql-config",
+  "isDocsHomePage": false,
+  "title": "GraphQLConfig",
+  "description": "The GraphQLConfig object is instantiated by calling loadConfig.",
+  "source": "@site/docs/api-graphql-config.md",
+  "slug": "/graphql-config",
+  "permalink": "/graphql-config",
+  "editUrl": "https://github.com/kamilkisiela/graphql-config/edit/master/website/docs/api-graphql-config.md",
+  "version": "current",
+  "sidebar_label": "GraphQLConfig",
+  "sidebar": "docs",
+  "previous": {
+    "title": "Loaders",
+    "permalink": "/loaders"
+  },
+  "next": {
+    "title": "GraphQLProjectConfig",
+    "permalink": "/graphql-project-config"
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "docusaurus-plugin-content-docs": {
+    "default": {
+      "path": "/",
+      "versions": [
+        {
+          "name": "current",
+          "label": "Next",
+          "isLast": true,
+          "path": "/",
+          "mainDocId": "introduction",
+          "docs": [
+            {
+              "id": "documents",
+              "path": "/documents",
+              "sidebar": "docs"
+            },
+            {
+              "id": "extensions",
+              "path": "/extensions",
+              "sidebar": "docs"
+            },
+            {
+              "id": "graphql-config",
+              "path": "/graphql-config",
+              "sidebar": "docs"
+            },
+            {
+              "id": "graphql-project-config",
+              "path": "/graphql-project-config",
+              "sidebar": "docs"
+            },
+            {
+              "id": "installation",
+              "path": "/installation",
+              "sidebar": "docs"
+            },
+            {
+              "id": "introduction",
+              "path": "/introduction",
+              "sidebar": "docs"
+            },
+            {
+              "id": "load-config",
+              "path": "/load-config",
+              "sidebar": "docs"
+            },
+            {
+              "id": "loaders",
+              "path": "/loaders",
+              "sidebar": "docs"
+            },
+            {
+              "id": "migration",
+              "path": "/migration",
+              "sidebar": "docs"
+            },
+            {
+              "id": "schema",
+              "path": "/schema",
+              "sidebar": "docs"
+            },
+            {
+              "id": "usage",
+              "path": "/usage",
+              "sidebar": "docs"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

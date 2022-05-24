@@ -1,0 +1,22 @@
+{
+  "unversionedId": "load-config",
+  "id": "load-config",
+  "isDocsHomePage": false,
+  "title": "Loading Config",
+  "description": "loadConfig",
+  "source": "@site/docs/author-load-config.md",
+  "slug": "/load-config",
+  "permalink": "/load-config",
+  "editUrl": "https://github.com/kamilkisiela/graphql-config/edit/master/website/docs/author-load-config.md",
+  "version": "current",
+  "sidebar_label": "Loading Config",
+  "sidebar": "docs",
+  "previous": {
+    "title": "Specifying documents",
+    "permalink": "/documents"
+  },
+  "next": {
+    "title": "Writing and Consuming Extensions",
+    "permalink": "/extensions"
+  }
+}

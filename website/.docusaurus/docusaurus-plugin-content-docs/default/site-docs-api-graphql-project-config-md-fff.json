@@ -1,0 +1,22 @@
+{
+  "unversionedId": "graphql-project-config",
+  "id": "graphql-project-config",
+  "isDocsHomePage": false,
+  "title": "GraphQLProjectConfig",
+  "description": "The GraphQLProjectConfig represents projects defined in GraphQL Config file.",
+  "source": "@site/docs/api-graphql-project-config.md",
+  "slug": "/graphql-project-config",
+  "permalink": "/graphql-project-config",
+  "editUrl": "https://github.com/kamilkisiela/graphql-config/edit/master/website/docs/api-graphql-project-config.md",
+  "version": "current",
+  "sidebar_label": "GraphQLProjectConfig",
+  "sidebar": "docs",
+  "previous": {
+    "title": "GraphQLConfig",
+    "permalink": "/graphql-config"
+  },
+  "next": {
+    "title": "Migration",
+    "permalink": "/migration"
+  }
+}

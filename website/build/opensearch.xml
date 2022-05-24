@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/"
+                       xmlns:moz="http://www.mozilla.org/2006/browser/search/">
+  <ShortName>GraphQL Config</ShortName>
+  <Description>Search GraphQL Config</Description>
+  <InputEncoding>UTF-8</InputEncoding>
+  <Image width="16" height="16" type="image/x-icon">https://graphql-config.com/img/logo.ico</Image>
+  <Url type="text/html" method="get" template="https://graphql-config.com/search?q={searchTerms}"/>
+  <Url type="application/opensearchdescription+xml" rel="self" template="https://graphql-config.com/opensearch.xml" />
+  <moz:SearchForm>https://graphql-config.com</moz:SearchForm>
+</OpenSearchDescription>

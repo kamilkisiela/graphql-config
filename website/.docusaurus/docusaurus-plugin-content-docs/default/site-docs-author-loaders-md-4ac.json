@@ -1,0 +1,22 @@
+{
+  "unversionedId": "loaders",
+  "id": "loaders",
+  "isDocsHomePage": false,
+  "title": "Loaders",
+  "description": "Available loaders",
+  "source": "@site/docs/author-loaders.md",
+  "slug": "/loaders",
+  "permalink": "/loaders",
+  "editUrl": "https://github.com/kamilkisiela/graphql-config/edit/master/website/docs/author-loaders.md",
+  "version": "current",
+  "sidebar_label": "Loaders",
+  "sidebar": "docs",
+  "previous": {
+    "title": "Writing and Consuming Extensions",
+    "permalink": "/extensions"
+  },
+  "next": {
+    "title": "GraphQLConfig",
+    "permalink": "/graphql-config"
+  }
+}

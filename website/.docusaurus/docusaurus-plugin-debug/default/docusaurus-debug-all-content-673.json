@@ -1,0 +1,359 @@
+{
+  "docusaurus-plugin-content-docs": {
+    "default": {
+      "loadedVersions": [
+        {
+          "versionName": "current",
+          "versionLabel": "Next",
+          "versionPath": "/",
+          "versionEditUrl": "https://github.com/kamilkisiela/graphql-config/edit/master/website/docs",
+          "versionEditUrlLocalized": "https://github.com/kamilkisiela/graphql-config/edit/master/website/i18n/en/docusaurus-plugin-content-docs/current",
+          "isLast": true,
+          "routePriority": -1,
+          "sidebarFilePath": "/home/ardat_000/Guild/graphql-config/website/sidebars.js",
+          "docsDirPath": "/home/ardat_000/Guild/graphql-config/website/docs",
+          "docsDirPathLocalized": "/home/ardat_000/Guild/graphql-config/website/i18n/en/docusaurus-plugin-content-docs/current",
+          "mainDocId": "introduction",
+          "sidebars": {
+            "docs": [
+              {
+                "collapsed": true,
+                "type": "category",
+                "label": "I'm a user",
+                "items": [
+                  {
+                    "type": "doc",
+                    "id": "introduction"
+                  },
+                  {
+                    "type": "doc",
+                    "id": "installation"
+                  },
+                  {
+                    "type": "doc",
+                    "id": "usage"
+                  },
+                  {
+                    "type": "doc",
+                    "id": "schema"
+                  },
+                  {
+                    "type": "doc",
+                    "id": "documents"
+                  }
+                ]
+              },
+              {
+                "collapsed": true,
+                "type": "category",
+                "label": "I'm a library author",
+                "items": [
+                  {
+                    "type": "doc",
+                    "id": "load-config"
+                  },
+                  {
+                    "type": "doc",
+                    "id": "extensions"
+                  },
+                  {
+                    "type": "doc",
+                    "id": "loaders"
+                  },
+                  {
+                    "type": "doc",
+                    "id": "graphql-config"
+                  },
+                  {
+                    "type": "doc",
+                    "id": "graphql-project-config"
+                  }
+                ]
+              },
+              {
+                "collapsed": true,
+                "type": "category",
+                "label": "Recipes",
+                "items": [
+                  {
+                    "type": "doc",
+                    "id": "migration"
+                  }
+                ]
+              }
+            ]
+          },
+          "permalinkToSidebar": {
+            "/documents": "docs",
+            "/extensions": "docs",
+            "/graphql-config": "docs",
+            "/graphql-project-config": "docs",
+            "/installation": "docs",
+            "/introduction": "docs",
+            "/load-config": "docs",
+            "/loaders": "docs",
+            "/migration": "docs",
+            "/schema": "docs",
+            "/usage": "docs"
+          },
+          "docs": [
+            {
+              "unversionedId": "documents",
+              "id": "documents",
+              "isDocsHomePage": false,
+              "title": "Specifying documents",
+              "description": "GraphQL Config supports not only a schema but GraphQL Operations and Fragments too.",
+              "source": "@site/docs/user-documents.md",
+              "slug": "/documents",
+              "permalink": "/documents",
+              "editUrl": "https://github.com/kamilkisiela/graphql-config/edit/master/website/docs/user-documents.md",
+              "version": "current",
+              "sidebar_label": "Specifying documents",
+              "sidebar": "docs",
+              "previous": {
+                "title": "Specifying schema",
+                "permalink": "/schema"
+              },
+              "next": {
+                "title": "Loading Config",
+                "permalink": "/load-config"
+              }
+            },
+            {
+              "unversionedId": "extensions",
+              "id": "extensions",
+              "isDocsHomePage": false,
+              "title": "Writing and Consuming Extensions",
+              "description": "The main purpose of GraphQL Config Extensions is to pass information to extension's consumer in order to extend the behavior of GraphQL Config's logic.",
+              "source": "@site/docs/author-extensions.md",
+              "slug": "/extensions",
+              "permalink": "/extensions",
+              "editUrl": "https://github.com/kamilkisiela/graphql-config/edit/master/website/docs/author-extensions.md",
+              "version": "current",
+              "sidebar_label": "Extensions",
+              "sidebar": "docs",
+              "previous": {
+                "title": "Loading Config",
+                "permalink": "/load-config"
+              },
+              "next": {
+                "title": "Loaders",
+                "permalink": "/loaders"
+              }
+            },
+            {
+              "unversionedId": "graphql-config",
+              "id": "graphql-config",
+              "isDocsHomePage": false,
+              "title": "GraphQLConfig",
+              "description": "The GraphQLConfig object is instantiated by calling loadConfig.",
+              "source": "@site/docs/api-graphql-config.md",
+              "slug": "/graphql-config",
+              "permalink": "/graphql-config",
+              "editUrl": "https://github.com/kamilkisiela/graphql-config/edit/master/website/docs/api-graphql-config.md",
+              "version": "current",
+              "sidebar_label": "GraphQLConfig",
+              "sidebar": "docs",
+              "previous": {
+                "title": "Loaders",
+                "permalink": "/loaders"
+              },
+              "next": {
+                "title": "GraphQLProjectConfig",
+                "permalink": "/graphql-project-config"
+              }
+            },
+            {
+              "unversionedId": "graphql-project-config",
+              "id": "graphql-project-config",
+              "isDocsHomePage": false,
+              "title": "GraphQLProjectConfig",
+              "description": "The GraphQLProjectConfig represents projects defined in GraphQL Config file.",
+              "source": "@site/docs/api-graphql-project-config.md",
+              "slug": "/graphql-project-config",
+              "permalink": "/graphql-project-config",
+              "editUrl": "https://github.com/kamilkisiela/graphql-config/edit/master/website/docs/api-graphql-project-config.md",
+              "version": "current",
+              "sidebar_label": "GraphQLProjectConfig",
+              "sidebar": "docs",
+              "previous": {
+                "title": "GraphQLConfig",
+                "permalink": "/graphql-config"
+              },
+              "next": {
+                "title": "Migration",
+                "permalink": "/migration"
+              }
+            },
+            {
+              "unversionedId": "installation",
+              "id": "installation",
+              "isDocsHomePage": false,
+              "title": "Installation",
+              "description": "GraphQL Config can be installed as a direct dependency:",
+              "source": "@site/docs/user-installation.md",
+              "slug": "/installation",
+              "permalink": "/installation",
+              "editUrl": "https://github.com/kamilkisiela/graphql-config/edit/master/website/docs/user-installation.md",
+              "version": "current",
+              "sidebar_label": "Installation",
+              "sidebar": "docs",
+              "previous": {
+                "title": "Introduction to GraphQL Config",
+                "permalink": "/introduction"
+              },
+              "next": {
+                "title": "Usage",
+                "permalink": "/usage"
+              }
+            },
+            {
+              "unversionedId": "introduction",
+              "id": "introduction",
+              "isDocsHomePage": false,
+              "title": "Introduction to GraphQL Config",
+              "description": "GraphQL Config",
+              "source": "@site/docs/user-introduction.md",
+              "slug": "/introduction",
+              "permalink": "/introduction",
+              "editUrl": "https://github.com/kamilkisiela/graphql-config/edit/master/website/docs/user-introduction.md",
+              "version": "current",
+              "sidebar_label": "Introduction",
+              "sidebar": "docs",
+              "next": {
+                "title": "Installation",
+                "permalink": "/installation"
+              }
+            },
+            {
+              "unversionedId": "load-config",
+              "id": "load-config",
+              "isDocsHomePage": false,
+              "title": "Loading Config",
+              "description": "loadConfig",
+              "source": "@site/docs/author-load-config.md",
+              "slug": "/load-config",
+              "permalink": "/load-config",
+              "editUrl": "https://github.com/kamilkisiela/graphql-config/edit/master/website/docs/author-load-config.md",
+              "version": "current",
+              "sidebar_label": "Loading Config",
+              "sidebar": "docs",
+              "previous": {
+                "title": "Specifying documents",
+                "permalink": "/documents"
+              },
+              "next": {
+                "title": "Writing and Consuming Extensions",
+                "permalink": "/extensions"
+              }
+            },
+            {
+              "unversionedId": "loaders",
+              "id": "loaders",
+              "isDocsHomePage": false,
+              "title": "Loaders",
+              "description": "Available loaders",
+              "source": "@site/docs/author-loaders.md",
+              "slug": "/loaders",
+              "permalink": "/loaders",
+              "editUrl": "https://github.com/kamilkisiela/graphql-config/edit/master/website/docs/author-loaders.md",
+              "version": "current",
+              "sidebar_label": "Loaders",
+              "sidebar": "docs",
+              "previous": {
+                "title": "Writing and Consuming Extensions",
+                "permalink": "/extensions"
+              },
+              "next": {
+                "title": "GraphQLConfig",
+                "permalink": "/graphql-config"
+              }
+            },
+            {
+              "unversionedId": "migration",
+              "id": "migration",
+              "isDocsHomePage": false,
+              "title": "Migration",
+              "description": "This chapter is not for library authors, but users. We explain here a new syntax and how to migrate from v2.0 to v3.0.",
+              "source": "@site/docs/migration.md",
+              "slug": "/migration",
+              "permalink": "/migration",
+              "editUrl": "https://github.com/kamilkisiela/graphql-config/edit/master/website/docs/migration.md",
+              "version": "current",
+              "sidebar": "docs",
+              "previous": {
+                "title": "GraphQLProjectConfig",
+                "permalink": "/graphql-project-config"
+              }
+            },
+            {
+              "unversionedId": "schema",
+              "id": "schema",
+              "isDocsHomePage": false,
+              "title": "Specifying schema",
+              "description": "The simplest config specifies only schema which points to the source of GraphQL schema.",
+              "source": "@site/docs/user-schema.md",
+              "slug": "/schema",
+              "permalink": "/schema",
+              "editUrl": "https://github.com/kamilkisiela/graphql-config/edit/master/website/docs/user-schema.md",
+              "version": "current",
+              "sidebar_label": "Specifying schema",
+              "sidebar": "docs",
+              "previous": {
+                "title": "Usage",
+                "permalink": "/usage"
+              },
+              "next": {
+                "title": "Specifying documents",
+                "permalink": "/documents"
+              }
+            },
+            {
+              "unversionedId": "usage",
+              "id": "usage",
+              "isDocsHomePage": false,
+              "title": "Usage",
+              "description": "Config search places",
+              "source": "@site/docs/user-usage.md",
+              "slug": "/usage",
+              "permalink": "/usage",
+              "editUrl": "https://github.com/kamilkisiela/graphql-config/edit/master/website/docs/user-usage.md",
+              "version": "current",
+              "sidebar_label": "Usage",
+              "sidebar": "docs",
+              "previous": {
+                "title": "Installation",
+                "permalink": "/installation"
+              },
+              "next": {
+                "title": "Specifying schema",
+                "permalink": "/schema"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "docusaurus-plugin-content-blog": {
+    "default": null
+  },
+  "docusaurus-plugin-content-pages": {
+    "default": [
+      {
+        "type": "jsx",
+        "permalink": "/",
+        "source": "@site/src/pages/index.js"
+      }
+    ]
+  },
+  "docusaurus-plugin-debug": {
+    "default": null
+  },
+  "docusaurus-theme-classic": {
+    "default": null
+  },
+  "docusaurus-theme-search-algolia": {
+    "default": null
+  }
+}

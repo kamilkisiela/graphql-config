@@ -1,0 +1,22 @@
+{
+  "unversionedId": "usage",
+  "id": "usage",
+  "isDocsHomePage": false,
+  "title": "Usage",
+  "description": "Config search places",
+  "source": "@site/docs/user-usage.md",
+  "slug": "/usage",
+  "permalink": "/usage",
+  "editUrl": "https://github.com/kamilkisiela/graphql-config/edit/master/website/docs/user-usage.md",
+  "version": "current",
+  "sidebar_label": "Usage",
+  "sidebar": "docs",
+  "previous": {
+    "title": "Installation",
+    "permalink": "/installation"
+  },
+  "next": {
+    "title": "Specifying schema",
+    "permalink": "/schema"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "unversionedId": "documents",
+  "id": "documents",
+  "isDocsHomePage": false,
+  "title": "Specifying documents",
+  "description": "GraphQL Config supports not only a schema but GraphQL Operations and Fragments too.",
+  "source": "@site/docs/user-documents.md",
+  "slug": "/documents",
+  "permalink": "/documents",
+  "editUrl": "https://github.com/kamilkisiela/graphql-config/edit/master/website/docs/user-documents.md",
+  "version": "current",
+  "sidebar_label": "Specifying documents",
+  "sidebar": "docs",
+  "previous": {
+    "title": "Specifying schema",
+    "permalink": "/schema"
+  },
+  "next": {
+    "title": "Loading Config",
+    "permalink": "/load-config"
+  }
+}
