@@ -39,7 +39,6 @@
     "graphql": "^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0"
   },
   "dependencies": {
-    "@endemolshinegroup/cosmiconfig-typescript-loader": "3.0.2",
     "@graphql-tools/graphql-file-loader": "^7.3.7",
     "@graphql-tools/json-file-loader": "^7.3.7",
     "@graphql-tools/load": "^7.5.5",
@@ -48,7 +47,9 @@
     "@graphql-tools/utils": "^8.6.5",
     "cosmiconfig": "7.0.1",
     "cosmiconfig-toml-loader": "1.0.0",
+    "cosmiconfig-typescript-loader": "3.0.0",
     "minimatch": "4.2.1",
+    "ts-node": "^10.8.1",
     "string-env-interpolation": "1.0.1"
   },
   "devDependencies": {
