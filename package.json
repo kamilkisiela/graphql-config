@@ -55,7 +55,7 @@
   "devDependencies": {
     "@changesets/cli": "2.22.0",
     "@types/jest": "27.5.1",
-    "@types/node": "16.11.36",
+    "@types/node": "16.11.45",
     "@typescript-eslint/eslint-plugin": "5.26.0",
     "@typescript-eslint/parser": "5.26.0",
     "bob-the-bundler": "1.7.3",
