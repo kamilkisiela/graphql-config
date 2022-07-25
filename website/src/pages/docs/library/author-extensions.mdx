@@ -1,12 +1,12 @@
 import { Callout } from '@theguild/components'
 
-# Writing and Consuming Extensions
+# Writing And Consuming Extensions
 
 The main purpose of GraphQL Config Extensions is to pass information to extension consumers to extend the behavior of GraphQL Config's logic.
 
 GraphQL Config ships TypeScript declaration files so let's make use of them in the following examples.
 
-## How to write extensions
+## How To Write Extensions
 
 To make sure you write extensions correctly, import and use the`GraphQLExtensionDeclaration` type from `graphql-config` package. Thanks to TypeScript, you get autocompletion and in-editor validation.
 
@@ -43,7 +43,7 @@ const RelayExtension: GraphQLExtensionDeclaration = api => {
 }
 ```
 
-## Consuming extension
+## Consuming Extension
 
 As a GraphQL tool author, you will likely want to load the config and register your extension to understand the user's configuration.
 
