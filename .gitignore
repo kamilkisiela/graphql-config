@@ -3,9 +3,7 @@
 node_modules/
 coverage/
 dist/
-public/
-*.map
 out.txt
-.now
 package-lock.json
 .next/
+*.log

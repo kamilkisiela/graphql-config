@@ -1,13 +1,12 @@
----
-title: Introduction to GraphQL Config
-sidebar_label: Introduction
----
+import { Callout } from '@theguild/components'
 
-# GraphQL Config
+# Introduction to GraphQL Config
 
 There are many ways to configure your application to use GraphQL, and while it is often enough to specify configuration options directly in your application code, maintaining and understanding the hard-coded configuration options may become a challenge as the scale grows. We recommend configuring your application with a `.graphqlrc` file that contains commonly needed GraphQL-related artifacts.
 
-> The configuration should be placed on the root folder if you are using workspaces.
+<Callout type="info">
+  The configuration should be placed on the root folder if you are using workspaces.
+</Callout>
 
 Think about GraphQL Config as **one configuration for all your GraphQL tools**.
 
@@ -23,9 +22,9 @@ From the point of view of a library author, GraphQL Config makes it easier to ma
 
 ## Examples
 
-Learn more in [usage docs](usage)
+Learn more in [usage docs](./usage).
 
-### `.graphqlrc`, or `.graphqlrc.yml/yaml`
+### `.graphqlrc` or `.graphqlrc.yml/yaml`
 
 ```yaml
 schema: 'packages/api/src/schema.graphql'
@@ -35,7 +34,7 @@ extensions:
     foo: true
 ```
 
-### `.graphqlrc`,`graphql.config.json` or `.graphqlrc.json`
+### `.graphqlrc`, `graphql.config.json` or `.graphqlrc.json`
 
 ```json
 {
@@ -71,7 +70,7 @@ export default config
 
 ### Custom paths
 
-custom extension paths with `.mycustomrc.js`, `mycustom.config.yml`, etcetera - any filename listed in [usage docs](usage) with `graphql` replaced by the `loadConfig()` parameter [`configName`](load-config#configname)
+Custom extension paths with `.mycustomrc.js`, `mycustom.config.yml`, etc. - any filename listed in [usage docs](usage) with `graphql` replaced by the `loadConfig(){:ts}` parameter [`configName`](load-config#configname).
 
 ```js
 await loadConfig({ configName: 'mycustom' })
@@ -89,7 +88,7 @@ module.exports = {
 
 We are using `cosmiconfig` to load the schema, and it uses the following flow to look for configurations:
 
-1. a `package.json` property
-2. a JSON or YAML, extensionless "rc file"
+1. a `package.json` property.
+2. a JSON or YAML, extensionless "rc file".
 3. a "rc file" with the extensions `.json`, `.yaml`, `.yml`, `.toml`, `.ts` or `.js`.
-4. a `.config.js` CommonJS module, or a `.config.ts` Typescript module using [`cosmiconfig-typescript-loader`](https://github.com/EndemolShineGroup/cosmiconfig-typescript-loader)
+4. a `.config.js` CommonJS module, or a `.config.ts` Typescript module using [`cosmiconfig-typescript-loader`](https://github.com/EndemolShineGroup/cosmiconfig-typescript-loader).
