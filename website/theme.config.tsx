@@ -2,12 +2,12 @@ import { ConfigLogo } from '@theguild/components';
 // @ts-ignore
 import { DocsThemeConfig } from 'nextra-theme-docs';
 
-const SITE_NAME = 'GraphQL Scalars';
+const SITE_NAME = 'GraphQL Config';
 
 const config: DocsThemeConfig = {
   titleSuffix: ` – ${SITE_NAME}`,
-  projectLink: 'https://github.com/urigo/graphql-scalars', // GitHub link in the navbar
-  docsRepositoryBase: 'https://github.com/Urigo/graphql-scalars/tree/master/website/src/pages', // base URL for the docs repository
+  projectLink: 'https://github.com/kamilkisiela/graphql-config', // GitHub link in the navbar
+  docsRepositoryBase: 'https://github.com/kamilkisiela/graphql-config/tree/master/website/src/pages', // base URL for the docs repository
   nextLinks: true,
   prevLinks: true,
   search: false,
@@ -20,9 +20,7 @@ const config: DocsThemeConfig = {
       <ConfigLogo className="mr-1.5 h-9 w-9" />
       <div>
         <h1 className="md:text-md text-sm font-medium">{SITE_NAME}</h1>
-        <h2 className="hidden text-xs sm:!block">
-          Common custom GraphQL Scalars for precise type-safe GraphQL schemas
-        </h2>
+        <h2 className="hidden text-xs sm:!block">One configuration for all your GraphQL tools</h2>
       </div>
     </>
   ),
