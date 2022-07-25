@@ -1,12 +1,10 @@
----
-title: GraphQLProjectConfig
----
+# GraphQL Project Config
 
-The `GraphQLProjectConfig` represents projects defined in GraphQL Config file.
+The `GraphQLProjectConfig` represents projects defined in the GraphQL Config file.
 
-A basic usage:
+## A basic usage:
 
-```ts
+```ts filename="ts"
 import { loadConfig } from 'graphql-config'
 
 async function main() {
@@ -70,13 +68,13 @@ Value defined in `exclude` property, in the config file.
 
 _type: `{ [projectName: string]: GraphQLProjectConfig }`_
 
-A key-value object where key is a project's name but value contains [`GraphQLProjectConfig`](api-graphql-project-config) object.
+A key-value object where the key is a project's name but the value contains [`GraphQLProjectConfig`](api-graphql-project-config) object.
 
 ### `hasExtension()`
 
 _type: `hasExtension(name: string): boolean`_
 
-Checks if project contains the extension.
+Checks if the project contains the extension.
 
 ### `getDefault()`
 
@@ -88,7 +86,7 @@ Returns a default project.
 
 _type: `extension<T = any>(name: string): T`_
 
-Allows to access extension's configuration + `schema`, `documents`, `include` and `exclude` values are also added to the object.
+Allows accessing extension's configuration + `schema`, `documents`, `include` and `exclude` values are also added to the object.
 
 ### `getSchema()`
 
@@ -98,7 +96,7 @@ _type: `getSchema(out: 'DocumentNode'): Promise<DocumentNode>`_
 
 _type: `getSchema(out: 'GraphQLSchema'): Promise<GraphQLSchema>`_
 
-Allows to access `GraphQLSchema` object based on provided information (in `schema` property of project's configuration).
+Allows accessing `GraphQLSchema` object based on provided information (in `schema` property of project's configuration).
 
 ### `getSchemaSync()`
 
@@ -108,7 +106,7 @@ _type: `getSchemaSync(out: 'DocumentNode'): DocumentNode`_
 
 _type: `getSchemaSync(out: 'GraphQLSchema'): GraphQLSchema`_
 
-Allows to access `GraphQLSchema` object based on provided information (in `schema` property of project's configuration).
+Allows accessing `GraphQLSchema` object based on provided information (in `schema` property of project's configuration).
 
 ### `getDocuments()`
 
@@ -126,4 +124,4 @@ Access Operations and Fragments wrapped with `Source` class based on provided in
 
 _type: `match(filepath: string): boolean`_
 
-Checks if file belongs to the project. It considers `schema`, `documents`, `include` and `exclude` options to see if the file path matches one of those values.
+Checks if the file belongs to the project. It considers `schema`, `documents`, `include` and `exclude` options to see if the file path matches one of those values.

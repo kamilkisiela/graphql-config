@@ -1,14 +1,12 @@
----
-title: Loading Config
----
+# Loading Config
 
-## loadConfig
+## Load Config
 
-This function is the starting point for using GraphQL Config. It looks for a config file in [predefined search places](user-usage#config-search-places) in the currently working directory.
+This function is the starting point for using GraphQL Config. It looks for a config file in [predefined search places](user-usage#config-search-places) in the current working directory.
 
-A basic usage example (async):
+### A basic usage example (async):
 
-```ts
+```ts filename="ts"
 import { loadConfig } from 'graphql-config'
 
 async function main() {
@@ -16,9 +14,9 @@ async function main() {
 }
 ```
 
-Synchronous version:
+### Synchronous version:
 
-```ts
+```ts filename="ts"
 import { loadConfigSync } from 'graphql-config'
 
 function main() {
@@ -44,13 +42,13 @@ A path of a directory where GraphQL Config should look for a file _(uses process
 
 _type: `string`_
 
-A name of the config file. It's `graphql` by default. Using `relay` as a config name instructs GraphQL Config to look for all the variations of possible config file names where one of them is `relay.config.js`.
+The name of the config file. It's `graphql` by default. Using `relay` as a config name instructs GraphQL Config to look for all the variations of possible config file names where one of them is `relay.config.js`.
 
 ### `extensions`
 
 _type: `GraphQLExtensionDeclaration[]`_
 
-An array of `GraphQLExtensionDeclaration` objects, place to register extensions.
+An array of `GraphQLExtensionDeclaration` objects, is placed to register extensions.
 
 ### `throwOnMissing`
 
