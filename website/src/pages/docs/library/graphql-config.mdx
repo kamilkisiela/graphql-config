@@ -1,6 +1,6 @@
 # GraphQLConfig
 
-The `GraphQLConfig` object is instantiated by calling [`loadConfig`](author-load-config).
+The `GraphQLConfig` object is instantiated by calling [`loadConfig`](./load-config).
 
 A basic usage:
 
@@ -36,7 +36,7 @@ A registry of provided extensions.
 
 _type: `{ [projectName: string]: GraphQLProjectConfig }`_
 
-A key-value object where the key is a project's name but the value contains [`GraphQLProjectConfig`](api-graphql-project-config) object.
+A key-value object where the key is a project's name but the value contains [`GraphQLProjectConfig`](./graphql-project-config) object.
 
 ### `getProject()`
 
@@ -54,4 +54,4 @@ Returns a default project.
 
 _type: `getProjectForFile(filepath: string): GraphQLProjectConfig | never`_
 
-Allows getting projects based on a file path. It might be a path to a GraphQL file that contains SDL or Operations and Fragments but also any file [included](../user/user-usage#include-exclude) in the project.
+Allows getting projects based on a file path. It might be a path to a GraphQL file that contains SDL or Operations and Fragments but also any file [included](/docs/user/usage#include-exclude) in the project.

@@ -25,7 +25,7 @@ const config: DocsThemeConfig = {
   head: (
     <>
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+      <link rel="shortcut icon" href="/favicon.ico" />
       <meta name="description" content={`${SITE_NAME}: documentation`} />
       <meta name="og:title" content={`${SITE_NAME}: documentation`} />
     </>
