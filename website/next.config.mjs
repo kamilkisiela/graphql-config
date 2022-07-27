@@ -1,31 +1,26 @@
-import { createRequire } from 'module';
-import bundleAnalyzer from '@next/bundle-analyzer';
-import { withGuildDocs } from '@guild-docs/server';
-import { register } from 'esbuild-register/dist/node.js';
-import { i18n } from './next-i18next.config.js';
+import { withGuildDocs } from 'guild-docs/next.config';
 
-const require = createRequire(import.meta.url);
-register({ extensions: ['.ts', '.tsx'] });
-
-const { getRoutes } = require('./routes.ts');
-
-const withBundleAnalyzer = bundleAnalyzer({
-  enabled: process.env.ANALYZE === 'true',
-});
-
-export default withBundleAnalyzer(
-  withGuildDocs({
-    i18n,
-    getRoutes,
-    redirects: () => {
-      return [
-        {
+export default withGuildDocs({
+  redirects: () =>
+    Object.entries({
+      '/legacy': '/docs/migration',
+      '/docs/user/user-introduction': '/docs',
+      '/docs/user/user-installation': '/docs/installation',
+      '/docs/recipes/migration': '/docs/migration',
+      '/docs/user/user-usage': 'docs/user/usage',
+      '/docs/user/user-documents': 'docs/user/documents',
+      '/docs/user/user-schema': 'docs/user/schema',
+      '/docs/library/api-graphql-config': '/docs/library/graphql-config',
+      '/docs/library/api-graphql-project-config': '/docs/library/graphql-project-config',
+      '/docs/library/author-extensions': '/docs/library/extensions',
+      '/docs/library/author-load-config': '/docs/library/load-config',
+      '/docs/library/author-loaders': '/docs/library/loaders',
+    }).map(
+      ([from, to]) =>
+        console.log({ from, to }) || {
+          source: from,
+          destination: to,
           permanent: true,
-          source: '/legacy',
-          destination: '/docs/recipes/migration',
         },
-      ];
-    },
-    swcMinify: true /* experimental SWS minify */,
-  }),
-);
+    ),
+});

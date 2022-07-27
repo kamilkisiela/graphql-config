@@ -1,14 +1,12 @@
----
-title: Specifying documents
----
+# Specifying Documents
 
 GraphQL Config supports not only a schema but GraphQL Operations and Fragments too.
 
-### Multiple files
+## Multiple Files
 
 You can specify a list of files:
 
-```yaml
+```yaml filename="yaml"
 documents:
   - ./documents/foo.graphql
   - ./documents/bar.graphql
@@ -17,7 +15,7 @@ documents:
 
 Use a glob pattern to find and include operations and fragments:
 
-```yaml
+```yaml filename="yaml"
 documents: ./documents/*.graphql
 ```
 

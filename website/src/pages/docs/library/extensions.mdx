@@ -1,17 +1,16 @@
----
-title: Writing and Consuming Extensions
-sidebar_label: Extensions
----
+import { Callout } from '@theguild/components'
 
-The main purpose of GraphQL Config Extensions is to pass information to extension's consumer in order to extend the behavior of GraphQL Config's logic.
+# Writing and Consuming Extensions
 
-GraphQL Config ships TypeScript declaration files so let's make use of them in following examples.
+The main purpose of GraphQL Config Extensions is to pass information to extension's consumer to extend the behavior of GraphQL Config's logic.
 
-## How to write extensions
+GraphQL Config ships TypeScript declaration files so let's make use of them in the following examples.
 
-In order to make sure you write extensions correctly, import and use the`GraphQLExtensionDeclaration` type from `graphql-config` package. Thanks to TypeScript, you get autocompletion and in-editor validation.
+## How to Write Extensions
 
-The main requirement of an extension is its name. Providing a name lets GraphQL Config to match the extension with its namespace in the config file.
+To make sure you write extensions correctly, import and use the `GraphQLExtensionDeclaration` type from `graphql-config` package. Thanks to TypeScript, you get autocompletion and in-editor validation.
+
+The main requirement of an extension is its name. Providing a name lets GraphQL Config match the extension with its namespace in the config file.
 
 ```ts
 import { GraphQLExtensionDeclaration } from 'graphql-config'
@@ -44,9 +43,9 @@ const RelayExtension: GraphQLExtensionDeclaration = api => {
 }
 ```
 
-## Consuming extension
+## Consuming Extension
 
-As a GraphQL tool author you will likely want to load the config and register your extension in order to understand user's configuration.
+As a GraphQL tool author, you will likely want to load the config and register your extension to understand the user's configuration.
 
 ```ts
 import { loadConfig } from 'graphql-config'
@@ -59,11 +58,11 @@ async function main() {
 }
 ```
 
-> Synchronous version: `loadConfigSync`
+<Callout>For synchronous use `loadConfigSync`</Callout>
 
 Now that everything is ready, GraphQL Config understands there's the Inspector extension.
 
-In order to access information stored in the config file, do the following:
+To access information stored in the config file, do the following:
 
 ```ts
 async function main() {
@@ -74,10 +73,10 @@ async function main() {
   // Reads configuration of a named project
   const project = config.getProject('admin')
 
-  // Reads extenion's configuration defined in a project
+  // Reads extension's configuration defined in a project
   const inspectorConfig = project.extension('inspector')
 
-  // Given following config file:
+  // Given the following config file:
   //
   // schema: './schema.graphql'
   // extensions:
@@ -92,7 +91,7 @@ async function main() {
 }
 ```
 
-Getting `GraphQLSchema` is straightforward: each project has `getSchema(): Promise<GraphQLSchema>` method.
+Getting `GraphQLSchema` is straightforward: each project has `getSchema(): Promise<GraphQLSchema>{:ts}` method.
 
 ```ts
 async function main() {
@@ -105,7 +104,7 @@ async function main() {
 }
 ```
 
-GraphQL Config is able to generate a schema not only as `GraphQLSchema` object, but also as a `DocumentNode`. (For more info, read the API reference of [`GraphQLProjectConfig`](api-graphql-project-config).)
+GraphQL Config can generate a schema not only as `GraphQLSchema` object but also as a `DocumentNode`. (For more info, read the API reference of [`GraphQLProjectConfig`](./graphql-project-config).)
 It's also capable of loading operations and fragments.
 
 ## Registering Loaders
@@ -121,17 +120,16 @@ The [GraphQL Tools](https://github.com/ardatan/graphql-tools) library has [a few
 For simplicity, we're going to use only [the one](https://github.com/ardatan/graphql-tools/tree/master/packages/loaders/code-file) responsible for extracting GraphQL SDL from code files.
 
 ```ts
+import { GraphQLExtensionDeclaration } from 'graphql-config'
 import { CodeFileLoader } from '@graphql-tools/code-file-loader'
 
 const InspectorExtension: GraphQLExtensionDeclaration = api => {
-  // Lets schema
+  // For schema
   api.loaders.schema.register(new CodeFileLoader())
-  // documents
+  // For documents
   api.loaders.documents.register(new CodeFileLoader())
 
-  return {
-    name: 'inspector'
-  }
+  return { name: 'inspector' }
 }
 ```
 
@@ -163,4 +161,4 @@ extensions:
 
 There are two kinds of loaders. One is responsible for handling schemas, and the other covers Operations and Fragments (we call them both `Documents`).
 
-To read more about loaders, please check ["Loaders" chapter](author-loaders)
+To read more about loaders, please check ["Loaders"](./loaders) chapter.
