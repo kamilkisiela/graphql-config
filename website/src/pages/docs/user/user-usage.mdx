@@ -1,3 +1,5 @@
+import { Callout } from '@theguild/components'
+
 # Usage
 
 ## Config Search Places
@@ -24,7 +26,7 @@
 
 The simplest config specifies only `schema` which points to the source of GraphQL Schema.
 
-```yaml filename="yaml"
+```yaml
 schema: ./schema.graphql
 ```
 
@@ -36,7 +38,7 @@ To learn more about possible sources of GraphQL schema read the ["Specifying sch
 
 Another piece of GraphQL may be operations and fragments. In GraphQL Config we call them `documents`.
 
-```yaml filename="yaml"
+```yaml
 # ...
 documents: src/components/**/*.graphql
 ```
@@ -47,19 +49,21 @@ By default, GraphQL Config can find and extract documents from GraphQL files but
 
 When you want to point out files related to the schema (for instance, React components) and make your IDE GraphQL Extension recognize those files, you can `include` and `exclude` items:
 
-```yaml filename="yaml"
+```yaml
 # ...
 include: src/components/**/*.jsx
 exclude: src/components/__ignored__/**/*.jsx
 ```
 
-> Remember that all files specified in `schema` or `documents` are included by default.
+<Callout>
+  Remember that all files specified in `schema` or `documents` are included by default.
+</Callout>
 
 ## Extensions
 
 To pass information to GraphQL Config's consumers (like IDE extensions, and Node libraries), you can use an `extensions` section that is a key-value object.
 
-```yaml filename="yaml"
+```yaml
 schema: './schema/*.graphql'
 extensions:
   codegen:
@@ -78,14 +82,14 @@ GraphQL Config allows you to define multiple projects within the same config fil
 
 Consider, for instance, writing the following configuration:
 
-```yaml filename="yaml"
+```yaml
 schema: './schema.graphql'
 documents: './src/components/**/*.graphql'
 ```
 
 This creates a singular, default project. To extend configuration to multiple projects, you can use the following approach:
 
-```yaml filename="yaml"
+```yaml
 projects:
   foo:
     schema: './packages/foo/schema.graphql'
@@ -96,7 +100,7 @@ projects:
 
 It's also possible to define many projects where one is the default. You can simply add `default` as that project's name:
 
-```yaml filename="yaml"
+```yaml
 projects:
   default:
     schema: './packages/foo/schema.graphql'

@@ -19,13 +19,9 @@ module.exports = {
         missingExports: true,
         ignoreExports: [
           '.eslintrc.js',
-          'next.config.js',
+          'next.config.mjs',
           'next-env.d.ts',
-          'next-i18next.config.js',
-          'src/pages/_document.tsx',
           'src/pages/_app.tsx',
-          'src/pages/index.tsx',
-          'src/pages/docs/[[...slug]].tsx',
         ],
       },
     ],
@@ -45,7 +41,7 @@ module.exports = {
   },
   overrides: [
     {
-      files: ['.eslintrc.js', 'next-i18next.config.js', 'next.config.js'],
+      files: ['.eslintrc.js', 'next.config.mjs'],
       env: {
         node: true,
       },

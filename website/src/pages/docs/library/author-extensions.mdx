@@ -1,18 +1,18 @@
 import { Callout } from '@theguild/components'
 
-# Writing And Consuming Extensions
+# Writing and Consuming Extensions
 
-The main purpose of GraphQL Config Extensions is to pass information to extension consumers to extend the behavior of GraphQL Config's logic.
+The main purpose of GraphQL Config Extensions is to pass information to extension's consumer to extend the behavior of GraphQL Config's logic.
 
 GraphQL Config ships TypeScript declaration files so let's make use of them in the following examples.
 
-## How To Write Extensions
+## How to Write Extensions
 
-To make sure you write extensions correctly, import and use the`GraphQLExtensionDeclaration` type from `graphql-config` package. Thanks to TypeScript, you get autocompletion and in-editor validation.
+To make sure you write extensions correctly, import and use the `GraphQLExtensionDeclaration` type from `graphql-config` package. Thanks to TypeScript, you get autocompletion and in-editor validation.
 
 The main requirement of an extension is its name. Providing a name lets GraphQL Config match the extension with its namespace in the config file.
 
-```ts filename="ts"
+```ts
 import { GraphQLExtensionDeclaration } from 'graphql-config'
 
 const InspectorExtension: GraphQLExtensionDeclaration = api => {
@@ -26,7 +26,7 @@ const InspectorExtension: GraphQLExtensionDeclaration = api => {
 
 GraphQL Config lets you intercept the GraphQL Schema loading process which may be helpful when dealing with custom directives like in Relay or Apollo Federation. We call it Middlewares.
 
-```ts filename="ts"
+```ts
 import { GraphQLExtensionDeclaration } from 'graphql-config'
 
 const RelayExtension: GraphQLExtensionDeclaration = api => {
@@ -47,7 +47,7 @@ const RelayExtension: GraphQLExtensionDeclaration = api => {
 
 As a GraphQL tool author, you will likely want to load the config and register your extension to understand the user's configuration.
 
-```ts filename="ts"
+```ts
 import { loadConfig } from 'graphql-config'
 import { InspectorExtension } from './extension'
 
@@ -58,13 +58,13 @@ async function main() {
 }
 ```
 
-<Callout type="info"> Synchronous version: `loadConfigSync`</Callout>
+<Callout>For synchronous use `loadConfigSync`</Callout>
 
 Now that everything is ready, GraphQL Config understands there's the Inspector extension.
 
 To access information stored in the config file, do the following:
 
-```ts filename="ts"
+```ts
 async function main() {
   // ... code from previous steps
 
@@ -91,9 +91,9 @@ async function main() {
 }
 ```
 
-Getting `GraphQLSchema` is straightforward: each project has `getSchema(): Promise<GraphQLSchema>` method.
+Getting `GraphQLSchema` is straightforward: each project has `getSchema(): Promise<GraphQLSchema>{:ts}` method.
 
-```ts filename="ts"
+```ts
 async function main() {
   // ... code from the previous example
   if (inspectorConfig.validate === true) {
@@ -119,13 +119,11 @@ The [GraphQL Tools](https://github.com/ardatan/graphql-tools) library has [a few
 
 For simplicity, we're going to use only [the one](https://github.com/ardatan/graphql-tools/tree/master/packages/loaders/code-file) responsible for extracting GraphQL SDL from code files.
 
-```ts filename="ts"
+```ts
 import { CodeFileLoader } from '@graphql-tools/code-file-loader'
 
 const InspectorExtension: GraphQLExtensionDeclaration = api => {
-  // Lets schema
   api.loaders.schema.register(new CodeFileLoader())
-  // documents
   api.loaders.documents.register(new CodeFileLoader())
 
   return {
@@ -136,7 +134,7 @@ const InspectorExtension: GraphQLExtensionDeclaration = api => {
 
 Let's say you have GraphQL SDL modularized across multiple TypeScript files, written like this:
 
-```ts filename="ts"
+```ts
 import { gql } from 'graphql-tag'
 
 export const typeDefs = gql`
@@ -153,7 +151,7 @@ export const typeDefs = gql`
 
 With `CodeFileLoader` you can extract those GraphQL pieces:
 
-```yaml filename="yaml"
+```yaml
 schema: './src/modules/*.ts' # uses a glob pattern to look for files
 extensions:
   inspector:
@@ -162,4 +160,4 @@ extensions:
 
 There are two kinds of loaders. One is responsible for handling schemas, and the other covers Operations and Fragments (we call them both `Documents`).
 
-To read more about loaders, please check ["Loaders" chapter](author-loaders)
+To read more about loaders, please check ["Loaders" chapter](./author-loaders).
