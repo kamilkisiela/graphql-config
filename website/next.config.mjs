@@ -3,7 +3,7 @@ import { withGuildDocs } from 'guild-docs/next.config';
 export default withGuildDocs({
   redirects: () =>
     Object.entries({
-      '/docs/introduction': '/docs',
+      '/legacy': '/docs/migration',
       '/docs/user/user-introduction': '/docs',
       '/docs/user/user-installation': '/docs/installation',
       '/docs/recipes/migration': '/docs/migration',
