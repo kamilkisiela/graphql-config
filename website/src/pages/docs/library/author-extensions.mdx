@@ -120,15 +120,16 @@ The [GraphQL Tools](https://github.com/ardatan/graphql-tools) library has [a few
 For simplicity, we're going to use only [the one](https://github.com/ardatan/graphql-tools/tree/master/packages/loaders/code-file) responsible for extracting GraphQL SDL from code files.
 
 ```ts
+import { GraphQLExtensionDeclaration } from 'graphql-config'
 import { CodeFileLoader } from '@graphql-tools/code-file-loader'
 
 const InspectorExtension: GraphQLExtensionDeclaration = api => {
+  // For schema
   api.loaders.schema.register(new CodeFileLoader())
+  // For documents
   api.loaders.documents.register(new CodeFileLoader())
 
-  return {
-    name: 'inspector'
-  }
+  return { name: 'inspector' }
 }
 ```
 
