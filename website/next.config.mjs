@@ -14,7 +14,7 @@ export default withGuildDocs({
       '/docs/library/api-graphql-project-config': '/docs/library/graphql-project-config',
       '/docs/library/author-extensions': '/docs/library/extensions',
       '/docs/library/author-load-config': '/docs/library/load-config',
-      '/docs/library/author-loaders.mdx': '/docs/library/loaders',
+      '/docs/library/author-loaders': '/docs/library/loaders',
     }).map(([from, to]) => console.log({from,to})|| ({
       source: from,
       destination: to,
