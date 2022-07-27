@@ -12,19 +12,6 @@ module.exports = {
     'no-else-return': ['error', { allowElseIf: false }],
     'react/jsx-curly-brace-presence': ['error', 'never'],
     'react/jsx-filename-extension': ['error', { extensions: ['.tsx'] }],
-    'import/no-unused-modules': [
-      'error',
-      {
-        unusedExports: true,
-        missingExports: true,
-        ignoreExports: [
-          '.eslintrc.js',
-          'next.config.mjs',
-          'next-env.d.ts',
-          'src/pages/_app.tsx',
-        ],
-      },
-    ],
     'import/order': [
       'error',
       {
@@ -41,7 +28,7 @@ module.exports = {
   },
   overrides: [
     {
-      files: ['.eslintrc.js', 'next.config.mjs'],
+      files: ['.eslintrc.cjs', 'next.config.mjs'],
       env: {
         node: true,
       },
