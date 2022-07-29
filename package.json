@@ -1,6 +1,6 @@
 {
   "name": "graphql-config",
-  "version": "4.3.2",
+  "version": "4.3.3",
   "description": "The easiest way to configure your development environment with your GraphQL schema (supported by most tools, editors & IDEs)",
   "sideEffects": false,
   "main": "dist/index.js",

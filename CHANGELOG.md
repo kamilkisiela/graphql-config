@@ -1,5 +1,11 @@
 # Change log
 
+## 4.3.3
+
+### Patch Changes
+
+- cd7747e: bump `cosmiconfig-typescript-loader` to resolve errors with esm loading
+
 ## 4.3.2
 
 ### Patch Changes
