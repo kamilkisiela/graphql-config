@@ -2036,10 +2036,10 @@ cosmiconfig-toml-loader@1.0.0:
   dependencies:
     "@iarna/toml" "^2.2.5"
 
-cosmiconfig-typescript-loader@3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/cosmiconfig-typescript-loader/-/cosmiconfig-typescript-loader-3.0.0.tgz#1925ca6f5d6c578acb6bf91d888f7cbb3d5e69f5"
-  integrity sha512-koBea9l2wvqoq4CWsoHdKb+RFyjgzTR7uw0F1CVvHrlGIHSGCMY5YwGj8+HN2iwqzpHPTst6LFUhCgTPwVOGpA==
+cosmiconfig-typescript-loader@^3.1.0:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/cosmiconfig-typescript-loader/-/cosmiconfig-typescript-loader-3.1.1.tgz#9cdc2ae1a219cf52b0bc0647596c6691b9ab56a3"
+  integrity sha512-SR5/NciF0vyYqcGsmB9WJ4QOKkcSSSzcBPLrnT6094BYahMy0eImWvlH3zoEOYqpF2zgiyAKHtWTXTo+fqgxPg==
 
 cosmiconfig@6.0.0:
   version "6.0.0"
