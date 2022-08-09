@@ -2,61 +2,47 @@ name: Release
 
 on:
   push:
-    branches: [master]
+    branches:
+      - master
 
 jobs:
-  build:
+  release:
+    name: stable
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Master
+      - name: Checkout
         uses: actions/checkout@v3
         with:
-          # This makes Actions fetch all Git history so that Changesets can generate changelogs with the correct commits
           fetch-depth: 0
-
-      - name: Configure Git Credentials
-        run: |
-          git config --global user.email "theguild-bot@users.noreply.github.com"
-          git config --global user.name "theguild-bot"
-          echo "machine github.com login theguild-bot password ${{secrets.BOT_TOKEN}}" > ~/.netrc
-
-      - name: Add origin remote and refetch master
-        run: |
-          git remote rm origin
-          git remote add origin "https://github.com/${{github.repository}}"
-          git fetch
-          git checkout master
-          git reset --hard
 
       - name: Use Node
         uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 18
+          cache: "yarn"
 
-      - name: Setup NPM credentials
-        run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
-        env:
-          NPM_TOKEN: ${{secrets.NPM_TOKEN}}
-
-      - name: Cache Yarn
-        uses: actions/cache@v3
-        with:
-          path: '**/node_modules'
-          key: ${{runner.os}}-16-yarn-${{hashFiles('yarn.lock')}}
-          restore-keys: |
-            ${{runner.os}}-16-yarn-${{hashFiles('yarn.lock')}}
-            ${{runner.os}}-16-yarn
-
-      - name: Install Dependencies
+      - name: Install Dependencies using Yarn
         run: yarn
+
+      - name: Build Packages
+        run: yarn build
+
+      - name: set version variables
+        id: vars
+        shell: bash
+        run: |
+          echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+          echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
 
       - name: Create Release Pull Request or Publish to npm
         id: changesets
-        uses: changesets/action@v1
+        uses: dotansimha/changesets-action@1bd10e16a393db098c8f537c719621962c0d5571
         with:
           publish: yarn release
-          commit: 'chore(release): update monorepo packages versions'
-          title: Upcoming Release Changes
+          commit: "chore(release): update monorepo packages versions"
+          title: "Upcoming Release Changes"
+          createGithubReleases: aggregate
+          githubReleaseName: "Release ${{ steps.vars.outputs.sha_short }} (from ${{ steps.vars.outputs.branch }})"
         env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-          NPM_TOKEN: ${{secrets.NPM_TOKEN}}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

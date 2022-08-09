@@ -1,0 +1,5 @@
+---
+'graphql-config': patch
+---
+
+temp
