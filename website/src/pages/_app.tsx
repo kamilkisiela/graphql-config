@@ -9,15 +9,13 @@ export default function App({ Component, pageProps, router }: AppProps) {
     router,
     trackingId: 'G-JSN4LT7S7V',
   });
-  // @ts-expect-error -- getLayout is custom function from nextra
-  const { getLayout = (page) => page } = Component;
   return (
     <ThemeProvider>
       <Script async src="https://the-guild.dev/static/crisp.js" />
       <Header accentColor="#1cc8ee" themeSwitch searchBarProps={{ version: 'v2' }} />
       <Script {...googleAnalytics.loadScriptProps} />
       <Script {...googleAnalytics.configScriptProps} />
-      {getLayout(<Component {...pageProps} />)}
+      <Component {...pageProps} />
       <FooterExtended />
     </ThemeProvider>
   );
