@@ -1,5 +1,29 @@
 [
   {
+    "objectID": "config-404",
+    "headings": [],
+    "toc": [],
+    "content": "d41d8cd98f00b204e9800998ecf8427e",
+    "url": "https://www.graphql-config.com//404",
+    "domain": "https://www.graphql-config.com/",
+    "hierarchy": [],
+    "source": "Config",
+    "title": "404",
+    "type": "Documentation"
+  },
+  {
+    "objectID": "config-500",
+    "headings": [],
+    "toc": [],
+    "content": "d41d8cd98f00b204e9800998ecf8427e",
+    "url": "https://www.graphql-config.com//500",
+    "domain": "https://www.graphql-config.com/",
+    "hierarchy": [],
+    "source": "Config",
+    "title": "500",
+    "type": "Documentation"
+  },
+  {
     "objectID": "config-docs-im-a-library-author-extensions",
     "headings": ["How to Write Extensions", "Consuming Extension", "Registering Loaders"],
     "toc": [
@@ -25,7 +49,7 @@
         "anchor": "registering-loaders"
       }
     ],
-    "content": "-",
+    "content": "619b5016980f4c1a82c1db3b23556ff6",
     "url": "https://www.graphql-config.com/docs/library/extensions",
     "domain": "https://www.graphql-config.com/",
     "hierarchy": ["Docs", "I'm a Library Author"],
@@ -80,7 +104,7 @@
         "anchor": "api"
       }
     ],
-    "content": "-",
+    "content": "d5c9c85c87a2d8f8cb6499a51e4c08ed",
     "url": "https://www.graphql-config.com/docs/library/graphql-config",
     "domain": "https://www.graphql-config.com/",
     "hierarchy": ["Docs", "I'm a Library Author"],
@@ -185,7 +209,7 @@
         "anchor": "api"
       }
     ],
-    "content": "-",
+    "content": "7dd0842b6e4e7a84b2cb875654de3fc8",
     "url": "https://www.graphql-config.com/docs/library/graphql-project-config",
     "domain": "https://www.graphql-config.com/",
     "hierarchy": ["Docs", "I'm a Library Author"],
@@ -252,7 +276,7 @@
         "anchor": "options"
       }
     ],
-    "content": "-",
+    "content": "76f9b92c02cd80d4d7ec398d0861a7b9",
     "url": "https://www.graphql-config.com/docs/library/load-config",
     "domain": "https://www.graphql-config.com/",
     "hierarchy": ["Docs", "I'm a Library Author"],
@@ -275,7 +299,7 @@
         "anchor": "writing-loaders"
       }
     ],
-    "content": "-",
+    "content": "f1121de9f0cebb8c5c916f278c9e9826",
     "url": "https://www.graphql-config.com/docs/library/loaders",
     "domain": "https://www.graphql-config.com/",
     "hierarchy": ["Docs", "I'm a Library Author"],
@@ -293,7 +317,7 @@
         "anchor": "multiple-files"
       }
     ],
-    "content": "-",
+    "content": "4f35dcbe4642da47d1275b0406044691",
     "url": "https://www.graphql-config.com/docs/user/documents",
     "domain": "https://www.graphql-config.com/",
     "hierarchy": ["Docs", "I'm a User"],
@@ -331,7 +355,7 @@
         "anchor": "passing-headers"
       }
     ],
-    "content": "-",
+    "content": "bbdb4e2f48d490ff5cd79d242bf33adc",
     "url": "https://www.graphql-config.com/docs/user/schema",
     "domain": "https://www.graphql-config.com/",
     "hierarchy": ["Docs", "I'm a User"],
@@ -374,7 +398,7 @@
         "anchor": "projects"
       }
     ],
-    "content": "-",
+    "content": "cb03d5e7a6ad51c1d46397b72b07ff16",
     "url": "https://www.graphql-config.com/docs/user/usage",
     "domain": "https://www.graphql-config.com/",
     "hierarchy": ["Docs", "I'm a User"],
@@ -439,7 +463,7 @@
         "anchor": "examples"
       }
     ],
-    "content": "-",
+    "content": "c24490dcde7573ac2871136c845dd41d",
     "url": "https://www.graphql-config.com/docs/index",
     "domain": "https://www.graphql-config.com/",
     "hierarchy": ["Docs"],
@@ -451,7 +475,7 @@
     "objectID": "config-docs-installation",
     "headings": [],
     "toc": [],
-    "content": "-",
+    "content": "aa53698e66beb354163efefc020640be",
     "url": "https://www.graphql-config.com/docs/installation",
     "domain": "https://www.graphql-config.com/",
     "hierarchy": ["Docs"],
@@ -501,7 +525,7 @@
         "anchor": "new-syntax"
       }
     ],
-    "content": "-",
+    "content": "fe185bd851d50e92ccd182a1e61279d6",
     "url": "https://www.graphql-config.com/docs/migration",
     "domain": "https://www.graphql-config.com/",
     "hierarchy": ["Docs"],
@@ -513,7 +537,7 @@
     "objectID": "config-index",
     "headings": [],
     "toc": [],
-    "content": "-",
+    "content": "74caa9fd4badabe12bdef51d192ead1c",
     "url": "https://www.graphql-config.com//index",
     "domain": "https://www.graphql-config.com/",
     "hierarchy": [],
