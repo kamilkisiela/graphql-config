@@ -19,7 +19,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18
-          cache: "yarn"
+          cache: 'yarn'
 
       - name: Install Dependencies using Yarn
         run: yarn
@@ -39,10 +39,10 @@ jobs:
         uses: dotansimha/changesets-action@v1.3.1
         with:
           publish: yarn release
-          commit: "chore(release): update monorepo packages versions"
-          title: "Upcoming Release Changes"
+          commit: 'chore(release): update monorepo packages versions'
+          title: 'Upcoming Release Changes'
           createGithubReleases: aggregate
-          githubReleaseName: "Release ${{ steps.vars.outputs.sha_short }} (from ${{ steps.vars.outputs.branch }})"
+          githubReleaseName: 'Release ${{ steps.vars.outputs.sha_short }} (from ${{ steps.vars.outputs.branch }})'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

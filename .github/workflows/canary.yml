@@ -3,9 +3,9 @@ name: Canary Release
 on:
   pull_request:
     branches:
-      - master  
+      - master
     paths:
-      - ".changeset/**/*.md"
+      - '.changeset/**/*.md'
 
 jobs:
   canary:
@@ -21,17 +21,17 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18
-          cache: "yarn"
+          cache: 'yarn'
 
       - name: Install Dependencies using Yarn
         run: yarn
 
       - name: Release Canary
         id: canary
-        uses: "the-guild-org/changesets-snapshot-action@main"
+        uses: 'the-guild-org/changesets-snapshot-action@main'
         with:
           tag: alpha
-          prepareScript: "yarn build"
+          prepareScript: 'yarn build'
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

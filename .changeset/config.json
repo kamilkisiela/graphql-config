@@ -1,9 +1,6 @@
 {
   "$schema": "https://unpkg.com/@changesets/config@2.1.0/schema.json",
-  "changelog": [
-    "@changesets/changelog-github",
-    { "repo": "kamilkisiela/graphql-config" }
-  ],
+  "changelog": ["@changesets/changelog-github", { "repo": "kamilkisiela/graphql-config" }],
   "commit": false,
   "fixed": [],
   "linked": [],
