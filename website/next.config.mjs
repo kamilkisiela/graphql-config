@@ -15,7 +15,7 @@ export default withGuildDocs({
       '/docs/library/author-extensions': '/docs/library/extensions',
       '/docs/library/author-load-config': '/docs/library/load-config',
       '/docs/library/author-loaders': '/docs/library/loaders',
-      '/usage': '/docs/user/usage'
+      '/usage': '/docs/user/usage',
     }).map(([from, to]) => ({
       source: from,
       destination: to,
