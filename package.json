@@ -29,6 +29,7 @@
     "prettier": "prettier --ignore-path .gitignore --write --list-different .",
     "prettier:check": "prettier --ignore-path .gitignore --check .",
     "lint": "eslint --ignore-path .gitignore .",
+    "ci:lint": "eslint --ignore-path .gitignore . --output-file eslint_report.json --format json",
     "test": "jest",
     "prerelease": "yarn build",
     "release": "changeset publish",
