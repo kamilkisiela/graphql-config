@@ -56,7 +56,7 @@
     "@changesets/cli": "2.24.3",
     "@changesets/changelog-github": "0.4.6",
     "@types/jest": "28.1.7",
-    "@types/node": "16.11.49",
+    "@types/node": "16.11.51",
     "@typescript-eslint/eslint-plugin": "5.33.1",
     "@typescript-eslint/parser": "5.33.1",
     "bob-the-bundler": "1.7.3",
