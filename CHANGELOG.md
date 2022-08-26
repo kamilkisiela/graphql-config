@@ -1,5 +1,15 @@
 # Change log
 
+## 4.3.4
+
+### Patch Changes
+
+- [#1103](https://github.com/kamilkisiela/graphql-config/pull/1103) [`2c568f1`](https://github.com/kamilkisiela/graphql-config/commit/2c568f1ee2d45bc46613b86b12fcfab82b1393aa) Thanks [@renovate](https://github.com/apps/renovate)! - dependencies updates:
+
+  - Added dependency [`tslib@^2.4.0` ↗︎](https://www.npmjs.com/package/tslib/v/null) (to `dependencies`)
+
+* [#1103](https://github.com/kamilkisiela/graphql-config/pull/1103) [`2c568f1`](https://github.com/kamilkisiela/graphql-config/commit/2c568f1ee2d45bc46613b86b12fcfab82b1393aa) Thanks [@renovate](https://github.com/apps/renovate)! - Proper ESM/CJS support on Node.js
+
 ## 4.3.3
 
 ### Patch Changes
