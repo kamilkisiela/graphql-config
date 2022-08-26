@@ -30,4 +30,6 @@ module.exports = {
   },
 
   errorOnDeprecated: true,
+
+  resolver: 'bob-the-bundler/jest-resolver.js',
 };
