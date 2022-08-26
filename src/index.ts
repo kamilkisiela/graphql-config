@@ -4,4 +4,4 @@ export { GraphQLExtensionDeclaration } from './extension.js';
 export { Source, Loader } from '@graphql-tools/utils';
 export * from './types.js';
 export * from './errors.js';
-export { LoadersRegistry } from "./loaders.js"
+export { LoadersRegistry } from './loaders.js';

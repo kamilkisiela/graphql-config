@@ -18,7 +18,7 @@ jest.mock('@graphql-tools/load', () => {
     }
   `);
 
-  schema.isTheOne = true
+  schema.isTheOne = true;
 
   return {
     loadTypedefs: jest.fn(() => {
@@ -35,9 +35,6 @@ jest.mock('@graphql-tools/load', () => {
     }),
   };
 });
-
-
-
 
 describe('middlewares', () => {
   test('loads Sources instead of GraphQLSchema when middlewares are defined', () => {
@@ -78,11 +75,8 @@ describe('middlewares', () => {
 
     expect(received.isTheOne).toEqual(true);
     expect(receivedAsync.isTheOne).toEqual(true);
-
   });
 });
-
-
 
 class CustomLoader implements Loader {
   private schema: GraphQLSchema;
