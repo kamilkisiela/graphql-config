@@ -106,7 +106,7 @@
   },
   "license": "MIT",
   "bob": {
-    "build":{
+    "build": {
       "copy": [
         "config-schema.json"
       ]
