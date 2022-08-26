@@ -10,7 +10,10 @@
     "moduleResolution": "node",
     "esModuleInterop": true,
     "noUnusedLocals": true,
-    "noUnusedParameters": true
+    "noUnusedParameters": true,
+    "paths": {
+      "graphql-config": ["./src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "dist"],
   "include": ["src"]

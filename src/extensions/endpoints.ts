@@ -1,5 +1,5 @@
-import type { GraphQLExtensionDeclaration } from '../extension';
-import type { WithList } from '../types';
+import type { GraphQLExtensionDeclaration } from '../extension.js';
+import type { WithList } from '../types.js';
 
 export interface Endpoint {
   url: string;

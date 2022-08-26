@@ -1,20 +1,25 @@
-import { parse, DirectiveDefinitionNode, buildSchema, GraphQLSchema, Kind } from 'graphql';
+import { DirectiveDefinitionNode, buildSchema, GraphQLSchema, Kind } from 'graphql';
 import { Loader, Source } from '@graphql-tools/utils';
+import { beforeAll, test, describe, expect } from '@jest/globals';
+import { LoadersRegistry } from 'graphql-config';
 import { loadTypedefsSync, loadSchemaSync, loadSchema, LoadSchemaOptions } from '@graphql-tools/load';
 
-const schema = buildSchema(/* GraphQL */ `
-  type Query {
-    foo: String
-  }
-`);
-
-const document = parse(/* GraphQL */ `
-  type Query {
-    foo: String @cache
-  }
-`);
-
 jest.mock('@graphql-tools/load', () => {
+  const { parse, buildSchema } = require('graphql');
+  const document = parse(/* GraphQL */ `
+    type Query {
+      foo: String @cache
+    }
+  `);
+
+  const schema = buildSchema(/* GraphQL */ `
+    type Query {
+      foo: String
+    }
+  `);
+
+  schema.isTheOne = true
+
   return {
     loadTypedefs: jest.fn(() => {
       return [{ document }];
@@ -31,7 +36,8 @@ jest.mock('@graphql-tools/load', () => {
   };
 });
 
-import { LoadersRegistry } from '../src/loaders';
+
+
 
 describe('middlewares', () => {
   test('loads Sources instead of GraphQLSchema when middlewares are defined', () => {
@@ -70,10 +76,13 @@ describe('middlewares', () => {
     const received = registry.loadSchemaSync('anything');
     const receivedAsync = await registry.loadSchema('anything');
 
-    expect(received).toBe(schema);
-    expect(receivedAsync).toBe(schema);
+    expect(received.isTheOne).toEqual(true);
+    expect(receivedAsync.isTheOne).toEqual(true);
+
   });
 });
+
+
 
 class CustomLoader implements Loader {
   private schema: GraphQLSchema;

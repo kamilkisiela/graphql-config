@@ -1,8 +1,10 @@
 import { cosmiconfig, cosmiconfigSync, Loader, defaultLoaders } from 'cosmiconfig';
-import loadTs from 'cosmiconfig-typescript-loader';
+import unsecure_loadTs from 'cosmiconfig-typescript-loader';
 import { loadToml } from 'cosmiconfig-toml-loader';
 import { env } from 'string-env-interpolation';
 
+/** The underlying module gives us { default: } on ESM but no default on CJS :) */
+const loadTs: typeof unsecure_loadTs = (unsecure_loadTs as any)?.default ?? unsecure_loadTs;
 export interface ConfigSearchResult {
   config: any;
   filepath: string;

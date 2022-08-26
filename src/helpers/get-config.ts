@@ -1,6 +1,6 @@
-import { ConfigNotFoundError, ConfigEmptyError, composeMessage } from '../errors';
-import { GraphQLConfigResult } from '../types';
-import { ConfigSearchResult, createCosmiConfigSync, createCosmiConfig } from './cosmiconfig';
+import { ConfigNotFoundError, ConfigEmptyError, composeMessage } from '../errors.js';
+import { GraphQLConfigResult } from '../types.js';
+import { ConfigSearchResult, createCosmiConfigSync, createCosmiConfig } from './cosmiconfig.js';
 
 export async function getConfig({
   filepath,
