@@ -1,5 +1,13 @@
 # Change log
 
+## 4.3.5
+
+### Patch Changes
+
+- [#1126](https://github.com/kamilkisiela/graphql-config/pull/1126) [`cc781c4`](https://github.com/kamilkisiela/graphql-config/commit/cc781c4cf3bd056a75081108e1b13efd1b3d29ed) Thanks [@n1ru4l](https://github.com/n1ru4l)! - dependencies updates:
+
+  - Updated dependency [`cosmiconfig-typescript-loader@^4.0.0` ↗︎](https://www.npmjs.com/package/cosmiconfig-typescript-loader/v/null) (from `^3.1.0`, in `dependencies`)
+
 ## 4.3.4
 
 ### Patch Changes
