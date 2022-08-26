@@ -1,4 +1,4 @@
-import type { IGraphQLConfig, IGraphQLProject, IGraphQLProjects, IGraphQLProjectLegacy } from '../types';
+import type { IGraphQLConfig, IGraphQLProject, IGraphQLProjects, IGraphQLProjectLegacy } from '../types.js';
 
 export function isMultipleProjectConfig(config: IGraphQLConfig): config is IGraphQLProjects {
   return typeof (config as IGraphQLProjects).projects === 'object';

@@ -1,6 +1,6 @@
 import { dirname } from 'path';
-import type { IGraphQLConfig, GraphQLConfigResult } from './types';
-import { GraphQLProjectConfig } from './project-config';
+import type { IGraphQLConfig, GraphQLConfigResult } from './types.js';
+import { GraphQLProjectConfig } from './project-config.js';
 import {
   isMultipleProjectConfig,
   isSingleProjectConfig,
@@ -9,11 +9,11 @@ import {
   getConfigSync,
   findConfigSync,
   isLegacyProjectConfig,
-} from './helpers';
-import { ProjectNotFoundError, ConfigNotFoundError, ConfigEmptyError } from './errors';
-import { GraphQLExtensionDeclaration, GraphQLExtensionsRegistry } from './extension';
-import { EndpointsExtension } from './extensions/endpoints';
-import { isLegacyConfig } from './helpers/cosmiconfig';
+} from './helpers/index.js';
+import { ProjectNotFoundError, ConfigNotFoundError, ConfigEmptyError } from './errors.js';
+import { GraphQLExtensionDeclaration, GraphQLExtensionsRegistry } from './extension.js';
+import { EndpointsExtension } from './extensions/endpoints.js';
+import { isLegacyConfig } from './helpers/cosmiconfig.js';
 
 const cwd = typeof process !== 'undefined' ? process.cwd() : undefined;
 const defaultConfigName = 'graphql';

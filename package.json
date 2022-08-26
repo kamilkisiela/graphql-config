@@ -3,29 +3,40 @@
   "version": "4.3.3",
   "description": "The easiest way to configure your development environment with your GraphQL schema (supported by most tools, editors & IDEs)",
   "sideEffects": false,
-  "main": "dist/index.js",
-  "module": "dist/index.mjs",
-  "typings": "dist/index.d.ts",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
   "exports": {
     ".": {
-      "require": "./dist/index.js",
-      "import": "./dist/index.mjs"
+      "require": {
+        "types": "./dist/typings/index.d.cts",
+        "default": "./dist/cjs/index.js"
+      },
+      "import": {
+        "types": "./dist/typings/index.d.ts",
+        "default": "./dist/esm/index.js"
+      },
+      "default": {
+        "types": "./dist/typings/index.d.ts",
+        "default": "./dist/esm/index.js"
+      }
     },
-    "./*": {
-      "require": "./dist/*.js",
-      "import": "./dist/*.mjs"
-    }
+    "./package.json": "./package.json"
   },
+  "typings": "dist/typings/index.d.ts",
   "typescript": {
-    "definition": "dist/index.d.ts"
+    "definition": "dist/typings/index.d.ts"
   },
+  "publishConfig": {
+    "directory": "dist",
+    "access": "public"
+  },
+  "type": "module",
   "scripts": {
     "prepublishOnly": "yarn build",
     "clean": "rimraf dist",
     "postinstall": "patch-package",
     "prebuild": "yarn clean && yarn json-schema",
-    "build": "bob build --single",
-    "prepack": "bob prepack",
+    "build": "bob build",
     "prettier": "prettier --ignore-path .gitignore --write --list-different .",
     "prettier:check": "prettier --ignore-path .gitignore --check .",
     "lint": "eslint --ignore-path .gitignore .",
@@ -94,10 +105,12 @@
     "url": "https://github.com/kamilkisiela"
   },
   "license": "MIT",
-  "buildOptions": {
-    "copy": [
-      "config-schema.json"
-    ]
+  "bob": {
+    "build":{
+      "copy": [
+        "config-schema.json"
+      ]
+    }
   },
   "lint-staged": {
     "{src,test}/**/*": [
@@ -108,10 +121,6 @@
     "hooks": {
       "pre-commit": "lint-staged"
     }
-  },
-  "publishConfig": {
-    "directory": "dist",
-    "access": "public"
   },
   "engines": {
     "node": ">= 10.0.0"

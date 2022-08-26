@@ -7,11 +7,11 @@ import {
   LoadTypedefsOptions as ToolsLoadTypedefsOptions,
   UnnormalizedTypeDefPointer,
 } from '@graphql-tools/load';
-import { ExtensionMissingError } from './errors';
-import type { GraphQLExtensionsRegistry } from './extension';
-import type { IExtensions, IGraphQLProject, IGraphQLProjectLegacy, WithList } from './types';
-import { isLegacyProjectConfig } from './helpers';
-import type { SchemaOutput } from './loaders';
+import { ExtensionMissingError } from './errors.js';
+import type { GraphQLExtensionsRegistry } from './extension.js';
+import type { IExtensions, IGraphQLProject, IGraphQLProjectLegacy, WithList } from './types.js';
+import { isLegacyProjectConfig } from './helpers/index.js';
+import type { SchemaOutput } from './loaders.js';
 
 type Pointer = UnnormalizedTypeDefPointer | UnnormalizedTypeDefPointer[];
 type LoadTypedefsOptions = Partial<ToolsLoadTypedefsOptions>;

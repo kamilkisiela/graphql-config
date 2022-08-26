@@ -13,7 +13,7 @@ import {
 } from '@graphql-tools/load';
 import { mergeTypeDefs } from '@graphql-tools/merge';
 import { GraphQLSchema, DocumentNode, buildASTSchema, print } from 'graphql';
-import { MiddlewareFn, useMiddleware } from './helpers';
+import { MiddlewareFn, useMiddleware } from './helpers/index.js';
 
 type Pointer = UnnormalizedTypeDefPointer | UnnormalizedTypeDefPointer[];
 type LoadTypedefsOptions = Partial<ToolsLoadTypedefsOptions>;

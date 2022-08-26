@@ -1,7 +1,7 @@
 import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader';
 import { UrlLoader } from '@graphql-tools/url-loader';
 import { JsonFileLoader } from '@graphql-tools/json-file-loader';
-import { LoadersRegistry } from './loaders';
+import { LoadersRegistry } from './loaders.js';
 
 export type GraphQLExtensionDeclaration = (api: ExtensionAPI) => GraphQLConfigExtension;
 

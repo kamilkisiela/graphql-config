@@ -1,6 +1,6 @@
-import { ConfigNotFoundError, ConfigEmptyError, composeMessage } from '../errors';
-import { GraphQLConfigResult } from '../types';
-import { createCosmiConfig, createCosmiConfigSync, ConfigSearchResult } from './cosmiconfig';
+import { ConfigNotFoundError, ConfigEmptyError, composeMessage } from '../errors.js';
+import { GraphQLConfigResult } from '../types.js';
+import { createCosmiConfig, createCosmiConfigSync, ConfigSearchResult } from './cosmiconfig.js';
 
 const cwd = typeof process !== 'undefined' ? process.cwd() : undefined;
 
