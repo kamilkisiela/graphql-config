@@ -2,7 +2,8 @@ import { buildSchema, buildASTSchema } from 'graphql';
 import { resolve, basename } from 'path';
 import { TempDir } from './utils/temp-dir';
 import { runTests } from './utils/runner';
-import { loadConfig, loadConfigSync, ConfigNotFoundError } from '../src';
+import { loadConfig, loadConfigSync, ConfigNotFoundError } from 'graphql-config';
+import { beforeEach, beforeAll, test, describe, expect } from '@jest/globals';
 
 const temp = new TempDir();
 

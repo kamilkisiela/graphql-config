@@ -1,6 +1,12 @@
+const { pathsToModuleNameMapper } = require('ts-jest');
+const { resolve } = require('path');
+
+const ROOT_DIR = __dirname;
+const TSCONFIG = resolve(ROOT_DIR, 'tsconfig.json');
+const tsconfig = require(TSCONFIG);
+
 // For a detailed explanation regarding each configuration property, visit:
 // https://jestjs.io/docs/en/configuration.html
-
 module.exports = {
   // Automatically clear mock calls and instances between every test
   clearMocks: true,
@@ -17,6 +23,8 @@ module.exports = {
 
   // An array of file extensions your modules use
   moduleFileExtensions: ['ts', 'js'],
+  modulePathIgnorePatterns: ['dist', '.bob'],
+  moduleNameMapper: pathsToModuleNameMapper(tsconfig.compilerOptions.paths, { prefix: `${ROOT_DIR}/` }),
 
   // The test environment that will be used for testing
   testEnvironment: 'node',
@@ -25,9 +33,7 @@ module.exports = {
   testMatch: ['**/test/**/*.spec.ts'],
 
   // A map from regular expressions to paths to transformers
-  transform: {
-    '^.+\\.ts$': 'ts-jest',
-  },
+  transform: { '^.+\\.tsx?$': 'babel-jest' },
 
   errorOnDeprecated: true,
 

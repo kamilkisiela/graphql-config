@@ -30,6 +30,9 @@ jobs:
       - name: Build
         run: yarn build
 
+      - name: Integrity check
+        run: yarn bob check
+
   lint:
     name: Lint
     uses: the-guild-org/shared-config/.github/workflows/lint.yml@main
