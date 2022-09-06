@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "jsx": "react",
     "module": "esnext",
     "target": "es5",
     "lib": ["es2017", "dom", "esnext.asynciterable"],
@@ -16,5 +17,5 @@
     }
   },
   "exclude": ["node_modules", "dist"],
-  "include": ["src"]
+  "include": ["src", "website/src/components"]
 }
