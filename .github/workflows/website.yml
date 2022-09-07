@@ -23,6 +23,7 @@ jobs:
         with:
           nodeVersion: 17
           packageManager: yarn
+          workingDirectory: website
 
       - uses: the-guild-org/shared-config/website-cf@main
         name: build and deploy website
@@ -38,6 +39,6 @@ jobs:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
           projectName: graphql-config
           prId: ${{ github.event.pull_request.number }}
-          websiteDirectory: ./
-          buildScript: cd website && yarn next export
-          artifactDir: website/out
+          websiteDirectory: website
+          buildScript: yarn build && yarn export
+          artifactDir: out
