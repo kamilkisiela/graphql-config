@@ -20,11 +20,6 @@ export function IndexPage(): ReactElement {
           title: 'Get started with GraphQL Config',
           onClick: (e) => handlePushRoute('/docs', e),
         }}
-        image={{
-          src: '/configuring.svg',
-          alt: 'configuring',
-          loading: 'lazy',
-        }}
         version={<NPMBadge name="graphql-config" />}
         colors={['#5f6184', '#000']}
       />
@@ -36,7 +31,8 @@ export function IndexPage(): ReactElement {
             description: 'You gain simplicity and a central place to setup your tools.',
             image: {
               src: '',
-              alt: '',
+              loading: 'eager',
+              placeholder: 'empty',
             },
           },
           {
@@ -44,7 +40,8 @@ export function IndexPage(): ReactElement {
             description: 'Highly customizable and extensible',
             image: {
               src: '',
-              alt: '',
+              loading: 'eager',
+              placeholder: 'empty',
             },
           },
           {
@@ -52,7 +49,8 @@ export function IndexPage(): ReactElement {
             description: 'A standard in the community',
             image: {
               src: '',
-              alt: '',
+              loading: 'eager',
+              placeholder: 'empty',
             },
           },
         ]}
