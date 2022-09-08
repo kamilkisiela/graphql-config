@@ -7,7 +7,7 @@
     "lint": "eslint --ignore-path ../.gitignore --ext js,jsx,cjs,mjs,ts,tsx,cts,mts .",
     "dev": "next dev",
     "next": "next",
-    "build": "next build",
+    "build": "next build && next-sitemap --config next-sitemap.config.cjs ",
     "start": "next start",
     "analyze": "cross-env ANALYZE=true yarn build"
   },
