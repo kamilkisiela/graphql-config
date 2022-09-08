@@ -1,6 +1,7 @@
 import { FeatureList, HeroGradient, NPMBadge } from '@theguild/components';
 import { handlePushRoute } from 'guild-docs';
 import { ReactElement } from 'react';
+import React from 'react';
 
 export function IndexPage(): ReactElement {
   return (
