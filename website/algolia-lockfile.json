@@ -1,29 +1,5 @@
 [
   {
-    "objectID": "config-404",
-    "headings": [],
-    "toc": [],
-    "content": "d41d8cd98f00b204e9800998ecf8427e",
-    "url": "https://www.graphql-config.com//404",
-    "domain": "https://www.graphql-config.com/",
-    "hierarchy": [],
-    "source": "Config",
-    "title": "404",
-    "type": "Documentation"
-  },
-  {
-    "objectID": "config-500",
-    "headings": [],
-    "toc": [],
-    "content": "d41d8cd98f00b204e9800998ecf8427e",
-    "url": "https://www.graphql-config.com//500",
-    "domain": "https://www.graphql-config.com/",
-    "hierarchy": [],
-    "source": "Config",
-    "title": "500",
-    "type": "Documentation"
-  },
-  {
     "objectID": "config-docs-im-a-library-author-extensions",
     "headings": ["How to Write Extensions", "Consuming Extension", "Registering Loaders"],
     "toc": [
@@ -537,7 +513,7 @@
     "objectID": "config-index",
     "headings": [],
     "toc": [],
-    "content": "74caa9fd4badabe12bdef51d192ead1c",
+    "content": "d41d8cd98f00b204e9800998ecf8427e",
     "url": "https://www.graphql-config.com//index",
     "domain": "https://www.graphql-config.com/",
     "hierarchy": [],
