@@ -34,6 +34,12 @@ export default withGuildDocs({
       '/usage': '/docs/user/usage',
       '/docs/user/user-usage': '/docs',
       '/docs/user': '/docs',
+      '/docs/introduction': '/docs',
+      '/docs/user/user-schema': '/docs',
+      '/docs/user': '/docs',
+      '/extensions': '/docs/library/extensions',
+      '/introduction': '/docs',
+      '/schema': '/docs/user/schema',
     }).map(([from, to]) => ({
       source: from,
       destination: to,
