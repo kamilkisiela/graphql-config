@@ -38,9 +38,7 @@ export default withGuildDocs({
       '/extensions': '/docs/library/extensions',
       '/introduction': '/docs',
       '/schema': '/docs/user/schema',
-      '/docs': '/docs',
       '/docs/schema': '/docs/user/schema',
-      '/docs/user/null': '/docs/user/usage',
     }).map(([from, to]) => ({
       source: from,
       destination: to,
