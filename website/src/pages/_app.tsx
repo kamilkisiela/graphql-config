@@ -12,13 +12,3 @@ export default function App({ Component, pageProps }: AppProps): ReactElement {
     </ThemeProvider>
   );
 }
-
-// const defaultSeo: AppSeoProps = {
-//   title: 'GraphQL Mesh',
-//   description: 'GraphQL Mesh Docs',
-//   logo: {
-//     url: '',
-//     width: 50,
-//     height: 54,
-//   },
-// };
