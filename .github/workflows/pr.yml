@@ -9,7 +9,7 @@ jobs:
   dependencies:
     uses: the-guild-org/shared-config/.github/workflows/changesets-dependencies.yaml@main
     secrets:
-      githubToken: ${{ secrets.GITHUB_TOKEN }}
+      githubToken: ${{ secrets.GUILD_BOT_TOKEN }}
 
   canary:
     uses: the-guild-org/shared-config/.github/workflows/release-snapshot.yml@main
@@ -18,5 +18,5 @@ jobs:
       buildScript: build
       nodeVersion: 16
     secrets:
-      githubToken: ${{ secrets.GITHUB_TOKEN }}
+      githubToken: ${{ secrets.GUILD_BOT_TOKEN }}
       npmToken: ${{ secrets.NPM_TOKEN }}
