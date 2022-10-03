@@ -8,3 +8,6 @@ package-lock.json
 .next/
 *.log
 .bob
+
+website/public/_redirects
+website/public/sitemap.xml

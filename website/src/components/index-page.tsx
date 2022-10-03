@@ -1,5 +1,4 @@
 import { FeatureList, HeroGradient, NPMBadge } from '@theguild/components';
-import { handlePushRoute } from 'guild-docs';
 import { ReactElement } from 'react';
 import React from 'react';
 
@@ -19,7 +18,6 @@ export function IndexPage(): ReactElement {
           href: '/docs',
           children: 'Get Started',
           title: 'Get started with GraphQL Config',
-          onClick: (e) => handlePushRoute('/docs', e),
         }}
         version={<NPMBadge name="graphql-config" />}
         colors={['#5f6184', '#000']}
@@ -32,6 +30,8 @@ export function IndexPage(): ReactElement {
             description: 'You gain simplicity and a central place to setup your tools.',
             image: {
               src: '',
+              className: 'hidden',
+              alt: 'Easy To Use',
               loading: 'eager',
               placeholder: 'empty',
             },
@@ -40,7 +40,9 @@ export function IndexPage(): ReactElement {
             title: 'Fully Configurable',
             description: 'Highly customizable and extensible',
             image: {
+              className: 'hidden',
               src: '',
+              alt: 'Fully Configurable',
               loading: 'eager',
               placeholder: 'empty',
             },
@@ -49,7 +51,9 @@ export function IndexPage(): ReactElement {
             title: 'Open Source',
             description: 'A standard in the community',
             image: {
+              className: 'hidden',
               src: '',
+              alt: 'Open Source',
               loading: 'eager',
               placeholder: 'empty',
             },
