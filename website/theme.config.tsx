@@ -4,7 +4,7 @@ const SITE_NAME = 'GraphQL Config';
 
 export default defineConfig({
   titleSuffix: ` – ${SITE_NAME}`,
-  docsRepositoryBase: 'https://github.com/kamilkisiela/graphql-config/tree/master/website/src/pages', // base URL for the docs repository
+  docsRepositoryBase: 'https://github.com/kamilkisiela/graphql-config/tree/master/website', // base URL for the docs repository
   logo: (
     <>
       <ConfigLogo className="mr-1.5 h-9 w-9" />
@@ -14,7 +14,7 @@ export default defineConfig({
       </div>
     </>
   ),
-  head: () => (
+  head: (
     <>
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="/favicon.ico" />
