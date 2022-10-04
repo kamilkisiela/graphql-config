@@ -26,6 +26,9 @@ export default withGuildDocs({
       '/introduction': '/docs',
       '/schema': '/docs/user/schema',
       '/docs/schema': '/docs/user/schema',
+      '/load-config': '/docs/library/load-config',
+      '/docs/user/user-schema': '/docs/user/schema',
+      '/documents': '/docs/user/documents',
     }).map(([from, to]) => ({
       source: from,
       destination: to,
