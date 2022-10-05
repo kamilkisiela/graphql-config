@@ -1,5 +1,5 @@
 import { cosmiconfig, cosmiconfigSync, Loader, defaultLoaders } from 'cosmiconfig';
-import { TypeScriptLoader } from 'cosmiconfig-typescript-loader';
+import { TypeScriptSWCLoader } from 'cosmiconfig-typescript-swc-loader';
 import { loadToml } from 'cosmiconfig-toml-loader';
 import { env } from 'string-env-interpolation';
 
@@ -81,7 +81,7 @@ function prepareCosmiconfig(moduleName: string, { legacy }: { legacy: boolean })
   return {
     searchPlaces: searchPlaces.map((place) => place.replace('#', moduleName)),
     loaders: {
-      '.ts': TypeScriptLoader(),
+      '.ts': TypeScriptSWCLoader(),
       '.js': defaultLoaders['.js'],
       '.json': loadJson,
       '.yaml': loadYaml,

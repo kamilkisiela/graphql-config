@@ -58,7 +58,7 @@
     "@graphql-tools/utils": "^8.6.5",
     "cosmiconfig": "7.0.1",
     "cosmiconfig-toml-loader": "1.0.0",
-    "cosmiconfig-typescript-loader": "^4.0.0",
+    "cosmiconfig-typescript-swc-loader": "0.1.0-alpha-20221005083433-3a0eba7",
     "minimatch": "4.2.1",
     "ts-node": "^10.8.1",
     "string-env-interpolation": "1.0.1",
