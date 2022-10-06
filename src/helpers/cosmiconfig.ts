@@ -81,7 +81,7 @@ function prepareCosmiconfig(moduleName: string, { legacy }: { legacy: boolean })
   return {
     searchPlaces: searchPlaces.map((place) => place.replace('#', moduleName)),
     loaders: {
-      '.ts': TypeScriptLoader(),
+      '.ts': TypeScriptLoader({ transpileOnly: true }),
       '.js': defaultLoaders['.js'],
       '.json': loadJson,
       '.yaml': loadYaml,
