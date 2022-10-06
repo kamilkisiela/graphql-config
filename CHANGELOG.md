@@ -1,5 +1,11 @@
 # Change log
 
+## 4.3.6
+
+### Patch Changes
+
+- [#1149](https://github.com/kamilkisiela/graphql-config/pull/1149) [`a12f394`](https://github.com/kamilkisiela/graphql-config/commit/a12f3945b3da70a9c10e0436785f96958202912e) Thanks [@charlypoly](https://github.com/charlypoly)! - conflict with codegen also using TypeScriptLoader(), causing a double ts-node register.
+
 ## 4.3.5
 
 ### Patch Changes
