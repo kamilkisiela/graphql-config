@@ -5753,10 +5753,10 @@ which@^2.0.1:
   dependencies:
     isexe "^2.0.0"
 
-wrangler@2.1.10:
-  version "2.1.10"
-  resolved "https://registry.yarnpkg.com/wrangler/-/wrangler-2.1.10.tgz#559422e5bb3505d3ae8d2513e0b2df65452a7397"
-  integrity sha512-hiaTNvkKw8axZljxHOjtDXIVo4GOrDclyxr0cF2aypzAwtrGlaYWD+WP0Z66BqRLpUpbF3BdzrPn1k+xGp0u+Q==
+wrangler@2.1.11:
+  version "2.1.11"
+  resolved "https://registry.yarnpkg.com/wrangler/-/wrangler-2.1.11.tgz#d40ef1255bb6d8aa64a9d3922ef449671682cc17"
+  integrity sha512-zXydDzU+KKOwYDD9IX+XdSZMFEPWTghzTN/CiZc+pxHGIjTuQBtbk97trY3i9YKeih/QOSlo+H7Clfoq+6rZLw==
   dependencies:
     "@cloudflare/kv-asset-handler" "^0.2.0"
     "@esbuild-plugins/node-globals-polyfill" "^0.1.1"
