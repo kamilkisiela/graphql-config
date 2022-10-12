@@ -25,3 +25,4 @@ jobs:
     with:
       domain: https://www.the-guild.dev/graphql/config/
       source: 'Config'
+      setupEnvWorkingDirectory: './website'
