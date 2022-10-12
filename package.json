@@ -34,7 +34,6 @@
   "scripts": {
     "prepublishOnly": "yarn build",
     "clean": "rimraf dist",
-    "postinstall": "patch-package",
     "prebuild": "yarn clean && yarn json-schema",
     "build": "bob build",
     "prettier": "prettier --ignore-path .gitignore --write --list-different .",
@@ -85,7 +84,6 @@
     "lint-staged": "13.0.3",
     "make-dir": "3.1.0",
     "parent-module": "2.0.0",
-    "patch-package": "6.4.7",
     "prettier": "2.7.1",
     "rimraf": "3.0.2",
     "ts-jest": "28.0.8",
