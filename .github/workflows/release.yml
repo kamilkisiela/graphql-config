@@ -14,7 +14,7 @@ jobs:
     secrets:
       githubToken: ${{ secrets.GITHUB_TOKEN }}
       npmToken: ${{ secrets.NPM_TOKEN }}
-  
+
   algolia:
     uses: the-guild-org/shared-config/.github/workflows/algolia-publish.yml@main
     secrets:
