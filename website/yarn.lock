@@ -615,10 +615,10 @@
     lodash "^4.17.21"
     remove-markdown "0.5.0"
 
-"@theguild/components@4.2.2":
-  version "4.2.2"
-  resolved "https://registry.yarnpkg.com/@theguild/components/-/components-4.2.2.tgz#8530e34e016ec4a1a0242f842ea5cfe9ab90fd75"
-  integrity sha512-RvhRESCTqXXGqi7CVzE1y9Bl8j6kvUnJAoYDyoiAmGUun+tPDsBxdQUsptRmlVba/ujRJacygRWADPHE1uNlZw==
+"@theguild/components@4.2.4":
+  version "4.2.4"
+  resolved "https://registry.yarnpkg.com/@theguild/components/-/components-4.2.4.tgz#edd61d2c7db8a1efc208f3b72bd3fc99b7ad8e7c"
+  integrity sha512-VF6M8ra858X3tCdLgCPJa9CAVCZtWdiVLc4HXeFDcmFNUtWlfgwS0e51QH496cMndRMLR3N4yjaHljYpQ7tGmA==
   dependencies:
     "@algolia/autocomplete-js" "1.7.1"
     "@algolia/autocomplete-plugin-algolia-insights" "1.7.1"
