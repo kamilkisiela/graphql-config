@@ -3,8 +3,8 @@ import del from 'del';
 import makeDir from 'make-dir';
 import parentModule from 'parent-module';
 import os from 'os';
-
-const fs = jest.requireActual('fs');
+import { Mock, SpyInstance } from 'vitest';
+import fs from 'node:fs';
 
 function normalizeDirectorySlash(pathname: string): string {
   const normalizeCrossPlatform = pathname.replace(/\\/g, '/');
@@ -13,15 +13,16 @@ function normalizeDirectorySlash(pathname: string): string {
 }
 
 export class TempDir {
-  public dir: string;
+  dir: string;
 
-  public constructor() {
+  constructor() {
     /**
-     * Get the actual path for temp directories that are symlinks (MacOS).
+     * Get the actual path for temp directories that are symlinks (macOS).
      * Without the actual path, tests that use process.chdir will unexpectedly
      * return the real path instead of symlink path.
      */
     const tempDir = fs.realpathSync(os.tmpdir());
+
     /**
      * Get the pathname of the file that imported util.js.
      * Used to create a unique directory name for each test suite.
@@ -39,19 +40,19 @@ export class TempDir {
     makeDir.sync(this.dir);
   }
 
-  public absolutePath(dir: string): string {
+  absolutePath(dir: string): string {
     // Use path.join to ensure dir is always inside the working temp directory
     const absolutePath = path.join(this.dir, dir);
 
     return absolutePath;
   }
 
-  public createDir(dir: string): void {
+  createDir(dir: string): void {
     const dirname = this.absolutePath(dir);
     makeDir.sync(dirname);
   }
 
-  public createFile(file: string, contents: string): void {
+  createFile(file: string, contents: string): void {
     const filePath = this.absolutePath(file);
     const fileDir = path.parse(filePath).dir;
     makeDir.sync(fileDir);
@@ -59,16 +60,16 @@ export class TempDir {
     fs.writeFileSync(filePath, `${contents}\n`);
   }
 
-  public getSpyPathCalls(spy: jest.Mock | jest.SpyInstance): Array<string> {
+  getSpyPathCalls(spy: Mock | SpyInstance): string[] {
     const calls = spy.mock.calls;
 
     const result = calls.map((call): string => {
-      const filePath = call[0];
+      const [filePath] = call;
       const relativePath = path.relative(this.dir, filePath);
 
       /**
        * Replace Windows backslash directory separators with forward slashes
-       * so expected paths will be consistent cross platform
+       * so expected paths will be consistent cross-platform
        */
       const normalizeCrossPlatform = normalizeDirectorySlash(relativePath);
 
@@ -78,7 +79,7 @@ export class TempDir {
     return result;
   }
 
-  public clean(): Array<string> {
+  clean(): string[] {
     const cleanPattern = normalizeDirectorySlash(this.absolutePath('**/*'));
     const removed = del.sync(cleanPattern, {
       dot: true,
@@ -88,7 +89,7 @@ export class TempDir {
     return removed;
   }
 
-  public deleteTempDir(): Array<string> {
+  deleteTempDir(): string[] {
     const removed = del.sync(normalizeDirectorySlash(this.dir), {
       force: true,
       dot: true,
