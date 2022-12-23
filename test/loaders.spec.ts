@@ -1,11 +1,11 @@
 import { DirectiveDefinitionNode, buildSchema, GraphQLSchema, Kind } from 'graphql';
 import { Loader, Source } from '@graphql-tools/utils';
-import { beforeAll, test, describe, expect } from '@jest/globals';
+import { beforeAll, test, describe, expect, vi, Mock } from 'vitest';
 import { LoadersRegistry } from 'graphql-config';
 import { loadTypedefsSync, loadSchemaSync, loadSchema, LoadSchemaOptions } from '@graphql-tools/load';
 
-jest.mock('@graphql-tools/load', () => {
-  const { parse, buildSchema } = require('graphql');
+vi.mock('@graphql-tools/load', async () => {
+  const { parse, buildSchema } = await import('graphql');
   const document = parse(/* GraphQL */ `
     type Query {
       foo: String @cache
@@ -20,19 +20,14 @@ jest.mock('@graphql-tools/load', () => {
 
   schema.isTheOne = true;
 
+  const { OPERATION_KINDS } = await vi.importActual('@graphql-tools/load');
+
   return {
-    loadTypedefs: jest.fn(() => {
-      return [{ document }];
-    }),
-    loadTypedefsSync: jest.fn(() => {
-      return [{ document }];
-    }),
-    loadSchemaSync: jest.fn(() => {
-      return schema;
-    }),
-    loadSchema: jest.fn(async () => {
-      return schema;
-    }),
+    OPERATION_KINDS,
+    loadTypedefs: vi.fn(() => [{ document }]),
+    loadTypedefsSync: vi.fn(() => [{ document }]),
+    loadSchemaSync: vi.fn(() => schema),
+    loadSchema: vi.fn(() => schema),
   };
 });
 
@@ -55,12 +50,10 @@ describe('middlewares', () => {
       ],
     };
 
-    registry.use((doc) => {
-      return {
-        ...doc,
-        definitions: [...doc.definitions, cacheDirective],
-      };
-    });
+    registry.use((doc) => ({
+      ...doc,
+      definitions: [...doc.definitions, cacheDirective],
+    }));
 
     const schema = registry.loadSchemaSync('anything');
 
@@ -79,11 +72,7 @@ describe('middlewares', () => {
 });
 
 class CustomLoader implements Loader {
-  private schema: GraphQLSchema;
-
-  constructor(schema) {
-    this.schema = schema;
-  }
+  constructor(private schema: GraphQLSchema) {}
 
   loaderId(): string {
     return 'custom';
@@ -113,10 +102,11 @@ const differentSchema = buildSchema(/* GraphQL */ `
 `);
 
 describe('override', () => {
-  beforeAll(() => {
-    (loadTypedefsSync as jest.Mock).mockImplementation(jest.requireActual('@graphql-tools/load').loadTypedefsSync);
-    (loadSchemaSync as jest.Mock).mockImplementation(jest.requireActual('@graphql-tools/load').loadSchemaSync);
-    (loadSchema as jest.Mock).mockImplementation(jest.requireActual('@graphql-tools/load').loadSchema);
+  beforeAll(async () => {
+    const load = await vi.importActual<any>('@graphql-tools/load');
+    (loadTypedefsSync as Mock).mockImplementation(load.loadTypedefsSync);
+    (loadSchemaSync as Mock).mockImplementation(load.loadSchemaSync);
+    (loadSchema as Mock).mockImplementation(load.loadSchema);
   });
 
   test('overrides default loaders', async () => {
@@ -127,8 +117,8 @@ describe('override', () => {
     const received = registry.loadSchemaSync('anything');
     const receivedAsync = await registry.loadSchema('anything');
 
-    expect(received.getQueryType().getFields()['bar']).toBeDefined();
-    expect(receivedAsync.getQueryType().getFields()['bar']).toBeDefined();
+    expect(received.getQueryType().getFields().bar).toBeDefined();
+    expect(receivedAsync.getQueryType().getFields().bar).toBeDefined();
   });
 
   test('allows custom loader options', async () => {

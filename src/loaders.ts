@@ -21,7 +21,7 @@ type LoadSchemaOptions = Partial<ToolsLoadSchemaOptions>;
 export type SchemaOutput = 'GraphQLSchema' | 'DocumentNode' | 'string';
 
 export class LoadersRegistry {
-  private _loaders: Set<Loader> = new Set();
+  private _loaders = new Set<Loader>();
   private _middlewares: MiddlewareFn<DocumentNode>[] = [];
   private readonly cwd: string;
 
