@@ -1,4 +1,3 @@
-import path from 'path';
 import { cosmiconfig, cosmiconfigSync, Loader, defaultLoaders } from 'cosmiconfig';
 import { loadToml } from 'cosmiconfig-toml-loader';
 import { env } from 'string-env-interpolation';
@@ -41,24 +40,7 @@ export function createCosmiConfigSync(moduleName: string, legacy: boolean) {
   return cosmiconfigSync(moduleName, options);
 }
 
-const englishJoinWords = (words) => new Intl.ListFormat('en-US', { type: 'conjunction' }).format(words);
-
 const loadTypeScript: Loader = (filePath, content) => {
-  const missingPackages = ['cosmiconfig-typescript-loader', 'typescript', 'ts-node'].filter((packageName) => {
-    try {
-      require.resolve(packageName);
-    } catch {
-      return true;
-    }
-  });
-
-  if (missingPackages.length) {
-    throw new Error(
-      `${path.basename(filePath)} requires ${englishJoinWords(
-        missingPackages.map((packageName) => `"${packageName}"`),
-      )} to be installed.`,
-    );
-  }
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { TypeScriptLoader } = require('cosmiconfig-typescript-loader');
 

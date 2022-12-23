@@ -2,7 +2,7 @@
   "compilerOptions": {
     "module": "esnext",
     "target": "es2018",
-    "lib": ["es2021"],
+    "lib": ["es2018"],
     "outDir": "dist",
     "declaration": true,
     "declarationMap": true,
