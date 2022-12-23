@@ -1,5 +1,4 @@
 import { cosmiconfig, cosmiconfigSync, Loader, defaultLoaders } from 'cosmiconfig';
-import { loadToml } from 'cosmiconfig-toml-loader';
 import { env } from 'string-env-interpolation';
 
 export interface ConfigSearchResult {
@@ -43,8 +42,13 @@ export function createCosmiConfigSync(moduleName: string, legacy: boolean) {
 const loadTypeScript: Loader = (...args) => {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { TypeScriptLoader } = require('cosmiconfig-typescript-loader');
-
   return TypeScriptLoader({ transpileOnly: true })(...args);
+};
+
+const loadToml: Loader = (...args) => {
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  const { loadToml } = require('cosmiconfig-toml-loader');
+  return createCustomLoader(loadToml)(...args);
 };
 
 function prepareCosmiconfig(moduleName: string, legacy: boolean) {
@@ -83,7 +87,7 @@ function prepareCosmiconfig(moduleName: string, legacy: boolean) {
       '.json': createCustomLoader(defaultLoaders['.json']),
       '.yaml': loadYaml,
       '.yml': loadYaml,
-      '.toml': createCustomLoader(loadToml),
+      '.toml': loadToml,
       noExt: loadYaml,
     },
   };
