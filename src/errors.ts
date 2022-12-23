@@ -20,6 +20,7 @@ export class ConfigNotFoundError extends ExtendableBuiltin(Error) {
     this.message = message;
   }
 }
+
 export class ConfigEmptyError extends ExtendableBuiltin(Error) {
   constructor(message: string) {
     super(message);
@@ -27,6 +28,7 @@ export class ConfigEmptyError extends ExtendableBuiltin(Error) {
     this.message = message;
   }
 }
+// TODO: remove in v5
 export class ConfigInvalidError extends ExtendableBuiltin(Error) {
   constructor(message: string) {
     super(message);
@@ -34,6 +36,7 @@ export class ConfigInvalidError extends ExtendableBuiltin(Error) {
     this.message = message;
   }
 }
+
 export class ProjectNotFoundError extends ExtendableBuiltin(Error) {
   constructor(message: string) {
     super(message);
@@ -41,6 +44,7 @@ export class ProjectNotFoundError extends ExtendableBuiltin(Error) {
     this.message = message;
   }
 }
+// TODO: remove in v5
 export class LoadersMissingError extends ExtendableBuiltin(Error) {
   constructor(message: string) {
     super(message);
@@ -48,6 +52,7 @@ export class LoadersMissingError extends ExtendableBuiltin(Error) {
     this.message = message;
   }
 }
+// TODO: remove in v5
 export class LoaderNoResultError extends ExtendableBuiltin(Error) {
   constructor(message: string) {
     super(message);
@@ -55,6 +60,7 @@ export class LoaderNoResultError extends ExtendableBuiltin(Error) {
     this.message = message;
   }
 }
+
 export class ExtensionMissingError extends ExtendableBuiltin(Error) {
   constructor(message: string) {
     super(message);

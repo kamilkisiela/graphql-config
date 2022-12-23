@@ -1,9 +1,8 @@
 {
   "compilerOptions": {
-    "jsx": "react",
     "module": "esnext",
     "target": "es2018",
-    "lib": ["es2017", "dom", "esnext.asynciterable"],
+    "lib": ["es2018"],
     "outDir": "dist",
     "declaration": true,
     "declarationMap": true,
@@ -17,6 +16,6 @@
       "graphql-config": ["./src/index.ts"]
     }
   },
-  "exclude": ["node_modules", "dist", "website"],
-  "include": ["src", "website/src/components"]
+  "exclude": [],
+  "include": ["src"]
 }

@@ -36,6 +36,7 @@
     "prepublishOnly": "yarn build",
     "clean": "rimraf dist",
     "prebuild": "yarn clean && yarn json-schema",
+    "postbuild": "tsx scripts/postbuild.ts",
     "build": "bob build",
     "prettier": "prettier --cache --write --list-different .",
     "prettier:check": "prettier --cache --check .",
@@ -47,7 +48,13 @@
     "json-schema": "typescript-json-schema src/types.ts IGraphQLConfig --out config-schema.json --ignoreErrors --required --titles && prettier --write config-schema.json"
   },
   "peerDependencies": {
+    "cosmiconfig-typescript-loader": "^4.0.0",
     "graphql": "^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0"
+  },
+  "peerDependenciesMeta": {
+    "cosmiconfig-typescript-loader": {
+      "optional": true
+    }
   },
   "dependencies": {
     "@graphql-tools/graphql-file-loader": "^7.3.7",
@@ -58,10 +65,8 @@
     "@graphql-tools/utils": "^8.6.5",
     "cosmiconfig": "7.0.1",
     "cosmiconfig-toml-loader": "1.0.0",
-    "cosmiconfig-typescript-loader": "^4.0.0",
     "minimatch": "4.2.1",
     "string-env-interpolation": "1.0.1",
-    "ts-node": "^10.8.1",
     "tslib": "^2.4.0"
   },
   "devDependencies": {
@@ -71,6 +76,7 @@
     "@typescript-eslint/eslint-plugin": "5.47.0",
     "@typescript-eslint/parser": "5.47.0",
     "bob-the-bundler": "4.2.0-alpha-20221222140753-fcf5286",
+    "cosmiconfig-typescript-loader": "4.3.0",
     "del": "6.1.1",
     "eslint": "8.25.0",
     "eslint-config-prettier": "8.5.0",
@@ -81,6 +87,7 @@
     "parent-module": "2.0.0",
     "prettier": "2.7.1",
     "rimraf": "3.0.2",
+    "ts-node": "10.9.1",
     "tsx": "3.12.1",
     "typescript": "4.8.4",
     "typescript-json-schema": "0.54.0",

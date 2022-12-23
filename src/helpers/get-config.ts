@@ -11,10 +11,10 @@ export async function getConfig({
   configName: string;
   legacy?: boolean;
 }): Promise<GraphQLConfigResult> {
-  validate({ filepath });
+  validate(filepath);
 
   return resolve({
-    result: await createCosmiConfig(configName, { legacy }).load(filepath),
+    result: await createCosmiConfig(configName, legacy).load(filepath),
     filepath,
   });
 }
@@ -28,10 +28,10 @@ export function getConfigSync({
   configName: string;
   legacy?: boolean;
 }): GraphQLConfigResult {
-  validate({ filepath });
+  validate(filepath);
 
   return resolve({
-    result: createCosmiConfigSync(configName, { legacy }).load(filepath),
+    result: createCosmiConfigSync(configName, legacy).load(filepath),
     filepath,
   });
 }
@@ -55,7 +55,7 @@ function resolve({ result, filepath }: { result?: ConfigSearchResult; filepath: 
   };
 }
 
-function validate({ filepath }: { filepath?: string }) {
+function validate(filepath: string): void {
   if (!filepath) {
     throw new Error(`Defining a file path is required`);
   }

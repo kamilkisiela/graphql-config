@@ -15,7 +15,7 @@ import { GraphQLExtensionDeclaration, GraphQLExtensionsRegistry } from './extens
 import { EndpointsExtension } from './extensions/endpoints.js';
 import { isLegacyConfig } from './helpers/cosmiconfig.js';
 
-const cwd = typeof process !== 'undefined' ? process.cwd() : undefined;
+const CWD = process.cwd();
 const defaultConfigName = 'graphql';
 
 interface LoadConfigOptions {
@@ -29,7 +29,7 @@ interface LoadConfigOptions {
 }
 
 const defaultLoadConfigOptions: LoadConfigOptions = {
-  rootDir: cwd,
+  rootDir: CWD,
   extensions: [],
   throwOnMissing: true,
   throwOnEmpty: true,
@@ -45,16 +45,8 @@ export async function loadConfig(options: LoadConfigOptions): Promise<GraphQLCon
 
   try {
     const found = filepath
-      ? await getConfig({
-          filepath,
-          configName,
-          legacy,
-        })
-      : await findConfig({
-          rootDir,
-          configName,
-          legacy,
-        });
+      ? await getConfig({ filepath, configName, legacy })
+      : await findConfig({ rootDir, configName, legacy });
 
     return new GraphQLConfig(found, extensions);
   } catch (error) {
@@ -70,16 +62,8 @@ export function loadConfigSync(options: LoadConfigOptions) {
 
   try {
     const found = filepath
-      ? getConfigSync({
-          filepath,
-          configName,
-          legacy,
-        })
-      : findConfigSync({
-          rootDir,
-          configName,
-          legacy,
-        });
+      ? getConfigSync({ filepath, configName, legacy })
+      : findConfigSync({ rootDir, configName, legacy });
 
     return new GraphQLConfig(found, extensions);
   } catch (error) {

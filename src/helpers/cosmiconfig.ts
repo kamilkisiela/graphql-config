@@ -1,5 +1,4 @@
 import { cosmiconfig, cosmiconfigSync, Loader, defaultLoaders } from 'cosmiconfig';
-import { TypeScriptLoader } from 'cosmiconfig-typescript-loader';
 import { loadToml } from 'cosmiconfig-toml-loader';
 import { env } from 'string-env-interpolation';
 
@@ -9,49 +8,47 @@ export interface ConfigSearchResult {
   isEmpty?: boolean;
 }
 
-const legacySearchPlaces = ['.graphqlconfig', '.graphqlconfig.json', '.graphqlconfig.yaml', '.graphqlconfig.yml'];
+const legacySearchPlaces = [
+  '.graphqlconfig',
+  '.graphqlconfig.json',
+  '.graphqlconfig.yaml',
+  '.graphqlconfig.yml',
+] as const;
 
-export function isLegacyConfig(filepath: string): boolean {
-  filepath = filepath.toLowerCase();
-
-  return legacySearchPlaces.some((name) => filepath.endsWith(name));
+export function isLegacyConfig(filePath: string): boolean {
+  filePath = filePath.toLowerCase();
+  return legacySearchPlaces.some((name) => filePath.endsWith(name));
 }
 
 function transformContent(content: string): string {
   return env(content);
 }
 
-const createCustomLoader = (loader: Loader): Loader => {
-  return (filepath, content) => {
-    return loader(filepath, transformContent(content));
-  };
-};
+function createCustomLoader(loader: Loader): Loader {
+  return (filePath, content) => loader(filePath, transformContent(content));
+}
 
-export function createCosmiConfig(
-  moduleName: string,
-  {
-    legacy,
-  }: {
-    legacy: boolean;
-  },
-) {
-  const options = prepareCosmiconfig(moduleName, {
-    legacy,
-  });
+export function createCosmiConfig(moduleName: string, legacy: boolean) {
+  const options = prepareCosmiconfig(moduleName, legacy);
 
   return cosmiconfig(moduleName, options);
 }
 
-export function createCosmiConfigSync(moduleName: string, { legacy }: { legacy: boolean }) {
-  const options = prepareCosmiconfig(moduleName, { legacy });
+export function createCosmiConfigSync(moduleName: string, legacy: boolean) {
+  const options = prepareCosmiconfig(moduleName, legacy);
 
   return cosmiconfigSync(moduleName, options);
 }
 
-function prepareCosmiconfig(moduleName: string, { legacy }: { legacy: boolean }) {
+const loadTypeScript: Loader = (...args) => {
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  const { TypeScriptLoader } = require('cosmiconfig-typescript-loader');
+
+  return TypeScriptLoader({ transpileOnly: true })(...args);
+};
+
+function prepareCosmiconfig(moduleName: string, legacy: boolean) {
   const loadYaml = createCustomLoader(defaultLoaders['.yaml']);
-  const loadTomlCustom = createCustomLoader(loadToml);
-  const loadJson = createCustomLoader(defaultLoaders['.json']);
 
   const searchPlaces = [
     '#.config.ts',
@@ -81,12 +78,12 @@ function prepareCosmiconfig(moduleName: string, { legacy }: { legacy: boolean })
   return {
     searchPlaces: searchPlaces.map((place) => place.replace('#', moduleName)),
     loaders: {
-      '.ts': TypeScriptLoader({ transpileOnly: true }),
+      '.ts': loadTypeScript,
       '.js': defaultLoaders['.js'],
-      '.json': loadJson,
+      '.json': createCustomLoader(defaultLoaders['.json']),
       '.yaml': loadYaml,
       '.yml': loadYaml,
-      '.toml': loadTomlCustom,
+      '.toml': createCustomLoader(loadToml),
       noExt: loadYaml,
     },
   };

@@ -2,45 +2,37 @@ import { ConfigNotFoundError, ConfigEmptyError, composeMessage } from '../errors
 import { GraphQLConfigResult } from '../types.js';
 import { createCosmiConfig, createCosmiConfigSync, ConfigSearchResult } from './cosmiconfig.js';
 
-const cwd = typeof process !== 'undefined' ? process.cwd() : undefined;
+const CWD = process.cwd();
+
+type FindConfigOptions = {
+  rootDir: string;
+  configName: string;
+  legacy?: boolean;
+};
 
 export async function findConfig({
-  rootDir = cwd,
+  rootDir = CWD,
   legacy = true,
   configName,
-}: {
-  rootDir: string;
-  configName: string;
-  legacy?: boolean;
-}): Promise<GraphQLConfigResult> {
-  validate({ rootDir });
+}: FindConfigOptions): Promise<GraphQLConfigResult> {
+  validate(rootDir);
 
   return resolve({
     rootDir,
-    result: await createCosmiConfig(configName, { legacy }).search(rootDir),
+    result: await createCosmiConfig(configName, legacy).search(rootDir),
   });
 }
 
-export function findConfigSync({
-  rootDir = cwd,
-  legacy = true,
-  configName,
-}: {
-  rootDir: string;
-  configName: string;
-  legacy?: boolean;
-}): GraphQLConfigResult {
-  validate({ rootDir });
+export function findConfigSync({ rootDir = CWD, legacy = true, configName }: FindConfigOptions): GraphQLConfigResult {
+  validate(rootDir);
 
   return resolve({
     rootDir,
-    result: createCosmiConfigSync(configName, { legacy }).search(rootDir),
+    result: createCosmiConfigSync(configName, legacy).search(rootDir),
   });
 }
 
-//
-
-function validate({ rootDir }: { rootDir: string }) {
+function validate(rootDir: string): void {
   if (!rootDir) {
     throw new Error(`Defining a root directory is required`);
   }
