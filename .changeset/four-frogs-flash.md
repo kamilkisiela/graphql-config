@@ -2,4 +2,4 @@
 'graphql-config': minor
 ---
 
-move `cosmiconfig-typescript-loader`/`typescript`/`ts-node` in `peerDependencyMeta`
+move `cosmiconfig-typescript-loader` in `peerDependencyMeta`
