@@ -40,11 +40,11 @@ export function createCosmiConfigSync(moduleName: string, legacy: boolean) {
   return cosmiconfigSync(moduleName, options);
 }
 
-const loadTypeScript: Loader = (filePath, content) => {
+const loadTypeScript: Loader = (...args) => {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { TypeScriptLoader } = require('cosmiconfig-typescript-loader');
 
-  return TypeScriptLoader({ transpileOnly: true })(filePath, content);
+  return TypeScriptLoader({ transpileOnly: true })(...args);
 };
 
 function prepareCosmiconfig(moduleName: string, legacy: boolean) {
