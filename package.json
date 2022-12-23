@@ -67,7 +67,7 @@
   "devDependencies": {
     "@changesets/changelog-github": "0.4.7",
     "@changesets/cli": "2.25.0",
-    "@types/node": "16.11.65",
+    "@types/node": "16.18.10",
     "@typescript-eslint/eslint-plugin": "5.47.0",
     "@typescript-eslint/parser": "5.47.0",
     "bob-the-bundler": "4.2.0-alpha-20221222140753-fcf5286",
