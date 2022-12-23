@@ -48,11 +48,15 @@
     "json-schema": "typescript-json-schema src/types.ts IGraphQLConfig --out config-schema.json --ignoreErrors --required --titles && prettier --write config-schema.json"
   },
   "peerDependencies": {
+    "cosmiconfig-toml-loader": "^1.0.0",
     "cosmiconfig-typescript-loader": "^4.0.0",
     "graphql": "^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0"
   },
   "peerDependenciesMeta": {
     "cosmiconfig-typescript-loader": {
+      "optional": true
+    },
+    "cosmiconfig-toml-loader": {
       "optional": true
     }
   },
@@ -64,7 +68,6 @@
     "@graphql-tools/url-loader": "^7.9.7",
     "@graphql-tools/utils": "^8.6.5",
     "cosmiconfig": "8.0.0",
-    "cosmiconfig-toml-loader": "1.0.0",
     "minimatch": "4.2.1",
     "string-env-interpolation": "1.0.1",
     "tslib": "^2.4.0"
@@ -76,6 +79,7 @@
     "@typescript-eslint/eslint-plugin": "5.47.0",
     "@typescript-eslint/parser": "5.47.0",
     "bob-the-bundler": "4.2.0-alpha-20221222140753-fcf5286",
+    "cosmiconfig-toml-loader": "1.0.0",
     "cosmiconfig-typescript-loader": "4.3.0",
     "del": "6.1.1",
     "eslint": "8.25.0",
