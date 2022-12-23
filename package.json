@@ -63,7 +63,7 @@
     "@graphql-tools/merge": "^8.2.6",
     "@graphql-tools/url-loader": "^7.9.7",
     "@graphql-tools/utils": "^8.6.5",
-    "cosmiconfig": "7.1.0",
+    "cosmiconfig": "8.0.0",
     "cosmiconfig-toml-loader": "1.0.0",
     "minimatch": "4.2.1",
     "string-env-interpolation": "1.0.1",
