@@ -1,5 +1,13 @@
 # Change log
 
+## 4.4.0
+
+### Minor Changes
+
+- [#1189](https://github.com/kamilkisiela/graphql-config/pull/1189) [`ab2ad6d`](https://github.com/kamilkisiela/graphql-config/commit/ab2ad6d558e55d5d9b52609c68d0404026e34f1e) Thanks [@B2o5T](https://github.com/B2o5T)! - add `cosmiconfig-toml-loader` to `peerDependenciesMeta`
+
+- [#1171](https://github.com/kamilkisiela/graphql-config/pull/1171) [`b52dc1b`](https://github.com/kamilkisiela/graphql-config/commit/b52dc1b7ed46c056dea39396ffbb89a400cee7d6) Thanks [@B2o5T](https://github.com/B2o5T)! - move `cosmiconfig-typescript-loader` in `peerDependencyMeta`
+
 ## 4.3.6
 
 ### Patch Changes
