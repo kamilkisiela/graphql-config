@@ -95,7 +95,7 @@
     "tsx": "3.12.1",
     "typescript": "4.9.4",
     "typescript-json-schema": "0.55.0",
-    "vitest": "0.26.2"
+    "vitest": "0.26.3"
   },
   "repository": {
     "type": "git",
