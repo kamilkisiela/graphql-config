@@ -89,7 +89,7 @@
     "lint-staged": "13.1.0",
     "make-dir": "3.1.0",
     "parent-module": "2.0.0",
-    "prettier": "2.8.1",
+    "prettier": "2.8.2",
     "rimraf": "3.0.2",
     "ts-node": "10.9.1",
     "tsx": "3.12.1",
