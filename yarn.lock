@@ -982,10 +982,10 @@ binary-extensions@^2.0.0:
   resolved "https://registry.yarnpkg.com/binary-extensions/-/binary-extensions-2.2.0.tgz#75f502eeaf9ffde42fc98829645be4ea76bd9e2d"
   integrity sha512-jDctJ/IVQbZoJykoeHbhXpOlNBqGNcwXJKJog42E5HDPUwQTSdjCHdihjj0DlnheQ7blbT6dHOafNAiS8ooQKA==
 
-bob-the-bundler@4.2.0-alpha-20230107195222-4a33822:
-  version "4.2.0-alpha-20230107195222-4a33822"
-  resolved "https://registry.yarnpkg.com/bob-the-bundler/-/bob-the-bundler-4.2.0-alpha-20230107195222-4a33822.tgz#4cbb7107f2fcfe72d65e192c18681cd675020e1a"
-  integrity sha512-RNtAt/SKe/pbLt3Q4QIF7TtgGudeTYf8qUoo3QB0msHJk3IIP6qZz+IgL2xrHqIB5qDzsJXelBGOU1wGPKPI5A==
+bob-the-bundler@4.2.0-alpha-20230109004739-ab69d1e:
+  version "4.2.0-alpha-20230109004739-ab69d1e"
+  resolved "https://registry.yarnpkg.com/bob-the-bundler/-/bob-the-bundler-4.2.0-alpha-20230109004739-ab69d1e.tgz#c0f248b4255b351e16983ba4def8f8bcce764751"
+  integrity sha512-9s1ixvns4FBI8Zhx3404/EJDOC1yH/yOSQTJuFObaJyBEoBlMO4rehmeNE75bndFX4n3Obo/b5V6PkghtgvVTA==
   dependencies:
     "@vercel/ncc" "^0.36.0"
     consola "^2.15.3"
