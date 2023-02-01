@@ -1,5 +1,11 @@
 # Change log
 
+## 4.4.1
+
+### Patch Changes
+
+- [#1245](https://github.com/kamilkisiela/graphql-config/pull/1245) [`bad5090`](https://github.com/kamilkisiela/graphql-config/commit/bad509048c971872224fe8eaddda84dd948e57c3) Thanks [@B2o5T](https://github.com/B2o5T)! - fix `peerDependenciesMeta` was not included in `package.json`
+
 ## 4.4.0
 
 ### Minor Changes
