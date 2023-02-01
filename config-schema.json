@@ -12,6 +12,20 @@
     }
   ],
   "definitions": {
+    "DocumentPointer": {
+      "anyOf": [
+        {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        {
+          "type": "string"
+        }
+      ],
+      "title": "DocumentPointer"
+    },
     "IExtensions": {
       "additionalProperties": {},
       "description": "Configuration of each used extension",
@@ -22,31 +36,11 @@
       "description": "GraphQL Project",
       "properties": {
         "documents": {
-          "anyOf": [
-            {
-              "items": {
-                "type": "string"
-              },
-              "type": "array"
-            },
-            {
-              "type": "string"
-            }
-          ],
+          "$ref": "#/definitions/DocumentPointer",
           "title": "documents"
         },
         "exclude": {
-          "anyOf": [
-            {
-              "items": {
-                "type": "string"
-              },
-              "type": "array"
-            },
-            {
-              "type": "string"
-            }
-          ],
+          "$ref": "#/definitions/WithList<string>",
           "title": "exclude"
         },
         "extensions": {
@@ -54,50 +48,11 @@
           "title": "extensions"
         },
         "include": {
-          "anyOf": [
-            {
-              "items": {
-                "type": "string"
-              },
-              "type": "array"
-            },
-            {
-              "type": "string"
-            }
-          ],
+          "$ref": "#/definitions/WithList<string>",
           "title": "include"
         },
         "schema": {
-          "anyOf": [
-            {
-              "items": {
-                "type": "string"
-              },
-              "type": "array"
-            },
-            {
-              "items": {
-                "additionalProperties": {
-                  "properties": {
-                    "headers": {
-                      "additionalProperties": {
-                        "type": "string"
-                      },
-                      "title": "headers",
-                      "type": "object"
-                    }
-                  },
-                  "required": ["headers"],
-                  "type": "object"
-                },
-                "type": "object"
-              },
-              "type": "array"
-            },
-            {
-              "type": "string"
-            }
-          ],
+          "$ref": "#/definitions/SchemaPointer",
           "title": "schema"
         }
       },
@@ -156,6 +111,53 @@
       "required": ["projects"],
       "title": "IGraphQLProjects",
       "type": "object"
+    },
+    "SchemaPointer": {
+      "anyOf": [
+        {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        {
+          "items": {
+            "additionalProperties": {
+              "properties": {
+                "headers": {
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "title": "headers",
+                  "type": "object"
+                }
+              },
+              "required": ["headers"],
+              "type": "object"
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        {
+          "type": "string"
+        }
+      ],
+      "title": "SchemaPointer"
+    },
+    "WithList<string>": {
+      "anyOf": [
+        {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        {
+          "type": "string"
+        }
+      ],
+      "title": "WithList<string>"
     }
   },
   "description": "Structure of GraphQL Config"
