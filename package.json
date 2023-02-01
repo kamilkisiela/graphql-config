@@ -78,7 +78,7 @@
     "@types/node": "18.11.18",
     "@typescript-eslint/eslint-plugin": "5.50.0",
     "@typescript-eslint/parser": "5.50.0",
-    "bob-the-bundler": "5.0.1",
+    "bob-the-bundler": "5.0.0",
     "cosmiconfig-toml-loader": "1.0.0",
     "cosmiconfig-typescript-loader": "4.3.0",
     "del": "6.1.1",
