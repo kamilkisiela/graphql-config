@@ -68,7 +68,7 @@
     "@graphql-tools/url-loader": "^7.9.7",
     "@graphql-tools/utils": "^9.0.0",
     "cosmiconfig": "8.0.0",
-    "minimatch": "4.2.1",
+    "minimatch": "4.2.3",
     "string-env-interpolation": "1.0.1",
     "tslib": "^2.4.0"
   },
