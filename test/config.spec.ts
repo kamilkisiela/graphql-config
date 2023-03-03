@@ -124,6 +124,8 @@ runTests({ async: loadConfig, sync: loadConfigSync })((load, mode) => {
     let configFiles = [
       // #.config files
       [`${moduleName}.config.ts`, tsConfig],
+      [`${moduleName}.config.cts`, tsConfig],
+      [`${moduleName}.config.mts`, tsConfig],
       [`${moduleName}.config.js`, jsConfig],
       [`${moduleName}.config.cjs`, jsConfig],
       [`${moduleName}.config.json`, jsonConfig],
@@ -133,6 +135,8 @@ runTests({ async: loadConfig, sync: loadConfigSync })((load, mode) => {
       // .#rc files
       [`.${moduleName}rc`, yamlConfig],
       [`.${moduleName}rc.ts`, tsConfig],
+      [`.${moduleName}rc.cts`, tsConfig],
+      [`.${moduleName}rc.mts`, tsConfig],
       [`.${moduleName}rc.js`, jsConfig],
       [`.${moduleName}rc.cjs`, jsConfig],
       [`.${moduleName}rc.json`, jsonConfig],

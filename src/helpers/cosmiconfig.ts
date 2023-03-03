@@ -40,9 +40,23 @@ export function createCosmiConfigSync(moduleName: string, legacy: boolean) {
 }
 
 const loadTypeScript: Loader = (...args) => {
+  try {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const { TypeScriptLoader } = require('cosmiconfig-typescript-loader');
+    return TypeScriptLoader({ transpileOnly: true })(...args);
+  } catch (err) {
+    if (isRequireESMError(err)) {
+      return jitiLoader(...args);
+    }
+  }
+};
+
+const jitiLoader: Loader = (filepath) => {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
-  const { TypeScriptLoader } = require('cosmiconfig-typescript-loader');
-  return TypeScriptLoader({ transpileOnly: true })(...args);
+  const jiti = require('jiti')(__filename, {
+    interopDefault: true,
+  });
+  return jiti(filepath);
 };
 
 const loadToml: Loader = (...args) => {
@@ -56,6 +70,8 @@ function prepareCosmiconfig(moduleName: string, legacy: boolean) {
 
   const searchPlaces = [
     '#.config.ts',
+    '#.config.cts',
+    '#.config.mts',
     '#.config.js',
     '#.config.cjs',
     '#.config.json',
@@ -64,6 +80,8 @@ function prepareCosmiconfig(moduleName: string, legacy: boolean) {
     '#.config.toml',
     '.#rc',
     '.#rc.ts',
+    '.#rc.cts',
+    '.#rc.mts',
     '.#rc.js',
     '.#rc.cjs',
     '.#rc.json',
@@ -83,6 +101,8 @@ function prepareCosmiconfig(moduleName: string, legacy: boolean) {
     searchPlaces: searchPlaces.map((place) => place.replace('#', moduleName)),
     loaders: {
       '.ts': loadTypeScript,
+      '.mts': createCustomLoader(jitiLoader),
+      '.cts': createCustomLoader(jitiLoader),
       '.js': defaultLoaders['.js'],
       '.json': createCustomLoader(defaultLoaders['.json']),
       '.yaml': loadYaml,
@@ -91,4 +111,8 @@ function prepareCosmiconfig(moduleName: string, legacy: boolean) {
       noExt: loadYaml,
     },
   };
+}
+
+function isRequireESMError(err: any) {
+  return typeof err.stack === 'string' && err.stack.startsWith('Error [ERR_REQUIRE_ESM]:');
 }
