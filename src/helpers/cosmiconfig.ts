@@ -48,6 +48,7 @@ const loadTypeScript: Loader = (...args) => {
     if (isRequireESMError(err)) {
       return jitiLoader(...args);
     }
+    throw err;
   }
 };
 

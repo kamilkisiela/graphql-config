@@ -177,6 +177,42 @@ runTests({ async: loadConfig, sync: loadConfigSync })((load, mode) => {
     });
   });
 
+  describe('"type": "module" in package.json', () => {
+    const schemaFile = 'schema.graphql';
+    const tsConfig = `export default { schema: '${schemaFile}' };`;
+
+    beforeEach(() => {
+      temp.clean();
+      temp.createFile(
+        schemaFile,
+        /* GraphQL */ `
+          type Query {
+            foo: String
+          }
+        `,
+      );
+      temp.createFile(
+        'package.json',
+        JSON.stringify({
+          type: 'module',
+        }),
+      );
+    });
+
+    const extensions = ['ts', 'cts', 'mts'];
+
+    test.each(extensions)('load a %s config', async (ext) => {
+      temp.createFile(`graphql.config.${ext}`, tsConfig);
+
+      const config = await load({ rootDir: temp.dir });
+
+      const loadedSchema = config.getDefault().schema;
+
+      expect(config).toBeDefined();
+      expect(loadedSchema).toEqual(schemaFile);
+    });
+  });
+
   describe('environment variables', () => {
     test('not defined but with a default value', async () => {
       temp.createFile(
