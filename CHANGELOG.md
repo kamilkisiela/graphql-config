@@ -1,5 +1,11 @@
 # Change log
 
+## 4.5.0
+
+### Minor Changes
+
+- [`9e4f453`](https://github.com/kamilkisiela/graphql-config/commit/9e4f453f463dbf39228de39c00ccc4b7014b9614) Thanks [@kamilkisiela](https://github.com/kamilkisiela)! - Support ESM and .mts/.cts config extensions
+
 ## 4.4.1
 
 ### Patch Changes
