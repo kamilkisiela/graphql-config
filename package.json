@@ -51,6 +51,11 @@
     "cosmiconfig-toml-loader": "^1.0.0",
     "graphql": "^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0"
   },
+  "peerDependenciesMeta": {
+    "cosmiconfig-toml-loader": {
+      "optional": true
+    }
+  },
   "dependencies": {
     "@graphql-tools/graphql-file-loader": "^7.3.7",
     "@graphql-tools/json-file-loader": "^7.3.7",
