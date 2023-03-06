@@ -1,5 +1,6 @@
 import { cosmiconfig, cosmiconfigSync, Loader, defaultLoaders } from 'cosmiconfig';
 import { env } from 'string-env-interpolation';
+import jiti from 'jiti';
 
 export interface ConfigSearchResult {
   config: any;
@@ -39,10 +40,11 @@ export function createCosmiConfigSync(moduleName: string, legacy: boolean) {
   return cosmiconfigSync(moduleName, options);
 }
 
-const loadTypeScript: Loader = (...args) => {
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
-  const { TypeScriptLoader } = require('cosmiconfig-typescript-loader');
-  return TypeScriptLoader({ transpileOnly: true })(...args);
+const loadTypeScript: Loader = (filepath) => {
+  const jitiLoader = jiti(__filename, {
+    interopDefault: true,
+  });
+  return jitiLoader(filepath);
 };
 
 const loadToml: Loader = (...args) => {
@@ -56,6 +58,8 @@ function prepareCosmiconfig(moduleName: string, legacy: boolean) {
 
   const searchPlaces = [
     '#.config.ts',
+    '#.config.cts',
+    '#.config.mts',
     '#.config.js',
     '#.config.cjs',
     '#.config.json',
@@ -64,6 +68,8 @@ function prepareCosmiconfig(moduleName: string, legacy: boolean) {
     '#.config.toml',
     '.#rc',
     '.#rc.ts',
+    '.#rc.cts',
+    '.#rc.mts',
     '.#rc.js',
     '.#rc.cjs',
     '.#rc.json',
@@ -83,6 +89,8 @@ function prepareCosmiconfig(moduleName: string, legacy: boolean) {
     searchPlaces: searchPlaces.map((place) => place.replace('#', moduleName)),
     loaders: {
       '.ts': loadTypeScript,
+      '.mts': loadTypeScript,
+      '.cts': loadTypeScript,
       '.js': defaultLoaders['.js'],
       '.json': createCustomLoader(defaultLoaders['.json']),
       '.yaml': loadYaml,

@@ -12,6 +12,8 @@ await writeFile(
   `
 import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
 ${content}`.trimStart(),
 );
 console.timeEnd('done');

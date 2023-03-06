@@ -124,6 +124,8 @@ runTests({ async: loadConfig, sync: loadConfigSync })((load, mode) => {
     let configFiles = [
       // #.config files
       [`${moduleName}.config.ts`, tsConfig],
+      [`${moduleName}.config.cts`, tsConfig],
+      [`${moduleName}.config.mts`, tsConfig],
       [`${moduleName}.config.js`, jsConfig],
       [`${moduleName}.config.cjs`, jsConfig],
       [`${moduleName}.config.json`, jsonConfig],
@@ -133,6 +135,8 @@ runTests({ async: loadConfig, sync: loadConfigSync })((load, mode) => {
       // .#rc files
       [`.${moduleName}rc`, yamlConfig],
       [`.${moduleName}rc.ts`, tsConfig],
+      [`.${moduleName}rc.cts`, tsConfig],
+      [`.${moduleName}rc.mts`, tsConfig],
       [`.${moduleName}rc.js`, jsConfig],
       [`.${moduleName}rc.cjs`, jsConfig],
       [`.${moduleName}rc.json`, jsonConfig],
@@ -169,6 +173,42 @@ runTests({ async: loadConfig, sync: loadConfigSync })((load, mode) => {
 
       expect(config).toBeDefined();
       expect(loadedFileName).toEqual(name);
+      expect(loadedSchema).toEqual(schemaFile);
+    });
+  });
+
+  describe('"type": "module" in package.json', () => {
+    const schemaFile = 'schema.graphql';
+    const tsConfig = `export default { schema: '${schemaFile}' };`;
+
+    beforeEach(() => {
+      temp.clean();
+      temp.createFile(
+        schemaFile,
+        /* GraphQL */ `
+          type Query {
+            foo: String
+          }
+        `,
+      );
+      temp.createFile(
+        'package.json',
+        JSON.stringify({
+          type: 'module',
+        }),
+      );
+    });
+
+    const extensions = ['ts', 'cts', 'mts'];
+
+    test.each(extensions)('load a %s config', async (ext) => {
+      temp.createFile(`graphql.config.${ext}`, tsConfig);
+
+      const config = await load({ rootDir: temp.dir });
+
+      const loadedSchema = config.getDefault().schema;
+
+      expect(config).toBeDefined();
       expect(loadedSchema).toEqual(schemaFile);
     });
   });

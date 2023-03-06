@@ -49,13 +49,9 @@
   },
   "peerDependencies": {
     "cosmiconfig-toml-loader": "^1.0.0",
-    "cosmiconfig-typescript-loader": "^4.0.0",
     "graphql": "^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0"
   },
   "peerDependenciesMeta": {
-    "cosmiconfig-typescript-loader": {
-      "optional": true
-    },
     "cosmiconfig-toml-loader": {
       "optional": true
     }
@@ -68,6 +64,7 @@
     "@graphql-tools/url-loader": "^7.9.7",
     "@graphql-tools/utils": "^9.0.0",
     "cosmiconfig": "8.0.0",
+    "jiti": "1.17.1",
     "minimatch": "4.2.3",
     "string-env-interpolation": "1.0.1",
     "tslib": "^2.4.0"
@@ -80,7 +77,6 @@
     "@typescript-eslint/parser": "5.54.0",
     "bob-the-bundler": "5.0.1",
     "cosmiconfig-toml-loader": "1.0.0",
-    "cosmiconfig-typescript-loader": "4.3.0",
     "del": "6.1.1",
     "eslint": "8.35.0",
     "eslint-config-prettier": "8.6.0",
