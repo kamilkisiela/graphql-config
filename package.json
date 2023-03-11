@@ -78,7 +78,7 @@
     "bob-the-bundler": "5.0.1",
     "cosmiconfig-toml-loader": "1.0.0",
     "del": "6.1.1",
-    "eslint": "8.35.0",
+    "eslint": "8.36.0",
     "eslint-config-prettier": "8.7.0",
     "graphql": "16.6.0",
     "husky": "8.0.3",
