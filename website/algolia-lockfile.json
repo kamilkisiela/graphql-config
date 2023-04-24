@@ -76,14 +76,28 @@
     "url": "https://www.the-guild.dev/graphql/config/docs/",
     "domain": "https://www.the-guild.dev/graphql/config",
     "hierarchy": [
-      "Docs"
+      "docs"
     ],
     "source": "Config",
     "title": "Introduction",
     "type": "Documentation"
   },
   {
-    "objectID": "config-docs-im-a-library-author-extensions",
+    "objectID": "config-docs-installation",
+    "headings": [],
+    "toc": [],
+    "content": "af321006c2c39ef81677f11200ad22a6",
+    "url": "https://www.the-guild.dev/graphql/config/docs/installation",
+    "domain": "https://www.the-guild.dev/graphql/config",
+    "hierarchy": [
+      "docs"
+    ],
+    "source": "Config",
+    "title": "Installation",
+    "type": "Documentation"
+  },
+  {
+    "objectID": "config-docs-library-extensions",
     "headings": [
       "How to Write Extensions",
       "Consuming Extension",
@@ -116,15 +130,15 @@
     "url": "https://www.the-guild.dev/graphql/config/docs/library/extensions",
     "domain": "https://www.the-guild.dev/graphql/config",
     "hierarchy": [
-      "Docs",
-      "I'm a Library Author"
+      "docs",
+      "library"
     ],
     "source": "Config",
     "title": "Extensions",
     "type": "Documentation"
   },
   {
-    "objectID": "config-docs-im-a-library-author-graphql-config",
+    "objectID": "config-docs-library-graphql-config",
     "headings": [
       "API"
     ],
@@ -176,15 +190,15 @@
     "url": "https://www.the-guild.dev/graphql/config/docs/library/graphql-config",
     "domain": "https://www.the-guild.dev/graphql/config",
     "hierarchy": [
-      "Docs",
-      "I'm a Library Author"
+      "docs",
+      "library"
     ],
     "source": "Config",
     "title": "GraphQLConfig",
     "type": "Documentation"
   },
   {
-    "objectID": "config-docs-im-a-library-author-graphql-project-config",
+    "objectID": "config-docs-library-graphql-project-config",
     "headings": [
       "API"
     ],
@@ -286,15 +300,15 @@
     "url": "https://www.the-guild.dev/graphql/config/docs/library/graphql-project-config",
     "domain": "https://www.the-guild.dev/graphql/config",
     "hierarchy": [
-      "Docs",
-      "I'm a Library Author"
+      "docs",
+      "library"
     ],
     "source": "Config",
     "title": "GraphQLProjectConfig",
     "type": "Documentation"
   },
   {
-    "objectID": "config-docs-im-a-library-author-load-config",
+    "objectID": "config-docs-library-load-config",
     "headings": [
       "Load Config",
       "Options"
@@ -359,15 +373,15 @@
     "url": "https://www.the-guild.dev/graphql/config/docs/library/load-config",
     "domain": "https://www.the-guild.dev/graphql/config",
     "hierarchy": [
-      "Docs",
-      "I'm a Library Author"
+      "docs",
+      "library"
     ],
     "source": "Config",
     "title": "Loading Config",
     "type": "Documentation"
   },
   {
-    "objectID": "config-docs-im-a-library-author-loaders",
+    "objectID": "config-docs-library-loaders",
     "headings": [
       "Available Loaders",
       "Writing Loaders"
@@ -388,148 +402,11 @@
     "url": "https://www.the-guild.dev/graphql/config/docs/library/loaders",
     "domain": "https://www.the-guild.dev/graphql/config",
     "hierarchy": [
-      "Docs",
-      "I'm a Library Author"
+      "docs",
+      "library"
     ],
     "source": "Config",
     "title": "Loaders",
-    "type": "Documentation"
-  },
-  {
-    "objectID": "config-docs-im-a-user-documents",
-    "headings": [
-      "Multiple Files"
-    ],
-    "toc": [
-      {
-        "children": [],
-        "title": "Multiple Files",
-        "anchor": "multiple-files"
-      }
-    ],
-    "content": "834afa9d292ad40d6343ac177b7afe04",
-    "url": "https://www.the-guild.dev/graphql/config/docs/user/documents",
-    "domain": "https://www.the-guild.dev/graphql/config",
-    "hierarchy": [
-      "Docs",
-      "I'm a User"
-    ],
-    "source": "Config",
-    "title": "Specifying Documents",
-    "type": "Documentation"
-  },
-  {
-    "objectID": "config-docs-im-a-user-schema",
-    "headings": [
-      "Multiple Files",
-      "Introspection Result",
-      "Endpoint",
-      "Environment Variables",
-      "Passing Headers"
-    ],
-    "toc": [
-      {
-        "children": [],
-        "title": "Multiple Files",
-        "anchor": "multiple-files"
-      },
-      {
-        "children": [],
-        "title": "Introspection Result",
-        "anchor": "introspection-result"
-      },
-      {
-        "children": [],
-        "title": "Endpoint",
-        "anchor": "endpoint"
-      },
-      {
-        "children": [],
-        "title": "Environment Variables",
-        "anchor": "environment-variables"
-      },
-      {
-        "children": [],
-        "title": "Passing Headers",
-        "anchor": "passing-headers"
-      }
-    ],
-    "content": "32b0faf3dac81d250f73afed50a5eea3",
-    "url": "https://www.the-guild.dev/graphql/config/docs/user/schema",
-    "domain": "https://www.the-guild.dev/graphql/config",
-    "hierarchy": [
-      "Docs",
-      "I'm a User"
-    ],
-    "source": "Config",
-    "title": "Specifying Schema",
-    "type": "Documentation"
-  },
-  {
-    "objectID": "config-docs-im-a-user-usage",
-    "headings": [
-      "Config Search Places",
-      "Schema",
-      "Documents",
-      "Include / Exclude",
-      "Extensions",
-      "Projects"
-    ],
-    "toc": [
-      {
-        "children": [],
-        "title": "Config Search Places",
-        "anchor": "config-search-places"
-      },
-      {
-        "children": [],
-        "title": "Schema",
-        "anchor": "schema"
-      },
-      {
-        "children": [],
-        "title": "Documents",
-        "anchor": "documents"
-      },
-      {
-        "children": [],
-        "title": "Include / Exclude",
-        "anchor": "include--exclude"
-      },
-      {
-        "children": [],
-        "title": "Extensions",
-        "anchor": "extensions"
-      },
-      {
-        "children": [],
-        "title": "Projects",
-        "anchor": "projects"
-      }
-    ],
-    "content": "cd52d5051ed321dd774afe569b5bfe60",
-    "url": "https://www.the-guild.dev/graphql/config/docs/user/usage",
-    "domain": "https://www.the-guild.dev/graphql/config",
-    "hierarchy": [
-      "Docs",
-      "I'm a User"
-    ],
-    "source": "Config",
-    "title": "Usage",
-    "type": "Documentation"
-  },
-  {
-    "objectID": "config-docs-installation",
-    "headings": [],
-    "toc": [],
-    "content": "af321006c2c39ef81677f11200ad22a6",
-    "url": "https://www.the-guild.dev/graphql/config/docs/installation",
-    "domain": "https://www.the-guild.dev/graphql/config",
-    "hierarchy": [
-      "Docs"
-    ],
-    "source": "Config",
-    "title": "Installation",
     "type": "Documentation"
   },
   {
@@ -581,10 +458,133 @@
     "url": "https://www.the-guild.dev/graphql/config/docs/migration",
     "domain": "https://www.the-guild.dev/graphql/config",
     "hierarchy": [
-      "Docs"
+      "docs"
     ],
     "source": "Config",
     "title": "Migration",
+    "type": "Documentation"
+  },
+  {
+    "objectID": "config-docs-user-documents",
+    "headings": [
+      "Multiple Files"
+    ],
+    "toc": [
+      {
+        "children": [],
+        "title": "Multiple Files",
+        "anchor": "multiple-files"
+      }
+    ],
+    "content": "834afa9d292ad40d6343ac177b7afe04",
+    "url": "https://www.the-guild.dev/graphql/config/docs/user/documents",
+    "domain": "https://www.the-guild.dev/graphql/config",
+    "hierarchy": [
+      "docs",
+      "user"
+    ],
+    "source": "Config",
+    "title": "Specifying Documents",
+    "type": "Documentation"
+  },
+  {
+    "objectID": "config-docs-user-schema",
+    "headings": [
+      "Multiple Files",
+      "Introspection Result",
+      "Endpoint",
+      "Environment Variables",
+      "Passing Headers"
+    ],
+    "toc": [
+      {
+        "children": [],
+        "title": "Multiple Files",
+        "anchor": "multiple-files"
+      },
+      {
+        "children": [],
+        "title": "Introspection Result",
+        "anchor": "introspection-result"
+      },
+      {
+        "children": [],
+        "title": "Endpoint",
+        "anchor": "endpoint"
+      },
+      {
+        "children": [],
+        "title": "Environment Variables",
+        "anchor": "environment-variables"
+      },
+      {
+        "children": [],
+        "title": "Passing Headers",
+        "anchor": "passing-headers"
+      }
+    ],
+    "content": "32b0faf3dac81d250f73afed50a5eea3",
+    "url": "https://www.the-guild.dev/graphql/config/docs/user/schema",
+    "domain": "https://www.the-guild.dev/graphql/config",
+    "hierarchy": [
+      "docs",
+      "user"
+    ],
+    "source": "Config",
+    "title": "Specifying Schema",
+    "type": "Documentation"
+  },
+  {
+    "objectID": "config-docs-user-usage",
+    "headings": [
+      "Config Search Places",
+      "Schema",
+      "Documents",
+      "Include / Exclude",
+      "Extensions",
+      "Projects"
+    ],
+    "toc": [
+      {
+        "children": [],
+        "title": "Config Search Places",
+        "anchor": "config-search-places"
+      },
+      {
+        "children": [],
+        "title": "Schema",
+        "anchor": "schema"
+      },
+      {
+        "children": [],
+        "title": "Documents",
+        "anchor": "documents"
+      },
+      {
+        "children": [],
+        "title": "Include / Exclude",
+        "anchor": "include--exclude"
+      },
+      {
+        "children": [],
+        "title": "Extensions",
+        "anchor": "extensions"
+      },
+      {
+        "children": [],
+        "title": "Projects",
+        "anchor": "projects"
+      }
+    ],
+    "content": "cd52d5051ed321dd774afe569b5bfe60",
+    "url": "https://www.the-guild.dev/graphql/config/docs/user/usage",
+    "domain": "https://www.the-guild.dev/graphql/config",
+    "hierarchy": [
+      "docs",
+      "user"
+    ],
+    "source": "Config",
+    "title": "Usage",
     "type": "Documentation"
   }
 ]
