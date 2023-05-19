@@ -10,7 +10,7 @@
     "analyze": "cross-env ANALYZE=true yarn build"
   },
   "dependencies": {
-    "@theguild/components": "4.5.10",
+    "@theguild/components": "4.5.12",
     "next": "13.3.1",
     "next-sitemap": "4.0.7",
     "react": "18.2.0",
@@ -29,7 +29,7 @@
     ]
   },
   "devDependencies": {
-    "@theguild/algolia": "1.1.6",
+    "@theguild/algolia": "1.1.7",
     "@theguild/tailwind-config": "0.2.1",
     "@types/node": "18.16.2",
     "@types/react": "18.2.0",
