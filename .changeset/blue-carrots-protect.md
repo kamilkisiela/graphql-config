@@ -2,4 +2,4 @@
 'graphql-config': major
 ---
 
-Require Node.js >= 16
+Drop support for Node.js 14. Require Node.js `>= 16`
