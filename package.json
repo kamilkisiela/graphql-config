@@ -57,12 +57,12 @@
     }
   },
   "dependencies": {
-    "@graphql-tools/graphql-file-loader": "^7.3.7",
-    "@graphql-tools/json-file-loader": "^7.3.7",
-    "@graphql-tools/load": "^7.5.5",
-    "@graphql-tools/merge": "^8.2.6",
-    "@graphql-tools/url-loader": "^7.9.7",
-    "@graphql-tools/utils": "^9.0.0",
+    "@graphql-tools/graphql-file-loader": "8.0.0-rc-20230519015308-f93ea91d",
+    "@graphql-tools/json-file-loader": "8.0.0-rc-20230519015308-f93ea91d",
+    "@graphql-tools/load": "8.0.0-rc-20230519015308-f93ea91d",
+    "@graphql-tools/merge": "9.0.0-rc-20230519015308-f93ea91d",
+    "@graphql-tools/url-loader": "8.0.0-rc-20230519015308-f93ea91d",
+    "@graphql-tools/utils": "10.0.0-rc-20230519015308-f93ea91d",
     "cosmiconfig": "8.1.0",
     "jiti": "1.17.1",
     "minimatch": "4.2.3",
@@ -75,7 +75,7 @@
     "@types/node": "18.16.14",
     "@typescript-eslint/eslint-plugin": "5.59.6",
     "@typescript-eslint/parser": "5.59.6",
-    "bob-the-bundler": "6.0.0",
+    "bob-the-bundler": "7.0.0",
     "cosmiconfig-toml-loader": "1.0.0",
     "del": "6.1.1",
     "eslint": "8.41.0",
@@ -128,6 +128,6 @@
     }
   },
   "engines": {
-    "node": ">= 10.0.0"
+    "node": ">= 16.0.0"
   }
 }
