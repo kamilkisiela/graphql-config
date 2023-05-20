@@ -88,7 +88,7 @@
     "prettier": "2.8.8",
     "rimraf": "5.0.1",
     "ts-node": "10.9.1",
-    "tsx": "3.12.6",
+    "tsx": "3.12.7",
     "typescript": "5.0.4",
     "typescript-json-schema": "0.56.0",
     "vitest": "0.30.1"
