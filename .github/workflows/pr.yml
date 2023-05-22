@@ -8,6 +8,9 @@ on:
 jobs:
   dependencies:
     uses: the-guild-org/shared-config/.github/workflows/changesets-dependencies.yaml@main
+    with:
+      preCommit: 'yarn prettier'
+      installDependencies: true
     secrets:
       githubToken: ${{ secrets.GUILD_BOT_TOKEN }}
 
@@ -16,7 +19,7 @@ jobs:
     with:
       npmTag: alpha
       buildScript: build
-      nodeVersion: 16
+      nodeVersion: 18
     secrets:
       githubToken: ${{ secrets.GITHUB_TOKEN }}
       npmToken: ${{ secrets.NPM_TOKEN }}

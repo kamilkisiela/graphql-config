@@ -1,9 +1,10 @@
 {
   "compilerOptions": {
     "module": "esnext",
-    "target": "es2018",
-    "lib": ["es2018"],
+    "target": "es2021",
+    "lib": ["es2021"],
     "outDir": "dist",
+    "skipLibCheck": true,
     "declaration": true,
     "declarationMap": true,
     "importHelpers": true,
