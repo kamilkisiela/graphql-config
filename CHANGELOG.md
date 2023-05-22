@@ -1,5 +1,11 @@
 # Change log
 
+## 5.0.1
+
+### Patch Changes
+
+- [#1359](https://github.com/kamilkisiela/graphql-config/pull/1359) [`18bfca8`](https://github.com/kamilkisiela/graphql-config/commit/18bfca88bf46455582e28b1c8d2ccf0c20f0dc75) Thanks [@n1ru4l](https://github.com/n1ru4l)! - Fix esm compatibility
+
 ## 5.0.0
 
 ### Major Changes
