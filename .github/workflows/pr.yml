@@ -8,6 +8,9 @@ on:
 jobs:
   dependencies:
     uses: the-guild-org/shared-config/.github/workflows/changesets-dependencies.yaml@main
+    with:
+      preCommit: 'yarn prettier'
+      installDependencies: true
     secrets:
       githubToken: ${{ secrets.GUILD_BOT_TOKEN }}
 
