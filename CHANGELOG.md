@@ -1,5 +1,33 @@
 # Change log
 
+## 5.0.0
+
+### Major Changes
+
+- [#1348](https://github.com/kamilkisiela/graphql-config/pull/1348) [`42ffb2e`](https://github.com/kamilkisiela/graphql-config/commit/42ffb2e82d9d7a170ae1a9b9f52cdcd396046d80) Thanks [@n1ru4l](https://github.com/n1ru4l)! - Drop support for Node.js 14. Require Node.js `>= 16`
+
+### Patch Changes
+
+- [#1294](https://github.com/kamilkisiela/graphql-config/pull/1294) [`1d11dbd`](https://github.com/kamilkisiela/graphql-config/commit/1d11dbd25e581cb6c0e216c3e2917ab7f47d6847) Thanks [@renovate](https://github.com/apps/renovate)! - dependencies updates:
+
+  - Updated dependency [`jiti@1.18.2` ↗︎](https://www.npmjs.com/package/jiti/v/1.18.2) (from `1.17.1`, in `dependencies`)
+
+- [#1348](https://github.com/kamilkisiela/graphql-config/pull/1348) [`42ffb2e`](https://github.com/kamilkisiela/graphql-config/commit/42ffb2e82d9d7a170ae1a9b9f52cdcd396046d80) Thanks [@n1ru4l](https://github.com/n1ru4l)! - dependencies updates:
+
+  - Updated dependency [`@graphql-tools/graphql-file-loader@^8.0.0` ↗︎](https://www.npmjs.com/package/@graphql-tools/graphql-file-loader/v/8.0.0) (from `^7.3.7`, in `dependencies`)
+  - Updated dependency [`@graphql-tools/json-file-loader@^8.0.0` ↗︎](https://www.npmjs.com/package/@graphql-tools/json-file-loader/v/8.0.0) (from `^7.3.7`, in `dependencies`)
+  - Updated dependency [`@graphql-tools/load@^8.0.0` ↗︎](https://www.npmjs.com/package/@graphql-tools/load/v/8.0.0) (from `^7.5.5`, in `dependencies`)
+  - Updated dependency [`@graphql-tools/merge@^9.0.0` ↗︎](https://www.npmjs.com/package/@graphql-tools/merge/v/9.0.0) (from `^8.2.6`, in `dependencies`)
+  - Updated dependency [`@graphql-tools/url-loader@^8.0.0` ↗︎](https://www.npmjs.com/package/@graphql-tools/url-loader/v/8.0.0) (from `^7.9.7`, in `dependencies`)
+  - Updated dependency [`@graphql-tools/utils@^10.0.0` ↗︎](https://www.npmjs.com/package/@graphql-tools/utils/v/10.0.0) (from `^9.0.0`, in `dependencies`)
+
+- [#1358](https://github.com/kamilkisiela/graphql-config/pull/1358) [`d6ead74`](https://github.com/kamilkisiela/graphql-config/commit/d6ead7426d3e9a7e2309b1939bfa66ae45e9e7d9) Thanks [@n1ru4l](https://github.com/n1ru4l)! - dependencies updates:
+
+  - Updated dependency [`cosmiconfig@^8.1.0` ↗︎](https://www.npmjs.com/package/cosmiconfig/v/8.1.0) (from `8.1.0`, in `dependencies`)
+  - Updated dependency [`jiti@^1.18.2` ↗︎](https://www.npmjs.com/package/jiti/v/1.18.2) (from `1.18.2`, in `dependencies`)
+  - Updated dependency [`minimatch@^4.2.3` ↗︎](https://www.npmjs.com/package/minimatch/v/4.2.3) (from `4.2.3`, in `dependencies`)
+  - Updated dependency [`string-env-interpolation@^1.0.1` ↗︎](https://www.npmjs.com/package/string-env-interpolation/v/1.0.1) (from `1.0.1`, in `dependencies`)
+
 ## 4.5.0
 
 ### Minor Changes
