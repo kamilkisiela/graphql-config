@@ -22,7 +22,7 @@ jobs:
         name: setup env
         with:
           nodeVersion: 18
-          packageManager: yarn
+          packageManager: 'pnpm'
           workingDirectory: website
 
       - uses: the-guild-org/shared-config/website-cf@main
@@ -37,5 +37,5 @@ jobs:
           projectName: graphql-config
           prId: ${{ github.event.pull_request.number }}
           websiteDirectory: website
-          buildScript: yarn build
+          buildScript: pnpm run build
           artifactDir: out

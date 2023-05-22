@@ -22,22 +22,24 @@ jobs:
       - name: Setup env
         uses: the-guild-org/shared-config/setup@main
         with:
+          packageManager: 'pnpm'
           nodeVersion: ${{matrix.node_version}}
 
       - name: Test
-        run: yarn test
+        run: pnpm run test
 
       - name: Build
-        run: yarn build
+        run: pnpm run build
 
       - name: Integrity check
-        run: yarn bob check
+        run: npx bob check
 
   lint:
     name: Lint
     uses: the-guild-org/shared-config/.github/workflows/lint.yml@main
     with:
-      script: yarn ci:lint
+      script: pnpm run ci:lint
+      packageManager: 'pnpm'
     secrets:
       githubToken: ${{ secrets.GITHUB_TOKEN }}
 
@@ -49,7 +51,8 @@ jobs:
       - name: Setup env
         uses: the-guild-org/shared-config/setup@main
         with:
+          packageManager: 'pnpm'
           nodeVersion: 16
 
       - name: Lint Prettier
-        run: yarn prettier:check
+        run: pnpm run prettier:check
