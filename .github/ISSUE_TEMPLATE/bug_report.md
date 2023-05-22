@@ -10,7 +10,7 @@ about: Create a bug report to help us improve
 _Progress of the issue based on the [Contributor Workflow](https://github.com/the-guild-org/Stack/blob/master/CONTRIBUTING.md#a-typical-contributor-workflow)_
 
 - [ ] 1. The issue provides a reproduction available on GitHub, Stackblitz or CodeSandbox
-     > Make sure to fork this template and run `yarn generate` in the terminal.
+     > Make sure to fork this template and run `pnpm run generate` in the terminal.
      >
      > Please make sure the Codegen and plugins version under `package.json` matches yours.
 - [ ] 2. A failing test has been provided

@@ -5,6 +5,7 @@
   "sideEffects": false,
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
+  "packageManager": "pnpm@7.32.4",
   "exports": {
     ".": {
       "require": {
@@ -33,9 +34,9 @@
   "type": "module",
   "scripts": {
     "postinstall": "tsx scripts/patch-graphql.ts",
-    "prepublishOnly": "yarn build",
+    "prepublishOnly": "pnpm run build",
     "clean": "rimraf dist",
-    "prebuild": "yarn clean && yarn json-schema",
+    "prebuild": "pnpm run clean && pnpm run json-schema",
     "postbuild": "tsx scripts/postbuild.ts",
     "build": "bob build",
     "prettier": "prettier --cache --write --list-different .",
@@ -43,7 +44,7 @@
     "lint": "eslint --cache --cache-location node_modules/.cache/.eslintcache --ignore-path .gitignore .",
     "ci:lint": "eslint --cache --cache-location node_modules/.cache/.eslintcache --ignore-path .gitignore . --output-file eslint_report.json --format json",
     "test": "vitest .",
-    "prerelease": "yarn build",
+    "prerelease": "pnpm run build",
     "release": "changeset publish",
     "json-schema": "typescript-json-schema src/types.ts IGraphQLConfig --out config-schema.json --ignoreErrors --required --titles && prettier --write config-schema.json"
   },
@@ -128,6 +129,7 @@
     }
   },
   "engines": {
-    "node": ">= 16.0.0"
+    "node": ">= 16.0.0",
+    "pnpm": "7.32.4"
   }
 }

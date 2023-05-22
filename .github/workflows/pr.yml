@@ -9,8 +9,9 @@ jobs:
   dependencies:
     uses: the-guild-org/shared-config/.github/workflows/changesets-dependencies.yaml@main
     with:
-      preCommit: 'yarn prettier'
+      preCommit: 'pnpm run prettier'
       installDependencies: true
+      packageManager: 'pnpm'
     secrets:
       githubToken: ${{ secrets.GUILD_BOT_TOKEN }}
 
@@ -20,6 +21,7 @@ jobs:
       npmTag: alpha
       buildScript: build
       nodeVersion: 18
+      packageManager: 'pnpm'
     secrets:
       githubToken: ${{ secrets.GITHUB_TOKEN }}
       npmToken: ${{ secrets.NPM_TOKEN }}
@@ -30,5 +32,6 @@ jobs:
       domain: https://www.the-guild.dev/graphql/config/
       source: 'Config'
       setupEnvWorkingDirectory: './website'
+      packageManager: 'pnpm'
     secrets:
       githubToken: ${{ secrets.GITHUB_TOKEN }}
