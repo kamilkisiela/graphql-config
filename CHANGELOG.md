@@ -1,5 +1,11 @@
 # Change log
 
+## 5.0.2
+
+### Patch Changes
+
+- [#1370](https://github.com/kamilkisiela/graphql-config/pull/1370) [`156e7c2`](https://github.com/kamilkisiela/graphql-config/commit/156e7c2cc128e4ec19f8e207bc040dd599132e38) Thanks [@gilgardosh](https://github.com/gilgardosh)! - Bump bob-the-bundler
+
 ## 5.0.1
 
 ### Patch Changes
