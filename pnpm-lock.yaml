@@ -52,8 +52,8 @@ devDependencies:
     specifier: 5.59.7
     version: 5.59.7(eslint@8.41.0)(typescript@5.0.4)
   bob-the-bundler:
-    specifier: 7.0.0
-    version: 7.0.0(typescript@5.0.4)
+    specifier: 7.0.1
+    version: 7.0.1(typescript@5.0.4)
   cosmiconfig-toml-loader:
     specifier: 1.0.0
     version: 1.0.0
@@ -702,7 +702,7 @@ packages:
       graphql: 16.6.0
       graphql-ws: 5.13.1(graphql@16.6.0)
       isomorphic-ws: 5.0.0(ws@8.13.0)
-      tslib: 2.4.0
+      tslib: 2.5.2
       ws: 8.13.0
     transitivePeerDependencies:
       - bufferutil
@@ -723,7 +723,7 @@ packages:
       extract-files: 11.0.0
       graphql: 16.6.0
       meros: 1.2.1(@types/node@18.16.14)
-      tslib: 2.4.0
+      tslib: 2.5.2
       value-or-promise: 1.0.12
     transitivePeerDependencies:
       - '@types/node'
@@ -740,7 +740,7 @@ packages:
       '@types/ws': 8.5.4
       graphql: 16.6.0
       isomorphic-ws: 5.0.0(ws@8.13.0)
-      tslib: 2.4.0
+      tslib: 2.5.2
       ws: 8.13.0
     transitivePeerDependencies:
       - bufferutil
@@ -787,7 +787,7 @@ packages:
       '@graphql-tools/utils': 10.0.0(graphql@16.6.0)
       graphql: 16.6.0
       resolve-from: 5.0.0
-      tslib: 2.4.0
+      tslib: 2.5.2
     dev: false
 
   /@graphql-tools/json-file-loader@8.0.0(graphql@16.6.0):
@@ -840,7 +840,7 @@ packages:
       '@graphql-tools/merge': 9.0.0(graphql@16.6.0)
       '@graphql-tools/utils': 10.0.0(graphql@16.6.0)
       graphql: 16.6.0
-      tslib: 2.4.0
+      tslib: 2.5.2
       value-or-promise: 1.0.12
     dev: false
 
@@ -895,7 +895,7 @@ packages:
       '@graphql-tools/schema': 10.0.0(graphql@16.6.0)
       '@graphql-tools/utils': 10.0.0(graphql@16.6.0)
       graphql: 16.6.0
-      tslib: 2.4.0
+      tslib: 2.5.2
       value-or-promise: 1.0.12
     dev: false
 
@@ -1492,9 +1492,9 @@ packages:
       { integrity: sha512-DRQrD6gJyy8FbiE4s+bDoXS9hiW3Vbx5uCdwvcCf3zLHL+Iv7LtGHLpr+GZV8rHG8tK766FGYBwRbu8pELTt+w== }
     dev: true
 
-  /bob-the-bundler@7.0.0(typescript@5.0.4):
+  /bob-the-bundler@7.0.1(typescript@5.0.4):
     resolution:
-      { integrity: sha512-W758FeY/k9p8x4VVdT6Qaf3yLKMbAtwWkKm1+REpwgb5T750S8BkMwXv1VyPunOX51FUHhDB96qNrTnGSuGszQ== }
+      { integrity: sha512-TFpj2AcCzTNVyMZ5ixHqJndJ9KyIUGrgTMMciz88X0HCRDujoUQL+D+61shAY+K20bM4q5Yn/NunbdiPC9drjA== }
     engines: { node: '>=16', pnpm: '>=8' }
     hasBin: true
     peerDependencies:
@@ -1508,7 +1508,7 @@ packages:
       lodash.get: 4.4.2
       p-limit: 4.0.0
       resolve.exports: 2.0.2
-      tslib: 2.4.0
+      tslib: 2.5.2
       typescript: 5.0.4
       yargs: 17.7.2
       zod: 3.21.4
@@ -4426,6 +4426,7 @@ packages:
   /tslib@2.4.0:
     resolution:
       { integrity: sha512-d6xOpEDfsi2CZVlPQzGeux8XMwLT9hssAsaPYExaQMuYskwb+x1x7J371tWlbBdWHroy99KnVB6qIkUbs5X3UQ== }
+    dev: false
 
   /tslib@2.5.2:
     resolution:
