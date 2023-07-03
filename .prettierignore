@@ -4,3 +4,4 @@ out/
 .husky/_/
 algolia-lockfile.json
 .bob/
+pnpm-lock.yaml
