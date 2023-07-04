@@ -101,8 +101,8 @@ devDependencies:
     specifier: 5.0.4
     version: 5.0.4
   typescript-json-schema:
-    specifier: 0.56.0
-    version: 0.56.0
+    specifier: 0.58.1
+    version: 0.58.1
   vitest:
     specifier: 0.31.1
     version: 0.31.1
@@ -4005,8 +4005,8 @@ packages:
       is-typed-array: 1.1.10
     dev: true
 
-  /typescript-json-schema@0.56.0:
-    resolution: {integrity: sha512-k/aSEqx89YR2z/f2y3VwoOGzlKTWern0EIey2qqEpMRP7HL4CI8udPElzJs4eFVkPowCLJ1yVBSzuIWIUF+mMA==}
+  /typescript-json-schema@0.58.1:
+    resolution: {integrity: sha512-EcmquhfGEmEJOAezLZC6CzY0rPNzfXuky+Z3zoXULEEncW8e13aAjmC2r8ppT1bvvDekJj1TJ4xVhOdkjYtkUA==}
     hasBin: true
     dependencies:
       '@types/json-schema': 7.0.11
