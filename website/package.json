@@ -41,7 +41,7 @@
     "eslint-config-prettier": "8.8.0",
     "typescript": "5.1.6"
   },
-  "packageManager": "pnpm@8.6.5",
+  "packageManager": "pnpm@8.6.6",
   "engines": {
     "node": ">= 16.0.0",
     "pnpm": "^8.6.5"
