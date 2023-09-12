@@ -33,14 +33,16 @@ export interface IGraphQLProjectLegacy {
 
 export declare type WithList<T> = T | T[];
 export declare type ElementOf<TList> = TList extends Array<infer TElement> ? TElement : never;
-export declare type SchemaPointer =
-  | WithList<string | {
-  [url: string]: {
-    headers: {
-      [name: string]: string;
-    };
-  };
-}>;
+export declare type SchemaPointer = WithList<
+  | string
+  | {
+      [url: string]: {
+        headers: {
+          [name: string]: string;
+        };
+      };
+    }
+>;
 export declare type SchemaPointerSingle = ElementOf<SchemaPointer>;
 export declare type DocumentGlobPathPointer = string;
 export declare type DocumentPointer = WithList<DocumentGlobPathPointer>;
