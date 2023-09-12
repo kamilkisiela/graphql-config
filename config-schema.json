@@ -52,7 +52,7 @@
           "title": "include"
         },
         "schema": {
-          "$ref": "#/definitions/SchemaPointer",
+          "$ref": "#/definitions/WithList<string|{[url:string]:{headers:{[name:string]:string;};};}>",
           "title": "schema"
         }
       },
@@ -112,39 +112,6 @@
       "title": "IGraphQLProjects",
       "type": "object"
     },
-    "SchemaPointer": {
-      "anyOf": [
-        {
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        {
-          "items": {
-            "additionalProperties": {
-              "properties": {
-                "headers": {
-                  "additionalProperties": {
-                    "type": "string"
-                  },
-                  "title": "headers",
-                  "type": "object"
-                }
-              },
-              "required": ["headers"],
-              "type": "object"
-            },
-            "type": "object"
-          },
-          "type": "array"
-        },
-        {
-          "type": "string"
-        }
-      ],
-      "title": "SchemaPointer"
-    },
     "WithList<string>": {
       "anyOf": [
         {
@@ -158,6 +125,56 @@
         }
       ],
       "title": "WithList<string>"
+    },
+    "WithList<string|{[url:string]:{headers:{[name:string]:string;};};}>": {
+      "anyOf": [
+        {
+          "additionalProperties": {
+            "properties": {
+              "headers": {
+                "additionalProperties": {
+                  "type": "string"
+                },
+                "title": "headers",
+                "type": "object"
+              }
+            },
+            "required": ["headers"],
+            "type": "object"
+          },
+          "type": "object"
+        },
+        {
+          "items": {
+            "anyOf": [
+              {
+                "additionalProperties": {
+                  "properties": {
+                    "headers": {
+                      "additionalProperties": {
+                        "type": "string"
+                      },
+                      "title": "headers",
+                      "type": "object"
+                    }
+                  },
+                  "required": ["headers"],
+                  "type": "object"
+                },
+                "type": "object"
+              },
+              {
+                "type": "string"
+              }
+            ]
+          },
+          "type": "array"
+        },
+        {
+          "type": "string"
+        }
+      ],
+      "title": "WithList<string|{[url:string]:{headers:{[name:string]:string;};};}>"
     }
   },
   "description": "Structure of GraphQL Config"
