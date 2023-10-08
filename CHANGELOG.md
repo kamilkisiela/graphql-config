@@ -1,5 +1,11 @@
 # Change log
 
+## 5.0.3
+
+### Patch Changes
+
+- [#1406](https://github.com/kamilkisiela/graphql-config/pull/1406) [`69afec4`](https://github.com/kamilkisiela/graphql-config/commit/69afec4bbabcee453c14737257c43f8b1919f532) Thanks [@B2o5T](https://github.com/B2o5T)! - fix `SchemaPointer` type, allow both URLs with headers and local type definitions
+
 ## 5.0.2
 
 ### Patch Changes
