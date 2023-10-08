@@ -1,4 +1,4 @@
-{
+export default {
   "load-config": "Loading Config",
   "extensions": "Extensions",
   "loaders": "Loaders",

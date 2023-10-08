@@ -1,4 +1,4 @@
-{
+export default {
   "index": {
     "title": "Home",
     "type": "page",
@@ -14,4 +14,4 @@
       "toc": true
     }
   }
-}
+};

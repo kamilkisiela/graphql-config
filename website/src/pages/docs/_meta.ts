@@ -1,4 +1,4 @@
-{
+export default {
   "index": "Introduction",
   "installation": "Installation",
   "user": "I'm a User",
