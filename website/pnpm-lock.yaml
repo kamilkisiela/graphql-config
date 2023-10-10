@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   '@theguild/components':
-    specifier: 6.0.0-alpha-20231008221431-ab5b020
-    version: 6.0.0-alpha-20231008221431-ab5b020(@algolia/client-search@4.19.1)(@types/react@18.2.25)(next@13.5.4)(react-dom@18.2.0)(react@18.2.0)(webpack@4.46.0)
+    specifier: 6.0.0-alpha-20231010161621-6bd0171
+    version: 6.0.0-alpha-20231010161621-6bd0171(@algolia/client-search@4.19.1)(@types/react@18.2.25)(next@13.5.4)(react-dom@18.2.0)(react@18.2.0)(webpack@4.46.0)
   next:
     specifier: 13.5.4
     version: 13.5.4(react-dom@18.2.0)(react@18.2.0)
@@ -877,7 +877,7 @@ packages:
   /@radix-ui/react-navigation-menu@1.1.4(@types/react@18.2.25)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-Cc+seCS3PmWmjI51ufGG7zp1cAAIRqHVw7C9LOA2TZ+R4hG6rDvHcTqIsEEFLmZO3zNVH72jOOE7kKNy8W+RtA==}
     peerDependencies:
-      '@types/react': '*'
+      '@types/react': 18.2.8
       '@types/react-dom': '*'
       react: ^16.8 || ^17.0 || ^18.0
       react-dom: ^16.8 || ^17.0 || ^18.0
@@ -951,7 +951,7 @@ packages:
   /@radix-ui/react-slot@1.0.2(@types/react@18.2.25)(react@18.2.0):
     resolution: {integrity: sha512-YeTpuq4deV+6DusvVUW4ivBgnkHwECUu0BiN43L5UCDFgdhsRUWAghhTF5MbvNTPzmiFOx90asDSUjWuCNapwg==}
     peerDependencies:
-      '@types/react': '*'
+      '@types/react': 18.2.8
       react: ^16.8 || ^17.0 || ^18.0
     peerDependenciesMeta:
       '@types/react':
@@ -1078,8 +1078,8 @@ packages:
       remove-markdown: 0.5.0
     dev: true
 
-  /@theguild/components@6.0.0-alpha-20231008221431-ab5b020(@algolia/client-search@4.19.1)(@types/react@18.2.25)(next@13.5.4)(react-dom@18.2.0)(react@18.2.0)(webpack@4.46.0):
-    resolution: {integrity: sha512-1wSM7G1l7pFA+nsUy9vq8gKa5cAcp45U+1z51ixgQsmJbtPjPOGjujMd7K5wpyJ1ifCUgnEWp8T6UW6EJSntxg==}
+  /@theguild/components@6.0.0-alpha-20231010161621-6bd0171(@algolia/client-search@4.19.1)(@types/react@18.2.25)(next@13.5.4)(react-dom@18.2.0)(react@18.2.0)(webpack@4.46.0):
+    resolution: {integrity: sha512-zBjOoqgq/3HFYsMfF/Dq5IiLFvefe4woyzXIyJAz9bjeZ2FaAC49xILGi9WZ6rdqk1ZRLIVE61QuZXQr4n8U7w==}
     peerDependencies:
       next: ^12.3.1 || ^13.0.0
       react: ^18.2.0
@@ -1097,8 +1097,8 @@ packages:
       fuzzy: 0.1.3
       next: 13.5.4(react-dom@18.2.0)(react@18.2.0)
       next-videos: 1.5.0(webpack@4.46.0)
-      nextra: 3.0.0-alpha.2(next@13.5.4)(react-dom@18.2.0)(react@18.2.0)
-      nextra-theme-docs: 3.0.0-alpha.2(next@13.5.4)(nextra@3.0.0-alpha.2)(react-dom@18.2.0)(react@18.2.0)
+      nextra: 3.0.0-alpha.4(next@13.5.4)(react-dom@18.2.0)(react@18.2.0)
+      nextra-theme-docs: 3.0.0-alpha.4(next@13.5.4)(nextra@3.0.0-alpha.4)(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       react-paginate: 8.2.0(react@18.2.0)
@@ -1128,8 +1128,8 @@ packages:
       - supports-color
     dev: false
 
-  /@theguild/remark-npm2yarn@0.3.0-alpha-20231007232355-2b5ea30:
-    resolution: {integrity: sha512-vnqnwU6/aeMgeDWSZg+wk1Xdn+9KMfwQmvPfrHj9NwiMuEUgVhCvfFL/T9lAZgTIB+LPNonaXwl7vhdOaDu78Q==}
+  /@theguild/remark-npm2yarn@0.3.0:
+    resolution: {integrity: sha512-Fofw+9airYgjBd9G6PiHHCrptjyUybQ50JH9/5o9LCH54kggJ7stpCofzHjICB8L7VQbQ1Gwu23P/3CMVY1R4Q==}
     dependencies:
       npm-to-yarn: 2.1.0
       unist-util-visit: 5.0.0
@@ -6362,11 +6362,11 @@ packages:
       - babel-plugin-macros
     dev: false
 
-  /nextra-theme-docs@3.0.0-alpha.2(next@13.5.4)(nextra@3.0.0-alpha.2)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-33GuLeuZ0UVl70kULxd8G6mOqL4Vf2mzhNE+j9eCb8rzTs37IYyubKmScgUWSTB/mupcZYEwgmo52SUSTsfL3Q==}
+  /nextra-theme-docs@3.0.0-alpha.4(next@13.5.4)(nextra@3.0.0-alpha.4)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-W9vQ6uXB3e7vpHcUHR+wU0xXzCMUAdfmffezl/PwKaaQeyBPbBgg3apY/G0WFC68F6KP/jjkYlbTeojXl7zblw==}
     peerDependencies:
       next: '>=13'
-      nextra: 3.0.0-alpha.2
+      nextra: 3.0.0-alpha.4
       react: '>=16.13.1'
       react-dom: '>=16.13.1'
     dependencies:
@@ -6379,15 +6379,15 @@ packages:
       intersection-observer: 0.12.2
       next: 13.5.4(react-dom@18.2.0)(react@18.2.0)
       next-themes: 0.2.1(next@13.5.4)(react-dom@18.2.0)(react@18.2.0)
-      nextra: 3.0.0-alpha.2(next@13.5.4)(react-dom@18.2.0)(react@18.2.0)
+      nextra: 3.0.0-alpha.4(next@13.5.4)(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       scroll-into-view-if-needed: 3.1.0
       zod: 3.22.4
     dev: false
 
-  /nextra@3.0.0-alpha.2(next@13.5.4)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-QPAYAy8mU/b64iq0QhNN7mpsXHLWIubhHK92mKB6msteLCtfu5K0Zu1RPuF481v0xlNP87sRpg9VSc9HOvf14g==}
+  /nextra@3.0.0-alpha.4(next@13.5.4)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-ymjh0/R2NKidFaiplJ+Ic9sspUU8XDXZEwW9sVO1xBlpRsKfXfr82xlhT+oR0FOrGoeZ/Sd9j7ufQ9hNcIHdXg==}
     engines: {node: '>=18'}
     peerDependencies:
       next: '>=13'
@@ -6399,7 +6399,7 @@ packages:
       '@mdx-js/react': 2.3.0(react@18.2.0)
       '@napi-rs/simple-git': 0.1.9
       '@theguild/remark-mermaid': 0.0.5(react@18.2.0)
-      '@theguild/remark-npm2yarn': 0.3.0-alpha-20231007232355-2b5ea30
+      '@theguild/remark-npm2yarn': 0.3.0
       clsx: 2.0.0
       estree-util-to-js: 2.0.0
       estree-util-value-to-estree: 3.0.1
