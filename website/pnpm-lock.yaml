@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   '@theguild/components':
-    specifier: 6.0.0-alpha-20231010161621-6bd0171
-    version: 6.0.0-alpha-20231010161621-6bd0171(@algolia/client-search@4.19.1)(@types/react@18.2.25)(next@13.5.4)(react-dom@18.2.0)(react@18.2.0)(webpack@4.46.0)
+    specifier: 6.0.0
+    version: 6.0.0(@algolia/client-search@4.19.1)(@types/react@18.2.25)(next@13.5.4)(react-dom@18.2.0)(react@18.2.0)(webpack@4.46.0)
   next:
     specifier: 13.5.4
     version: 13.5.4(react-dom@18.2.0)(react@18.2.0)
@@ -1078,8 +1078,8 @@ packages:
       remove-markdown: 0.5.0
     dev: true
 
-  /@theguild/components@6.0.0-alpha-20231010161621-6bd0171(@algolia/client-search@4.19.1)(@types/react@18.2.25)(next@13.5.4)(react-dom@18.2.0)(react@18.2.0)(webpack@4.46.0):
-    resolution: {integrity: sha512-zBjOoqgq/3HFYsMfF/Dq5IiLFvefe4woyzXIyJAz9bjeZ2FaAC49xILGi9WZ6rdqk1ZRLIVE61QuZXQr4n8U7w==}
+  /@theguild/components@6.0.0(@algolia/client-search@4.19.1)(@types/react@18.2.25)(next@13.5.4)(react-dom@18.2.0)(react@18.2.0)(webpack@4.46.0):
+    resolution: {integrity: sha512-48kvsC1qR9rJytrbGiTJ7IKVKUUc6bMVNkFSYnlJ4c0GqVHKvD6edY5XmLdnOYbn0xUD68LO/lzwtkCO1XWr2A==}
     peerDependencies:
       next: ^12.3.1 || ^13.0.0
       react: ^18.2.0
