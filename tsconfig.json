@@ -14,9 +14,9 @@
     "noUnusedParameters": true,
     "resolveJsonModule": true,
     "paths": {
-      "graphql-config": ["./src/index.ts"]
-    }
+      "graphql-config": ["./src/index.ts"],
+    },
   },
   "exclude": [],
-  "include": ["src"]
+  "include": ["src"],
 }
