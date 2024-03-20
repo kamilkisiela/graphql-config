@@ -33,7 +33,6 @@
   },
   "type": "module",
   "scripts": {
-    "postinstall": "tsx scripts/patch-graphql.ts",
     "prepublishOnly": "pnpm run build",
     "clean": "rimraf dist",
     "prebuild": "pnpm run clean && pnpm run json-schema",
