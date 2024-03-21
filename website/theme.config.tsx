@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 export default defineConfig({
   description: 'One GraphQL configuration',
   docsRepositoryBase: 'https://github.com/kamilkisiela/graphql-config/tree/master/website', // base URL for the docs repository
-  logo: PRODUCTS.CONFIG.logo({ className: "w-8" }),
+  logo: PRODUCTS.CONFIG.logo({ className: 'w-8' }),
   main({ children }) {
     const { resolvedTheme } = useTheme();
     const { route } = useRouter();
