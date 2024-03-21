@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 /* eslint sort-keys: error */
-import { defineConfig, Giscus, useTheme } from '@theguild/components';
+import { defineConfig, Giscus, PRODUCTS, useTheme } from '@theguild/components';
 import { useRouter } from 'next/router';
 
 export default defineConfig({
@@ -28,5 +28,7 @@ export default defineConfig({
       </>
     );
   },
-  siteName: 'CONFIG',
+  websiteName: 'CONFIG',
+  description: PRODUCTS.CONFIG.title,
+  logo: PRODUCTS.CONFIG.logo,
 });
