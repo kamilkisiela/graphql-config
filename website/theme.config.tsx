@@ -30,5 +30,5 @@ export default defineConfig({
       </>
     );
   },
-  websiteName: 'CONFIG',
+  websiteName: 'GraphQL-Config',
 });
