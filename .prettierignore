@@ -2,6 +2,5 @@ dist/
 out/
 .next/
 .husky/_/
-algolia-lockfile.json
 .bob/
 pnpm-lock.yaml
