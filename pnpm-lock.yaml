@@ -19,7 +19,7 @@ dependencies:
     version: 9.0.4(graphql@16.8.1)
   '@graphql-tools/url-loader':
     specifier: ^8.0.0
-    version: 8.0.2(@types/node@18.19.31)(graphql@16.8.1)
+    version: 8.0.2(@types/node@18.19.32)(graphql@16.8.1)
   '@graphql-tools/utils':
     specifier: ^10.0.0
     version: 10.2.0(graphql@16.8.1)
@@ -47,8 +47,8 @@ devDependencies:
     specifier: 2.27.1
     version: 2.27.1
   '@types/node':
-    specifier: 18.19.31
-    version: 18.19.31
+    specifier: 18.19.32
+    version: 18.19.32
   '@typescript-eslint/eslint-plugin':
     specifier: 5.62.0
     version: 5.62.0(@typescript-eslint/parser@5.62.0)(eslint@8.57.0)(typescript@5.1.6)
@@ -93,7 +93,7 @@ devDependencies:
     version: 5.0.5
   ts-node:
     specifier: 10.9.2
-    version: 10.9.2(@types/node@18.19.31)(typescript@5.1.6)
+    version: 10.9.2(@types/node@18.19.32)(typescript@5.1.6)
   tsx:
     specifier: 3.12.7
     version: 3.12.7
@@ -664,7 +664,7 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@graphql-tools/executor-http@1.0.9(@types/node@18.19.31)(graphql@16.8.1):
+  /@graphql-tools/executor-http@1.0.9(@types/node@18.19.32)(graphql@16.8.1):
     resolution: {integrity: sha512-+NXaZd2MWbbrWHqU4EhXcrDbogeiCDmEbrAN+rMn4Nu2okDjn2MTFDbTIab87oEubQCH4Te1wDkWPKrzXup7+Q==}
     engines: {node: '>=16.0.0'}
     peerDependencies:
@@ -675,7 +675,7 @@ packages:
       '@whatwg-node/fetch': 0.9.17
       extract-files: 11.0.0
       graphql: 16.8.1
-      meros: 1.3.0(@types/node@18.19.31)
+      meros: 1.3.0(@types/node@18.19.32)
       tslib: 2.4.0
       value-or-promise: 1.0.12
     transitivePeerDependencies:
@@ -789,7 +789,7 @@ packages:
       value-or-promise: 1.0.12
     dev: false
 
-  /@graphql-tools/url-loader@8.0.2(@types/node@18.19.31)(graphql@16.8.1):
+  /@graphql-tools/url-loader@8.0.2(@types/node@18.19.32)(graphql@16.8.1):
     resolution: {integrity: sha512-1dKp2K8UuFn7DFo1qX5c1cyazQv2h2ICwA9esHblEqCYrgf69Nk8N7SODmsfWg94OEaI74IqMoM12t7eIGwFzQ==}
     engines: {node: '>=16.0.0'}
     peerDependencies:
@@ -798,7 +798,7 @@ packages:
       '@ardatan/sync-fetch': 0.0.1
       '@graphql-tools/delegate': 10.0.9(graphql@16.8.1)
       '@graphql-tools/executor-graphql-ws': 1.1.2(graphql@16.8.1)
-      '@graphql-tools/executor-http': 1.0.9(@types/node@18.19.31)(graphql@16.8.1)
+      '@graphql-tools/executor-http': 1.0.9(@types/node@18.19.32)(graphql@16.8.1)
       '@graphql-tools/executor-legacy-ws': 1.0.6(graphql@16.8.1)
       '@graphql-tools/utils': 10.2.0(graphql@16.8.1)
       '@graphql-tools/wrap': 10.0.5(graphql@16.8.1)
@@ -1009,8 +1009,8 @@ packages:
     resolution: {integrity: sha512-zpnXe4dEz6PrWz9u7dqyRoq9VxwCvoXRPy/ewhmMa1CgEyVmtL1NJPQ2MX+4pf97vetquVKkpiMx0MwI8pjNOw==}
     dev: true
 
-  /@types/node@18.19.31:
-    resolution: {integrity: sha512-ArgCD39YpyyrtFKIqMDvjz79jto5fcI/SVUs2HwB+f0dAzq68yqOdyaSivLiLugSziTpNXLQrVb7RZFmdZzbhA==}
+  /@types/node@18.19.32:
+    resolution: {integrity: sha512-2bkg93YBSDKk8DLmmHnmj/Rwr18TLx7/n+I23BigFwgexUJoMHZOd8X1OFxuF/W3NN0S2W2E5sVabI5CPinNvA==}
     dependencies:
       undici-types: 5.26.5
 
@@ -1025,7 +1025,7 @@ packages:
   /@types/ws@8.5.10:
     resolution: {integrity: sha512-vmQSUcfalpIq0R9q7uTo2lXs6eGIpt9wtnLdMv9LVpIjCA/+ufZRozlVoVelIYixx1ugCBKDhn89vnsEGOCx9A==}
     dependencies:
-      '@types/node': 18.19.31
+      '@types/node': 18.19.32
     dev: false
 
   /@typescript-eslint/eslint-plugin@5.62.0(@typescript-eslint/parser@5.62.0)(eslint@8.57.0)(typescript@5.1.6):
@@ -2892,7 +2892,7 @@ packages:
     resolution: {integrity: sha512-8q7VEgMJW4J8tcfVPy8g09NcQwZdbwFEqhe/WZkoIzjn/3TGDwtOCYtXGxA3O8tPzpczCCDgv+P2P5y00ZJOOg==}
     engines: {node: '>= 8'}
 
-  /meros@1.3.0(@types/node@18.19.31):
+  /meros@1.3.0(@types/node@18.19.32):
     resolution: {integrity: sha512-2BNGOimxEz5hmjUG2FwoxCt5HN7BXdaWyFqEwxPTrJzVdABtrL4TiHTcsWSFAxPQ/tOnEaQEJh3qWq71QRMY+w==}
     engines: {node: '>=13'}
     peerDependencies:
@@ -2901,7 +2901,7 @@ packages:
       '@types/node':
         optional: true
     dependencies:
-      '@types/node': 18.19.31
+      '@types/node': 18.19.32
     dev: false
 
   /micromatch@4.0.5:
@@ -3840,7 +3840,7 @@ packages:
       yn: 3.1.1
     dev: true
 
-  /ts-node@10.9.2(@types/node@18.19.31)(typescript@5.1.6):
+  /ts-node@10.9.2(@types/node@18.19.32)(typescript@5.1.6):
     resolution: {integrity: sha512-f0FFpIdcHgn8zcPSbf1dRevwt047YMnaiJM3u2w2RewrB+fob/zePZcrOyQoLMMO7aBIddLcQIEK5dYjkLnGrQ==}
     hasBin: true
     peerDependencies:
@@ -3859,7 +3859,7 @@ packages:
       '@tsconfig/node12': 1.0.11
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.4
-      '@types/node': 18.19.31
+      '@types/node': 18.19.32
       acorn: 8.9.0
       acorn-walk: 8.2.0
       arg: 4.1.3
@@ -4048,7 +4048,7 @@ packages:
     engines: {node: '>=12'}
     dev: false
 
-  /vite-node@0.33.0(@types/node@18.19.31):
+  /vite-node@0.33.0(@types/node@18.19.32):
     resolution: {integrity: sha512-19FpHYbwWWxDr73ruNahC+vtEdza52kA90Qb3La98yZ0xULqV8A5JLNPUff0f5zID4984tW7l3DH2przTJUZSw==}
     engines: {node: '>=v14.18.0'}
     hasBin: true
@@ -4058,7 +4058,7 @@ packages:
       mlly: 1.4.0
       pathe: 1.1.1
       picocolors: 1.0.0
-      vite: 4.3.8(@types/node@18.19.31)
+      vite: 4.3.8(@types/node@18.19.32)
     transitivePeerDependencies:
       - '@types/node'
       - less
@@ -4069,7 +4069,7 @@ packages:
       - terser
     dev: true
 
-  /vite@4.3.8(@types/node@18.19.31):
+  /vite@4.3.8(@types/node@18.19.32):
     resolution: {integrity: sha512-uYB8PwN7hbMrf4j1xzGDk/lqjsZvCDbt/JC5dyfxc19Pg8kRm14LinK/uq+HSLNswZEoKmweGdtpbnxRtrAXiQ==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
@@ -4094,7 +4094,7 @@ packages:
       terser:
         optional: true
     dependencies:
-      '@types/node': 18.19.31
+      '@types/node': 18.19.32
       esbuild: 0.17.19
       postcss: 8.4.23
       rollup: 3.23.0
@@ -4135,7 +4135,7 @@ packages:
     dependencies:
       '@types/chai': 4.3.5
       '@types/chai-subset': 1.3.3
-      '@types/node': 18.19.31
+      '@types/node': 18.19.32
       '@vitest/expect': 0.33.0
       '@vitest/runner': 0.33.0
       '@vitest/snapshot': 0.33.0
@@ -4154,8 +4154,8 @@ packages:
       strip-literal: 1.0.1
       tinybench: 2.5.0
       tinypool: 0.6.0
-      vite: 4.3.8(@types/node@18.19.31)
-      vite-node: 0.33.0(@types/node@18.19.31)
+      vite: 4.3.8(@types/node@18.19.32)
+      vite-node: 0.33.0(@types/node@18.19.32)
       why-is-node-running: 2.2.2
     transitivePeerDependencies:
       - less
