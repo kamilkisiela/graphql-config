@@ -33,7 +33,6 @@
   },
   "type": "module",
   "scripts": {
-    "postinstall": "tsx scripts/patch-graphql.ts",
     "prepublishOnly": "pnpm run build",
     "clean": "rimraf dist",
     "prebuild": "pnpm run clean && pnpm run json-schema",
@@ -92,7 +91,8 @@
     "tsx": "3.12.7",
     "typescript": "5.5.3",
     "typescript-json-schema": "0.64.0",
-    "vitest": "0.34.6"
+    "vitest": "2.0.5",
+    "vite-tsconfig-paths": "^4.3.2"
   },
   "repository": {
     "type": "git",

@@ -52,7 +52,7 @@
           "title": "include"
         },
         "schema": {
-          "$ref": "#/definitions/WithList<string|{[url:string]:{headers:{[name:string]:string;};};}>",
+          "$ref": "#/definitions/SchemaPointer",
           "title": "schema"
         }
       },
@@ -112,21 +112,7 @@
       "title": "IGraphQLProjects",
       "type": "object"
     },
-    "WithList<string>": {
-      "anyOf": [
-        {
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        {
-          "type": "string"
-        }
-      ],
-      "title": "WithList<string>"
-    },
-    "WithList<string|{[url:string]:{headers:{[name:string]:string;};};}>": {
+    "SchemaPointer": {
       "anyOf": [
         {
           "additionalProperties": {
@@ -174,7 +160,21 @@
           "type": "string"
         }
       ],
-      "title": "WithList<string|{[url:string]:{headers:{[name:string]:string;};};}>"
+      "title": "SchemaPointer"
+    },
+    "WithList<string>": {
+      "anyOf": [
+        {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        {
+          "type": "string"
+        }
+      ],
+      "title": "WithList<string>"
     }
   },
   "description": "Structure of GraphQL Config"
