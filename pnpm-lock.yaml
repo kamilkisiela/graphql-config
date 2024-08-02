@@ -89,8 +89,8 @@ devDependencies:
     specifier: 2.8.8
     version: 2.8.8
   rimraf:
-    specifier: 5.0.9
-    version: 5.0.9
+    specifier: 5.0.10
+    version: 5.0.10
   ts-node:
     specifier: 10.9.2
     version: 10.9.2(@types/node@20.14.14)(typescript@5.5.3)
@@ -3291,9 +3291,8 @@ packages:
       glob: 7.2.3
     dev: true
 
-  /rimraf@5.0.9:
-    resolution: {integrity: sha512-3i7b8OcswU6CpU8Ej89quJD4O98id7TtVM5U4Mybh84zQXdrFmDLouWBEEaD/QfO3gDDfH+AGFCGsR7kngzQnA==}
-    engines: {node: 14 >=14.20 || 16 >=16.20 || >=18}
+  /rimraf@5.0.10:
+    resolution: {integrity: sha512-l0OE8wL34P4nJH/H2ffoaniAokM2qSmrtXHmlpvYr5AVVX8msAyW0l8NVJFDxlSK4u3Uh/f41cQheDVdnYijwQ==}
     hasBin: true
     dependencies:
       glob: 10.3.12
