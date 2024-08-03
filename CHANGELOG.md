@@ -1,5 +1,17 @@
 # Change log
 
+## 5.1.0
+
+### Minor Changes
+
+- [#1459](https://github.com/kamilkisiela/graphql-config/pull/1459) [`5eca929`](https://github.com/kamilkisiela/graphql-config/commit/5eca92966fece546d39db39e647158a1081cee46) Thanks [@dimaMachina](https://github.com/dimaMachina)! - - fix loading esm js config
+
+  - add support of `*.mjs` configs
+
+### Patch Changes
+
+- [#1418](https://github.com/kamilkisiela/graphql-config/pull/1418) [`658f984`](https://github.com/kamilkisiela/graphql-config/commit/658f98427d620a9cb8ca6c18e415b75b087794b8) Thanks [@dimaMachina](https://github.com/dimaMachina)! - should not throw `pattern is too long` from minimatch dependency when SDL schema contain more than 65536 characters
+
 ## 5.0.3
 
 ### Patch Changes
