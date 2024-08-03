@@ -13,6 +13,7 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "resolveJsonModule": true,
+    "types": ["vitest/globals"],
     "paths": {
       "graphql-config": ["./src/index.ts"]
     }

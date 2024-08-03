@@ -191,7 +191,11 @@ export class GraphQLProjectConfig {
   }
 }
 
-// XXX: it works but uses nodejs - expose normalization of file and dir paths in config
+function isSDLSchemaLike(schema: string): boolean {
+  return schema.includes('\n');
+}
+
+// XXX: it works but uses Node.js - expose normalization of file and dir paths in config
 function match(filepath: string, dirpath: string, pointer?: Pointer): boolean {
   if (!pointer) {
     return false;
@@ -202,6 +206,10 @@ function match(filepath: string, dirpath: string, pointer?: Pointer): boolean {
   }
 
   if (typeof pointer === 'string') {
+    if (isSDLSchemaLike(pointer)) {
+      return false;
+    }
+
     const normalizedFilepath = normalize(isAbsolute(filepath) ? relative(dirpath, filepath) : filepath);
     return minimatch(normalizedFilepath, normalize(pointer), { dot: true });
   }

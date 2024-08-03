@@ -1,6 +1,5 @@
 import { DirectiveDefinitionNode, buildSchema, GraphQLSchema, Kind } from 'graphql';
 import { Loader, Source } from '@graphql-tools/utils';
-import { beforeAll, test, describe, expect, vi, Mock } from 'vitest';
 import { LoadersRegistry } from 'graphql-config';
 import { loadTypedefsSync, loadSchemaSync, loadSchema, LoadSchemaOptions } from '@graphql-tools/load';
 
