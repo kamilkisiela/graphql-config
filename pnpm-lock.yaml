@@ -74,8 +74,8 @@ devDependencies:
     specifier: 16.9.0
     version: 16.9.0
   husky:
-    specifier: 8.0.3
-    version: 8.0.3
+    specifier: 9.1.4
+    version: 9.1.4
   lint-staged:
     specifier: 13.3.0
     version: 13.3.0
@@ -86,8 +86,8 @@ devDependencies:
     specifier: 3.1.0
     version: 3.1.0
   prettier:
-    specifier: 2.8.8
-    version: 2.8.8
+    specifier: 3.3.3
+    version: 3.3.3
   rimraf:
     specifier: 5.0.10
     version: 5.0.10
@@ -2558,9 +2558,9 @@ packages:
     engines: {node: '>=16.17.0'}
     dev: true
 
-  /husky@8.0.3:
-    resolution: {integrity: sha512-+dQSyqPh4x1hlO1swXBiNb2HzTDN1I2IGLQx1GrBuiqFJfoMrnZWwVmatvSiO+Iz8fBUnf+lekwNo4c2LlXItg==}
-    engines: {node: '>=14'}
+  /husky@9.1.4:
+    resolution: {integrity: sha512-bho94YyReb4JV7LYWRWxZ/xr6TtOTt8cMfmQ39MQYJ7f/YE268s3GdghGwi+y4zAeqewE5zYLvuhV0M0ijsDEA==}
+    engines: {node: '>=18'}
     hasBin: true
     dev: true
 
@@ -3220,6 +3220,12 @@ packages:
   /prettier@2.8.8:
     resolution: {integrity: sha512-tdN8qQGvNjw4CHbY+XXk0JgCXn9QiF21a55rBe5LJAU+kDyC4WQn4+awm2Xfk2lQMk5fKup9XgzTZtGkjBdP9Q==}
     engines: {node: '>=10.13.0'}
+    hasBin: true
+    dev: true
+
+  /prettier@3.3.3:
+    resolution: {integrity: sha512-i2tDNA0O5IrMO757lfrdQZCc2jPNDVntV0m/+4whiDfWaTKfMNgR7Qz0NAeGz/nRqF4m5/6CLzbP4/liHt12Ew==}
+    engines: {node: '>=14'}
     hasBin: true
     dev: true
 
