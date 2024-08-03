@@ -1,6 +1,7 @@
 import { DirectiveDefinitionNode, buildSchema, GraphQLSchema, Kind } from 'graphql';
 import { Loader, Source } from '@graphql-tools/utils';
 import { LoadersRegistry } from 'graphql-config';
+import { Mock } from 'vitest';
 import { loadTypedefsSync, loadSchemaSync, loadSchema, LoadSchemaOptions } from '@graphql-tools/load';
 
 vi.mock('@graphql-tools/load', async () => {
