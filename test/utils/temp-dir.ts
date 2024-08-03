@@ -1,6 +1,6 @@
 import path from 'path';
 import { deleteSync } from 'del';
-import makeDir from 'make-dir';
+import { makeDirectorySync } from 'make-dir';
 import parentModule from 'parent-module';
 import os from 'os';
 import { Mock, SpyInstance } from 'vitest';
@@ -37,7 +37,7 @@ export class TempDir {
     this.dir = path.resolve(tempDir, 'cosmiconfig', `${relativeParent}-dir`);
 
     // create directory
-    makeDir.sync(this.dir);
+    makeDirectorySync(this.dir);
   }
 
   absolutePath(dir: string): string {
@@ -49,13 +49,13 @@ export class TempDir {
 
   createDir(dir: string): void {
     const dirname = this.absolutePath(dir);
-    makeDir.sync(dirname);
+    makeDirectorySync(dirname);
   }
 
   createFile(file: string, contents: string): void {
     const filePath = this.absolutePath(file);
     const fileDir = path.parse(filePath).dir;
-    makeDir.sync(fileDir);
+    makeDirectorySync(fileDir);
 
     fs.writeFileSync(filePath, `${contents}\n`);
   }
@@ -82,8 +82,8 @@ export class TempDir {
   clean(): string[] {
     const cleanPattern = normalizeDirectorySlash(this.absolutePath('**/*'));
     const removed = deleteSync(cleanPattern, {
-      dot: true,
       force: true,
+      dot: true,
     });
 
     return removed;
