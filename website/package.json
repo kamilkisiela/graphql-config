@@ -38,7 +38,7 @@
     "cross-env": "7.0.3",
     "eslint": "8.57.0",
     "eslint-config-next": "14.2.5",
-    "eslint-config-prettier": "9.0.0",
+    "eslint-config-prettier": "9.1.0",
     "typescript": "5.5.4"
   },
   "packageManager": "pnpm@8.6.6",
