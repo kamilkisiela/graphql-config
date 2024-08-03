@@ -13,6 +13,7 @@ module.exports = {
       extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended', 'prettier'],
       rules: {
         'no-console': 'error',
+        '@typescript-eslint/no-explicit-any': 'warn',
       },
     },
   ],
