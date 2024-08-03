@@ -1,9 +1,9 @@
-import path from 'path';
+import path from 'node:path';
 import { deleteSync } from 'del';
 import makeDir from 'make-dir';
 import parentModule from 'parent-module';
-import os from 'os';
-import { Mock, SpyInstance } from 'vitest';
+import os from 'node:os';
+import type { Mock, MockInstance } from 'vitest';
 import fs from 'node:fs';
 
 function normalizeDirectorySlash(pathname: string): string {
@@ -60,7 +60,7 @@ export class TempDir {
     fs.writeFileSync(filePath, `${contents}\n`);
   }
 
-  getSpyPathCalls(spy: Mock | SpyInstance): string[] {
+  getSpyPathCalls(spy: Mock | MockInstance): string[] {
     const calls = spy.mock.calls;
 
     const result = calls.map((call): string => {
