@@ -1,5 +1,3 @@
-import { describe } from 'vitest';
-
 type PromiseOf<T extends (...args: any[]) => any> = T extends (...args: any[]) => Promise<infer R> ? R : ReturnType<T>;
 
 export function runTests<
@@ -27,8 +25,8 @@ export function runTests<
       }, 'sync');
     });
     // async
-    describe(`async`, () => {
-      testRunner((...args) => executeAsync(...args) as any, 'async');
+    describe('async', () => {
+      testRunner(executeAsync as any, 'async');
     });
   };
 }

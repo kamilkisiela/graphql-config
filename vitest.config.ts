@@ -6,6 +6,7 @@ const CWD = process.cwd();
 
 export default defineConfig({
   test: {
+    globals: true,
     alias: {
       'graphql-config': path.join(CWD, 'src', 'index.ts'),
       // fixes Duplicate "graphql" modules cannot be used at the same time since different

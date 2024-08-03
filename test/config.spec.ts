@@ -2,8 +2,7 @@ import { buildSchema, buildASTSchema } from 'graphql';
 import path from 'path';
 import { TempDir } from './utils/temp-dir';
 import { runTests } from './utils/runner';
-import { loadConfig, loadConfigSync, ConfigNotFoundError } from 'graphql-config';
-import { beforeEach, beforeAll, test, describe, expect, afterAll } from 'vitest';
+import { loadConfig, loadConfigSync, ConfigNotFoundError, GraphQLConfig } from 'graphql-config';
 
 const temp = new TempDir();
 
@@ -276,5 +275,17 @@ runTests({ async: loadConfig, sync: loadConfigSync })((load, mode) => {
 
       expect(config.getDefault().schema).toEqual(schemaFilename);
     });
+  });
+});
+
+describe('GraphQLConfig', () => {
+  const MINIMATCH_MAX_LENGTH = 65_536;
+
+  // https://github.com/dimaMachina/graphql-eslint/issues/2046
+  it(`should not throw \`pattern is too long\` from minimatch dependency when SDL schema contain more than ${MINIMATCH_MAX_LENGTH} characters`, async () => {
+    const schema = Array.from({ length: 2_150 }, (_, i) => `type Query${i} { foo: String }`).join('\n');
+    const graphQLConfig = new GraphQLConfig({ config: { schema }, filepath: '' }, []);
+    expect(schema.length).toBeGreaterThan(MINIMATCH_MAX_LENGTH);
+    expect(() => graphQLConfig.getProjectForFile('foo')).not.toThrow();
   });
 });
