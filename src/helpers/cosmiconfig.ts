@@ -36,7 +36,6 @@ export function createCosmiConfig(moduleName: string, legacy: boolean) {
 
 export function createCosmiConfigSync(moduleName: string, legacy: boolean) {
   const options = prepareCosmiconfig(moduleName, legacy);
-
   return cosmiconfigSync(moduleName, options);
 }
 
@@ -53,15 +52,22 @@ const loadToml: Loader = (...args) => {
   return createCustomLoader(loadToml)(...args);
 };
 
-function prepareCosmiconfig(moduleName: string, legacy: boolean) {
-  const loadYaml = createCustomLoader(defaultLoaders['.yaml']);
+const loadYaml = createCustomLoader(defaultLoaders['.yaml']);
 
+function prepareCosmiconfig(
+  moduleName: string,
+  legacy: boolean,
+): {
+  searchPlaces: string[];
+  loaders: Record<string, Loader>;
+} {
   const searchPlaces = [
     '#.config.ts',
     '#.config.cts',
     '#.config.mts',
     '#.config.js',
     '#.config.cjs',
+    '#.config.mjs',
     '#.config.json',
     '#.config.yaml',
     '#.config.yml',
@@ -72,6 +78,7 @@ function prepareCosmiconfig(moduleName: string, legacy: boolean) {
     '.#rc.mts',
     '.#rc.js',
     '.#rc.cjs',
+    '.#rc.mjs',
     '.#rc.json',
     '.#rc.yml',
     '.#rc.yaml',
@@ -89,10 +96,11 @@ function prepareCosmiconfig(moduleName: string, legacy: boolean) {
     searchPlaces: searchPlaces.map((place) => place.replace('#', moduleName)),
     loaders: {
       '.ts': loadTypeScript,
-      '.mts': loadTypeScript,
       '.cts': loadTypeScript,
-      '.js': defaultLoaders['.js'],
-      '.json': createCustomLoader(defaultLoaders['.json']),
+      '.mts': loadTypeScript,
+      '.js': loadTypeScript,
+      '.mjs': loadTypeScript,
+      '.json': defaultLoaders['.json'],
       '.yaml': loadYaml,
       '.yml': loadYaml,
       '.toml': loadToml,
