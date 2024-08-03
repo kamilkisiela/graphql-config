@@ -1,5 +1,5 @@
 import path from 'path';
-import del from 'del';
+import { deleteSync } from 'del';
 import makeDir from 'make-dir';
 import parentModule from 'parent-module';
 import os from 'os';
@@ -81,7 +81,7 @@ export class TempDir {
 
   clean(): string[] {
     const cleanPattern = normalizeDirectorySlash(this.absolutePath('**/*'));
-    const removed = del.sync(cleanPattern, {
+    const removed = deleteSync(cleanPattern, {
       dot: true,
       force: true,
     });
@@ -90,7 +90,7 @@ export class TempDir {
   }
 
   deleteTempDir(): string[] {
-    const removed = del.sync(normalizeDirectorySlash(this.dir), {
+    const removed = deleteSync(normalizeDirectorySlash(this.dir), {
       force: true,
       dot: true,
     });
