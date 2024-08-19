@@ -210,7 +210,9 @@ function match(filepath: string, dirpath: string, pointer?: Pointer): boolean {
       return false;
     }
 
-    const normalizedFilepath = normalize(isAbsolute(filepath) ? relative(dirpath, filepath) : filepath).split('\\').join('/');
+    const normalizedFilepath = normalize(isAbsolute(filepath) ? relative(dirpath, filepath) : filepath)
+      .split('\\')
+      .join('/');
     return minimatch(normalizedFilepath, normalize(pointer).split('\\').join('/'), { dot: true });
   }
 
