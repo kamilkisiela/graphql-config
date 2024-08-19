@@ -18,6 +18,7 @@ vi.mock('@graphql-tools/load', async () => {
     }
   `);
 
+  // @ts-expect-error - we're adding a property here
   schema.isTheOne = true;
 
   const { OPERATION_KINDS } = await vi.importActual('@graphql-tools/load');
@@ -66,7 +67,9 @@ describe('middlewares', () => {
     const received = registry.loadSchemaSync('anything');
     const receivedAsync = await registry.loadSchema('anything');
 
+    // @ts-expect-error - we're adding a property here
     expect(received.isTheOne).toEqual(true);
+    // @ts-expect-error - we're adding a property here
     expect(receivedAsync.isTheOne).toEqual(true);
   });
 });

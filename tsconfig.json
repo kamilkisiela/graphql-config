@@ -17,7 +17,5 @@
     "paths": {
       "graphql-config": ["./src/index.ts"]
     }
-  },
-  "exclude": [],
-  "include": ["src"]
+  }
 }
