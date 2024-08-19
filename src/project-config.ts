@@ -1,7 +1,7 @@
 import { dirname, isAbsolute, relative, normalize } from 'path';
 import type { GraphQLSchema, DocumentNode } from 'graphql';
 import type { Source } from '@graphql-tools/utils';
-import { Minimatch } from 'minimatch';
+import { minimatch } from 'minimatch';
 import {
   LoadSchemaOptions as ToolsLoadSchemaOptions,
   LoadTypedefsOptions as ToolsLoadTypedefsOptions,
@@ -210,9 +210,8 @@ function match(filepath: string, dirpath: string, pointer?: Pointer): boolean {
       return false;
     }
 
-    const normalizedFilepath = normalize(isAbsolute(filepath) ? relative(dirpath, filepath) : filepath);
-    const minimatch = new Minimatch(normalize(pointer), { dot: true });
-    return minimatch.match(normalizedFilepath);
+    const normalizedFilepath = normalize(isAbsolute(filepath) ? relative(dirpath, filepath) : filepath).split('\\').join('/');
+    return minimatch(normalizedFilepath, normalize(pointer).split('\\').join('/'), { dot: true });
   }
 
   if (typeof pointer === 'object') {
