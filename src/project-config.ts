@@ -1,7 +1,7 @@
 import { dirname, isAbsolute, relative, normalize } from 'path';
 import type { GraphQLSchema, DocumentNode } from 'graphql';
 import type { Source } from '@graphql-tools/utils';
-import minimatch from 'minimatch';
+import { minimatch } from 'minimatch';
 import {
   LoadSchemaOptions as ToolsLoadSchemaOptions,
   LoadTypedefsOptions as ToolsLoadTypedefsOptions,
