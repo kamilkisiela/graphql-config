@@ -1,5 +1,11 @@
 # Change log
 
+## 5.1.1
+
+### Patch Changes
+
+- [#1481](https://github.com/kamilkisiela/graphql-config/pull/1481) [`5d00c94`](https://github.com/kamilkisiela/graphql-config/commit/5d00c94fafb220a9e101c192bffcce70dc194b75) Thanks [@renovate](https://github.com/apps/renovate)! - Update minimatch
+
 ## 5.1.0
 
 ### Minor Changes
