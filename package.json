@@ -65,7 +65,7 @@
     "@graphql-tools/utils": "^10.0.0",
     "cosmiconfig": "^9.0.0",
     "jiti": "^1.18.2",
-    "minimatch": "^10.0.0",
+    "minimatch": "^9.0.5",
     "string-env-interpolation": "^1.0.1",
     "tslib": "^2.4.0"
   },
