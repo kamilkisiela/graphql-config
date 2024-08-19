@@ -1,5 +1,11 @@
 # Change log
 
+## 5.1.2
+
+### Patch Changes
+
+- [#1489](https://github.com/kamilkisiela/graphql-config/pull/1489) [`9a89093`](https://github.com/kamilkisiela/graphql-config/commit/9a8909375f72c6040cd5441fb88bd86035159719) Thanks [@that1matt](https://github.com/that1matt)! - Change minimatch to version 9
+
 ## 5.1.1
 
 ### Patch Changes
