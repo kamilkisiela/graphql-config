@@ -1,4 +1,4 @@
-// eslint-disable-next-line @typescript-eslint/ban-types -- TODO: fix lint error
+// eslint-disable-next-line @typescript-eslint/no-unsafe-function-type -- TODO: fix lint error
 function ExtendableBuiltin<T extends Function>(cls: T): T {
   function ExtendableBuiltin(this: any, ...args) {
     cls.apply(this, args);

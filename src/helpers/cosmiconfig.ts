@@ -47,7 +47,7 @@ const loadTypeScript: Loader = (filepath) => {
 };
 
 const loadToml: Loader = (...args) => {
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
   const { loadToml } = require('cosmiconfig-toml-loader');
   return createCustomLoader(loadToml)(...args);
 };
