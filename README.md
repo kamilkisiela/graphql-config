@@ -2,6 +2,7 @@
 
 <!-- Uncomment when we remove GraphQL Conf banner -->
 <!-- ![GraphQL Config](https://i.imgur.com/hw5tXw2.gif 'GraphQL Config') -->
+
 [![npm version](https://badge.fury.io/js/graphql-config.svg)](https://npmjs.com/package/graphql-config)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 [![renovate-app badge](https://img.shields.io/badge/renovate-app-blue.svg)](https://renovateapp.com/)
