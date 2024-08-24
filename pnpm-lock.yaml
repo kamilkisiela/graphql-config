@@ -37,7 +37,7 @@ dependencies:
     version: 1.0.1
   tslib:
     specifier: ^2.4.0
-    version: 2.6.3
+    version: 2.7.0
 
 devDependencies:
   '@changesets/changelog-github':
@@ -868,7 +868,7 @@ packages:
       '@graphql-tools/utils': 10.5.4(graphql@16.9.0)
       dataloader: 2.2.2
       graphql: 16.9.0
-      tslib: 2.6.3
+      tslib: 2.7.0
       value-or-promise: 1.0.12
     dev: false
 
@@ -884,7 +884,7 @@ packages:
       '@graphql-tools/utils': 10.5.4(graphql@16.9.0)
       dataloader: 2.2.2
       graphql: 16.9.0
-      tslib: 2.6.3
+      tslib: 2.7.0
     dev: false
 
   /@graphql-tools/executor-graphql-ws@1.1.2(graphql@16.9.0):
@@ -898,7 +898,7 @@ packages:
       graphql: 16.9.0
       graphql-ws: 5.16.0(graphql@16.9.0)
       isomorphic-ws: 5.0.0(ws@8.18.0)
-      tslib: 2.6.3
+      tslib: 2.7.0
       ws: 8.18.0
     transitivePeerDependencies:
       - bufferutil
@@ -917,7 +917,7 @@ packages:
       extract-files: 11.0.0
       graphql: 16.9.0
       meros: 1.3.0(@types/node@20.16.1)
-      tslib: 2.6.3
+      tslib: 2.7.0
       value-or-promise: 1.0.12
     transitivePeerDependencies:
       - '@types/node'
@@ -933,7 +933,7 @@ packages:
       '@types/ws': 8.5.10
       graphql: 16.9.0
       isomorphic-ws: 5.0.0(ws@8.18.0)
-      tslib: 2.6.3
+      tslib: 2.7.0
       ws: 8.18.0
     transitivePeerDependencies:
       - bufferutil
@@ -950,7 +950,7 @@ packages:
       '@graphql-typed-document-node/core': 3.2.0(graphql@16.9.0)
       '@repeaterjs/repeater': 3.0.5
       graphql: 16.9.0
-      tslib: 2.6.3
+      tslib: 2.7.0
       value-or-promise: 1.0.12
     dev: false
 
@@ -964,7 +964,7 @@ packages:
       '@graphql-tools/utils': 10.5.4(graphql@16.9.0)
       globby: 11.1.0
       graphql: 16.9.0
-      tslib: 2.6.3
+      tslib: 2.7.0
       unixify: 1.0.0
     dev: false
 
@@ -977,7 +977,7 @@ packages:
       '@graphql-tools/utils': 10.5.4(graphql@16.9.0)
       graphql: 16.9.0
       resolve-from: 5.0.0
-      tslib: 2.6.3
+      tslib: 2.7.0
     dev: false
 
   /@graphql-tools/json-file-loader@8.0.1(graphql@16.9.0):
@@ -989,7 +989,7 @@ packages:
       '@graphql-tools/utils': 10.5.4(graphql@16.9.0)
       globby: 11.1.0
       graphql: 16.9.0
-      tslib: 2.6.3
+      tslib: 2.7.0
       unixify: 1.0.0
     dev: false
 
@@ -1003,7 +1003,7 @@ packages:
       '@graphql-tools/utils': 10.5.4(graphql@16.9.0)
       graphql: 16.9.0
       p-limit: 3.1.0
-      tslib: 2.6.3
+      tslib: 2.7.0
     dev: false
 
   /@graphql-tools/merge@9.0.6(graphql@16.9.0):
@@ -1014,7 +1014,7 @@ packages:
     dependencies:
       '@graphql-tools/utils': 10.5.4(graphql@16.9.0)
       graphql: 16.9.0
-      tslib: 2.6.3
+      tslib: 2.7.0
     dev: false
 
   /@graphql-tools/schema@10.0.3(graphql@16.9.0):
@@ -1026,7 +1026,7 @@ packages:
       '@graphql-tools/merge': 9.0.6(graphql@16.9.0)
       '@graphql-tools/utils': 10.5.4(graphql@16.9.0)
       graphql: 16.9.0
-      tslib: 2.6.3
+      tslib: 2.7.0
       value-or-promise: 1.0.12
     dev: false
 
@@ -1047,7 +1047,7 @@ packages:
       '@whatwg-node/fetch': 0.9.17
       graphql: 16.9.0
       isomorphic-ws: 5.0.0(ws@8.18.0)
-      tslib: 2.6.3
+      tslib: 2.7.0
       value-or-promise: 1.0.12
       ws: 8.18.0
     transitivePeerDependencies:
@@ -1067,7 +1067,7 @@ packages:
       cross-inspect: 1.0.1
       dset: 3.1.3
       graphql: 16.9.0
-      tslib: 2.6.3
+      tslib: 2.7.0
     dev: false
 
   /@graphql-tools/wrap@10.0.5(graphql@16.9.0):
@@ -1080,7 +1080,7 @@ packages:
       '@graphql-tools/schema': 10.0.3(graphql@16.9.0)
       '@graphql-tools/utils': 10.5.4(graphql@16.9.0)
       graphql: 16.9.0
-      tslib: 2.6.3
+      tslib: 2.7.0
       value-or-promise: 1.0.12
     dev: false
 
@@ -1581,7 +1581,7 @@ packages:
       '@whatwg-node/events': 0.1.1
       busboy: 1.6.0
       fast-querystring: 1.1.2
-      tslib: 2.6.3
+      tslib: 2.7.0
     dev: false
 
   /acorn-jsx@5.3.2(acorn@8.12.1):
@@ -1713,7 +1713,7 @@ packages:
       lodash.get: 4.4.2
       p-limit: 4.0.0
       resolve.exports: 2.0.2
-      tslib: 2.6.3
+      tslib: 2.7.0
       typescript: 5.5.4
       yargs: 17.7.2
       zod: 3.21.4
@@ -1901,7 +1901,7 @@ packages:
     resolution: {integrity: sha512-Pcw1JTvZLSJH83iiGWt6fRcT+BjZlCDRVwYLbUcHzv/CRpB7r0MlSrGbIyQvVSNyGnbt7G4AXuyCiDR3POvZ1A==}
     engines: {node: '>=16.0.0'}
     dependencies:
-      tslib: 2.6.3
+      tslib: 2.7.0
     dev: false
 
   /cross-spawn@5.1.0:
@@ -3659,8 +3659,8 @@ packages:
       typescript: 5.5.4
     dev: true
 
-  /tslib@2.6.3:
-    resolution: {integrity: sha512-xNvxJEOUiWPGhUuUdQgAJPKOOJfGnIyKySOc09XkKsgdUV/3E2zvwZYdejjmRgPCgcym1juLH3226yA7sEFJKQ==}
+  /tslib@2.7.0:
+    resolution: {integrity: sha512-gLXCKdN1/j47AiHiOkJN69hJmcbGTHI0ImLmbYLHykhgeN0jVGola9yVjFgzCUklsZQMW55o+dW7IXv3RCXDzA==}
 
   /tsx@4.17.0:
     resolution: {integrity: sha512-eN4mnDA5UMKDt4YZixo9tBioibaMBpoxBkD+rIPAjVmYERSG0/dWEY1CEFuV89CgASlKL499q8AhmkMnnjtOJg==}
