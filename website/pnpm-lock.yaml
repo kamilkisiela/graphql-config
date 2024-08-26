@@ -2951,7 +2951,7 @@ packages:
       debug: 4.3.6
       enhanced-resolve: 5.17.1
       eslint: 9.9.1
-      eslint-module-utils: 2.8.1(@typescript-eslint/parser@7.2.0)(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1)(eslint@9.9.1)
+      eslint-module-utils: 2.8.2(@typescript-eslint/parser@7.2.0)(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1)(eslint@9.9.1)
       eslint-plugin-import: 2.29.1(@typescript-eslint/parser@8.2.0)(eslint@9.9.1)
       fast-glob: 3.3.2
       get-tsconfig: 4.7.6
@@ -2964,8 +2964,8 @@ packages:
       - supports-color
     dev: true
 
-  /eslint-module-utils@2.8.1(@typescript-eslint/parser@7.2.0)(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1)(eslint@9.9.1):
-    resolution: {integrity: sha512-rXDXR3h7cs7dy9RNpUlQf80nX31XWJEyGq1tRMo+6GsO5VmTe4UTwtmonAD4ZkAsrfMVDA2wlGJ3790Ys+D49Q==}
+  /eslint-module-utils@2.8.2(@typescript-eslint/parser@7.2.0)(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1)(eslint@9.9.1):
+    resolution: {integrity: sha512-3XnC5fDyc8M4J2E8pt8pmSVRX2M+5yWMCfI/kDZwauQeFgzQOuhcRBFKjTeJagqgk4sFKxe1mvNVnaWwImx/Tg==}
     engines: {node: '>=4'}
     peerDependencies:
       '@typescript-eslint/parser': '*'
@@ -2994,8 +2994,8 @@ packages:
       - supports-color
     dev: true
 
-  /eslint-module-utils@2.8.1(@typescript-eslint/parser@8.2.0)(eslint-import-resolver-node@0.3.9)(eslint@9.9.1):
-    resolution: {integrity: sha512-rXDXR3h7cs7dy9RNpUlQf80nX31XWJEyGq1tRMo+6GsO5VmTe4UTwtmonAD4ZkAsrfMVDA2wlGJ3790Ys+D49Q==}
+  /eslint-module-utils@2.8.2(@typescript-eslint/parser@8.2.0)(eslint-import-resolver-node@0.3.9)(eslint@9.9.1):
+    resolution: {integrity: sha512-3XnC5fDyc8M4J2E8pt8pmSVRX2M+5yWMCfI/kDZwauQeFgzQOuhcRBFKjTeJagqgk4sFKxe1mvNVnaWwImx/Tg==}
     engines: {node: '>=4'}
     peerDependencies:
       '@typescript-eslint/parser': '*'
@@ -3042,7 +3042,7 @@ packages:
       doctrine: 2.1.0
       eslint: 9.9.1
       eslint-import-resolver-node: 0.3.9
-      eslint-module-utils: 2.8.1(@typescript-eslint/parser@8.2.0)(eslint-import-resolver-node@0.3.9)(eslint@9.9.1)
+      eslint-module-utils: 2.8.2(@typescript-eslint/parser@8.2.0)(eslint-import-resolver-node@0.3.9)(eslint@9.9.1)
       hasown: 2.0.2
       is-core-module: 2.15.1
       is-glob: 4.0.3
