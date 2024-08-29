@@ -16,7 +16,7 @@ dependencies:
     version: 8.0.2(graphql@16.9.0)
   '@graphql-tools/merge':
     specifier: ^9.0.0
-    version: 9.0.6(graphql@16.9.0)
+    version: 9.0.7(graphql@16.9.0)
   '@graphql-tools/url-loader':
     specifier: ^8.0.0
     version: 8.0.2(@types/node@20.16.2)(graphql@16.9.0)
@@ -1002,8 +1002,8 @@ packages:
       tslib: 2.7.0
     dev: false
 
-  /@graphql-tools/merge@9.0.6(graphql@16.9.0):
-    resolution: {integrity: sha512-TmkzFTFVieHnqu9mPTF6RxAQltaprpDQnM5HMTPSyMLXnJGMTvdWejV0yORKj7DW1YSi791/sUnKf8HytepBFQ==}
+  /@graphql-tools/merge@9.0.7(graphql@16.9.0):
+    resolution: {integrity: sha512-lbTrIuXIbUSmSumHkPRY1QX0Z8JEtmRhnIrkH7vkfeEmf0kNn/nCWvJwqokm5U7L+a+DA1wlRM4slIlbfXjJBA==}
     engines: {node: '>=16.0.0'}
     peerDependencies:
       graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
@@ -1019,7 +1019,7 @@ packages:
     peerDependencies:
       graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
     dependencies:
-      '@graphql-tools/merge': 9.0.6(graphql@16.9.0)
+      '@graphql-tools/merge': 9.0.7(graphql@16.9.0)
       '@graphql-tools/utils': 10.5.4(graphql@16.9.0)
       graphql: 16.9.0
       tslib: 2.7.0
