@@ -7,7 +7,7 @@ settings:
 dependencies:
   '@theguild/components':
     specifier: ^6.5.3
-    version: 6.6.4(@types/react@18.3.5)(next@14.2.7)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.4)(webpack@4.47.0)
+    version: 6.6.5(@types/react@18.3.5)(next@14.2.7)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.4)(webpack@4.47.0)
   next:
     specifier: ^14.1.4
     version: 14.2.7(react-dom@18.3.1)(react@18.3.1)
@@ -144,7 +144,7 @@ packages:
       react: ^16 || ^17 || ^18
       react-dom: ^16 || ^17 || ^18
     dependencies:
-      '@tanstack/react-virtual': 3.10.4(react-dom@18.3.1)(react@18.3.1)
+      '@tanstack/react-virtual': 3.10.6(react-dom@18.3.1)(react@18.3.1)
       client-only: 0.0.1
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
@@ -237,7 +237,7 @@ packages:
       unist-util-position-from-estree: 2.0.0
       unist-util-stringify-position: 4.0.0
       unist-util-visit: 5.0.0
-      vfile: 6.0.2
+      vfile: 6.0.3
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -253,8 +253,8 @@ packages:
       react: 18.3.1
     dev: false
 
-  /@napi-rs/simple-git-android-arm-eabi@0.1.18:
-    resolution: {integrity: sha512-MK3wpgV3wdBDHlv9+etcp+z+15YwVEIZUslkQAvmzQkXvGsqX4DNqtYrz2edZdrG7kBRkUXXZ9l5+33Iox5oSQ==}
+  /@napi-rs/simple-git-android-arm-eabi@0.1.19:
+    resolution: {integrity: sha512-XryEH/hadZ4Duk/HS/HC/cA1j0RHmqUGey3MsCf65ZS0VrWMqChXM/xlTPWuY5jfCc/rPubHaqI7DZlbexnX/g==}
     engines: {node: '>= 10'}
     cpu: [arm]
     os: [android]
@@ -262,8 +262,8 @@ packages:
     dev: false
     optional: true
 
-  /@napi-rs/simple-git-android-arm64@0.1.18:
-    resolution: {integrity: sha512-Yng4mUMQPXCnL8Jt+zdX0fda4aiSniDcuUHLfiNm/avvZ8JgM7zq4nG+sUAol5oskahaeRS0GeXHP44A28m+Qg==}
+  /@napi-rs/simple-git-android-arm64@0.1.19:
+    resolution: {integrity: sha512-ZQ0cPvY6nV9p7zrR9ZPo7hQBkDAcY/CHj3BjYNhykeUCiSNCrhvwX+WEeg5on8M1j4d5jcI/cwVG2FslfiByUg==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [android]
@@ -271,8 +271,8 @@ packages:
     dev: false
     optional: true
 
-  /@napi-rs/simple-git-darwin-arm64@0.1.18:
-    resolution: {integrity: sha512-pLeOUm8MSrWqhkuCkAuEp6bR7fKjaXnwFDLjaDzy4RcwdsRUNy/LykyP2Ah07OVg+Dl9moj11ViSn0VhM1hI1w==}
+  /@napi-rs/simple-git-darwin-arm64@0.1.19:
+    resolution: {integrity: sha512-viZB5TYgjA1vH+QluhxZo0WKro3xBA+1xSzYx8mcxUMO5gnAoUMwXn0ZO/6Zy6pai+aGae+cj6XihGnrBRu3Pg==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [darwin]
@@ -280,8 +280,8 @@ packages:
     dev: false
     optional: true
 
-  /@napi-rs/simple-git-darwin-x64@0.1.18:
-    resolution: {integrity: sha512-0Vvqo+waHIXIEu0KGUaTFr9pas1P0u3zmjBY/gdexdQfpENIIlPOw9FczwgJEAfe5vWWnq1xzfJkOUB+eJBhIA==}
+  /@napi-rs/simple-git-darwin-x64@0.1.19:
+    resolution: {integrity: sha512-6dNkzSNUV5X9rsVYQbpZLyJu4Gtkl2vNJ3abBXHX/Etk0ILG5ZasO3ncznIANZQpqcbn/QPHr49J2QYAXGoKJA==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [darwin]
@@ -289,8 +289,8 @@ packages:
     dev: false
     optional: true
 
-  /@napi-rs/simple-git-freebsd-x64@0.1.18:
-    resolution: {integrity: sha512-uJm+w3d37q+s57Gwp0cRN1GqRIkLCfWI+NpUauXqJZr67u9Ou/oeWbVN3bmupjZ4zI+m5NpAEFPCvAeD8p7IUQ==}
+  /@napi-rs/simple-git-freebsd-x64@0.1.19:
+    resolution: {integrity: sha512-sB9krVIchzd20FjI2ZZ8FDsTSsXLBdnwJ6CpeVyrhXHnoszfcqxt49ocZHujAS9lMpXq7i2Nv1EXJmCy4KdhwA==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [freebsd]
@@ -298,8 +298,8 @@ packages:
     dev: false
     optional: true
 
-  /@napi-rs/simple-git-linux-arm-gnueabihf@0.1.18:
-    resolution: {integrity: sha512-8bGYkkZ/8BUC0Q1XeVfb5YqbSEhRLMqQZ3zm+w9kD8mSxbxjqaYdydEH6SnV+e/UrbCLzc5khVxhH5FFRZimPQ==}
+  /@napi-rs/simple-git-linux-arm-gnueabihf@0.1.19:
+    resolution: {integrity: sha512-6HPn09lr9N1n5/XKfP8Np53g4fEXVxOFqNkS6rTH3Rm1lZHdazTRH62RggXLTguZwjcE+MvOLvoTIoR5kAS8+g==}
     engines: {node: '>= 10'}
     cpu: [arm]
     os: [linux]
@@ -307,8 +307,8 @@ packages:
     dev: false
     optional: true
 
-  /@napi-rs/simple-git-linux-arm64-gnu@0.1.18:
-    resolution: {integrity: sha512-I4qZ3dNm/zaO0FYiamMFD5uBtu6Pp+yR6OADVX/2hJrWaZREFcWRD0losEQK8CbA1e+kW12IHXzq+uX+2prHGA==}
+  /@napi-rs/simple-git-linux-arm64-gnu@0.1.19:
+    resolution: {integrity: sha512-G0gISckt4cVDp3oh5Z6PV3GHJrJO6Z8bIS+9xA7vTtKdqB1i5y0n3cSFLlzQciLzhr+CajFD27doW4lEyErQ/Q==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [linux]
@@ -316,8 +316,8 @@ packages:
     dev: false
     optional: true
 
-  /@napi-rs/simple-git-linux-arm64-musl@0.1.18:
-    resolution: {integrity: sha512-wFANGmM7J3ZPMenI0sTtGKOIMampmDYUF1d0AZNA0bpQGY2/czToUA5arJN3Afg3hdM6l8VXMTvM2zyWzkPyHg==}
+  /@napi-rs/simple-git-linux-arm64-musl@0.1.19:
+    resolution: {integrity: sha512-OwTRF+H4IZYxmDFRi1IrLMfqbdIpvHeYbJl2X94NVsLVOY+3NUHvEzL3fYaVx5urBaMnIK0DD3wZLbcueWvxbA==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [linux]
@@ -325,8 +325,8 @@ packages:
     dev: false
     optional: true
 
-  /@napi-rs/simple-git-linux-powerpc64le-gnu@0.1.18:
-    resolution: {integrity: sha512-fODhJEUN6qF/0oua6pyd/MHumE4FNrEy8wxDZDqc48GHeLRC+NqQabNUey7g5JeqWCpX+b4CySywOvb6NKvYCA==}
+  /@napi-rs/simple-git-linux-powerpc64le-gnu@0.1.19:
+    resolution: {integrity: sha512-p7zuNNVyzpRvkCt2RIGv9FX/WPcPbZ6/FRUgUTZkA2WU33mrbvNqSi4AOqCCl6mBvEd+EOw5NU4lS9ORRJvAEg==}
     engines: {node: '>= 10'}
     cpu: [powerpc64le]
     os: [linux]
@@ -334,8 +334,8 @@ packages:
     dev: false
     optional: true
 
-  /@napi-rs/simple-git-linux-s390x-gnu@0.1.18:
-    resolution: {integrity: sha512-fYBbSpx1jeK1lj+o6ovQrZy0ac9BdtJ2mqDAsOXk/Z2N5iFVceAzlW7OmkqHgLHYhOpDTw3b205ZhB7OYMzlPA==}
+  /@napi-rs/simple-git-linux-s390x-gnu@0.1.19:
+    resolution: {integrity: sha512-6N2vwJUPLiak8GLrS0a3is0gSb0UwI2CHOOqtvQxPmv+JVI8kn3vKiUscsktdDb0wGEPeZ8PvZs0y8UWix7K4g==}
     engines: {node: '>= 10'}
     cpu: [s390x]
     os: [linux]
@@ -343,8 +343,8 @@ packages:
     dev: false
     optional: true
 
-  /@napi-rs/simple-git-linux-x64-gnu@0.1.18:
-    resolution: {integrity: sha512-jpaYDWl6bOWijH+k5Cen/YB/Q1tix9PABv4DRFcAHFI0nLGZmjXxZOulO1XyuUtUxYNasQjFx4T1sN5rMGng8A==}
+  /@napi-rs/simple-git-linux-x64-gnu@0.1.19:
+    resolution: {integrity: sha512-61YfeO1J13WK7MalLgP3QlV6of2rWnVw1aqxWkAgy/lGxoOFSJ4Wid6ANVCEZk4tJpPX/XNeneqkUz5xpeb2Cw==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [linux]
@@ -352,8 +352,8 @@ packages:
     dev: false
     optional: true
 
-  /@napi-rs/simple-git-linux-x64-musl@0.1.18:
-    resolution: {integrity: sha512-MDzBCBWzYshfTZ4TNiYkPy6ob8mNpJSVPIXJ7w6pZhirnVjrbnFlsUjyij6/oqqXPna7tEZreiJgiZRADYWiDw==}
+  /@napi-rs/simple-git-linux-x64-musl@0.1.19:
+    resolution: {integrity: sha512-cCTWNpMJnN3PrUBItWcs3dQKCydsIasbrS3laMzq8k7OzF93Zrp2LWDTPlLCO9brbBVpBzy2Qk5Xg9uAfe/Ukw==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [linux]
@@ -361,8 +361,8 @@ packages:
     dev: false
     optional: true
 
-  /@napi-rs/simple-git-win32-arm64-msvc@0.1.18:
-    resolution: {integrity: sha512-crmrLsBVVr6yZXVtMIn1dTKMm9L9nb7EzIpHjwSt1y9SJ+5m/hjEF9Ytr239EDiW9W4r14T/tqRXO01bbeLDuA==}
+  /@napi-rs/simple-git-win32-arm64-msvc@0.1.19:
+    resolution: {integrity: sha512-sWavb1BjeLKKBA+PbTsRSSzVNfb7V/dOpaJvkgR5d2kWFn/AHmCZHSSj/3nyZdYf0BdDC+DIvqk3daAEZ6QMVw==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [win32]
@@ -370,8 +370,8 @@ packages:
     dev: false
     optional: true
 
-  /@napi-rs/simple-git-win32-x64-msvc@0.1.18:
-    resolution: {integrity: sha512-AAOe1eSDUsw3bppVXFCD6vFlB+LLmHQh5Vk8xRPh7JY39uX+3ULinFzVVr7R6OYOf5xbr1X551mI+DuLOz/hFA==}
+  /@napi-rs/simple-git-win32-x64-msvc@0.1.19:
+    resolution: {integrity: sha512-FmNuPoK4+qwaSCkp8lm3sJlrxk374enW+zCE5ZksXlZzj/9BDJAULJb5QUJ7o9Y8A/G+d8LkdQLPBE2Jaxe5XA==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [win32]
@@ -379,28 +379,28 @@ packages:
     dev: false
     optional: true
 
-  /@napi-rs/simple-git@0.1.18:
-    resolution: {integrity: sha512-8IwzeM2ApCMV986mTDUhKiiVYIcJ/r/1kenj0dnt8YYaHSoCe7tIA8j7WT70nawiQQNgaWB+SNqpAR+jN526fw==}
+  /@napi-rs/simple-git@0.1.19:
+    resolution: {integrity: sha512-jMxvwzkKzd3cXo2EB9GM2ic0eYo2rP/BS6gJt6HnWbsDO1O8GSD4k7o2Cpr2YERtMpGF/MGcDfsfj2EbQPtrXw==}
     engines: {node: '>= 10'}
     optionalDependencies:
-      '@napi-rs/simple-git-android-arm-eabi': 0.1.18
-      '@napi-rs/simple-git-android-arm64': 0.1.18
-      '@napi-rs/simple-git-darwin-arm64': 0.1.18
-      '@napi-rs/simple-git-darwin-x64': 0.1.18
-      '@napi-rs/simple-git-freebsd-x64': 0.1.18
-      '@napi-rs/simple-git-linux-arm-gnueabihf': 0.1.18
-      '@napi-rs/simple-git-linux-arm64-gnu': 0.1.18
-      '@napi-rs/simple-git-linux-arm64-musl': 0.1.18
-      '@napi-rs/simple-git-linux-powerpc64le-gnu': 0.1.18
-      '@napi-rs/simple-git-linux-s390x-gnu': 0.1.18
-      '@napi-rs/simple-git-linux-x64-gnu': 0.1.18
-      '@napi-rs/simple-git-linux-x64-musl': 0.1.18
-      '@napi-rs/simple-git-win32-arm64-msvc': 0.1.18
-      '@napi-rs/simple-git-win32-x64-msvc': 0.1.18
+      '@napi-rs/simple-git-android-arm-eabi': 0.1.19
+      '@napi-rs/simple-git-android-arm64': 0.1.19
+      '@napi-rs/simple-git-darwin-arm64': 0.1.19
+      '@napi-rs/simple-git-darwin-x64': 0.1.19
+      '@napi-rs/simple-git-freebsd-x64': 0.1.19
+      '@napi-rs/simple-git-linux-arm-gnueabihf': 0.1.19
+      '@napi-rs/simple-git-linux-arm64-gnu': 0.1.19
+      '@napi-rs/simple-git-linux-arm64-musl': 0.1.19
+      '@napi-rs/simple-git-linux-powerpc64le-gnu': 0.1.19
+      '@napi-rs/simple-git-linux-s390x-gnu': 0.1.19
+      '@napi-rs/simple-git-linux-x64-gnu': 0.1.19
+      '@napi-rs/simple-git-linux-x64-musl': 0.1.19
+      '@napi-rs/simple-git-win32-arm64-msvc': 0.1.19
+      '@napi-rs/simple-git-win32-x64-msvc': 0.1.19
     dev: false
 
-  /@next/bundle-analyzer@14.2.5:
-    resolution: {integrity: sha512-BtBbI8VUnB7s4m9ut6CkeJ8Hyx+aq+86mbH+uAld7ZGG0/eH4+5hcPnkHKsQM/yj74iClazS0fninI8yZbIZWA==}
+  /@next/bundle-analyzer@14.2.7:
+    resolution: {integrity: sha512-Zz55BLjoNKiUjr8PJIMTXFQnbUEpk8qkXP5nmEcXvOorbruQOIdmkRa3sahlJZPWTjsZNpxwImhZf2yFMVMWeg==}
     dependencies:
       webpack-bundle-analyzer: 4.10.1
     transitivePeerDependencies:
@@ -540,16 +540,16 @@ packages:
     resolution: {integrity: sha512-WJgX9nzTqknM393q1QJDJmoW28kUfEnybeTfVNcNAPnIx210RXm2DiXiHzfNPJNIUUb1tJnz/l4QGtJ30PgWmA==}
     dev: true
 
-  /@shikijs/core@1.14.1:
-    resolution: {integrity: sha512-KyHIIpKNaT20FtFPFjCQB5WVSTpLR/n+jQXhWHWVUMm9MaOaG9BGOG0MSyt7yA4+Lm+4c9rTc03tt3nYzeYSfw==}
+  /@shikijs/core@1.15.2:
+    resolution: {integrity: sha512-hi6XZuwHYn6bU4wtXZxST8ynM55aiU2+rVU9aPIrSxqKmEKl4d65puwGsggwcZWTET+7zGXKe7AUj46iQ8Aq8w==}
     dependencies:
       '@types/hast': 3.0.4
     dev: false
 
-  /@shikijs/twoslash@1.14.1(typescript@5.5.4):
-    resolution: {integrity: sha512-b0krVIqVCpdh9Gji+gTSJp0n2KyepPmnjKEDs+dUb765MUcyfN9qK/vRr7fA/YdAJxab8IDpz1GbLl0GuzAyFQ==}
+  /@shikijs/twoslash@1.15.2(typescript@5.5.4):
+    resolution: {integrity: sha512-xGMsTd5QYL1cP7bjAbEl2YckyC7D8EOhsRy/ie13izjszjPPTSWl0fJs6cb5bEOLxa8ivFwUtwepr8RwWlE6yw==}
     dependencies:
-      '@shikijs/core': 1.14.1
+      '@shikijs/core': 1.15.2
       twoslash: 0.2.9(typescript@5.5.4)
     transitivePeerDependencies:
       - supports-color
@@ -567,30 +567,30 @@ packages:
       tslib: 2.7.0
     dev: false
 
-  /@tanstack/react-virtual@3.10.4(react-dom@18.3.1)(react@18.3.1):
-    resolution: {integrity: sha512-Y2y1QJN3e5gNTG4wlZcoW2IAFrVCuho80oyeODKKFVSbAhJAXmkDNH3ZztM6EQij5ueqpqgz5FlsgKP9TGjImA==}
+  /@tanstack/react-virtual@3.10.6(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-xaSy6uUxB92O8mngHZ6CvbhGuqxQ5lIZWCBy+FjhrbHmOwc6BnOnKkYm2FsB1/BpKw/+FVctlMbEtI+F6I1aJg==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
-      '@tanstack/virtual-core': 3.10.4
+      '@tanstack/virtual-core': 3.10.6
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
     dev: false
 
-  /@tanstack/virtual-core@3.10.4:
-    resolution: {integrity: sha512-yHyli4RHVsI+eJ0RjmOsjA9RpHp3/Zah9t+iRjmFa72dq00TeG/NwuLYuCV6CB4RkWD4i5RD421j1eb6BdKgvQ==}
+  /@tanstack/virtual-core@3.10.6:
+    resolution: {integrity: sha512-1giLc4dzgEKLMx5pgKjL6HlG5fjZMgCjzlKAlpr7yoUtetVPELgER1NtephAI910nMwfPTHNyWKSFmJdHkz2Cw==}
     dev: false
 
-  /@theguild/components@6.6.4(@types/react@18.3.5)(next@14.2.7)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.4)(webpack@4.47.0):
-    resolution: {integrity: sha512-pW3HdLJ4kPXP0L6XHhkLYUH6ng52XrSdQZkfLDSGVmsgNB3Rnq1RU0ndh3p8y90djAgHcKbudCG42+SDAt623w==}
+  /@theguild/components@6.6.5(@types/react@18.3.5)(next@14.2.7)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.4)(webpack@4.47.0):
+    resolution: {integrity: sha512-Ffck7yt4dXaWOyNg/HAOrPpOTtE2Q5QFM/w1bZ/7bRssNdirGj0cntk+rpiryJbXsLXmF4wDOxEpbNUep1TC+Q==}
     peerDependencies:
       next: ^13 || ^14
       react: ^18.2.0
       react-dom: ^18.2.0
     dependencies:
       '@giscus/react': 3.0.0(react-dom@18.3.1)(react@18.3.1)
-      '@next/bundle-analyzer': 14.2.5
+      '@next/bundle-analyzer': 14.2.7
       clsx: 2.1.1
       fuzzy: 0.1.3
       next: 14.2.7(react-dom@18.3.1)(react@18.3.1)
@@ -3872,7 +3872,7 @@ packages:
       devlop: 1.1.0
       hast-util-from-parse5: 8.0.1
       parse5: 7.1.2
-      vfile: 6.0.2
+      vfile: 6.0.3
       vfile-message: 4.0.2
     dev: false
 
@@ -3884,7 +3884,7 @@ packages:
       devlop: 1.1.0
       hastscript: 8.0.0
       property-information: 6.5.0
-      vfile: 6.0.2
+      vfile: 6.0.3
       vfile-location: 5.0.3
       web-namespaces: 2.0.1
     dev: false
@@ -3914,7 +3914,7 @@ packages:
       parse5: 7.1.2
       unist-util-position: 5.0.0
       unist-util-visit: 5.0.0
-      vfile: 6.0.2
+      vfile: 6.0.3
       web-namespaces: 2.0.1
       zwitch: 2.0.4
     dev: false
@@ -3931,7 +3931,7 @@ packages:
       estree-util-is-identifier-name: 3.0.0
       hast-util-whitespace: 3.0.0
       mdast-util-mdx-expression: 2.0.0
-      mdast-util-mdx-jsx: 3.1.2
+      mdast-util-mdx-jsx: 3.1.3
       mdast-util-mdxjs-esm: 2.0.1
       property-information: 6.5.0
       space-separated-tokens: 2.0.2
@@ -3953,11 +3953,11 @@ packages:
       estree-util-is-identifier-name: 3.0.0
       hast-util-whitespace: 3.0.0
       mdast-util-mdx-expression: 2.0.0
-      mdast-util-mdx-jsx: 3.1.2
+      mdast-util-mdx-jsx: 3.1.3
       mdast-util-mdxjs-esm: 2.0.1
       property-information: 6.5.0
       space-separated-tokens: 2.0.2
-      style-to-object: 1.0.6
+      style-to-object: 1.0.7
       unist-util-position: 5.0.0
       vfile-message: 4.0.2
     transitivePeerDependencies:
@@ -4912,8 +4912,8 @@ packages:
       - supports-color
     dev: false
 
-  /mdast-util-mdx-jsx@3.1.2:
-    resolution: {integrity: sha512-eKMQDeywY2wlHc97k5eD8VC+9ASMjN8ItEZQNGwJ6E0XWKiW/Z0V5/H8pvoXUf+y+Mj0VIgeRRbujBmFn4FTyA==}
+  /mdast-util-mdx-jsx@3.1.3:
+    resolution: {integrity: sha512-bfOjvNt+1AcbPLTFMFWY149nJz0OjmewJs3LQQ5pIyVGxP4CdOqNVJL6kTaM5c68p8q82Xv3nCyFfUnuEcH3UQ==}
     dependencies:
       '@types/estree-jsx': 1.0.5
       '@types/hast': 3.0.4
@@ -4925,7 +4925,6 @@ packages:
       mdast-util-to-markdown: 2.1.0
       parse-entities: 4.0.1
       stringify-entities: 4.0.4
-      unist-util-remove-position: 5.0.0
       unist-util-stringify-position: 4.0.0
       vfile-message: 4.0.2
     transitivePeerDependencies:
@@ -4937,7 +4936,7 @@ packages:
     dependencies:
       mdast-util-from-markdown: 2.0.1
       mdast-util-mdx-expression: 2.0.0
-      mdast-util-mdx-jsx: 3.1.2
+      mdast-util-mdx-jsx: 3.1.3
       mdast-util-mdxjs-esm: 2.0.1
       mdast-util-to-markdown: 2.1.0
     transitivePeerDependencies:
@@ -4975,7 +4974,7 @@ packages:
       trim-lines: 3.0.1
       unist-util-position: 5.0.0
       unist-util-visit: 5.0.0
-      vfile: 6.0.2
+      vfile: 6.0.3
     dev: false
 
   /mdast-util-to-markdown@2.1.0:
@@ -5889,8 +5888,8 @@ packages:
       '@headlessui/react': 1.7.19(react-dom@18.3.1)(react@18.3.1)
       '@mdx-js/mdx': 3.0.1
       '@mdx-js/react': 3.0.1(@types/react@18.3.5)(react@18.3.1)
-      '@napi-rs/simple-git': 0.1.18
-      '@shikijs/twoslash': 1.14.1(typescript@5.5.4)
+      '@napi-rs/simple-git': 0.1.19
+      '@shikijs/twoslash': 1.15.2(typescript@5.5.4)
       '@theguild/remark-mermaid': 0.0.7(react@18.3.1)
       '@theguild/remark-npm2yarn': 0.3.0
       better-react-mathjax: 2.0.3(react@18.3.1)
@@ -5907,14 +5906,14 @@ packages:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
       rehype-katex: 7.0.1
-      rehype-pretty-code: 0.13.2(shiki@1.14.1)
+      rehype-pretty-code: 0.13.2(shiki@1.15.2)
       rehype-raw: 7.0.0
       remark-frontmatter: 5.0.0
       remark-gfm: 4.0.0
       remark-math: 6.0.0
       remark-reading-time: 2.0.1
       remark-smartypants: 3.0.2
-      shiki: 1.14.1
+      shiki: 1.15.2
       slash: 5.1.0
       title: 3.5.3
       unist-util-remove: 4.0.0
@@ -6228,7 +6227,7 @@ packages:
       nlcst-to-string: 4.0.0
       unist-util-modify-children: 4.0.0
       unist-util-visit-children: 3.0.0
-      vfile: 6.0.2
+      vfile: 6.0.3
     dev: false
 
   /parse-numeric-range@1.3.0:
@@ -6980,7 +6979,7 @@ packages:
       hast-util-to-text: 4.0.2
       katex: 0.16.11
       unist-util-visit-parents: 6.0.1
-      vfile: 6.0.2
+      vfile: 6.0.3
     dev: false
 
   /rehype-parse@9.0.0:
@@ -6991,7 +6990,7 @@ packages:
       unified: 11.0.5
     dev: false
 
-  /rehype-pretty-code@0.13.2(shiki@1.14.1):
+  /rehype-pretty-code@0.13.2(shiki@1.15.2):
     resolution: {integrity: sha512-F+PaFMscfJOcSHcR2b//+hk/0jT56hmGDqXcVD6VC9j0CUSGiqv8YxaWUyhR7qEIRRSbzAVxx+0uxzk+akXs+w==}
     engines: {node: '>=18'}
     peerDependencies:
@@ -7001,7 +7000,7 @@ packages:
       hast-util-to-string: 3.0.0
       parse-numeric-range: 1.3.0
       rehype-parse: 9.0.0
-      shiki: 1.14.1
+      shiki: 1.15.2
       unified: 11.0.5
       unist-util-visit: 5.0.0
     dev: false
@@ -7011,7 +7010,7 @@ packages:
     dependencies:
       '@types/hast': 3.0.4
       hast-util-raw: 9.0.4
-      vfile: 6.0.2
+      vfile: 6.0.3
     dev: false
 
   /remark-frontmatter@5.0.0:
@@ -7093,7 +7092,7 @@ packages:
       '@types/mdast': 4.0.4
       mdast-util-to-hast: 13.2.0
       unified: 11.0.5
-      vfile: 6.0.2
+      vfile: 6.0.3
     dev: false
 
   /remark-smartypants@3.0.2:
@@ -7101,7 +7100,7 @@ packages:
     engines: {node: '>=16.0.0'}
     dependencies:
       retext: 9.0.0
-      retext-smartypants: 6.1.0
+      retext-smartypants: 6.1.1
       unified: 11.0.5
       unist-util-visit: 5.0.0
     dev: false
@@ -7175,8 +7174,8 @@ packages:
       unified: 11.0.5
     dev: false
 
-  /retext-smartypants@6.1.0:
-    resolution: {integrity: sha512-LDPXg95346bqFZnDMHo0S7Rq5p64+B+N8Vz733+wPMDtwb9rCOs9LIdIEhrUOU+TAywX9St+ocQWJt8wrzivcQ==}
+  /retext-smartypants@6.1.1:
+    resolution: {integrity: sha512-onsHf34i/GzgElJgtT1K2V+31yEhWs7NJboKNxXJcmVMMPxLpgxZ9iADoMdydd6j/bHic5F/aNq0CGqElEtu2g==}
     dependencies:
       '@types/nlcst': 2.0.3
       nlcst-to-string: 4.0.0
@@ -7408,10 +7407,10 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /shiki@1.14.1:
-    resolution: {integrity: sha512-FujAN40NEejeXdzPt+3sZ3F2dx1U24BY2XTY01+MG8mbxCiA2XukXdcbyMyLAHJ/1AUUnQd1tZlvIjefWWEJeA==}
+  /shiki@1.15.2:
+    resolution: {integrity: sha512-M+7QZQZiZw/cZeizrC/yryG3eeG8pTUhu7ZaHxVyzPNFIRIlN46YBciquoNPCiXiwLnx6JB62f3lSuSYQrus1w==}
     dependencies:
-      '@shikijs/core': 1.14.1
+      '@shikijs/core': 1.15.2
       '@types/hast': 3.0.4
     dev: false
 
@@ -7744,8 +7743,8 @@ packages:
       inline-style-parser: 0.1.1
     dev: false
 
-  /style-to-object@1.0.6:
-    resolution: {integrity: sha512-khxq+Qm3xEyZfKd/y9L3oIWQimxuc4STrQKtQn8aSDRHb8mFgpukgX1hdzfrMEW6JCjyJ8p89x+IUMVnCBI1PA==}
+  /style-to-object@1.0.7:
+    resolution: {integrity: sha512-uSjr59G5u6fbxUfKbb8GcqMGT3Xs9v5IbPkjb0S16GyOeBLAzSRK0CixBv5YrYvzO6TDLzIS6QCn78tkqWngPw==}
     dependencies:
       inline-style-parser: 0.2.3
     dev: false
@@ -8138,7 +8137,7 @@ packages:
       extend: 3.0.2
       is-plain-obj: 4.1.0
       trough: 2.2.0
-      vfile: 6.0.2
+      vfile: 6.0.3
     dev: false
 
   /union-value@1.0.1:
@@ -8363,7 +8362,7 @@ packages:
     resolution: {integrity: sha512-5yXvWDEgqeiYiBe1lbxYF7UMAIm/IcopxMHrMQDq3nvKcjPKIhZklUKL+AE7J7uApI4kwe2snsK+eI6UTj9EHg==}
     dependencies:
       '@types/unist': 3.0.3
-      vfile: 6.0.2
+      vfile: 6.0.3
     dev: false
 
   /vfile-message@3.1.4:
@@ -8389,11 +8388,10 @@ packages:
       vfile-message: 3.1.4
     dev: false
 
-  /vfile@6.0.2:
-    resolution: {integrity: sha512-zND7NlS8rJYb/sPqkb13ZvbbUoExdbi4w3SfRrMq6R3FvnLQmmfpajJNITuuYm6AZ5uao9vy4BAos3EXBPf2rg==}
+  /vfile@6.0.3:
+    resolution: {integrity: sha512-KzIbH/9tXat2u30jf+smMwFCsno4wHVdNmzFyL+T/L3UGqqk6JKfVqOFOZEpZSHADH1k40ab6NUIXZq422ov3Q==}
     dependencies:
       '@types/unist': 3.0.3
-      unist-util-stringify-position: 4.0.0
       vfile-message: 4.0.2
     dev: false
 
