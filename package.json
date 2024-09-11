@@ -81,7 +81,7 @@
     "eslint": "9.10.0",
     "eslint-config-prettier": "9.1.0",
     "graphql": "16.9.0",
-    "husky": "9.1.5",
+    "husky": "9.1.6",
     "lint-staged": "15.2.10",
     "make-dir": "5.0.0",
     "parent-module": "3.1.0",
