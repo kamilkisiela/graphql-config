@@ -1,5 +1,11 @@
 # Change log
 
+## 5.1.3
+
+### Patch Changes
+
+- [#1572](https://github.com/kamilkisiela/graphql-config/pull/1572) [`d95462c`](https://github.com/kamilkisiela/graphql-config/commit/d95462c4ebf57cac2c2af7e8be97d5bb504fb591) Thanks [@dimaMachina](https://github.com/dimaMachina)! - revert cosmiconfig update to v8
+
 ## 5.1.2
 
 ### Patch Changes
