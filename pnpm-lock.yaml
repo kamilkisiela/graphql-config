@@ -27,8 +27,8 @@ dependencies:
     specifier: ^8.1.0
     version: 8.3.6(typescript@5.6.3)
   jiti:
-    specifier: ^1.18.2
-    version: 1.21.6
+    specifier: ^2.0.0
+    version: 2.3.3
   minimatch:
     specifier: ^9.0.5
     version: 9.0.5
@@ -66,7 +66,7 @@ devDependencies:
     version: 7.1.0
   eslint:
     specifier: 9.12.0
-    version: 9.12.0(jiti@1.21.6)
+    version: 9.12.0(jiti@2.3.3)
   eslint-config-prettier:
     specifier: 9.1.0
     version: 9.1.0(eslint@9.12.0)
@@ -785,7 +785,7 @@ packages:
     peerDependencies:
       eslint: ^6.0.0 || ^7.0.0 || >=8.0.0
     dependencies:
-      eslint: 9.12.0(jiti@1.21.6)
+      eslint: 9.12.0(jiti@2.3.3)
       eslint-visitor-keys: 3.4.3
     dev: true
 
@@ -1369,7 +1369,7 @@ packages:
       '@typescript-eslint/type-utils': 8.8.1(eslint@9.12.0)(typescript@5.6.3)
       '@typescript-eslint/utils': 8.8.1(eslint@9.12.0)(typescript@5.6.3)
       '@typescript-eslint/visitor-keys': 8.8.1
-      eslint: 9.12.0(jiti@1.21.6)
+      eslint: 9.12.0(jiti@2.3.3)
       graphemer: 1.4.0
       ignore: 5.3.2
       natural-compare: 1.4.0
@@ -1394,7 +1394,7 @@ packages:
       '@typescript-eslint/typescript-estree': 8.8.1(typescript@5.6.3)
       '@typescript-eslint/visitor-keys': 8.8.1
       debug: 4.3.7
-      eslint: 9.12.0(jiti@1.21.6)
+      eslint: 9.12.0(jiti@2.3.3)
       typescript: 5.6.3
     transitivePeerDependencies:
       - supports-color
@@ -1464,7 +1464,7 @@ packages:
       '@typescript-eslint/scope-manager': 8.8.1
       '@typescript-eslint/types': 8.8.1
       '@typescript-eslint/typescript-estree': 8.8.1(typescript@5.6.3)
-      eslint: 9.12.0(jiti@1.21.6)
+      eslint: 9.12.0(jiti@2.3.3)
     transitivePeerDependencies:
       - supports-color
       - typescript
@@ -2089,7 +2089,7 @@ packages:
     peerDependencies:
       eslint: '>=7.0.0'
     dependencies:
-      eslint: 9.12.0(jiti@1.21.6)
+      eslint: 9.12.0(jiti@2.3.3)
     dev: true
 
   /eslint-scope@8.1.0:
@@ -2110,7 +2110,7 @@ packages:
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
     dev: true
 
-  /eslint@9.12.0(jiti@1.21.6):
+  /eslint@9.12.0(jiti@2.3.3):
     resolution: {integrity: sha512-UVIOlTEWxwIopRL1wgSQYdnVDcEvs2wyaO6DGo5mXqe3r16IoCNWkR29iHhyaP4cICWjbgbmFUGAhh0GJRuGZw==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
     hasBin: true
@@ -2149,7 +2149,7 @@ packages:
       ignore: 5.3.2
       imurmurhash: 0.1.4
       is-glob: 4.0.3
-      jiti: 1.21.6
+      jiti: 2.3.3
       json-stable-stringify-without-jsonify: 1.0.1
       lodash.merge: 4.6.2
       minimatch: 3.1.2
@@ -2653,8 +2653,8 @@ packages:
       '@isaacs/cliui': 8.0.2
     dev: true
 
-  /jiti@1.21.6:
-    resolution: {integrity: sha512-2yTgeWTWzMWkHu6Jp9NKgePDaYHbntiwvYuuJLbbN9vl7DC9DvXKOB2BC3ZZ92D3cvV/aflH0osDfwpHepQ53w==}
+  /jiti@2.3.3:
+    resolution: {integrity: sha512-EX4oNDwcXSivPrw2qKH2LB5PoFxEvgtv2JgwW0bU858HoLQ+kutSvjLMUqBd0PeJYEinLWhoI9Ol0eYMqj/wNQ==}
     hasBin: true
 
   /js-tokens@4.0.0:
