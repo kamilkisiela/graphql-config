@@ -9,7 +9,7 @@
   "prCreation": "immediate",
   "prHourlyLimit": 5,
   "timezone": "Europe/Warsaw",
-  "schedule": ["after 10pm and before 6:00am"],
+  "schedule": ["after 10pm", "before 6:00am"],
   "vulnerabilityAlerts": {
     "assignees": ["@kamilkisiela"]
   }
