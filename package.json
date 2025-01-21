@@ -80,7 +80,7 @@
     "del": "8.0.0",
     "eslint": "9.18.0",
     "eslint-config-prettier": "9.1.0",
-    "graphql": "16.9.0",
+    "graphql": "16.10.0",
     "husky": "9.1.7",
     "lint-staged": "15.2.10",
     "make-dir": "5.0.0",
