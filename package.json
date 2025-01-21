@@ -5,7 +5,7 @@
   "sideEffects": false,
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
-  "packageManager": "pnpm@8.15.9",
+  "packageManager": "pnpm@9.15.4",
   "exports": {
     ".": {
       "require": {
@@ -130,6 +130,6 @@
   },
   "engines": {
     "node": ">= 16.0.0",
-    "pnpm": "^8.6.5"
+    "pnpm": "^9.0.0"
   }
 }
