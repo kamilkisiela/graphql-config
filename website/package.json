@@ -32,7 +32,7 @@
   "devDependencies": {
     "@theguild/tailwind-config": "0.5.0",
     "@types/node": "20.16.11",
-    "@types/react": "18.3.11",
+    "@types/react": "18.3.18",
     "@typescript-eslint/eslint-plugin": "8.9.0",
     "@typescript-eslint/parser": "8.9.0",
     "cross-env": "7.0.3",
