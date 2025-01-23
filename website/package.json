@@ -6,6 +6,7 @@
   "scripts": {
     "lint": "eslint --ignore-path ../.gitignore --ext js,jsx,cjs,mjs,ts,tsx,cts,mts .",
     "dev": "next",
+    "build": "next build",
     "pagefind": "pagefind --site .next/server/app --output-path out/_pagefind",
     "postbuild": "next-sitemap && yarn pagefind",
     "start": "next start",
