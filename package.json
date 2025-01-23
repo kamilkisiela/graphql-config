@@ -91,8 +91,8 @@
     "tsx": "4.19.2",
     "typescript": "5.7.3",
     "typescript-json-schema": "0.65.1",
-    "vitest": "3.0.5",
-    "vite-tsconfig-paths": "^5.0.0"
+    "vite-tsconfig-paths": "^5.0.0",
+    "vitest": "3.0.5"
   },
   "repository": {
     "type": "git",
@@ -131,5 +131,10 @@
   "engines": {
     "node": ">= 16.0.0",
     "pnpm": "^10.0.0"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
   }
 }

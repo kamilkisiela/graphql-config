@@ -1,28 +1,28 @@
 import { FC, ReactNode } from 'react';
 import {
+  ConfigLogo,
   GitHubIcon,
   HiveFooter,
   PaperIcon,
   PencilIcon,
   PRODUCTS,
-  StitchingLogo,
-} from '@theguild/components';
+} from "@theguild/components";
 import { getDefaultMetadata, getPageMap, GuildLayout } from '@theguild/components/server';
 import '@theguild/components/style.css';
 
-const description = PRODUCTS.STITCHING.title;
-const websiteName = 'Schema Stitching';
+const description = PRODUCTS.CONFIG.title;
+const websiteName = 'GraphQL-Config';
 
 export const metadata = getDefaultMetadata({
   description,
   websiteName,
-  productName: 'STITCHING',
+  productName: 'CONFIG',
 });
 
 const RootLayout: FC<{
   children: ReactNode;
 }> = async ({ children }) => {
-  const logo = <StitchingLogo fill="currentColor" className="h-auto w-8" />;
+  const logo = <ConfigLogo fill="currentColor" className="h-auto w-8" />;
   return (
     <GuildLayout
       htmlProps={{
@@ -33,7 +33,7 @@ const RootLayout: FC<{
       description={description}
       logo={logo}
       layoutProps={{
-        docsRepositoryBase: 'https://github.com/ardatan/schema-stitching/tree/master/website',
+        docsRepositoryBase: 'https://github.com/kamilkisiela/graphql-config/tree/master/website',
         footer: (
           <HiveFooter
             logo={
@@ -46,9 +46,9 @@ const RootLayout: FC<{
             items={{
               resources: [
                 {
-                  children: 'Handbook',
-                  href: '/handbook',
-                  title: 'Handbook',
+                  children: 'Changelog',
+                  href: '/changelog',
+                  title: 'Changelog',
                 },
               ],
             }}
@@ -69,7 +69,7 @@ const RootLayout: FC<{
             children: 'Blog',
           },
           {
-            href: 'https://github.com/ardatan/schema-stitching',
+            href: 'https://github.com/kamilkisiela/graphql-config',
             icon: <GitHubIcon />,
             children: 'GitHub',
           },
