@@ -1,12 +1,5 @@
 import { FC, ReactNode } from 'react';
-import {
-  ConfigLogo,
-  GitHubIcon,
-  HiveFooter,
-  PaperIcon,
-  PencilIcon,
-  PRODUCTS,
-} from "@theguild/components";
+import { ConfigLogo, GitHubIcon, HiveFooter, PaperIcon, PencilIcon, PRODUCTS } from '@theguild/components';
 import { getDefaultMetadata, getPageMap, GuildLayout } from '@theguild/components/server';
 import '@theguild/components/style.css';
 

@@ -34,6 +34,6 @@ export default withGuildDocs({
     SITE_URL: 'https://the-guild.dev/graphql/config',
   },
   nextraConfig: {
-    contentDirBasePath: '/docs'
-  }
+    contentDirBasePath: '/docs',
+  },
 });

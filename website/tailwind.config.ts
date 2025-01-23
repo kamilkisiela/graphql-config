@@ -36,8 +36,7 @@ const config: Config = {
       animation: {
         'accordion-down': 'accordion-down 0.5s ease',
         'accordion-up': 'accordion-up 0.5s ease',
-        scroll:
-          'scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite',
+        scroll: 'scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite',
       },
     },
   },
