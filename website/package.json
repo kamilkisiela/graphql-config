@@ -8,7 +8,7 @@
     "dev": "next",
     "build": "next build",
     "pagefind": "pagefind --site .next/server/app --output-path out/_pagefind",
-    "postbuild": "next-sitemap && yarn pagefind",
+    "postbuild": "next-sitemap && pnpm pagefind",
     "start": "next start",
     "analyze": "cross-env ANALYZE=true pnpm run build"
   },
