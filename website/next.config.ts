@@ -30,4 +30,10 @@ export default withGuildDocs({
       permanent: true,
     })),
   output: 'export',
+  env: {
+    SITE_URL: 'https://the-guild.dev/graphql/config',
+  },
+  nextraConfig: {
+    contentDirBasePath: '/docs'
+  }
 });
