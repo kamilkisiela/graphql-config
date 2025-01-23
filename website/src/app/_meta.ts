@@ -1,10 +1,10 @@
 export default {
   index: {
-    display: 'hidden'
+    display: 'hidden',
   },
   docs: {
     title: 'Documentation',
-    type: 'page'
+    type: 'page',
   },
   changelog: {
     type: 'page',
