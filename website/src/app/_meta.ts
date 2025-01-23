@@ -8,4 +8,12 @@ export default {
     title: 'Docs',
     type: 'page'
   },
+  changelog: {
+    theme: {
+      toc: false,
+      timestamp: false,
+      sidebar: false,
+      breadcrumb: false,
+    },
+  },
 };
