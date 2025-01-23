@@ -11,6 +11,7 @@ export async function generateMetadata(props: NextPageProps<'...mdxPath'>) {
   return metadata;
 }
 
+// eslint-disable-next-line react-hooks/rules-of-hooks
 const Wrapper = useMDXComponents().wrapper;
 
 export default async function Page(props: NextPageProps<'...mdxPath'>) {
