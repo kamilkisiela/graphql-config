@@ -1,19 +1,15 @@
 export default {
   index: {
-    title: 'Home',
-    type: 'page',
     display: 'hidden'
   },
   docs: {
-    title: 'Docs',
+    title: 'Documentation',
     type: 'page'
   },
   changelog: {
+    type: 'page',
     theme: {
-      toc: false,
       timestamp: false,
-      sidebar: false,
-      breadcrumb: false,
     },
   },
 };
