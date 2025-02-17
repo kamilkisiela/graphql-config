@@ -128,6 +128,25 @@ runTests({ async: loadConfig, sync: loadConfigSync })((load, mode) => {
       ['package.json', packageJsonConfig],
     ];
 
+    if (mode === 'async') {
+      const topAwaitConfigTs = `await Promise.resolve(); export default { schema: '${schemaFilename}' } satisfies any`;
+      const topAwaitConfig = `await Promise.resolve(); export default { schema: '${schemaFilename}' }`;
+
+      configFiles.push(
+        // #.config files
+        [`${moduleName}.config.ts`, topAwaitConfigTs, typeModule],
+        [`${moduleName}.config.js`, topAwaitConfig, typeModule],
+        [`${moduleName}.config.mts`, topAwaitConfigTs],
+        [`${moduleName}.config.mjs`, topAwaitConfig],
+
+        // .#rc files
+        [`.${moduleName}rc.ts`, topAwaitConfigTs, typeModule],
+        [`.${moduleName}rc.js`, topAwaitConfig, typeModule],
+        [`.${moduleName}rc.mts`, topAwaitConfigTs],
+        [`.${moduleName}rc.mjs`, topAwaitConfig],
+      );
+    }
+
     beforeEach(() => {
       temp.clean();
       temp.createFile(schemaFilename, testSDL);

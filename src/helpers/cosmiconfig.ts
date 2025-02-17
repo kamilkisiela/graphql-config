@@ -1,6 +1,6 @@
 import { cosmiconfig, cosmiconfigSync, Loader, defaultLoaders } from 'cosmiconfig';
 import { env } from 'string-env-interpolation';
-import jiti from 'jiti';
+import { createJiti } from 'jiti';
 
 export interface ConfigSearchResult {
   config: any;
@@ -29,21 +29,23 @@ function createCustomLoader(loader: Loader): Loader {
 }
 
 export function createCosmiConfig(moduleName: string, legacy: boolean) {
-  const options = prepareCosmiconfig(moduleName, legacy);
-
+  const options = prepareCosmiconfig(moduleName, legacy, 'async');
   return cosmiconfig(moduleName, options);
 }
 
 export function createCosmiConfigSync(moduleName: string, legacy: boolean) {
-  const options = prepareCosmiconfig(moduleName, legacy);
+  const options = prepareCosmiconfig(moduleName, legacy, 'sync');
   return cosmiconfigSync(moduleName, options);
 }
 
 const loadTypeScript: Loader = (filepath) => {
-  const jitiLoader = jiti(__filename, {
-    interopDefault: true,
-  });
-  return jitiLoader(filepath);
+  const jiti = createJiti(__filename, { interopDefault: true });
+  return jiti.import(filepath);
+};
+
+const loadTypeScriptSync: Loader = (filepath) => {
+  const jiti = createJiti(__filename, { interopDefault: true });
+  return jiti(filepath);
 };
 
 const loadToml: Loader = (...args) => {
@@ -57,6 +59,7 @@ const loadYaml = createCustomLoader(defaultLoaders['.yaml']);
 function prepareCosmiconfig(
   moduleName: string,
   legacy: boolean,
+  mode: 'sync' | 'async',
 ): {
   searchPlaces: string[];
   loaders: Record<string, Loader>;
@@ -95,11 +98,11 @@ function prepareCosmiconfig(
   return {
     searchPlaces: searchPlaces.map((place) => place.replace('#', moduleName)),
     loaders: {
-      '.ts': loadTypeScript,
-      '.cts': loadTypeScript,
-      '.mts': loadTypeScript,
-      '.js': loadTypeScript,
-      '.mjs': loadTypeScript,
+      '.ts': mode === 'async' ? loadTypeScript : loadTypeScriptSync,
+      '.cts': mode === 'async' ? loadTypeScript : loadTypeScriptSync,
+      '.mts': mode === 'async' ? loadTypeScript : loadTypeScriptSync,
+      '.js': mode === 'async' ? loadTypeScript : loadTypeScriptSync,
+      '.mjs': mode === 'async' ? loadTypeScript : loadTypeScriptSync,
       '.json': defaultLoaders['.json'],
       '.yaml': loadYaml,
       '.yml': loadYaml,
