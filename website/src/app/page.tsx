@@ -19,7 +19,7 @@ export default function IndexPage() {
       <Hero
         heading="GraphQL Config"
         text="One configuration for all your GraphQL tools. The easiest way to configure your development environment with your GraphQL Schema."
-        logo={<ConfigLogo />}
+        top={<ConfigLogo />}
         checkmarks={['Fully open source', 'No vendor lock']}
         // Original logo has some issues with overflowing <path> elements
         className="[&_.-z-10>svg]:fill-[#B0CBD1]"
