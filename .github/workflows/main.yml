@@ -17,7 +17,7 @@ jobs:
         os: [ubuntu-latest, windows-latest]
         node_version: [18, 20, 22, 23]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
 
       - name: Setup env
         uses: the-guild-org/shared-config/setup@main
@@ -47,7 +47,7 @@ jobs:
     name: Lint source files
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
       - name: Setup env
         uses: the-guild-org/shared-config/setup@main
         with:
